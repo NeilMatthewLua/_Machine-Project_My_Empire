@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import People;
 
 public class Player extends People{
 
@@ -36,27 +35,32 @@ public class Player extends People{
 
     public void roll() {
         int nRoll;
+        this.nPosition = 29;
+        int start = this.nPosition;
         //Properties temp;
-
-        nRoll = (int)(Math.random() * (6 - 1) + 1 );
+        nRoll = (int)((Math.random() * (7 - 1)) + 1 );
 System.out.println(nRoll);
 
-        for( int i = nPosition + 1 ; i <= nPosition + nRoll; i++ ) {
-            if( i > 31 ) {
-                this.nRoll -= i; 
+        for( int i = start + 1 ; i <= start + nRoll; i++ ) {
+
+             if( i > 31 ) {
+                nRoll = nRoll + start -i; 
                 i = 0;
                 this.nPosition = 0;
+                start = 0;
                 this.dMoney += 200;
-
+// System.out.println("TRUE");
+// System.out.println( i);
+// System.out.println( nRoll);
                 //temp = properties.get(i);
-                temp.addFootTraffic();
+                //temp.addFootTraffic();
                 //properties.set(i,temp);
             }
             else {
                 //temp = properties.get(i);
-                temp.addFootTraffic();
+                //temp.addFootTraffic();
                 //properties.set(i,temp);
-
+System.out.println("D ");
                 this.nPosition += 1;
             }
         }
