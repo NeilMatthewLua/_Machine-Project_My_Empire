@@ -1,3 +1,8 @@
+/**
+ * People class which is used to make entities within the game
+ *   @author  Lua & Tanting
+ *   @version 1.0
+ */
 public class People{
 
     private String strName;
