@@ -5,51 +5,58 @@ import java.util.Random;
 /**
  * GameBoard class contains methods which plays the game
  *
+ * New Changes Made: Added initializePlayers(), playGame(), getChance()
+ *
+ * Last Changes Made: Added initializeLand() and initializeCards()
  * @author  Lua & Tanting
- * @version 1.0
+ * @version 1.1
  */
 public class GameBoard {
     private Player[] players;
-    private int[] actionOrder;
     private ArrayList<Land> land;
     private ArrayList<Land> landLeft;
     private ArrayList<Card> cardPile;
     private ArrayList<Card> cardDiscard;
     private boolean isWin;
-    private Player bank;
+    private People bank;
 
+    /**
+     * Creates a GameBoard object initialized with land, random set of cards, and players
+     */
     public GameBoard(){
         initializeLand();
         initializeCards();
-    }
-    public Player[] getPlayers() {
-        return players;
+        initializePlayers();
     }
 
-    public int[] getActionOrder() {
-        return actionOrder;
+    /**
+     * Gets the number of players in the current game board
+     * @return number of players
+     */
+    public int getPlayers() {
+        return players.length;
     }
 
+    /**
+     * Gets the arrayList of land which comprises the current game board
+     * @return the arrayList of land
+     */
     public ArrayList<Land> getLand() {
         return land;
     }
 
-    public ArrayList<Land> getLandLeft() {
-        return landLeft;
+    /**
+     * Gets the bank player object from the board
+     * @return bank player object
+     */
+    public People getBank(){
+        return bank;
     }
 
-    public ArrayList<Card> getCardPile() {
-        return cardPile;
-    }
-
-    public ArrayList<Card> getCardDiscard() {
-        return cardDiscard;
-    }
-
-    public boolean getIsWin(){
-        return isWin;
-    }
-
+    /**
+     * Changes the value of isWin variable to either true or false
+     * @param value the value to be set to isWin
+     */
     public void setIsWin(boolean value){
         isWin = value;
     }
@@ -57,9 +64,15 @@ public class GameBoard {
     /**
      * Prints Land in Order
      */
-    public void printLand(){
+    private void printLand(){
+        int[] arrPositions = new int[players.length];
+        for(int i = 0; i < players.length;i++)
+            arrPositions[i] = players[i].getPosition();
         for(int i = 0; i < landLeft.size();i++){
             System.out.println(i +"."+ landLeft.get(i).getName());
+            for(int j = 0; j < players.length; j++)
+                if(i == arrPositions[j])
+                    System.out.println("Player:" + players[j].getName() + "is here.");
         }
     }
     /**
@@ -151,7 +164,7 @@ public class GameBoard {
     /**
      * Prints Cards in Order
      */
-    public void printCards(){
+    private void printCards(){
         for(int i = 0; i < cardPile.size();i++){
             System.out.println(i +"."+ cardPile.get(i).getDescription());
         }
@@ -213,9 +226,33 @@ public class GameBoard {
     }
 
     /**
+     * Initializes players based on the number specified by user and randomizes their order
+     *
+     */
+    private void initializePlayers(){
+        int nPlayers = 4; //Adjust to add more players
+        bank = new People("Bank",true); //Initialize bank
+        players = new Player[nPlayers];
+        for(int i = 0; i < nPlayers; i++){
+            players[i] = new Player("Albert" + i);
+        }
+        Random rgen = new Random();  // Random number generator
+
+        for (int i=0; i<players.length; i++) {//Randomizes the order of the players inside the array
+            int randomPosition = rgen.nextInt(players.length);
+            Player temp = players[i];
+            players[i] = players[randomPosition];
+            players[randomPosition] = temp;
+        }
+        for (int i = 0; i < players.length;i++){
+            System.out.println(players[i].getName());
+        }
+    }
+
+    /**
      * Checks if player has two full sets
      * @param player player whose property will be checked
-     * @return (bool) true if the player has 2 full sets, false if less than 2 full sets
+     * @return true if the player has 2 full sets, false if less than 2 full sets
      */
     private boolean isCompleteSet(Player player){
         int[] nPropertyCount = {0,0,0,0,0,0,0}; //Counts the no. of properties player has per color
@@ -267,14 +304,41 @@ public class GameBoard {
      * Player does not have enough money to pay for rent,
      * Player owns 2 full sets of properties with the same color
      * or Bank is out of cash
-     * @return (void)
      */
     private void checkForWin(){
-        boolean isWin = false;
         if(bank.getMoney() <= 0)
             this.isWin = true;
-        for(int i = 0; i < players.length && this.isWin == false;i++){
+        for(int i = 0; i < players.length && !this.isWin;i++){
             this.isWin = isCompleteSet(players[i]);
         }
+    }
+
+    /**
+     * Method for playing the board until a player has won
+     */
+    public  void playGame(){
+        while(!isWin){//While no one has won
+            for(int i = 0; i < players.length && !isWin; i++){
+                checkForWin();
+                printLand();
+                players[i].roll(this);
+            }
+        }
+    }
+
+    /**
+     * Gives player a card from the topmost card in cardPile
+     * @return card that the user got from the pile
+     */
+    public Card drawChance(){
+        Card temp = cardPile.get(cardPile.size()-1); //Remove topmost card in cardPile
+        cardPile.remove(cardPile.size()-1);
+        if(cardPile.size() == 0) //If cardPile is empty then shuffle discardPile into cardPile
+            for(int i = 0; i < cardDiscard.size(); i++){
+                cardPile.add(cardDiscard.get(0));
+                cardDiscard.remove(0);
+            }
+        Collections.shuffle(cardPile);
+        return temp;
     }
 }
