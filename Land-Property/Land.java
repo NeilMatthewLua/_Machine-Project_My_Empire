@@ -91,6 +91,13 @@ public class Land {
     }
 
     /**
+     * Sets the owner of the property to specified player
+     * @param player player which will now own the property
+     */
+    public void setOwner(Player player){
+        owner = player;
+    }
+    /**
      * Adds foot traffic when players pass by, only exists to be overridden by property
      */
     public void addFootTraffic(){
