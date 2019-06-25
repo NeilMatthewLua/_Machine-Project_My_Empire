@@ -1,8 +1,19 @@
 /**
- * People class which is used to make entities within the game
- *   @author  Lua & Tanting
- *   @version 1.0
+ * People Class
+ *    
+ *      New Changes: 
+ * 
+ *      Last Changes Made: public People(String strName)
+                           public People(String strName, boolean isBank)
+                           public String getName()
+                           public double getMoney()
+                           public void receiveMoney(People player, double amount)
+                           public void giveMoney(People player, double amount)
+
+ * Version 1.01
  */
+
+
 public class People{
 
     private String strName;

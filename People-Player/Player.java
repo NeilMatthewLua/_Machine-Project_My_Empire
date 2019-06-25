@@ -1,3 +1,21 @@
+/**
+ * Player Class
+ *    
+ *      New Changes:        public isMine()
+                            added isMind on UML
+                            public void action()
+                                - 1/2 Switch Case, Determines if Tax Tile, Chance Tile, Rairoad, or Start Tile
+                                -1/2 Determines if property tile is yours or theirs or free for buying              
+ * 
+        Last Changes Made:  public Player(String strName)
+                            public int getPosition()
+                            public Card getCard() 
+                            public Property getProperty()
+                            public void roll()
+   
+ * Version 1.01
+ */
+
 import java.util.ArrayList;
 
 /**
@@ -51,13 +69,12 @@ public class Player extends People{
         return nDiceRoll;
     }
 
-    /**
-     * Gets an arrayList of properties owned by the player
-     * @return (ArrayList<Property>) list of properties owned by user
-     */
-    public ArrayList<Property> getProperties() {
-        return properties;
-    }
+    public void roll() {
+        int nRoll;
+        this.nPosition = 29;
+        int start = this.nPosition;
+        //Properties temp;
+        nRoll = (int)((Math.random() * (7 - 1)) + 1 );
 
     /**
      * Adds a given card to the cards which the player possesses
@@ -82,16 +99,45 @@ public class Player extends People{
             if (i > 31) {//If position has gone past the edge of the board then go back to start
                 nRoll -= i;
                 i = 0;
-                nPosition = 0;
-                dMoney += 200;
-            } else {
-                nPosition += 1;
+                this.nPosition = 0;
+                start = 0;
+                this.dMoney += 200;
+                //temp = properties.get(i);
+                //temp.addFootTraffic();
+                //properties.set(i,temp);
             }
-            if (gameBoard.getLand().get(i).getOwner().getName() != null &&
-                    gameBoard.getLand().get(i).getLandType().equalsIgnoreCase("property")) {
-                //If land is owned and is property type
-                gameBoard.getLand().get(i).addFootTraffic();
+            else {
+                //temp = properties.get(i);
+                //temp.addFootTraffic();
+                //properties.set(i,temp);
+                this.nPosition += 1;
             }
         }
+
+        action();
     }
+
+    public void action() {
+        switch(gameBoard.getLand().get(this.nPosition).getLandType()) {
+            case "railroad":
+            case "income":
+            case "utility": Land.triggerEvent(this, gameboard); break;
+            case "property": {
+                if(!isMine) {
+//Method need here for check if someone owns it
+                    Land.triggerEvent(this, gameboard); break;
+                }
+                else {
+
+                }
+
+            } 
+
+        }
+    }
+
+    public boolean isMine() {
+        return this.properties.contains(gameBoard.getLand().get(this.nPosition));
+    }
+
 }
