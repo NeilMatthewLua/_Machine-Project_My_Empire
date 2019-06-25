@@ -1,5 +1,9 @@
 /**
  * Property class which inherits from Land and is used for making property objects inside the board
+ *
+ *  New Changes Made: N/A
+ *
+ *  Last Changes Made: N/A
  *   @author  Lua & Tanting
  *   @version 1.0
  */

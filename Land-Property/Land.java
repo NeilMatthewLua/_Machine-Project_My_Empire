@@ -3,6 +3,10 @@ import java.util.Collections;
 
 /**
  * Land class which acts as a template for the different places found on the board
+ *
+ *  New Changes Made: Moved addCard method into GameBoard class
+ *
+ *  Last Changes Made: N/A
  *   @author  Lua & Tanting
  *   @version 1.0
  */
@@ -39,7 +43,7 @@ public class Land {
 
     /**
      * Gets name of the land
-     * @return (String) name of the land
+     * @return name of the land
      */
     public String getName() {
         return strName;
@@ -47,7 +51,7 @@ public class Land {
 
     /**
      * Gets land type of the land
-     * @return (String) land type of the land
+     * @return land type of the land
      */
     public String getLandType() {
         return strLandType;
@@ -55,7 +59,7 @@ public class Land {
 
     /**
      * Gets the price of the land
-     * @return (double) price of the land
+     * @return price of the land
      */
     public double getPrice() {
         return dPrice;
@@ -63,7 +67,7 @@ public class Land {
 
     /**
      * Gets the owner of the land
-     * @return (Player) that owns the land
+     * @return that owns the land
      */
     public Player getOwner() {
         return owner;
@@ -71,7 +75,7 @@ public class Land {
 
     /**
      * Gets the rent multiplier for the land
-     * @return (double) multiplier for land price
+     * @return multiplier for land price
      */
     public double getMultiplier() {
         return dMultiplier;
@@ -87,7 +91,6 @@ public class Land {
      * Determines event when player steps on land (only triggers when land is owned by other players or can't be owned (i.e. luxury, income, corners)
      * @param player player that stepped on the land
      * @param gameBoard is the game board which contains all the information about the game
-     * @return (void)
      */
     public void triggerEvent(Player player, GameBoard gameBoard){
         double dPayment;
@@ -103,14 +106,18 @@ public class Land {
             //If land is luxury or income tax space
             dPayment = getTax(player);
             if(player.getMoney() - dPayment >= 0)
-                player.giveMoney(owner,dPayment);
+                player.giveMoney(gameBoard.getBank(),dPayment);
             else
                 gameBoard.setIsWin(false);
         }
         else if(strLandType.equals("chance")){
             //If land is chance space
-            player.addCard(getChance(player,gameBoard.getCardPile(),gameBoard.getCardDiscard()));
-            System.out.println("Player"  + player.getName() + "gets a card" );
+            player.addCard(gameBoard.drawChance());
+            System.out.println("Player"  + player.getName() + "gets a card." + player.getCard()
+            .getDescription());
+            if(player.getCard().getCanKeep() == false) //If card can't be kept
+                player.getCard().useCard(gameBoard);
+
         }
         else if (strLandType.equals("corner")){
             //If Land is a corner
@@ -119,7 +126,7 @@ public class Land {
                     System.out.println("Community Service, pay 50$.");
                     dPayment = 50;
                     if(player.getMoney() - dPayment >= 0)
-                        player.giveMoney(owner,dPayment);
+                        player.giveMoney(gameBoard.getBank(),dPayment);
                     else
                         gameBoard.setIsWin(false);
                     break;
@@ -127,7 +134,7 @@ public class Land {
                     System.out.println("Free Parking! Wait for next turn.");
                     break;
                 case 24: //Jail
-                    System.out.println("Welcome to Jail. Pay 50$ at the start of your next turn");
+                    System.out.println("Welcome to Jail. Pay 50$ at the start of your next turn"); //Implement this
                     break;
             }
         }
@@ -135,7 +142,7 @@ public class Land {
 
     /**
      * Calculates the amount of rent to be paid on utility or railroad land
-     * @return (double) the amount of rent to be paid
+     * @return the amount of rent to be paid
      */
     private double getRent(Player player){
         int nCounter = 0;
@@ -177,7 +184,7 @@ public class Land {
     /**
      * Calculates the tax on luxury or income tax land
      * @param player Player that will be paying the tax
-     * @return (double) the tax amount to be paid
+     * @return the tax amount to be paid
      */
     private double getTax(Player player){
         double dRent = 0;
@@ -186,24 +193,6 @@ public class Land {
         else if(strLandType.equals("income"))
             dRent = ((player.getMoney() * .10) >= 200) ? player.getMoney() * .10 : 200;
         return dRent;
-    }
-
-    /**
-     * Gives player a card from the topmost card in cardPile
-     * @param player Player which drew the card
-     * @param cardPile CardPile where the player drew the card from
-     * @return (Card) that the user got from the pile
-     */
-    private Card getChance(Player player, ArrayList<Card> cardPile, ArrayList<Card> discardPile){
-        Card temp = cardPile.get(cardPile.size()-1); //Remove topmost card in cardPile
-        cardPile.remove(cardPile.size()-1);
-        if(cardPile.size() == 0) //If cardPile is empty then shuffle discardPile into cardPile
-            for(int i = 0; i < discardPile.size(); i++){
-                cardPile.add(discardPile.get(0));
-                discardPile.remove(0);
-            }
-        Collections.shuffle(cardPile);
-        return temp;
     }
 
 }
