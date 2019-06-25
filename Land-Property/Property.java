@@ -4,6 +4,7 @@
  *  New Changes Made: N/A
  *
  *  Last Changes Made: N/A
+ *
  *   @author  Lua & Tanting
  *   @version 1.0
  */
@@ -11,6 +12,7 @@ public class Property extends Land {
     private String strColor;
     private double[] arrAttributes;
     private int nDevelopment;
+    boolean doubleRent;
     private double dFootTraffic;
     private double dRentCollected;
 
@@ -28,6 +30,7 @@ public class Property extends Land {
         nDevelopment = 0;
         dRentCollected = 0;
         dFootTraffic = 0;
+        doubleRent = false;
     }
 
     /**
@@ -80,6 +83,13 @@ public class Property extends Land {
     }
 
     /**
+     * Changes the variable whether if a double rent card is applied
+     * @param val value to set the doubleRent variable to
+     */
+    public void setDoubleRent(boolean val){
+        doubleRent = val;
+    }
+    /**
      * Similar to the getRent() function of parent class land but computes differently for property land
      * @return (double) rent to be paid
      */
@@ -99,6 +109,10 @@ public class Property extends Land {
             dRent += 20;
         dRent += arrAttributes[nDevelopment + 2]; //Add development level
         dRent *= getMultiplier(); //Multiply multipliers
+        if(doubleRent){
+            dRent *= 2;
+            doubleRent = false;
+        }
         return dRent;
     }
 

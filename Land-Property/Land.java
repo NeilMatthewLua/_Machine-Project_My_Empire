@@ -4,11 +4,11 @@ import java.util.Collections;
 /**
  * Land class which acts as a template for the different places found on the board
  *
- *  New Changes Made: Moved addCard method into GameBoard class
+ *  New Changes Made: Added setMultiplier, Adjusted code to match new receive/give money methods
  *
- *  Last Changes Made: N/A
+ *  Last Changes Made: Moved addCard method into GameBoard class
  *   @author  Lua & Tanting
- *   @version 1.0
+ *   @version 1.1
  */
 public class Land {
     private String strName;
@@ -25,6 +25,7 @@ public class Land {
     public Land(String strName, String strLandType){
         this.strName  = strName;
         this.strLandType = strLandType;
+        owner = null;
         dMultiplier = 1;
     }
 
@@ -82,6 +83,14 @@ public class Land {
     }
 
     /**
+     * Adds multiplier from parameter unto the multiplier of the rent for the land
+     * @param multiplier is the multiplier percentage to stack
+     */
+    public void setMultiplier(double multiplier){
+        dMultiplier *= multiplier;
+    }
+
+    /**
      * Adds foot traffic when players pass by, only exists to be overridden by property
      */
     public void addFootTraffic(){
@@ -97,18 +106,28 @@ public class Land {
         if(strLandType.equals("property") || strLandType.equals("railroad") || strLandType.equals("utility")){
             //If land is property, railroad, or utility
             dPayment = getRent(player) * dMultiplier;
-            if(player.getMoney() - dPayment >= 0)
-                player.giveMoney(owner,dPayment);
-            else
+            if(player.getMoney() - dPayment >= 0){
+                player.giveMoney(dPayment);
+                owner.receiveMoney(dPayment);
+            }
+            else{
                 gameBoard.setIsWin(false);
+                owner.receiveMoney(player.getMoney());
+                player.giveMoney(player.getMoney());
+            }
         }
         else if(strLandType.equals("luxury") || strLandType.equals("income")) {
             //If land is luxury or income tax space
             dPayment = getTax(player);
-            if(player.getMoney() - dPayment >= 0)
-                player.giveMoney(gameBoard.getBank(),dPayment);
-            else
+            if(player.getMoney() - dPayment >= 0){
+                player.giveMoney(dPayment);
+                gameBoard.getBank().receiveMoney(player.getMoney());
+            }
+            else{
                 gameBoard.setIsWin(false);
+                gameBoard.getBank().receiveMoney(player.getMoney());
+                player.giveMoney(player.getMoney());
+            }
         }
         else if(strLandType.equals("chance")){
             //If land is chance space
@@ -116,7 +135,7 @@ public class Land {
             System.out.println("Player"  + player.getName() + "gets a card." + player.getCard()
             .getDescription());
             if(player.getCard().getCanKeep() == false) //If card can't be kept
-                player.getCard().useCard(gameBoard);
+                player.getCard().useCard(player,gameBoard);
 
         }
         else if (strLandType.equals("corner")){
@@ -125,15 +144,21 @@ public class Land {
                 case 8: //Community Service
                     System.out.println("Community Service, pay 50$.");
                     dPayment = 50;
-                    if(player.getMoney() - dPayment >= 0)
-                        player.giveMoney(gameBoard.getBank(),dPayment);
-                    else
+                    if(player.getMoney() - dPayment >= 0){
+                        gameBoard.getBank().receiveMoney(dPayment);
+                        player.giveMoney(dPayment);
+                    }
+                    else{
                         gameBoard.setIsWin(false);
+                        gameBoard.getBank().receiveMoney(player.getMoney());
+                        player.giveMoney(player.getMoney());
+                    }
                     break;
                 case 16: //Free Parking
                     System.out.println("Free Parking! Wait for next turn.");
                     break;
                 case 24: //Jail
+
                     System.out.println("Welcome to Jail. Pay 50$ at the start of your next turn"); //Implement this
                     break;
             }
