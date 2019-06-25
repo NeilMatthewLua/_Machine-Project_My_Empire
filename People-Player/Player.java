@@ -1,19 +1,16 @@
 /**
  * Player Class
  *    
- *      New Changes:        Other half Roll (Trade, Purchase)    
+ *      New Changes:        develop()
+                            eligibleDev()
+ * 
+        Last Changes Made:  Other half Roll (Trade, Purchase)    
                             setPosition()
                             getLastRoll()  
                             purchase()   
-                            trade() 
- * 
-        Last Changes Made:  public isMine()
-                            added isMind on UML
-                            public void action()
-                                - 1/2 Switch Case, Determines if Tax Tile, Chance Tile, Rairoad, or Start Tile
-                                -1/2 Determines if property tile is yours or theirs or free for buying    
+                            trade()     
    
- * Version 1.02
+ * Version 1.03
  */
 
 import java.util.ArrayList;
@@ -138,7 +135,12 @@ public class Player extends People{
                     }
                 }
                 else { //this means the land tile is owned by the current Player
+                    
                     trade(gameBoard);
+
+                    if(eligibleDev(gameBoard)) { //checks if the land is eligible for development before offering it 
+                        develop(gameBoard);
+                    }
                 }
                 break;
             } 
@@ -176,7 +178,31 @@ public class Player extends People{
         gameBoard.getLand.get(this.nProperty).setOwner(gameBoard.getLand.get(this.nProperty).getOwner(nChosenProperty));
 
         gameBoard.getLand.get(nChosenProperty).setOwner(this);
+    }
 
+    /**
+     * Develops land of the owner
+     */
+    private void develop(GameBoard gameBoard) {
+       this.dMoney -=  gameBoard.getLand().get(this.nPosition).arrAttributes[1];
+       gameBoard.getLand().get(this.nPosition).setDevelopment(1);
+    }
 
+    /**
+     * Checker whether or not this land is eligible for development
+     * @return boolean if the land is eligible
+     */
+    private boolean eligibleDev (GameBoard gameBoard) {
+        if(this.dMoney >= gameBoard.getLand().get(this.nPosition).arrAttributes[1]) {
+            if( (gameBoard.getLand().get(this.nPosition).getRentCollected() >= gameBoard.getLand().get(this.nPosition).arrAttributes[1]) || (gameBoard.getLand().get(this.nPosition).getFootTraffic() >=  gameBoard.getLand().get(this.nPosition).arrAttributes[8] * gameBoard.getPlayers().length) ) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
     }
 }
