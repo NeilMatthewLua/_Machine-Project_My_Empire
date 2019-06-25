@@ -5,7 +5,6 @@ public class main {
         System.out.println(a.getPosition());
         a.roll();
         System.out.println(a.getPosition());
-        System.out.println(a.getMoney());
 
 
     }
