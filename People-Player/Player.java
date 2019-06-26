@@ -9,7 +9,7 @@
         Last Changes Made:  develop()
                             trade() 
    
- * Version 1.04
+ * Version 1.05
  */
 
 import java.util.ArrayList;

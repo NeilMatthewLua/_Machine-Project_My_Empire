@@ -1,12 +1,13 @@
 /**
  * People Class
  *    
- *      New Changes: Edited the Receive Give Method (Avoided infinite loop)
-                     Removed receivedMoney()
+ *      New Changes: 
+                     Brought Back receivedMoney()
  * 
- *      Last Changes Made: 
+ *      Last Changes Made: Edited the Receive Give Method (Avoided infinite loop)
+                     Removed receivedMoney()
 
- * Version 1.02
+ * Version 1.03
  */
 
 
@@ -58,6 +59,16 @@ public class People{
     public double getMoney(){
         return this.dMoney;
     }
+
+    /**
+     * Receives Money to a Player
+     * @param player Player that you will pay to
+     * @param amount amount of money to be paid to the Player
+     */
+    public void receiveMoney(double amount) {
+        this.dMoney += amount;
+    }
+
 
     /**
      * Gives Money to a Player
