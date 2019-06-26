@@ -1,7 +1,7 @@
 /**
  * Property class which inherits from Land and is used for making property objects inside the board
  *
- *  New Changes Made: N/A
+ *  New Changes Made: setRentCollected(), getRentCollcted(), getFootTraffic()
  *
  *  Last Changes Made: N/A
  *
@@ -54,13 +54,14 @@ public class Property extends Land {
      * Gets the different attributes associated with the property
      * @return (double[]) of details regarding the property
      */
+    @Override
     public double[] getDetails() {
         return arrAttributes;
     }
 
     /**
      * Gets the development level of the property
-     * @return (int) development level of the property
+     * @return development level of the property
      */
     public int getDevelopment() {
         return nDevelopment;
@@ -68,7 +69,7 @@ public class Property extends Land {
 
     /**
      * Gets the foot traffic of the property
-     * @return (double) foot traffic of the property
+     * @return foot traffic of the property
      */
     public double getFootTraffic() {
         return dFootTraffic;
@@ -76,7 +77,6 @@ public class Property extends Land {
 
     /**
      * Gets the amount of rent collected by the property
-     * @return (double) amount of rent collected by property
      */
     public double getRentCollected() {
         return dRentCollected;
@@ -89,9 +89,25 @@ public class Property extends Land {
     public void setDoubleRent(boolean val){
         doubleRent = val;
     }
+
+    /**
+     * Adds development to property based on the parameter
+     * @param n the value to add to property development
+     */
+    public void setDevelopment(int n){
+        nDevelopment += n;
+    }
+
+    /**
+     * Adds an amount to the rent collected by the property based on the parameter
+     * @param n the amount to be addded
+     */
+    public void setRentCollected(double n){
+        dRentCollected += n;
+    }
     /**
      * Similar to the getRent() function of parent class land but computes differently for property land
-     * @return (double) rent to be paid
+     * @return rent to be paid
      */
     private double getRent(){
         int nCounter = 0;
@@ -118,7 +134,6 @@ public class Property extends Land {
 
     /**
      * Increments footTraffic counter when player passes over property
-     * return (void)
      */
     @Override
     public void addFootTraffic(){

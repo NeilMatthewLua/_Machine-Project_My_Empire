@@ -4,9 +4,9 @@ import java.util.Collections;
 /**
  * Land class which acts as a template for the different places found on the board
  *
- *  New Changes Made: Added setMultiplier, Adjusted code to match new receive/give money methods
+ *  New Changes Made: getDetails(),
  *
- *  Last Changes Made: Moved addCard method into GameBoard class
+ *  Last Changes Made: Added setMultiplier, Adjusted code to match new receive/give money methods
  *   @author  Lua & Tanting
  *   @version 1.1
  */
@@ -83,12 +83,20 @@ public class Land {
     }
 
     /**
+     * Acts as an empty function to be overridden by subclass Property
+     * @return nothing since only Property contains details
+     */
+    public double[] getDetails(){
+        return null;
+    }
+    /**
      * Adds multiplier from parameter unto the multiplier of the rent for the land
      * @param multiplier is the multiplier percentage to stack
      */
     public void setMultiplier(double multiplier){
         dMultiplier *= multiplier;
     }
+
 
     /**
      * Sets the owner of the property to specified player
@@ -180,8 +188,8 @@ public class Land {
         int nCounter = 0;
         double dRent = 0;
         if(strLandType.equals("railroad")){ //If land is railroad, count number of railroads owner has
-            for(int i = 0; i < owner.getProperties().size(); i++)
-                if(owner.getProperties().get(i).getLandType().equals("railroad"))
+            for(int i = 0; i < owner.getProperty().size(); i++)
+                if(owner.getProperty().get(i).getLandType().equals("railroad"))
                     nCounter++;
             switch(nCounter) {//Calculations made based on no. of railroads owner has
                 case 1:
@@ -197,8 +205,8 @@ public class Land {
             }
         }
         else if(strLandType.equals("utility")){ //If land is utility count, count number of land owner has
-            for(int i = 0; i < owner.getProperties().size(); i++)
-                if(owner.getProperties().get(i).getLandType().equals("utilities"))
+            for(int i = 0; i < owner.getProperty().size(); i++)
+                if(owner.getProperty().get(i).getLandType().equals("utilities"))
                     nCounter++;
             switch(nCounter){//Calculations made based on owned properties and dice rolls
                 case 1:
