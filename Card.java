@@ -5,13 +5,14 @@ import java.util.Scanner;
 /**
  * Card class which acts as a template for the cards that can be used during the game
  *
- *  New Changes Made:  get out of jail
- *                     move to property chance to own / trade / pay rent
- *
- *  Last Changes Made:
- *
+ *  New Changes Made:  First half of Chance Cards
+                       
+ 
+ *  Last Changes Made: get out of jail
+                       move to property chance to own / trade / pay rent
+ 
  *   @author  Tanting
- *   @version 1.2
+ *   @version 1.3
  */
 public class Card {
     private int nGroup; //Group which card belongs to
@@ -68,6 +69,7 @@ public class Card {
                 }
                 while(player.getPosition() != nRandProperty){//While player has not landed on property
                     player.setPosition(1);//Player moves one space
+
                     if (gameBoard.getLand().get(player.getPosition()).getOwner().getName() != null &&
                             gameBoard.getLand().get(player.getPosition()).getLandType().equalsIgnoreCase("property")) {
                         //If land is owned and is property type
@@ -85,31 +87,90 @@ public class Card {
                     }
                 }
                 else { //this means the land tile is owned by the current Player
-                        trade(gameBoard);
-                    }
-            }
-        }
-        else if (nIndex == 1) {
-
-        }
-        else if (nIndex == 2) {
-
-        }
-        else if(nGroup == 2){
-            if(nIndex == 0) {
-
+                    trade(gameBoard);
+                }
             }
             else if (nIndex == 1) {
+                while(!(gameBoard.getLand().get(player.getPosition()).getLandType().equals("utility"))) {//Loops until a utility is found
+                    player.setPosition(1);
 
+                    if(player.getPosition() == 0){
+                        player.receiveMoney(200);
+                        gameBoard.getBank().giveMoney(200);
+                    }
+
+                    if (gameBoard.getLand().get(player.getPosition()).getOwner().getName() != null &&
+                    gameBoard.getLand().get(player.getPosition()).getLandType().equalsIgnoreCase("property")) {
+                    //If land is owned and is property type
+                    gameBoard.getLand().get(player.getPosition()).addFootTraffic();
+                      }
+                }
+
+                if(gameBoard.getLand().get(player.getPosition()).getOwner() != null) { //checks if the utility tile is owned by anyone
+                    if(!(player.isMine(gameBoard))) { //checks if you dont own it, you'll pay 10 times rent to the owner
+                        gameBoard.getLand().get(player.getPosition()).getOwner().receiveMoney(player.giveMoney( 10 * gameBoard.getLand().get(player.getPosition()).getRent()));
+
+                        player.giveMoney( ( 10 * gameBoard.getLand().get(player.getPosition()).getRent() ) );
+                    }
+
+                }
+                else { //the utility tile is free to buy
+                    if(player.getMoney() >= gameBoard.getLand().get(player.getPosition).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land 
+                        player.purchase(gameBoard);
+                    }
+                }    
             }
             else if (nIndex == 2) {
+                while(!(gameBoard.getLand().get(player.getPosition()).getLandType().equals("railroad"))) {//Loops until a utility is found
+                    player.setPosition(1);
+                    
+                    if(player.getPosition() == 0){
+                        player.receiveMoney(200);
+                        gameBoard.getBank().giveMoney(200);
+                    }
 
+                    if (gameBoard.getLand().get(player.getPosition()).getOwner().getName() != null &&
+                            gameBoard.getLand().get(player.getPosition()).getLandType().equalsIgnoreCase("property")) {
+                        //If land is owned and is property type
+                        gameBoard.getLand().get(player.getPosition()).addFootTraffic();
+                    }
+                }
+                if(gameBoard.getLand().get(player.getPosition()).getOwner() != null) { //checks if the utility tile is owned by anyone
+                    if(!(player.isMine(gameBoard))) { //checks if you dont own it, you'll pay rent to the owner
+                        gameBoard.getLand().get(player.getPosition()).getOwner().receiveMoney(player.giveMoney(gameBoard.getLand().get(player.getPosition()).getRent()));
+
+                        player.giveMoney(player.giveMoney(gameBoard.getLand().get(player.getPosition()).getRent()));
+                    }
+
+                }
+                else { //the utility tile is free to buy
+                    if(player.getMoney() >= gameBoard.getLand().get(player.getPosition).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land 
+                        player.purchase(gameBoard);
+                    }
+                }
+            }
+        }
+        else if(nGroup == 2){ //change cards receiving cash
+            if(nIndex == 0) { 
+                player.receiveMoney(50);
+                gameBoard.getBank().giveMoney(50);
+            }
+            else if (nIndex == 1) {
+                player.receiveMoney(100);
+                gameBoard.getBank().giveMoney(100);
+            }
+            else if (nIndex == 2) {
+                player.setPosition(32 - player.getPosition());
+                player.receiveMoney(200);
+                gameBoard.getBank().giveMoney(200);
             }
             else if (nIndex == 3) {
-
+                player.receiveMoney(300);
+                gameBoard.getBank().giveMoney(300);
             }
             else if (nIndex == 4) {
-
+                player.receiveMoney(150);
+                gameBoard.getBank().giveMoney(150);
             }
         }
         else if(nGroup == 3){//Trip to jail(index 24) or property
