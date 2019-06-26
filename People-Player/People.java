@@ -1,12 +1,16 @@
 /**
  * People Class
  *    
- *      New Changes: Edited the Receive Give Method (Avoided infinite loop)
-                     Removed receivedMoney()
+ *      New Changes: 
  * 
- *      Last Changes Made: 
+ *      Last Changes Made: public People(String strName)
+                           public People(String strName, boolean isBank)
+                           public String getName()
+                           public double getMoney()
+                           public void receiveMoney(People player, double amount)
+                           public void giveMoney(People player, double amount)
 
- * Version 1.02
+ * Version 1.01
  */
 
 
@@ -60,12 +64,23 @@ public class People{
     }
 
     /**
+     * Receive Money from a Player
+     * @param player Player that will pay you
+     * @param amount amount of money to be received from the Player
+     */
+    public void receiveMoney(People player, double amount) {
+        this.dMoney += amount;
+        player.giveMoney(this, amount);
+    }
+
+    /**
      * Gives Money to a Player
      * @param player Player that you will pay to
      * @param amount amount of money to be paid to the Player
      */
-    public void giveMoney(double amount) {
+    public void giveMoney(People player, double amount) {
         this.dMoney -= amount;
+        player.receiveMoney(this, amount);
     }
 
 }
