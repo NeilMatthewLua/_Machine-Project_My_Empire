@@ -5,12 +5,13 @@ import java.util.Scanner;
 /**
  * Card class which acts as a template for the cards that can be used during the game
  *
- *  New Changes Made:
+ *  New Changes Made:  get out of jail
+ *                     move to property chance to own / trade / pay rent
  *
  *  Last Changes Made:
  *
  *   @author  Tanting
- *   @version 1.1
+ *   @version 1.2
  */
 public class Card {
     private int nGroup; //Group which card belongs to
@@ -56,13 +57,60 @@ public class Card {
      */
     public void useCard (Player player, GameBoard gameBoard) {
         if(nGroup == 0){
-
+                player.setJail();
         }
         else if (nGroup == 1){
+            if(nIndex == 0) {
+                Random rand = new Random();
+                int nRandProperty = rand.nextInt(32);
+                while(gameBoard.getLand().get(nRandProperty).getLandType().equals("property")){//Loops until a property is found
+                    nRandProperty = rand.nextInt(32);
+                }
+                while(player.getPosition() != nRandProperty){//While player has not landed on property
+                    player.setPosition(1);//Player moves one space
+                    if (gameBoard.getLand().get(player.getPosition()).getOwner().getName() != null &&
+                            gameBoard.getLand().get(player.getPosition()).getLandType().equalsIgnoreCase("property")) {
+                        //If land is owned and is property type
+                        gameBoard.getLand().get(player.getPosition()).addFootTraffic();
+                    }
+                }
+                
+                if(!isMine(gameBoard)) { //checks if the current Player owns that piece of land
+                    if (gameBoard.getLand().get(player.getPosition()).getOwner() != null) //checks if the landed tile is owned by the current Player
+                        gameBoard.getLand().get((player.getPosition()).triggerEvent(player, gameBoard));
+                    else { //If not, checks if that tile is free to purchase form the bank
+                        if(player.getMoney() >= gameBoard.getLand().get((player.getPosition()).getDetails()[0])) { //checks if the current player has sufficient funds before offering to buy that land 
+                            purchase(gameBoard);
+                        }
+                    }
+                }
+                else { //this means the land tile is owned by the current Player
+                        trade(gameBoard);
+                    }
+            }
+        }
+        else if (nIndex == 1) {
+
+        }
+        else if (nIndex == 2) {
 
         }
         else if(nGroup == 2){
+            if(nIndex == 0) {
 
+            }
+            else if (nIndex == 1) {
+
+            }
+            else if (nIndex == 2) {
+
+            }
+            else if (nIndex == 3) {
+
+            }
+            else if (nIndex == 4) {
+
+            }
         }
         else if(nGroup == 3){//Trip to jail(index 24) or property
             if(nIndex == 0){//Trip to jail, no money on start
