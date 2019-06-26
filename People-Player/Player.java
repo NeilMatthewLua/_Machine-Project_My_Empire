@@ -1,15 +1,16 @@
 /**
  * Player Class
  *    
- *      New Changes:        private inJail
+ *      New Changes:        addCard() 
+                            getProperty() -> getProperties()
+                            Updated javaDocs of some methods          
+   
+        Last Changes Made:  private inJail
                             getJail()
-                            setJail       
-                            edited method calls and mismatch attribute names                   
+                            setJail()       
+                            edited method calls and mismatch attribute names   
    
-        Last Changes Made:  develop()
-                            trade() 
-   
- * Version 1.05
+ * Version 1.06
  */
 
 import java.util.ArrayList;
@@ -42,6 +43,14 @@ public class Player extends People{
     }
 
     /**
+     * Adds a card on hand
+     * @param card a card that can be kepton hand
+     */
+    public void addCard(Card card) {
+         this.card.add(card);
+    }
+
+    /**
      * Getter for the cards on hand (One card at a time, first card always)
      * @return first card on hand (if there are any)
      */
@@ -56,7 +65,7 @@ public class Player extends People{
      * Getter for the properties
      * @return properties arrayList
      */
-    public ArrayList<Property> getProperty() {
+    public ArrayList<Property> getProperties() {
         return this.properties;
     }    
 
@@ -197,6 +206,7 @@ int nChosenPosition = 0;
 
     /**
      * Develops land of the owner
+     *  @param gameBoard Gameboard where the players are playing on
      */
     private void develop(GameBoard gameBoard) {
        dMoney -=  gameBoard.getLand().get(nPosition).getDetails()[1];
@@ -205,6 +215,7 @@ int nChosenPosition = 0;
 
     /**
      * Checker whether or not this land is eligible for development
+     * @param gameBoard Gameboard where the players are playing on
      * @return boolean if the land is eligible
      */
     private boolean eligibleDev (GameBoard gameBoard) {
