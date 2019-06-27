@@ -1,9 +1,9 @@
 /**
  * Property class which inherits from Land and is used for making property objects inside the board
  *
- *  New Changes Made: setRentCollected(), getRentCollcted(), getFootTraffic()
+ *  New Changes Made: No changes
  *
- *  Last Changes Made: N/A
+ *  Last Changes Made: setRentCollected(), getRentCollcted(), getFootTraffic()
  *
  *   @author  Lua & Tanting
  *   @version 1.0
@@ -71,6 +71,7 @@ public class Property extends Land {
      * Gets the foot traffic of the property
      * @return foot traffic of the property
      */
+    @Override
     public double getFootTraffic() {
         return dFootTraffic;
     }
@@ -78,6 +79,7 @@ public class Property extends Land {
     /**
      * Gets the amount of rent collected by the property
      */
+    @Override
     public double getRentCollected() {
         return dRentCollected;
     }
@@ -86,6 +88,7 @@ public class Property extends Land {
      * Changes the variable whether if a double rent card is applied
      * @param val value to set the doubleRent variable to
      */
+    @Override
     public void setDoubleRent(boolean val){
         doubleRent = val;
     }
@@ -94,6 +97,7 @@ public class Property extends Land {
      * Adds development to property based on the parameter
      * @param n the value to add to property development
      */
+    @Override
     public void setDevelopment(int n){
         nDevelopment += n;
     }
@@ -105,17 +109,19 @@ public class Property extends Land {
     public void setRentCollected(double n){
         dRentCollected += n;
     }
+
     /**
      * Similar to the getRent() function of parent class land but computes differently for property land
      * @return rent to be paid
      */
-    private double getRent(){
+    @Override
+    public double getRent(Player player){
         int nCounter = 0;
         double dRent = 0;
         for(int i = 0; i < getOwner().getProperties().size();i++){
             //Count the number of properties of the same color owned by player
             if(getLandType().equals(getOwner().getProperties().get(i).getLandType())){
-                if(strColor.equals(getOwner().getProperties().get(i).strColor))
+                if(this.strColor.equals(getOwner().getProperties().get(i).getColor()))
                     nCounter++;
             }
         }
