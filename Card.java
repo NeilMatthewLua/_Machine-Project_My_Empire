@@ -5,11 +5,10 @@ import java.util.Scanner;
 /**
  * Card class which acts as a template for the cards that can be used during the game
  *
- *  New Changes Made:  First half of Chance Cards
+ *  New Changes Made: Used cards are now removed
                        
  
- *  Last Changes Made: get out of jail
-                       move to property chance to own / trade / pay rent
+ *  Last Changes Made: First half of Chance Cards
  
  *   @author  Tanting
  *   @version 1.3
@@ -58,7 +57,7 @@ public class Card {
      */
     public void useCard (Player player, GameBoard gameBoard) {
         if(nGroup == 0){
-                player.setJail();
+                player.setJail(false);
         }
         else if (nGroup == 1){
             if(nIndex == 0) {
@@ -70,24 +69,24 @@ public class Card {
                 while(player.getPosition() != nRandProperty){//While player has not landed on property
                     player.setPosition(1);//Player moves one space
 
-                    if (gameBoard.getLand().get(player.getPosition()).getOwner().getName() != null &&
-                            gameBoard.getLand().get(player.getPosition()).getLandType().equalsIgnoreCase("property")) {
+                    if (gameBoard.getLand().get(player.getPosition()).getOwner() != null)
+                        if(gameBoard.getLand().get(player.getPosition()).getLandType().equalsIgnoreCase("property")) {
                         //If land is owned and is property type
                         gameBoard.getLand().get(player.getPosition()).addFootTraffic();
                     }
                 }
                 
-                if(!isMine(gameBoard)) { //checks if the current Player owns that piece of land
+                if(!player.isMine(gameBoard)) { //checks if the current Player owns that piece of land
                     if (gameBoard.getLand().get(player.getPosition()).getOwner() != null) //checks if the landed tile is owned by the current Player
-                        gameBoard.getLand().get((player.getPosition()).triggerEvent(player, gameBoard));
+                        gameBoard.getLand().get((player.getPosition())).triggerEvent(player, gameBoard);
                     else { //If not, checks if that tile is free to purchase form the bank
-                        if(player.getMoney() >= gameBoard.getLand().get((player.getPosition()).getDetails()[0])) { //checks if the current player has sufficient funds before offering to buy that land 
-                            purchase(gameBoard);
+                        if(player.getMoney() >= gameBoard.getLand().get((player.getPosition())).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land
+                            player.purchase(gameBoard);
                         }
                     }
                 }
                 else { //this means the land tile is owned by the current Player
-                    trade(gameBoard);
+                    player.trade(gameBoard);
                 }
             }
             else if (nIndex == 1) {
@@ -99,23 +98,23 @@ public class Card {
                         gameBoard.getBank().giveMoney(200);
                     }
 
-                    if (gameBoard.getLand().get(player.getPosition()).getOwner().getName() != null &&
-                    gameBoard.getLand().get(player.getPosition()).getLandType().equalsIgnoreCase("property")) {
-                    //If land is owned and is property type
-                    gameBoard.getLand().get(player.getPosition()).addFootTraffic();
+                    if (gameBoard.getLand().get(player.getPosition()).getOwner() != null)
+                        if(gameBoard.getLand().get(player.getPosition()).getLandType().equalsIgnoreCase("property")) {
+                            //If land is owned and is property type
+                             gameBoard.getLand().get(player.getPosition()).addFootTraffic();
                       }
                 }
 
                 if(gameBoard.getLand().get(player.getPosition()).getOwner() != null) { //checks if the utility tile is owned by anyone
-                    if(!(player.isMine(gameBoard))) { //checks if you dont own it, you'll pay 10 times rent to the owner
-                        gameBoard.getLand().get(player.getPosition()).getOwner().receiveMoney(player.giveMoney( 10 * gameBoard.getLand().get(player.getPosition()).getRent()));
+                    if(!(player.isMine(gameBoard))) { //checks if you don't own it, you'll pay 10 times rent to the owner
+                        gameBoard.getLand().get(player.getPosition()).getOwner().receiveMoney( 10 * gameBoard.getLand().get(player.getPosition()).getRent(player));
 
-                        player.giveMoney( ( 10 * gameBoard.getLand().get(player.getPosition()).getRent() ) );
+                        player.giveMoney( ( 10 * gameBoard.getLand().get(player.getPosition()).getRent(player)) );
                     }
 
                 }
                 else { //the utility tile is free to buy
-                    if(player.getMoney() >= gameBoard.getLand().get(player.getPosition).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land 
+                    if(player.getMoney() >= gameBoard.getLand().get(player.getPosition()).getPrice()) { //checks if the current player has sufficient funds before offering to buy that land
                         player.purchase(gameBoard);
                     }
                 }    
@@ -129,22 +128,22 @@ public class Card {
                         gameBoard.getBank().giveMoney(200);
                     }
 
-                    if (gameBoard.getLand().get(player.getPosition()).getOwner().getName() != null &&
-                            gameBoard.getLand().get(player.getPosition()).getLandType().equalsIgnoreCase("property")) {
+                    if (gameBoard.getLand().get(player.getPosition()).getOwner() != null)
+                        if(gameBoard.getLand().get(player.getPosition()).getLandType().equalsIgnoreCase("property")) {
                         //If land is owned and is property type
                         gameBoard.getLand().get(player.getPosition()).addFootTraffic();
                     }
                 }
                 if(gameBoard.getLand().get(player.getPosition()).getOwner() != null) { //checks if the utility tile is owned by anyone
-                    if(!(player.isMine(gameBoard))) { //checks if you dont own it, you'll pay rent to the owner
-                        gameBoard.getLand().get(player.getPosition()).getOwner().receiveMoney(player.giveMoney(gameBoard.getLand().get(player.getPosition()).getRent()));
+                    if(!(player.isMine(gameBoard))) { //checks if you don't own it, you'll pay rent to the owner
+                        gameBoard.getLand().get(player.getPosition()).getOwner().receiveMoney(gameBoard.getLand().get(player.getPosition()).getRent(player));
 
-                        player.giveMoney(player.giveMoney(gameBoard.getLand().get(player.getPosition()).getRent()));
+                        player.giveMoney(gameBoard.getLand().get(player.getPosition()).getRent(player));
                     }
 
                 }
                 else { //the utility tile is free to buy
-                    if(player.getMoney() >= gameBoard.getLand().get(player.getPosition).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land 
+                    if(player.getMoney() >= gameBoard.getLand().get(player.getPosition()).getPrice()) { //checks if the current player has sufficient funds before offering to buy that land
                         player.purchase(gameBoard);
                     }
                 }
@@ -196,8 +195,8 @@ public class Card {
                         player.receiveMoney(200);
                         gameBoard.getBank().giveMoney(200);
                     }
-                    if (gameBoard.getLand().get(player.getPosition()).getOwner().getName() != null &&
-                            gameBoard.getLand().get(player.getPosition()).getLandType().equalsIgnoreCase("property")) {
+                    if (gameBoard.getLand().get(player.getPosition()).getOwner() != null)
+                        if(gameBoard.getLand().get(player.getPosition()).getLandType().equalsIgnoreCase("property")) {
                         //If land is owned and is property type
                         gameBoard.getLand().get(player.getPosition()).addFootTraffic();
                     }
@@ -296,6 +295,8 @@ public class Card {
             }
 
         }
-
+        //Add used card to discard pile and remove card from player's cards
+        gameBoard.addCardDiscard(player.getCard().get(player.getCard().size()-1));
+        player.getCard().remove(player.getCard().size()-1);
     }
 }
