@@ -1,6 +1,7 @@
 /**
  * Player Class
  *    
+<<<<<<< HEAD
  *      New Changes: Fixed bugs under Trade (ArrayoutofBounds)
                       setOwner first before handing property
    
@@ -9,6 +10,15 @@
  *                   adjusted trade() to allow players to choose properties to trade
    
  * Version 1.08
+=======
+ *      New Changes: Arranged method ordering in code,
+ *                   Added Jail fine in roll(),
+ *                   adjusted trade() to allow players to choose properties to trade
+   
+        Last Changes Made: Fixed some method calls
+   
+ * Version 1.07
+>>>>>>> 5e3e8be9f09e038ef3147b67a2f0d3336ae9c353
  */
 
 import java.util.ArrayList;
@@ -243,11 +253,19 @@ public class Player extends People{
         this.properties.add(temp);
 
         //Sets your chosen property to be owned by other player
+<<<<<<< HEAD
         properties.get(nProperty).setOwner(gameBoard.getPlayers()[nChosenPlayer]);
         gameBoard.getPlayers()[nChosenPlayer].properties.add(properties.get(nProperty));
 
         //Remove traded properties from both players
         this.properties.remove(properties.get(nProperty ));
+=======
+        gameBoard.getPlayers()[nChosenPlayer].properties.add(properties.get(nProperty));
+        properties.get(nProperty).setOwner(gameBoard.getPlayers()[nChosenPlayer]);
+
+        //Remove traded properties from both players
+        this.properties.remove(properties.get(nPosition));
+>>>>>>> 5e3e8be9f09e038ef3147b67a2f0d3336ae9c353
         gameBoard.getPlayers()[nChosenPlayer].properties.remove(nChosenPosition);
 
         System.out.println(getName() + " now owns " + gameBoard.getLand().get(nChosenPosition).getName());
