@@ -5,11 +5,11 @@ import java.util.Random;
 /**
  * GameBoard class contains methods which plays the game
  *
- * New Changes Made: Added initializePlayers(), playGame(), getChance()
+ * New Changes Made: addDiscard(), randomizeLand(), endResults(), playGame() now functional
  *
- * Last Changes Made: Added initializeLand() and initializeCards()
+ * Last Changes Made: Added initializePlayers(), playGame(), getChance()
  * @author  Lua & Tanting
- * @version 1.1
+ * @version 1.2
  */
 public class GameBoard {
     private Player[] players;
@@ -27,14 +27,16 @@ public class GameBoard {
         initializeLand();
         initializeCards();
         initializePlayers();
+        randomizeLand();
+        isWin = false;
     }
 
     /**
      * Gets the number of players in the current game board
      * @return number of players
      */
-    public int getPlayers() {
-        return players.length;
+    public Player[] getPlayers() {
+        return players;
     }
 
     /**
@@ -64,16 +66,23 @@ public class GameBoard {
     /**
      * Prints Land in Order
      */
-    private void printLand(){
+    private void printLand(Player player){
+        System.out.println("TURN: " + player.getName());
         int[] arrPositions = new int[players.length];
-        for(int i = 0; i < players.length;i++)
+        for(int i = 0; i < players.length; i++)
             arrPositions[i] = players[i].getPosition();
-        for(int i = 0; i < landLeft.size();i++){
-            System.out.println(i +"."+ landLeft.get(i).getName());
+        for(int i = 0; i < land.size(); i++){
+            if(land.get(i).getOwner() != null )
+                if(land.get(i).getOwner().equals(player))
+                    System.out.print("(OWNED) ");
+            System.out.println(i +"."+ land.get(i).getName());
             for(int j = 0; j < players.length; j++)
                 if(i == arrPositions[j])
-                    System.out.println("Player:" + players[j].getName() + "is here.");
+                    System.out.println("Player: " + players[j].getName() + "is here. at " + i);
         }
+        System.out.println();
+        System.out.println();
+        System.out.println();
     }
     /**
      * Creates land objects to be used in the board and places it in landLeft
@@ -161,6 +170,24 @@ public class GameBoard {
         }
     }
 
+    //ADD RANDOMIZE FUNCTION
+
+    public void randomizeLand(){
+        land = new ArrayList<Land>(1);
+        for(int i = 0; i < landLeft.size();i++ ){
+            if(!(landLeft.get(i).getName().equals("Start") ||
+                    landLeft.get(i).getName().equals("Community Service") ||
+                    landLeft.get(i).getName().equals("Free Parking") ||
+                    landLeft.get(i).getName().equals("Jail")))
+            land.add(landLeft.get(i));
+        }
+        Collections.shuffle(land);
+        land.add(0,landLeft.get(0));
+        land.add(8,landLeft.get(8));
+        land.add(16,landLeft.get(16));
+        land.add(24,landLeft.get(24));
+    }
+
     /**
      * Prints Cards in Order
      */
@@ -231,7 +258,7 @@ public class GameBoard {
      */
     private void initializePlayers(){
         int nPlayers = 4; //Adjust to add more players
-        bank = new People("Bank",true); //Initialize bank
+        bank = new People("Bank",true,4); //Initialize bank
         players = new Player[nPlayers];
         for(int i = 0; i < nPlayers; i++){
             players[i] = new Player("Albert" + i);
@@ -314,19 +341,6 @@ public class GameBoard {
     }
 
     /**
-     * Method for playing the board until a player has won
-     */
-    public  void playGame(){
-        while(!isWin){//While no one has won
-            for(int i = 0; i < players.length && !isWin; i++){
-                checkForWin();
-                printLand();
-                players[i].roll(this);
-            }
-        }
-    }
-
-    /**
      * Gives player a card from the topmost card in cardPile
      * @return card that the user got from the pile
      */
@@ -341,4 +355,49 @@ public class GameBoard {
         Collections.shuffle(cardPile);
         return temp;
     }
+
+    /**
+     * Adds card from the parameter to discard pile
+     * @param c is the card to be added
+     */
+    public void addCardDiscard(Card c){
+        cardDiscard.add(c);
+    }
+
+    /**
+     * Method for playing the board until a player has won
+     */
+    public  void playGame(){
+        while(!isWin){//While no one has won
+            for(int i = 0; i < players.length && !isWin; i++){
+                checkForWin();
+                printLand(players[i]);
+                players[i].roll(this);
+            }
+        }
+        endResults();
+    }
+
+    /**
+     * Prints end results with players arranged in descending order of money
+     */
+    public void endResults(){
+        for(int i = 1; i < players.length; i++){
+            Player current = players[i];
+            int j = i - 1;
+            while(j >= 0 && current.getMoney() < players[j].getMoney()) {
+                players[j+1] = players[j];
+                j--;
+            }
+            // at this point we've exited, so j is either -1
+            // or it's at the first element where current >= a[j]
+            players[j+1] = current;
+        }
+        for(int i = players.length-1; i >= 0; i--){
+            if(players[i].getMoney() == 0)
+                System.out.print("BANKRUPT");
+            System.out.println(i+1 + "." + players[i].getName() + "Money: " + players[i].getMoney());
+        }
+    }
+
 }
