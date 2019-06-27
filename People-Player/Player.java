@@ -1,23 +1,21 @@
 /**
  * Player Class
  *    
- *      New Changes:        addCard() 
-                            getProperty() -> getProperties()
-                            Updated javaDocs of some methods          
+ *      New Changes: Arranged method ordering in code,
+ *                   Added Jail fine in roll(),
+ *                   adjusted trade() to allow players to choose properties to trade
    
-        Last Changes Made:  private inJail
-                            getJail()
-                            setJail()       
-                            edited method calls and mismatch attribute names   
+        Last Changes Made: Fixed some method calls
    
- * Version 1.06
+ * Version 1.07
  */
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Player extends People{
 
-    private ArrayList<Property> properties;
+    private ArrayList<Land> properties;
     private ArrayList<Card> cards;
     private int nPosition;
     private int nDiceRoll;
@@ -25,13 +23,31 @@ public class Player extends People{
 
     /**
      * This constructor creats a new Player
+     * @param strName is the name to be assigned to the player
      */
     public Player(String strName) {
-        super(strName, false);
-        this.properties = new ArrayList<Property>();
+        super(strName);
+        this.properties = new ArrayList<Land>();
         this.cards = new ArrayList<Card>();
         nPosition = 0;
         this.nDiceRoll = 0;
+    }
+
+
+    /**
+     * Getter for the properties
+     * @return properties arrayList owned by the player
+     */
+    public ArrayList<Land> getProperties() {
+        return this.properties;
+    }
+
+    /**
+     * Getter for the cards on hand (One card at a time, first card always)
+     * @return cards the player has
+     */
+    public ArrayList<Card> getCard() {
+            return cards;
     }
 
     /**
@@ -41,33 +57,6 @@ public class Player extends People{
     public int getPosition() {
         return nPosition;
     }
-
-    /**
-     * Adds a card on hand
-     * @param card a card that can be kepton hand
-     */
-    public void addCard(Card card) {
-         this.card.add(card);
-    }
-
-    /**
-     * Getter for the cards on hand (One card at a time, first card always)
-     * @return first card on hand (if there are any)
-     */
-    public Card getCard() {
-        if(!cards.isEmpty())
-            return this.cards.get(0);
-        else
-            return null;
-    }
-
-    /**
-     * Getter for the properties
-     * @return properties arrayList
-     */
-    public ArrayList<Property> getProperties() {
-        return this.properties;
-    }    
 
     /**
      * Getter for the last roll value
@@ -85,9 +74,18 @@ public class Player extends People{
         return this.inJail;
     }
 
+
+    /**
+     * Adds a card on hand
+     * @param card a card that can be kept on hand
+     */
+    public void addCard(Card card) {
+         this.cards.add(card);
+    }
+
     /**
      * Setter for the Player's position
-     * @param roll number of spaces the token moves
+     * @param nRoll number of spaces the token moves
      */
     public void setPosition(int nRoll) {
         if(nPosition + nRoll > 31) { //checks if the token went through the whole board already
@@ -97,10 +95,10 @@ public class Player extends People{
     }
       
     /**
-     * Setter for the Player's jail status
+     * Setter for the Player's jail status. Changes status of player's jail status based on parameter
      */
-    public void setJail() {
-        this.inJail = !(this.inJail);
+    public void setJail(boolean value) {
+        this.inJail = value;
     }
         
     /**
@@ -110,10 +108,23 @@ public class Player extends People{
     public void roll(GameBoard gameBoard) {
         int nRoll;
         int start = nPosition; //Initializes the starting position of the token
-        Property temp;
+        Land temp;
         nRoll = (int)((Math.random() * (6 - 1)) + 1 ); //generates a random number form 1 - 6 
         this.nDiceRoll = nRoll;
-        
+        System.out.println("Rolled "+ nRoll); // Display dice roll
+        if(inJail){//If player is in jail then exact fine
+            if(this.getMoney() - 50 >= 0){//If player can pay
+                this.giveMoney(50);
+                gameBoard.getBank().receiveMoney(50);
+                System.out.println("Bank was given 50$ for Jail fine.");
+            }
+            else{//If player can't pay
+                System.out.println("Game is over." + getName() +" was not able to pay Jail Fine.");
+                gameBoard.setIsWin(false);
+                gameBoard.getBank().receiveMoney(this.getMoney());
+                this.giveMoney(this.getMoney());
+            }
+        }
         for( int i = start + 1 ; i <= start + nRoll; i++ ) {
 
             if( i > 31 ) { //Checks if the token has reached the end of the board 
@@ -123,13 +134,16 @@ public class Player extends People{
                 start = 0;
                 dMoney += 200; //the player received 200$ from the bank
                 gameBoard.getBank().giveMoney(200); //the bank shells out 200$
+                System.out.println("Bank pays 200 to: " + getName());
             }
             else {
                 nPosition += 1;
             }
-            temp = properties.get(i);
-            temp.addFootTraffic();
-            properties.set(i,temp);
+            if (gameBoard.getLand().get(this.getPosition()).getOwner() != null)
+                if(gameBoard.getLand().get(this.getPosition()).getLandType().equalsIgnoreCase("property")) {
+                    //If land is owned and is property type
+                    gameBoard.getLand().get(this.getPosition()).addFootTraffic();
+                }
         }
 
     action(gameBoard); //calls the actions to be offered to the player
@@ -153,7 +167,7 @@ public class Player extends People{
                     if (gameBoard.getLand().get(nPosition).getOwner() != null) //checks if the landed tile is owned by the current Player
                         gameBoard.getLand().get(nPosition).triggerEvent(this, gameBoard);
                     else { //If not, checks if that tile is free to purchase form the bank
-                        if(dMoney >= gameBoard.getLand().get(nPosition).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land 
+                        if(dMoney >= gameBoard.getLand().get(nPosition).getPrice()) { //checks if the current player has sufficient funds before offering to buy that land
                             purchase(gameBoard);
                         }
                     }
@@ -180,28 +194,62 @@ public class Player extends People{
     public boolean isMine(GameBoard gameBoard) {
        return this.properties.contains(gameBoard.getLand().get(nPosition));
     }
+
     /**
      * Purchasing a Land Tile
      * @param gameBoard Gameboard where the players are playing on
      */
-    private void purchase (GameBoard gameBoard) {
+    public void purchase (GameBoard gameBoard) {
         gameBoard.getLand().get(nPosition).setOwner(this); //sets the current player as the owner of the land
-        this.properties.add(gameBoard.getLand().get(nPosition)); //adds the land to the current Player's list of land owned
-        dMoney -= gameBoard.getLand().get(nPosition).getDetails()[0]; //subtracts the money from the current Player
-        gameBoard.getBank().receiveMoney(gameBoard.getLand().get(nPosition).getDetails()[0]); //gives the money to the bank
+        properties.add(gameBoard.getLand().get(nPosition)); //adds the land to the current Player's list of land owned
+        dMoney -= gameBoard.getLand().get(nPosition).getPrice(); //subtracts the money from the current Player
+        gameBoard.getBank().receiveMoney(gameBoard.getLand().get(nPosition).getPrice()); //gives the money to the bank
+        System.out.println(gameBoard.getLand().get(nPosition).getName() + " was purchased by " + getName());
     } 
 
     /**
      * Trades with another Player
      * @param gameBoard Gameboard where the players are playing on
      */
-    private void trade(GameBoard gameBoard) {
-        //choose which property to trade with (index)
-int nChosenPosition = 0;
-        //assuming other end agrees,
-        gameBoard.getLand().get(nPosition).setOwner(gameBoard.getLand().get(nChosenPosition).getOwner());
+    public void trade(GameBoard gameBoard) {
+        int nChosenPosition = 0; //Property which player wants to get
+        int nChosenPlayer = 0; //Player which this player wishes to trade with
+        int nProperty = 0; //Property which this player wishes to trade in return
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Which player to trade to:");
+        for(int i = 0; i < gameBoard.getPlayers().length; i++)
+            if(gameBoard.getPlayers()[i].getName() != getName())
+                System.out.println(i+"."+gameBoard.getPlayers()[i].getName());
+        nChosenPlayer = sc.nextInt();
 
-        gameBoard.getLand().get(nChosenPosition).setOwner(this);
+        System.out.println("Which property to trade?");
+        for(int i = 0; i < gameBoard.getPlayers()[nChosenPlayer].getProperties().size();i++)
+            System.out.println(i+"."+gameBoard.getPlayers()[nChosenPlayer].getProperties().get(i).getName());
+        nChosenPosition = sc.nextInt();
+
+        System.out.println("Which property to trade? to " + gameBoard.getPlayers()[nChosenPlayer].getName());
+        for(int i = 0; i < properties.size();i++)
+            System.out.println(i+"."+properties.get(i).getName());
+        nProperty = sc.nextInt();
+
+
+        //assuming other end agrees,
+        Land temp = gameBoard.getPlayers()[nChosenPlayer].getProperties().get(nChosenPosition);
+        //Sets owner to player and removes property traded from owned properties
+        temp.setOwner(this);
+        this.properties.add(temp);
+
+        //Sets your chosen property to be owned by other player
+        gameBoard.getPlayers()[nChosenPlayer].properties.add(properties.get(nProperty));
+        properties.get(nProperty).setOwner(gameBoard.getPlayers()[nChosenPlayer]);
+
+        //Remove traded properties from both players
+        this.properties.remove(properties.get(nPosition));
+        gameBoard.getPlayers()[nChosenPlayer].properties.remove(nChosenPosition);
+
+        System.out.println(getName() + " now owns " + gameBoard.getLand().get(nChosenPosition).getName());
+        System.out.println(gameBoard.getLand().get(nPosition).getOwner().getName() +" now owns " +
+                gameBoard.getLand().get(nPosition).getName());
     }
 
     /**
@@ -211,6 +259,8 @@ int nChosenPosition = 0;
     private void develop(GameBoard gameBoard) {
        dMoney -=  gameBoard.getLand().get(nPosition).getDetails()[1];
        gameBoard.getLand().get(nPosition).setDevelopment(1);
+       System.out.println(gameBoard.getLand().get(nPosition).getName() + " was developed. " +
+               "Now at Development Level: " + gameBoard.getLand().get(nPosition).getDevelopment());
     }
 
     /**
@@ -219,16 +269,20 @@ int nChosenPosition = 0;
      * @return boolean if the land is eligible
      */
     private boolean eligibleDev (GameBoard gameBoard) {
-        if(dMoney >= gameBoard.getLand().get(nPosition).getDetails()[1]) {
-            if( (gameBoard.getLand().get(nPosition).getRentCollected() >= gameBoard.getLand().get(nPosition).getDetails()[1]) || (gameBoard.getLand().get(nPosition).getFootTraffic() >=  gameBoard.getLand().get(nPosition).getDetails()[8] * gameBoard.getPlayers()) ) {
-                return true;
+        if(gameBoard.getLand().get(nPosition).getLandType().equals("property")){
+            if(dMoney >= gameBoard.getLand().get(nPosition).getDetails()[1]) {
+                if( (gameBoard.getLand().get(nPosition).getRentCollected() >= gameBoard.getLand().get(nPosition).getDetails()[1]) || (gameBoard.getLand().get(nPosition).getFootTraffic() >=  gameBoard.getLand().get(nPosition).getDetails()[8] * gameBoard.getPlayers().length) ) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
             else {
                 return false;
             }
         }
-        else {
+        else
             return false;
-        }
     }
 }

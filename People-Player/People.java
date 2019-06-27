@@ -1,11 +1,10 @@
 /**
  * People Class
  *    
- *      New Changes: 
-                     Brought Back receivedMoney()
+ *      New Changes: Minor adjustment to constructors (Bank)
+
  * 
- *      Last Changes Made: Edited the Receive Give Method (Avoided infinite loop)
-                     Removed receivedMoney()
+ *      Last Changes Made: Brought Back receivedMoney()
 
  * Version 1.03
  */
@@ -32,14 +31,14 @@ public class People{
      @param strName name of the Player 
      @param isBank  identifies if it is a bank or a Player
      */
-    public People(String strName, boolean isBank) {
+    public People(String strName, boolean isBank, int nPlayers) {
         this.strName = strName;
         if(!isBank) {
             this.dMoney = 1500.00;
             this.isBank = !(isBank);
         }
         else {
-           // this.dMoney = GameBoard.getPlayers() * 2500.00;
+            this.dMoney = nPlayers * 2500.00;
             this.isBank = isBank;
         }
     }
@@ -62,7 +61,6 @@ public class People{
 
     /**
      * Receives Money to a Player
-     * @param player Player that you will pay to
      * @param amount amount of money to be paid to the Player
      */
     public void receiveMoney(double amount) {
@@ -72,7 +70,6 @@ public class People{
 
     /**
      * Gives Money to a Player
-     * @param player Player that you will pay to
      * @param amount amount of money to be paid to the Player
      */
     public void giveMoney(double amount) {
