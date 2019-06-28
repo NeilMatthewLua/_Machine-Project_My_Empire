@@ -1,24 +1,13 @@
 /**
  * Player Class
  *    
-<<<<<<< HEAD
- *      New Changes: Fixed bugs under Trade (ArrayoutofBounds)
+ *      New Changes: Add Limit Dev on eligibleDev()
+   
+        Last Changes Made: Fixed bugs under Trade (ArrayoutofBounds)
                       setOwner first before handing property
    
-        Last Changes Made:  Arranged method ordering in code,
- *                   Added Jail fine in roll(),
- *                   adjusted trade() to allow players to choose properties to trade
-   
- * Version 1.08
-=======
- *      New Changes: Arranged method ordering in code,
- *                   Added Jail fine in roll(),
- *                   adjusted trade() to allow players to choose properties to trade
-   
-        Last Changes Made: Fixed some method calls
-   
- * Version 1.07
->>>>>>> 5e3e8be9f09e038ef3147b67a2f0d3336ae9c353
+ * Version 1.09
+
  */
 
 import java.util.ArrayList;
@@ -253,19 +242,12 @@ public class Player extends People{
         this.properties.add(temp);
 
         //Sets your chosen property to be owned by other player
-<<<<<<< HEAD
         properties.get(nProperty).setOwner(gameBoard.getPlayers()[nChosenPlayer]);
         gameBoard.getPlayers()[nChosenPlayer].properties.add(properties.get(nProperty));
 
         //Remove traded properties from both players
         this.properties.remove(properties.get(nProperty ));
-=======
-        gameBoard.getPlayers()[nChosenPlayer].properties.add(properties.get(nProperty));
-        properties.get(nProperty).setOwner(gameBoard.getPlayers()[nChosenPlayer]);
 
-        //Remove traded properties from both players
-        this.properties.remove(properties.get(nPosition));
->>>>>>> 5e3e8be9f09e038ef3147b67a2f0d3336ae9c353
         gameBoard.getPlayers()[nChosenPlayer].properties.remove(nChosenPosition);
 
         System.out.println(getName() + " now owns " + gameBoard.getLand().get(nChosenPosition).getName());
@@ -289,11 +271,16 @@ public class Player extends People{
      * @param gameBoard Gameboard where the players are playing on
      * @return boolean if the land is eligible
      */
-    private boolean eligibleDev (GameBoard gameBoard) {
-        if(gameBoard.getLand().get(nPosition).getLandType().equals("property")){
-            if(dMoney >= gameBoard.getLand().get(nPosition).getDetails()[1]) {
-                if( (gameBoard.getLand().get(nPosition).getRentCollected() >= gameBoard.getLand().get(nPosition).getDetails()[1]) || (gameBoard.getLand().get(nPosition).getFootTraffic() >=  gameBoard.getLand().get(nPosition).getDetails()[8] * gameBoard.getPlayers().length) ) {
-                    return true;
+    private boolean eligibleDev (GameBoard gameBoard) { //NOTE: FootTraffic does not reset for every development made
+        if(gameBoard.getLand().get(nPosition).getLandType().equals("property")){ //checks if the landed spot is indeed a proprty, therefore eligible for a development
+            if(dMoney >= gameBoard.getLand().get(nPosition).getDetails()[1]) { //checks if the player has enough cash to develop
+                if( (gameBoard.getLand().get(nPosition).getRentCollected() >= gameBoard.getLand().get(nPosition).getDetails()[1]) || (gameBoard.getLand().get(nPosition).getFootTraffic() >=  gameBoard.getLand().get(nPosition).getDetails()[8] * gameBoard.getPlayers().length) ) { //checks if either the property has accumulated enough rent or foottraffic on that spot is more than the multiplier * # of players requirement
+                    if(gameBoard.getLand().get(nPosition).getDevelopment() <= 4) { //checks if the property has not yet reached max development
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
                 }
                 else {
                     return false;
