@@ -5,13 +5,13 @@ import java.util.Scanner;
 /**
  * Card class which acts as a template for the cards that can be used during the game
  *
- *  New Changes Made: Used cards are now removed
+ *  New Changes Made: Fixed Display of Utility Railroad Decrement
                        
  
- *  Last Changes Made: First half of Chance Cards
+ *  Last Changes Made: Used cards are now removed
  
  *   @author  Tanting
- *   @version 1.3
+ *   @version 1.4
  */
 public class Card {
     private int nGroup; //Group which card belongs to
@@ -204,7 +204,7 @@ public class Card {
             }
         }
         else if(nGroup == 4){//Rent modifiers
-            if(nIndex >= 0 || nIndex <= 2){//For properties
+            if(nIndex >= 0 && nIndex <= 2){//For properties
                 int nUserInput = 0;
                 boolean isValid = false;
                 //Loops through properties to check if player has property of applicable type
