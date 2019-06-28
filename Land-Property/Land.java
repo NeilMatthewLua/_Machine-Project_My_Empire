@@ -4,11 +4,12 @@ import java.util.Collections;
 /**
  * Land class which acts as a template for the different places found on the board
  *
- *  New Changes Made: Players can now use cards to get out of jail
+ *  New Changes Made: getRent() utilities -> utilities
  *
- *  Last Changes Made: Re-arranged methods
+ *  Last Changes Made: Players can now use cards to get out of jail
+ *
  *   @author  Lua & Tanting
- *   @version 1.1
+ *   @version 1.2
  */
 public class Land {
     private String strName;
@@ -264,18 +265,20 @@ public class Land {
                 default: break;
             }
         }
-        else if(strLandType.equals("utility")){ //If land is utility count, count number of land owner has
-            for(int i = 0; i < owner.getProperties().size(); i++)
-                if(owner.getProperties().get(i).getLandType().equals("utilities"))
+        else if(strLandType.equals("utility")) { //If land is utility count, count number of land owner has
+            for (int i = 0; i < owner.getProperties().size(); i++)
+                if (owner.getProperties().get(i).getLandType().equals("utility")) {
                     nCounter++;
-            switch(nCounter){//Calculations made based on owned properties and dice rolls
+                }
+            switch (nCounter) {//Calculations made based on owned properties and dice rolls
                 case 1:
-                    dRent = player.getLastRoll()* 4;
+                    dRent = player.getLastRoll() * 4;
                     break;
                 case 2:
                     dRent = player.getLastRoll() * 10;
                     break;
-                default: break;
+                default:
+                    break;
             }
         }
         return dRent;
