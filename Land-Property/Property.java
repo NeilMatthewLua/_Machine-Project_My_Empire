@@ -1,12 +1,12 @@
 /**
  * Property class which inherits from Land and is used for making property objects inside the board
  *
- *  New Changes Made: No changes
+ *  New Changes Made: Call the setRentCollected method in getRent()
  *
  *  Last Changes Made: setRentCollected(), getRentCollcted(), getFootTraffic()
  *
  *   @author  Lua & Tanting
- *   @version 1.0
+ *   @version 1.1
  */
 public class Property extends Land {
     private String strColor;
@@ -135,6 +135,9 @@ public class Property extends Land {
             dRent *= 2;
             doubleRent = false;
         }
+
+        this.setRentCollected(dRent); //Updates the rent collected tracker 
+
         return dRent;
     }
 
