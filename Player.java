@@ -1,24 +1,12 @@
 /**
  * Player Class
  *    
-<<<<<<< HEAD
- *      New Changes: Fixed bugs under Trade (ArrayoutofBounds)
-                      setOwner first before handing property
+ *      New Changes: Added conditionals to prevent bankrupt player from moving, Changes in roll()
    
-        Last Changes Made:  Arranged method ordering in code,
- *                   Added Jail fine in roll(),
- *                   adjusted trade() to allow players to choose properties to trade
+        Last Changes Made: Add Limit Dev on eligibleDev()
    
- * Version 1.08
-=======
- *      New Changes: Arranged method ordering in code,
- *                   Added Jail fine in roll(),
- *                   adjusted trade() to allow players to choose properties to trade
-   
-        Last Changes Made: Fixed some method calls
-   
- * Version 1.07
->>>>>>> 5e3e8be9f09e038ef3147b67a2f0d3336ae9c353
+ * Version 1.09
+
  */
 
 import java.util.ArrayList;
@@ -122,7 +110,6 @@ public class Player extends People{
         Land temp;
         nRoll = (int)((Math.random() * (6 - 1)) + 1 ); //generates a random number form 1 - 6 
         this.nDiceRoll = nRoll;
-        System.out.println("Rolled "+ nRoll); // Display dice roll
         if(inJail){//If player is in jail then exact fine
             if(this.getMoney() - 50 >= 0){//If player can pay
                 this.giveMoney(50);
@@ -131,34 +118,45 @@ public class Player extends People{
             }
             else{//If player can't pay
                 System.out.println("Game is over." + getName() +" was not able to pay Jail Fine.");
-                gameBoard.setIsWin(false);
+                gameBoard.setIsWin(true);
                 gameBoard.getBank().receiveMoney(this.getMoney());
                 this.giveMoney(this.getMoney());
             }
         }
-        for( int i = start + 1 ; i <= start + nRoll; i++ ) {
+        System.out.println("Rolled "+ nRoll); // Display dice roll
+        if(!gameBoard.getIsWin()){
+            for( int i = start + 1 ; i <= start + nRoll; i++ ) {
 
-            if( i > 31 ) { //Checks if the token has reached the end of the board 
-                nRoll = nRoll + start -i;  
-                i = 0;
-                nPosition = 0; //this sets the token at start (index 0)
-                start = 0;
-                dMoney += 200; //the player received 200$ from the bank
-                gameBoard.getBank().giveMoney(200); //the bank shells out 200$
-                System.out.println("Bank pays 200 to: " + getName());
-            }
-            else {
-                nPosition += 1;
-            }
-            if (gameBoard.getLand().get(this.getPosition()).getOwner() != null)
-                if(gameBoard.getLand().get(this.getPosition()).getLandType().equalsIgnoreCase("property")) {
-                    //If land is owned and is property type
-                    gameBoard.getLand().get(this.getPosition()).addFootTraffic();
+                if( i > 31 ) { //Checks if the token has reached the end of the board
+                    nRoll = nRoll + start -i;
+                    i = 0;
+                    nPosition = 0; //this sets the token at start (index 0)
+                    start = 0;
+                    if((gameBoard.getBank().getMoney() - 200) > 0){
+                        dMoney += 200; //the player received 200$ from the bank
+                        gameBoard.getBank().giveMoney(200); //the bank shells out 200$
+                        System.out.println("Bank pays $200 to: " + getName());
+                    }
+                    else{//If bank can't pay
+                        dMoney += gameBoard.getBank().getMoney();
+                        System.out.println("Bank pays: " + gameBoard.getBank().getMoney() + "to " + getName());
+                        gameBoard.getBank().giveMoney(200);
+                        System.out.println("Bank is now bankrupt. Game is over.");
+                        gameBoard.setIsWin(true);
+                    }
                 }
-        }
+                else {
+                    nPosition += 1;
+                }
+                if (gameBoard.getLand().get(this.getPosition()).getOwner() != null)
+                    if(gameBoard.getLand().get(this.getPosition()).getLandType().equalsIgnoreCase("property")) {
+                        //If land is owned and is property type
+                        gameBoard.getLand().get(this.getPosition()).addFootTraffic();
+                    }
+            }
 
-    action(gameBoard); //calls the actions to be offered to the player
-    
+            action(gameBoard); //calls the actions to be offered to the player
+        }
     }
 
     /**
@@ -187,7 +185,7 @@ public class Player extends People{
                 }
                 else { //this means the land tile is owned by the current Player
                     
-                    trade(gameBoard);
+                    //trade(gameBoard);
 
                     if(eligibleDev(gameBoard)) { //checks if the land is eligible for development before offering it 
                         develop(gameBoard);
@@ -253,24 +251,17 @@ public class Player extends People{
         this.properties.add(temp);
 
         //Sets your chosen property to be owned by other player
-<<<<<<< HEAD
         properties.get(nProperty).setOwner(gameBoard.getPlayers()[nChosenPlayer]);
         gameBoard.getPlayers()[nChosenPlayer].properties.add(properties.get(nProperty));
 
         //Remove traded properties from both players
         this.properties.remove(properties.get(nProperty ));
-=======
-        gameBoard.getPlayers()[nChosenPlayer].properties.add(properties.get(nProperty));
-        properties.get(nProperty).setOwner(gameBoard.getPlayers()[nChosenPlayer]);
 
-        //Remove traded properties from both players
-        this.properties.remove(properties.get(nPosition));
->>>>>>> 5e3e8be9f09e038ef3147b67a2f0d3336ae9c353
         gameBoard.getPlayers()[nChosenPlayer].properties.remove(nChosenPosition);
 
-        System.out.println(getName() + " now owns " + gameBoard.getLand().get(nChosenPosition).getName());
-        System.out.println(gameBoard.getLand().get(nPosition).getOwner().getName() +" now owns " +
-                gameBoard.getLand().get(nPosition).getName());
+        System.out.println(getName() + " now owns " + this.properties.get(properties.size()-1).getName());
+        System.out.println(gameBoard.getPlayers()[nChosenPlayer].getName() +" now owns " +
+                gameBoard.getPlayers()[nChosenPlayer].properties.get(gameBoard.getPlayers()[nChosenPlayer].properties.size()-1).getName());
     }
 
     /**
@@ -289,11 +280,16 @@ public class Player extends People{
      * @param gameBoard Gameboard where the players are playing on
      * @return boolean if the land is eligible
      */
-    private boolean eligibleDev (GameBoard gameBoard) {
-        if(gameBoard.getLand().get(nPosition).getLandType().equals("property")){
-            if(dMoney >= gameBoard.getLand().get(nPosition).getDetails()[1]) {
-                if( (gameBoard.getLand().get(nPosition).getRentCollected() >= gameBoard.getLand().get(nPosition).getDetails()[1]) || (gameBoard.getLand().get(nPosition).getFootTraffic() >=  gameBoard.getLand().get(nPosition).getDetails()[8] * gameBoard.getPlayers().length) ) {
-                    return true;
+    private boolean eligibleDev (GameBoard gameBoard) { //NOTE: FootTraffic does not reset for every development made
+        if(gameBoard.getLand().get(nPosition).getLandType().equals("property")){ //checks if the landed spot is indeed a proprty, therefore eligible for a development
+            if(dMoney >= gameBoard.getLand().get(nPosition).getDetails()[1]) { //checks if the player has enough cash to develop
+                if( (gameBoard.getLand().get(nPosition).getRentCollected() >= gameBoard.getLand().get(nPosition).getDetails()[1]) || (gameBoard.getLand().get(nPosition).getFootTraffic() >=  gameBoard.getLand().get(nPosition).getDetails()[8] * gameBoard.getPlayers().length) ) { //checks if either the property has accumulated enough rent or foottraffic on that spot is more than the multiplier * # of players requirement
+                    if(gameBoard.getLand().get(nPosition).getDevelopment() <= 4) { //checks if the property has not yet reached max development
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
                 }
                 else {
                     return false;

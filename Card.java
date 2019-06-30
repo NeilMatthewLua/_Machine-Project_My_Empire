@@ -5,13 +5,13 @@ import java.util.Scanner;
 /**
  * Card class which acts as a template for the cards that can be used during the game
  *
- *  New Changes Made: Used cards are now removed
+ *  New Changes Made: Small NPE problems with some cards
                        
  
- *  Last Changes Made: First half of Chance Cards
+ *  Last Changes Made: Fixed Display of Utility Railroad Decrement
  
  *   @author  Tanting
- *   @version 1.3
+ *   @version 1.4
  */
 public class Card {
     private int nGroup; //Group which card belongs to
@@ -63,7 +63,7 @@ public class Card {
             if(nIndex == 0) {
                 Random rand = new Random();
                 int nRandProperty = rand.nextInt(32);
-                while(gameBoard.getLand().get(nRandProperty).getLandType().equals("property")){//Loops until a property is found
+                while(!gameBoard.getLand().get(nRandProperty).getLandType().equals("property")){//Loops until a property is found
                     nRandProperty = rand.nextInt(32);
                 }
                 while(player.getPosition() != nRandProperty){//While player has not landed on property
@@ -80,7 +80,8 @@ public class Card {
                     if (gameBoard.getLand().get(player.getPosition()).getOwner() != null) //checks if the landed tile is owned by the current Player
                         gameBoard.getLand().get((player.getPosition())).triggerEvent(player, gameBoard);
                     else { //If not, checks if that tile is free to purchase form the bank
-                        if(player.getMoney() >= gameBoard.getLand().get((player.getPosition())).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land
+                        if(gameBoard.getLand().get(player.getPosition()).getLandType().equalsIgnoreCase("property"))
+                            if(player.getMoney() >= gameBoard.getLand().get((player.getPosition())).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land
                             player.purchase(gameBoard);
                         }
                     }
@@ -94,8 +95,18 @@ public class Card {
                     player.setPosition(1);
 
                     if(player.getPosition() == 0){
-                        player.receiveMoney(200);
-                        gameBoard.getBank().giveMoney(200);
+                        if((gameBoard.getBank().getMoney() - 200) > 0){
+                            player.receiveMoney(200);
+                            gameBoard.getBank().giveMoney(200); //the bank shells out 200$
+                            System.out.println("Bank pays $"+ 200+" to: " + player.getName());
+                        }
+                        else{//If bank can't pay
+                            player.receiveMoney(gameBoard.getBank().getMoney());
+                            System.out.println("Bank pays: " + gameBoard.getBank().getMoney() + "to " + player.getName());
+                            gameBoard.getBank().giveMoney(gameBoard.getBank().getMoney());
+                            System.out.println("Bank is now bankrupt. Game is over.");
+                            gameBoard.setIsWin(true);
+                        }
                     }
 
                     if (gameBoard.getLand().get(player.getPosition()).getOwner() != null)
@@ -106,8 +117,10 @@ public class Card {
                 }
 
                 if(gameBoard.getLand().get(player.getPosition()).getOwner() != null) { //checks if the utility tile is owned by anyone
-                    if(!(player.isMine(gameBoard))) { //checks if you don't own it, you'll pay 10 times rent to the owner
-                        gameBoard.getLand().get(player.getPosition()).getOwner().receiveMoney( 10 * gameBoard.getLand().get(player.getPosition()).getRent(player));
+                    if(!(player.isMine(gameBoard))) { //checks if you don't own it, you'll pay 10 times dice roll to the owner
+                        Random rand = new Random();
+                        int nRand = rand.nextInt(7);
+                        gameBoard.getLand().get(player.getPosition()).getOwner().receiveMoney( 10 * nRand);
 
                         player.giveMoney( ( 10 * gameBoard.getLand().get(player.getPosition()).getRent(player)) );
                     }
@@ -122,10 +135,20 @@ public class Card {
             else if (nIndex == 2) {
                 while(!(gameBoard.getLand().get(player.getPosition()).getLandType().equals("railroad"))) {//Loops until a utility is found
                     player.setPosition(1);
-                    
+
                     if(player.getPosition() == 0){
-                        player.receiveMoney(200);
-                        gameBoard.getBank().giveMoney(200);
+                        if((gameBoard.getBank().getMoney() - 200) > 0){
+                            player.receiveMoney(200);
+                            gameBoard.getBank().giveMoney(200); //the bank shells out 200$
+                            System.out.println("Bank pays $"+ 200+" to: " + player.getName());
+                        }
+                        else{//If bank can't pay
+                            player.receiveMoney(gameBoard.getBank().getMoney());
+                            System.out.println("Bank pays: " + gameBoard.getBank().getMoney() + "to " + player.getName());
+                            gameBoard.getBank().giveMoney(gameBoard.getBank().getMoney());
+                            System.out.println("Bank is now bankrupt. Game is over.");
+                            gameBoard.setIsWin(true);
+                        }
                     }
 
                     if (gameBoard.getLand().get(player.getPosition()).getOwner() != null)
@@ -137,7 +160,7 @@ public class Card {
                 if(gameBoard.getLand().get(player.getPosition()).getOwner() != null) { //checks if the utility tile is owned by anyone
                     if(!(player.isMine(gameBoard))) { //checks if you don't own it, you'll pay rent to the owner
                         gameBoard.getLand().get(player.getPosition()).getOwner().receiveMoney(gameBoard.getLand().get(player.getPosition()).getRent(player));
-
+                        System.out.print(gameBoard.getLand().get(player.getPosition()).getRent(player));
                         player.giveMoney(gameBoard.getLand().get(player.getPosition()).getRent(player));
                     }
 
@@ -150,34 +173,54 @@ public class Card {
             }
         }
         else if(nGroup == 2){ //change cards receiving cash
-            if(nIndex == 0) { 
+            double dPayment = 0;
+            if(nIndex == 0) {
+                dPayment = 50;
                 player.receiveMoney(50);
                 gameBoard.getBank().giveMoney(50);
             }
             else if (nIndex == 1) {
+                dPayment = 100;
                 player.receiveMoney(100);
                 gameBoard.getBank().giveMoney(100);
             }
             else if (nIndex == 2) {
-                player.setPosition(32 - player.getPosition());
+                dPayment = 200;
+                player.setPosition(-player.getPosition());
                 player.receiveMoney(200);
                 gameBoard.getBank().giveMoney(200);
             }
             else if (nIndex == 3) {
+                dPayment = 300;
                 player.receiveMoney(300);
                 gameBoard.getBank().giveMoney(300);
             }
             else if (nIndex == 4) {
+                dPayment = 150;
                 player.receiveMoney(150);
                 gameBoard.getBank().giveMoney(150);
+            }
+            if((gameBoard.getBank().getMoney() - dPayment) > 0){
+                player.receiveMoney(dPayment);
+                gameBoard.getBank().giveMoney(dPayment); //the bank shells out 200$
+                System.out.println("Bank pays $"+ dPayment+" to: " + player.getName());
+            }
+            else{//If bank can't pay
+                System.out.print(gameBoard.getBank().getMoney());
+                dPayment = gameBoard.getBank().getMoney();
+                System.out.println("Bank pays: " + dPayment + " to " + player.getName());
+                player.receiveMoney(dPayment);
+                gameBoard.getBank().giveMoney(dPayment);
+                System.out.println("Bank is now bankrupt. Game is over.");
+                gameBoard.setIsWin(true);
             }
         }
         else if(nGroup == 3){//Trip to jail(index 24) or property
             if(nIndex == 0){//Trip to jail, no money on start
                 while(player.getPosition() != 24){
                     player.setPosition(1);//Player moves one space
-                    if (gameBoard.getLand().get(player.getPosition()).getOwner().getName() != null &&
-                            gameBoard.getLand().get(player.getPosition()).getLandType().equalsIgnoreCase("property")) {
+                    if (gameBoard.getLand().get(player.getPosition()).getOwner() != null)
+                            if(gameBoard.getLand().get(player.getPosition()).getLandType().equalsIgnoreCase("property")) {
                         //If land is owned and is property type
                         gameBoard.getLand().get(player.getPosition()).addFootTraffic();
                     }
@@ -186,7 +229,7 @@ public class Card {
             else if(nIndex == 1){//Trip to random property
                 Random rand = new Random();
                 int nRandProperty = rand.nextInt(32);
-                while(gameBoard.getLand().get(nRandProperty).getLandType().equals("property")){//Loops until a property is found
+                while(!gameBoard.getLand().get(nRandProperty).getLandType().equals("property")){//Loops until a property is found
                     nRandProperty = rand.nextInt(32);
                 }
                 while(player.getPosition() != nRandProperty){//While player has not landed on property
@@ -204,7 +247,7 @@ public class Card {
             }
         }
         else if(nGroup == 4){//Rent modifiers
-            if(nIndex >= 0 || nIndex <= 2){//For properties
+            if(nIndex >= 0 && nIndex <= 2){//For properties
                 int nUserInput = 0;
                 boolean isValid = false;
                 //Loops through properties to check if player has property of applicable type

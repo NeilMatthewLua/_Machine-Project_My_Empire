@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -5,9 +6,9 @@ import java.util.Random;
 /**
  * GameBoard class contains methods which plays the game
  *
- * New Changes Made: addDiscard(), randomizeLand(), endResults(), playGame() now functional
+ * New Changes Made: Added conditional in checkForCompleteSet
  *
- * Last Changes Made: Added initializePlayers(), playGame(), getChance()
+ * Last Changes Made: Added getIsWin(),Added decimalFormat to result screen
  * @author  Lua & Tanting
  * @version 1.2
  */
@@ -32,8 +33,8 @@ public class GameBoard {
     }
 
     /**
-     * Gets the number of players in the current game board
-     * @return number of players
+     * Gets the players in the current game board
+     * @return array of players in the game
      */
     public Player[] getPlayers() {
         return players;
@@ -55,6 +56,11 @@ public class GameBoard {
         return bank;
     }
 
+    /**
+     * Gets the variable which checks whether or not the game is over
+     * @return true if the game has ended, false if not
+     */
+    public boolean getIsWin(){return isWin;}
     /**
      * Changes the value of isWin variable to either true or false
      * @param value the value to be set to isWin
@@ -285,40 +291,42 @@ public class GameBoard {
         int[] nPropertyCount = {0,0,0,0,0,0,0}; //Counts the no. of properties player has per color
         int nFullSet = 0;
         for(int j = 0; j < player.getProperties().size() && nFullSet < 2;j++){
-            if(player.getProperties().get(j).getName().equalsIgnoreCase("silver")){
-                nPropertyCount[0] += 1;
-                if(nPropertyCount[0] == 2)
-                    nFullSet += 1;
-            }
-            else if(player.getProperties().get(j).getName().equalsIgnoreCase("purple")){
-                nPropertyCount[1] += 1;
-                if(nPropertyCount[1] == 3)
-                    nFullSet += 1;
-            }
-            else if(player.getProperties().get(j).getName().equalsIgnoreCase("pink")){
-                nPropertyCount[2] += 1;
-                if(nPropertyCount[2] == 3)
-                    nFullSet += 1;
-            }
-            else if(player.getProperties().get(j).getName().equalsIgnoreCase("green")){
-                nPropertyCount[3] += 1;
-                if(nPropertyCount[3] == 3)
-                    nFullSet += 1;
-            }
-            else if(player.getProperties().get(j).getName().equalsIgnoreCase("blue")){
-                nPropertyCount[4] += 1;
-                if(nPropertyCount[4] == 3)
-                    nFullSet += 1;
-            }
-            else if(player.getProperties().get(j).getName().equalsIgnoreCase("red")){
-                nPropertyCount[5] += 1;
-                if(nPropertyCount[5] == 2)
-                    nFullSet += 1;
-            }
-            else if(player.getProperties().get(j).getName().equalsIgnoreCase("yellow")){
-                nPropertyCount[6] += 1;
-                if(nPropertyCount[6] == 2)
-                    nFullSet += 1;
+            if(player.getProperties().get(j).getLandType().equals("properties")){
+                if(player.getProperties().get(j).getColor().equalsIgnoreCase("silver")){
+                    nPropertyCount[0] += 1;
+                    if(nPropertyCount[0] == 2)
+                        nFullSet += 1;
+                }
+                else if(player.getProperties().get(j).getColor().equalsIgnoreCase("purple")){
+                    nPropertyCount[1] += 1;
+                    if(nPropertyCount[1] == 3)
+                        nFullSet += 1;
+                }
+                else if(player.getProperties().get(j).getColor().equalsIgnoreCase("pink")){
+                    nPropertyCount[2] += 1;
+                    if(nPropertyCount[2] == 3)
+                        nFullSet += 1;
+                }
+                else if(player.getProperties().get(j).getColor().equalsIgnoreCase("green")){
+                    nPropertyCount[3] += 1;
+                    if(nPropertyCount[3] == 3)
+                        nFullSet += 1;
+                }
+                else if(player.getProperties().get(j).getColor().equalsIgnoreCase("blue")){
+                    nPropertyCount[4] += 1;
+                    if(nPropertyCount[4] == 3)
+                        nFullSet += 1;
+                }
+                else if(player.getProperties().get(j).getColor().equalsIgnoreCase("red")){
+                    nPropertyCount[5] += 1;
+                    if(nPropertyCount[5] == 2)
+                        nFullSet += 1;
+                }
+                else if(player.getProperties().get(j).getColor().equalsIgnoreCase("yellow")){
+                    nPropertyCount[6] += 1;
+                    if(nPropertyCount[6] == 2)
+                        nFullSet += 1;
+                }
             }
             if(nFullSet == 2)
                 return true;
@@ -368,11 +376,14 @@ public class GameBoard {
      * Method for playing the board until a player has won
      */
     public  void playGame(){
+        players[0].addCard(new Card(2,3,false,"dasd"));
+        players[0].getCard().get(0).useCard(players[0],this);
         while(!isWin){//While no one has won
             for(int i = 0; i < players.length && !isWin; i++){
                 checkForWin();
                 printLand(players[i]);
                 players[i].roll(this);
+
             }
         }
         endResults();
@@ -382,6 +393,8 @@ public class GameBoard {
      * Prints end results with players arranged in descending order of money
      */
     public void endResults(){
+        String pattern = "###,##0.00";
+        DecimalFormat decimalFormat = new DecimalFormat(pattern);
         for(int i = 1; i < players.length; i++){
             Player current = players[i];
             int j = i - 1;
@@ -393,10 +406,12 @@ public class GameBoard {
             // or it's at the first element where current >= a[j]
             players[j+1] = current;
         }
+        System.out.println(bank.getMoney());
         for(int i = players.length-1; i >= 0; i--){
             if(players[i].getMoney() == 0)
                 System.out.print("BANKRUPT");
-            System.out.println(i+1 + "." + players[i].getName() + "Money: " + players[i].getMoney());
+            System.out.println(i+1 + "." + players[i].getName() + "Money: " +
+                    decimalFormat.format(players[i].getMoney()));
         }
     }
 

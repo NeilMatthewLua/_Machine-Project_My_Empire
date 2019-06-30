@@ -4,9 +4,9 @@ import java.util.Collections;
 /**
  * Land class which acts as a template for the different places found on the board
  *
- *  New Changes Made: getRent() utilities -> utilities
+ *  New Changes Made: Fixed bug which gave bank all of player's money
  *
- *  Last Changes Made: Players can now use cards to get out of jail
+ *  Last Changes Made: getRent() utilities -> utilities
  *
  *   @author  Lua & Tanting
  *   @version 1.2
@@ -163,10 +163,13 @@ public class Land {
      * @param gameBoard is the game board which contains all the information about the game
      */
     public void triggerEvent(Player player, GameBoard gameBoard){
-        double dPayment;
+        double dPayment = 0;
         if(strLandType.equals("property") || strLandType.equals("railroad") || strLandType.equals("utility")){
             //If land is property, railroad, or utility
-            dPayment = getRent(player) * dMultiplier;
+            if(strLandType.equals("railroad") || strLandType.equals("utility"))
+                dPayment = getRent(player) * dMultiplier;
+            else//For properties, multiplier is done in getRent()
+                dPayment = getRent(player);
             System.out.println("Payment for" + strLandType + "space is: $" + dPayment);
             if(player.getMoney() - dPayment >= 0){
                 player.giveMoney(dPayment);
@@ -175,7 +178,7 @@ public class Land {
             }
             else{
                 System.out.println("Game is over. " + player.getName() + " is bankrupt");
-                gameBoard.setIsWin(false);
+                gameBoard.setIsWin(true);
                 owner.receiveMoney(player.getMoney());
                 player.giveMoney(player.getMoney());
             }
@@ -186,12 +189,12 @@ public class Land {
             System.out.println("Payment for " + strLandType + " space is: $" + dPayment);
             if(player.getMoney() - dPayment >= 0){
                 player.giveMoney(dPayment);
-                gameBoard.getBank().receiveMoney(player.getMoney());
+                gameBoard.getBank().receiveMoney(dPayment);
                 System.out.println("Bank was given " + dPayment);
             }
             else{
                 System.out.println("Game is over. " + player.getName() + " is bankrupt");
-                gameBoard.setIsWin(false);
+                gameBoard.setIsWin(true);
                 gameBoard.getBank().receiveMoney(player.getMoney());
                 player.giveMoney(player.getMoney());
             }
@@ -218,7 +221,7 @@ public class Land {
                     }
                     else{
                         System.out.println("Game is over. " + player.getName() + " is bankrupt");
-                        gameBoard.setIsWin(false);
+                        gameBoard.setIsWin(true);
                         gameBoard.getBank().receiveMoney(player.getMoney());
                         player.giveMoney(player.getMoney());
                     }
@@ -229,7 +232,7 @@ public class Land {
                 case 24: //Jail
                     System.out.println("Welcome to Jail. Pay 50$ at the start of your next turn");
                     if(player.getCard().size() > 0)
-                    if(player.getCard().get(player.getCard().size()-1).getDescription().equals("Get out of jail free.")){
+                    {
                         //If player has get out of jail car.
                         System.out.println("Get out of jail free card used");
                         player.getCard().get(player.getCard().size()-1).useCard(player,gameBoard);

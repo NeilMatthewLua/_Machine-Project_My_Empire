@@ -22,7 +22,7 @@ public class People{
      */
     public People(String strName) {
         this.strName = strName;
-        this.dMoney = 2500;
+        this.dMoney = 1500;
         this.isBank = false;
     }
 
@@ -34,11 +34,11 @@ public class People{
     public People(String strName, boolean isBank, int nPlayers) {
         this.strName = strName;
         if(!isBank) {
-            this.dMoney = 1500.00;
+            this.dMoney = 1500;
             this.isBank = !(isBank);
         }
         else {
-            this.dMoney = nPlayers * 2500.00;
+            this.dMoney = nPlayers * 2500;
             this.isBank = isBank;
         }
     }
