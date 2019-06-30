@@ -1,7 +1,7 @@
 /**
  * Player Class
  *    
- *      New Changes: Added conditionals to prevent bankrupt player from moving
+ *      New Changes: Added conditionals to prevent bankrupt player from moving, Changes in roll()
    
         Last Changes Made: Add Limit Dev on eligibleDev()
    
