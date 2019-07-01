@@ -95,6 +95,7 @@ public class Player extends People{
       
     /**
      * Setter for the Player's jail status. Changes status of player's jail status based on parameter
+     * @param value determines the status of player with regards to jail time
      */
     public void setJail(boolean value) {
         this.inJail = value;

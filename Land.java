@@ -6,9 +6,9 @@ import java.util.Collections;
  *
  *  New Changes Made: Fixed bug which gave bank all of player's money
  *
- *  Last Changes Made: getRent() utilities -> utilities
+ *  Last Changes Made: getRent() utilities into utilities
  *
- *   @author  Lua & Tanting
+ *   @author  Lua and Tanting
  *   @version 1.2
  */
 public class Land {
@@ -133,12 +133,14 @@ public class Land {
 
     /**
      * Sets development of land but method is empty as only Property can have development levels
+     * @param n the value to add to property development
      */
     public void setDevelopment(int n){
     }
 
     /**
      * Sets double rent of land but method is empty as only Property can have double rent
+     * @param val value to set the doubleRent variable to
      */
     public void setDoubleRent(boolean val){
     }
@@ -246,7 +248,8 @@ public class Land {
 
     /**
      * Calculates the amount of rent to be paid on utility or railroad land
-     * @return the amount of rent to be paid
+     * @param player the player that pays the rent
+     * @return rent to be paid
      */
     public double getRent(Player player){
         int nCounter = 0;

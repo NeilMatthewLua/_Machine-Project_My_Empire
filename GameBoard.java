@@ -9,7 +9,7 @@ import java.util.Random;
  * New Changes Made: Added conditional in checkForCompleteSet
  *
  * Last Changes Made: Added getIsWin(),Added decimalFormat to result screen
- * @author  Lua & Tanting
+ * @author  Lua and Tanting
  * @version 1.2
  */
 public class GameBoard {

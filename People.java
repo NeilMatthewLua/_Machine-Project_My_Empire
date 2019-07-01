@@ -30,6 +30,7 @@ public class People{
      * This constructor creates a People object that can either be a Player or a bank
      @param strName name of the Player 
      @param isBank  identifies if it is a bank or a Player
+     @param nPlayers number of players in the game for the bank to initialize cash
      */
     public People(String strName, boolean isBank, int nPlayers) {
         this.strName = strName;

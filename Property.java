@@ -5,7 +5,7 @@
  *
  *  Last Changes Made: setRentCollected(), getRentCollcted(), getFootTraffic()
  *
- *   @author  Lua & Tanting
+ *   @author  Lua and Tanting
  *   @version 1.1
  */
 public class Property extends Land {
@@ -95,7 +95,7 @@ public class Property extends Land {
 
     /**
      * Adds development to property based on the parameter
-     * @param n the value to add to property development
+
      */
     @Override
     public void setDevelopment(int n){
@@ -112,6 +112,7 @@ public class Property extends Land {
 
     /**
      * Similar to the getRent() function of parent class land but computes differently for property land
+     * @param player the player that pays the rent
      * @return rent to be paid
      */
     @Override
