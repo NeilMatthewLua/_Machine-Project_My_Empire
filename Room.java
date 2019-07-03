@@ -2,10 +2,19 @@ import java.util.ArrayList;
 public class Room {
     final int roomNo ;
     ArrayList<Guest> guests;
+    final int nCapacity;
+
 
     public Room(int roomNo){
         this.roomNo = roomNo;
         guests = new ArrayList<Guest>();
+        this.nCapacity = 6;
+    }
+
+    public Room(int roomNo, int nCapacity){
+        this.roomNo = roomNo;
+        guests = new ArrayList<Guest>();
+        this.nCapacity = nCapacity;
     }
 
     public int getRoomNo(){
@@ -31,13 +40,19 @@ public class Room {
     }
 
     public boolean isFull(){
-        return (guests.size() == 2);
+        return (guests.size() == nCapacity);
     }
+
     @Override
     public String toString(){
-        String info = " ";
-        for(int i = 0; i < guests.size(); i++)
+        String info = "";
+        for(int i = 0; i < guests.size(); i++){
+            info += "Guest: ";
             info += guests.get(i).getName();
+            info += "\n Nationality: ";
+            info += guests.get(i).getNationality();
+            info += "\n";
+        }
         return info;
     }
 }

@@ -6,6 +6,7 @@ public class HotelOpen extends JDialog implements ActionListener
 {
 	private JTextField tfName;
 	private JTextField tfCount;
+	private JTextField tfCapacity;
 	private JButton btnOk;
 	
 	public HotelOpen (JFrame owner, boolean modal)
@@ -24,12 +25,13 @@ public class HotelOpen extends JDialog implements ActionListener
 		
 		tfName = new JTextField (15);
 		tfCount = new JTextField (5);
+		tfCapacity = new JTextField (5);
 		btnOk = new JButton ("Create");
 		
 		JPanel panel = new JPanel ();
 		panel.setLayout (new FlowLayout ());
 		
-		panel.add (new JLabel ("Hotel Name: "));
+		panel.add (new JLabel ("Dorm Name: "));
 		panel.add (tfName);
 		
 		add (panel);
@@ -41,7 +43,12 @@ public class HotelOpen extends JDialog implements ActionListener
 		panel.add (tfCount);
 		
 		add (panel);
-		
+
+		panel.add (new JLabel ("Room Capacity: "));
+		panel.add (tfCapacity);
+
+		add (panel);
+
 		panel = new JPanel ();
 		panel.setLayout (new FlowLayout ());
 		
@@ -70,5 +77,9 @@ public class HotelOpen extends JDialog implements ActionListener
 		if (tfCount.getText ().length () != 0)
 			return Integer.parseInt (tfCount.getText ());
 		return 0;
+	}
+
+	public int getRoomCapacity(){
+		return Integer.parseInt (tfCapacity.getText ());
 	}
 }

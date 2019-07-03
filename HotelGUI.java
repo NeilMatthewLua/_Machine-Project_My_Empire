@@ -8,7 +8,7 @@ public class HotelGUI extends JFrame
 	private final int NAME = 0;
 	private final int NATIONALITY = 1;
 	
-	public final int MAX_GUEST = 2;
+	public final int MAX_GUEST;
 	
 	public final String BLANK = "Blank";
 	public final String BOOK = "Book";
@@ -27,10 +27,10 @@ public class HotelGUI extends JFrame
 	private JPanel centerPane;
 	
 	
-	public HotelGUI (String name, int rooms)
+	public HotelGUI (String name, int rooms, int nCapacity)
 	{
 		super (name);
-		
+		MAX_GUEST = nCapacity;
 		setLayout (new BorderLayout ());
 		setup (rooms);
 		init ();

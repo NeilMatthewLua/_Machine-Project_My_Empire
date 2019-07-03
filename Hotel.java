@@ -3,12 +3,12 @@ public class Hotel {
     Room[] rooms;
     final int nSize;
     final String name;
-    public Hotel (String name, int roomsNo){
+    public Hotel (String name, int roomsNo, int nCapacity){
         nSize = roomsNo;
         this.name = name;
         rooms = new Room [nSize];
         for(int i = 0; i < nSize; i++){
-            rooms[i] = new Room(i+1);
+            rooms[i] = new Room(i+1, nCapacity);
         }
     }
     public void addGuest(int room, ArrayList<Guest> g){
