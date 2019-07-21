@@ -1,0 +1,13 @@
+#anchorPane{
+    -fx-background-image: url("/Images/StartPage.jpg");
+    -fx-background-size: cover, auto; ;
+}
+
+#playLabel{
+    -fx-font-family: "Impact";
+    -fx-font-size: 30px;
+}
+
+#playLabel:hover{
+    -fx-underline: true;
+}
