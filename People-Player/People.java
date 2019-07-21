@@ -1,11 +1,10 @@
 /**
  * People Class
  *    
- *      New Changes: Minor adjustment to constructors (Bank)
+ *      New Changes: Changed the implementation of giveMoney()
 
  * 
- *      Last Changes Made: Brought Back receivedMoney()
-
+ *      Last Changes Made: Minor adjustment to constructors (Bank)
  * Version 1.03
  */
 
@@ -22,7 +21,7 @@ public class People{
      */
     public People(String strName) {
         this.strName = strName;
-        this.dMoney = 2500;
+        this.dMoney = 1500;
         this.isBank = false;
     }
 
@@ -34,11 +33,11 @@ public class People{
     public People(String strName, boolean isBank, int nPlayers) {
         this.strName = strName;
         if(!isBank) {
-            this.dMoney = 1500.00;
+            this.dMoney = 1500;
             this.isBank = !(isBank);
         }
         else {
-            this.dMoney = nPlayers * 2500.00;
+            this.dMoney = nPlayers * 2500;
             this.isBank = isBank;
         }
     }
@@ -63,7 +62,7 @@ public class People{
      * Receives Money to a Player
      * @param amount amount of money to be paid to the Player
      */
-    public void receiveMoney(double amount) {
+    public void receiveMoney( double amount) {
         this.dMoney += amount;
     }
 
@@ -71,9 +70,19 @@ public class People{
     /**
      * Gives Money to a Player
      * @param amount amount of money to be paid to the Player
+     * @return true if player is able to give money, false if not
      */
-    public void giveMoney(double amount) {
-        this.dMoney -= amount;
+    public boolean giveMoney(People receiver, double amount) {
+        if(this.dMoney - amount > 0){
+            receiver.receiveMoney(amount);
+            this.dMoney -= amount;
+            return true;
+        }
+        else{
+            receiver.receiveMoney(this.dMoney);
+            this.dMoney = 0;
+            return false;
+        }
     }
 
 }

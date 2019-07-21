@@ -1,9 +1,9 @@
 /**
  * Player Class
  *    
- *      New Changes: Added conditionals to prevent bankrupt player from moving, Changes in roll()
+ *      New Changes: Changed implementation of Roll() and Action()
    
-        Last Changes Made: Add Limit Dev on eligibleDev()
+        Last Changes Made: Added conditionals to prevent bankrupt player from moving, Changes in roll()
    
  * Version 1.09
 
@@ -104,97 +104,75 @@ public class Player extends People{
      * Method that performs the rolling of die and the calculation of steps of the Player's token
      * @param gameBoard Gameboard where the players are playing on
      */
-    public void roll(GameBoard gameBoard) {
+    public String roll(GameBoard gameBoard) {//
         int nRoll;
         int start = nPosition; //Initializes the starting position of the token
         Land temp;
-        nRoll = (int)((Math.random() * (6 - 1)) + 1 ); //generates a random number form 1 - 6 
-        this.nDiceRoll = nRoll;
+        nRoll = (int)((Math.random() * (6 - 1)) + 1 ); //generates a random number form 1 - 6
         if(inJail){//If player is in jail then exact fine
-            if(this.getMoney() - 50 >= 0){//If player can pay
-                this.giveMoney(50);
-                gameBoard.getBank().receiveMoney(50);
-                System.out.println("Bank was given 50$ for Jail fine.");
-            }
+            if(this.giveMoney(gameBoard.getBank(),50) == true)
+                gameBoard.getEvents().add("Bank was given 50$ for Jail fine.");
             else{//If player can't pay
-                System.out.println("Game is over." + getName() +" was not able to pay Jail Fine.");
+                gameBoard.getEvents().add(getName() +" was not able to pay Jail Fine.");
                 gameBoard.setIsWin(true);
-                gameBoard.getBank().receiveMoney(this.getMoney());
-                this.giveMoney(this.getMoney());
             }
         }
-        System.out.println("Rolled "+ nRoll); // Display dice roll
+        gameBoard.getEvents().add(this.getName() + " rolled "+ nRoll); // Display dice roll
+        String event = "";
         if(!gameBoard.getIsWin()){
             for( int i = start + 1 ; i <= start + nRoll; i++ ) {
-
                 if( i > 31 ) { //Checks if the token has reached the end of the board
                     nRoll = nRoll + start -i;
                     i = 0;
                     nPosition = 0; //this sets the token at start (index 0)
                     start = 0;
-                    if((gameBoard.getBank().getMoney() - 200) > 0){
-                        dMoney += 200; //the player received 200$ from the bank
-                        gameBoard.getBank().giveMoney(200); //the bank shells out 200$
-                        System.out.println("Bank pays $200 to: " + getName());
-                    }
-                    else{//If bank can't pay
-                        dMoney += gameBoard.getBank().getMoney();
-                        System.out.println("Bank pays: " + gameBoard.getBank().getMoney() + "to " + getName());
-                        gameBoard.getBank().giveMoney(200);
-                        System.out.println("Bank is now bankrupt. Game is over.");
-                        gameBoard.setIsWin(true);
-                    }
+                    gameBoard.getEvents().add(gameBoard.getLand().get(0).triggerEvent(gameBoard,this));
                 }
                 else {
                     nPosition += 1;
                 }
-                if (gameBoard.getLand().get(this.getPosition()).getOwner() != null)
-                    if(gameBoard.getLand().get(this.getPosition()).getLandType().equalsIgnoreCase("property")) {
+                if (gameBoard.getLand().get(i) instanceof Property)
+                    if(((Property) gameBoard.getLand().get(i)).getOwner() != null) {
                         //If land is owned and is property type
-                        gameBoard.getLand().get(this.getPosition()).addFootTraffic();
+                        ((Property) gameBoard.getLand().get(this.getPosition())).addFootTraffic();
                     }
             }
-
-            action(gameBoard); //calls the actions to be offered to the player
+            event = action(gameBoard); //calls the actions to be offered to the player
         }
+        return event;
     }
 
     /**
      * This lets the player choose from a set of actions he/she may do during the turn
      * @param gameBoard Gameboard where the players are playing on
      */
-    public void action(GameBoard gameBoard) {
-        switch(gameBoard.getLand().get(nPosition).getLandType()) {
-            case "income":
-            case "luxury":
-            case "chance":
-            case "corner": gameBoard.getLand().get(nPosition).triggerEvent(this, gameBoard); break; //if the player lands on a non own-able land tile, call triggerEvent
-            case "railroad":
-            case "utility": 
-            case "property": {
+    public String action(GameBoard gameBoard) {
+        String event = "";
+        //TODO Connect functionality with GUI
+        if((gameBoard.getLand().get(nPosition) instanceof Tax) || (gameBoard.getLand().get(nPosition) instanceof Chance) || (gameBoard.getLand().get(nPosition) instanceof Community) ||
+                (gameBoard.getLand().get(nPosition) instanceof Jail) || (gameBoard.getLand().get(nPosition) instanceof Parking)){
+            gameBoard.getLand().get(nPosition).triggerEvent(gameBoard, this);
+        }
+        else if((gameBoard.getLand().get(nPosition) instanceof Utility) || (gameBoard.getLand().get(nPosition) instanceof Railroad) || (gameBoard.getLand().get(nPosition) instanceof Property)){
                 if(!isMine(gameBoard)) { //checks if the current Player owns that piece of land
-                    if (gameBoard.getLand().get(nPosition).getOwner() != null) //checks if the landed tile is owned by the current Player
-                        gameBoard.getLand().get(nPosition).triggerEvent(this, gameBoard);
+                    if (((Property) gameBoard.getLand().get(nPosition)).getOwner() != null) //checks if the landed tile is owned by the current Player
+                        gameBoard.getLand().get(nPosition).triggerEvent(gameBoard, this);
                     else { //If not, checks if that tile is free to purchase form the bank
-                        if(dMoney >= gameBoard.getLand().get(nPosition).getPrice()) { //checks if the current player has sufficient funds before offering to buy that land
-                            purchase(gameBoard);
+                        if (dMoney >= ((Property) gameBoard.getLand().get(nPosition)).getPrice()) { //checks if the current player has sufficient funds before offering to buy that land
+                            event = purchase(gameBoard);
                         }
-                        else
-                        System.out.println(this.getName() + "has insufficient funds");
                     }
                 }
                 else { //this means the land tile is owned by the current Player
                     
-                    //trade(gameBoard);
+                    event = trade(gameBoard);
 
                     if(eligibleDev(gameBoard)) { //checks if the land is eligible for development before offering it 
-                        develop(gameBoard);
+                        event = develop(gameBoard);
                     }
                 }
-                break;
-            } 
-
         }
+        return event;
     }
 
     /**
@@ -210,19 +188,19 @@ public class Player extends People{
      * Purchasing a Land Tile
      * @param gameBoard Gameboard where the players are playing on
      */
-    public void purchase (GameBoard gameBoard) {
-        gameBoard.getLand().get(nPosition).setOwner(this); //sets the current player as the owner of the land
+    public String purchase (GameBoard gameBoard) {
+        ((Property)gameBoard.getLand().get(nPosition)).setOwner(this); //sets the current player as the owner of the land
         properties.add(gameBoard.getLand().get(nPosition)); //adds the land to the current Player's list of land owned
-        dMoney -= gameBoard.getLand().get(nPosition).getPrice(); //subtracts the money from the current Player
-        gameBoard.getBank().receiveMoney(gameBoard.getLand().get(nPosition).getPrice()); //gives the money to the bank
-        System.out.println(gameBoard.getLand().get(nPosition).getName() + " was purchased by " + getName());
+        dMoney -= ((Property)gameBoard.getLand().get(nPosition)).getPrice(); //subtracts the money from the current Player
+        gameBoard.getBank().receiveMoney(((Property)gameBoard.getLand().get(nPosition)).getPrice()); //gives the money to the bank
+        return gameBoard.getLand().get(nPosition).getName() + " was purchased by " + getName();
     } 
 
     /**
      * Trades with another Player
      * @param gameBoard Gameboard where the players are playing on
      */
-    public void trade(GameBoard gameBoard) {
+    public String trade(GameBoard gameBoard) {
         int nChosenPosition = 0; //Property which player wants to get
         int nChosenPlayer = 0; //Player which this player wishes to trade with
         int nProperty = 0; //Property which this player wishes to trade in return
@@ -233,6 +211,7 @@ public class Player extends People{
                 System.out.println(i+"."+gameBoard.getPlayers()[i].getName());
         nChosenPlayer = sc.nextInt();
 
+        //TODO Connect this with GUI
         System.out.println("Which property to trade?");
         for(int i = 0; i < gameBoard.getPlayers()[nChosenPlayer].getProperties().size();i++)
             System.out.println(i+"."+gameBoard.getPlayers()[nChosenPlayer].getProperties().get(i).getName());
@@ -247,32 +226,34 @@ public class Player extends People{
         //assuming other end agrees,
         Land temp = gameBoard.getPlayers()[nChosenPlayer].getProperties().get(nChosenPosition);
         //Sets owner to player and removes property traded from owned properties
-        temp.setOwner(this);
+        ((Property)temp).setOwner(this);
         this.properties.add(temp);
 
         //Sets your chosen property to be owned by other player
-        properties.get(nProperty).setOwner(gameBoard.getPlayers()[nChosenPlayer]);
+        ((Property)properties.get(nProperty)).setOwner(gameBoard.getPlayers()[nChosenPlayer]);
         gameBoard.getPlayers()[nChosenPlayer].properties.add(properties.get(nProperty));
 
         //Remove traded properties from both players
         this.properties.remove(properties.get(nProperty ));
 
         gameBoard.getPlayers()[nChosenPlayer].properties.remove(nChosenPosition);
-
-        System.out.println(getName() + " now owns " + this.properties.get(properties.size()-1).getName());
-        System.out.println(gameBoard.getPlayers()[nChosenPlayer].getName() +" now owns " +
-                gameBoard.getPlayers()[nChosenPlayer].properties.get(gameBoard.getPlayers()[nChosenPlayer].properties.size()-1).getName());
+        String event = "";
+        event += getName() + " now owns " + this.properties.get(properties.size()-1).getName();
+        event += gameBoard.getPlayers()[nChosenPlayer].getName() +" now owns " +
+                gameBoard.getPlayers()[nChosenPlayer].properties.get(gameBoard.getPlayers()[nChosenPlayer].properties.size()-1).getName();
+        return event;
     }
 
     /**
      * Develops land of the owner
      *  @param gameBoard Gameboard where the players are playing on
      */
-    private void develop(GameBoard gameBoard) {
-       dMoney -=  gameBoard.getLand().get(nPosition).getDetails()[1];
-       gameBoard.getLand().get(nPosition).setDevelopment(1);
-       System.out.println(gameBoard.getLand().get(nPosition).getName() + " was developed. " +
-               "Now at Development Level: " + gameBoard.getLand().get(nPosition).getDevelopment());
+    private String develop(GameBoard gameBoard) {
+        String event = "";
+       dMoney -=  ((Property)gameBoard.getLand().get(nPosition)).getDetails()[1];
+        ((Property)gameBoard.getLand().get(nPosition)).setDevelopment(1);
+       return gameBoard.getLand().get(nPosition).getName() + " was developed. " +
+               "Now at Development Level: " + ((Property)gameBoard.getLand().get(nPosition)).getDevelopment();
     }
 
     /**
@@ -281,10 +262,10 @@ public class Player extends People{
      * @return boolean if the land is eligible
      */
     private boolean eligibleDev (GameBoard gameBoard) { //NOTE: FootTraffic does not reset for every development made
-        if(gameBoard.getLand().get(nPosition).getLandType().equals("property")){ //checks if the landed spot is indeed a proprty, therefore eligible for a development
-            if(dMoney >= gameBoard.getLand().get(nPosition).getDetails()[1]) { //checks if the player has enough cash to develop
-                if( (gameBoard.getLand().get(nPosition).getRentCollected() >= gameBoard.getLand().get(nPosition).getDetails()[1]) || (gameBoard.getLand().get(nPosition).getFootTraffic() >=  gameBoard.getLand().get(nPosition).getDetails()[8] * gameBoard.getPlayers().length) ) { //checks if either the property has accumulated enough rent or foottraffic on that spot is more than the multiplier * # of players requirement
-                    if(gameBoard.getLand().get(nPosition).getDevelopment() <= 4) { //checks if the property has not yet reached max development
+        if(gameBoard.getLand().get(nPosition) instanceof Property){ //checks if the landed spot is indeed a proprty, therefore eligible for a development
+            if(dMoney >= ((Property)gameBoard.getLand().get(nPosition)).getDetails()[1]) { //checks if the player has enough cash to develop
+                if( (((Property)gameBoard.getLand().get(nPosition)).getRentCollected() >=((Property)gameBoard.getLand().get(nPosition)).getDetails()[1]) || (((Property)gameBoard.getLand().get(nPosition)).getFootTraffic() >=  ((Property)gameBoard.getLand().get(nPosition)).getDetails()[8] * gameBoard.getPlayers().length) ) { //checks if either the property has accumulated enough rent or foottraffic on that spot is more than the multiplier * # of players requirement
+                    if(((Property)gameBoard.getLand().get(nPosition)).getDevelopment() <= 4) { //checks if the property has not yet reached max development
                         return true;
                     }
                     else {
