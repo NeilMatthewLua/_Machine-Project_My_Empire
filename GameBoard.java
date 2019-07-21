@@ -6,21 +6,20 @@ import java.util.Random;
 /**
  * GameBoard class contains methods which plays the game
  *
- * New Changes Made: Added conditional in checkForCompleteSet
+ * New Changes Made: Adjustments for new project Design. Changed initialization of land and checking for complete sets
  *
- * Last Changes Made: Added getIsWin(),Added decimalFormat to result screen
+ * Last Changes Made: Added conditional in checkForCompleteSet
  * @author  Lua & Tanting
  * @version 1.2
  */
 public class GameBoard {
     private Player[] players;
     private ArrayList<Land> land;
-    private ArrayList<Land> landLeft;
     private ArrayList<Card> cardPile;
     private ArrayList<Card> cardDiscard;
     private boolean isWin;
     private People bank;
-
+    private ArrayList<String> events;
     /**
      * Creates a GameBoard object initialized with land, random set of cards, and players
      */
@@ -33,8 +32,8 @@ public class GameBoard {
     }
 
     /**
-     * Gets the number of players in the current game board
-     * @return number of players
+     * Gets the players in the current game board
+     * @return array of players in the game
      */
     public Player[] getPlayers() {
         return players;
@@ -61,6 +60,11 @@ public class GameBoard {
      * @return true if the game has ended, false if not
      */
     public boolean getIsWin(){return isWin;}
+
+    public ArrayList<String> getEvents(){
+        return events;
+    }
+
     /**
      * Changes the value of isWin variable to either true or false
      * @param value the value to be set to isWin
@@ -78,8 +82,9 @@ public class GameBoard {
         for(int i = 0; i < players.length; i++)
             arrPositions[i] = players[i].getPosition();
         for(int i = 0; i < land.size(); i++){
-            if(land.get(i).getOwner() != null )
-                if(land.get(i).getOwner().equals(player))
+            if(land.get(i) instanceof Property)
+            if(((Property)land.get(i)).getOwner() != null )
+                if(((Property)land.get(i)).getOwner().equals(player))
                     System.out.print("(OWNED) ");
             System.out.println(i +"."+ land.get(i).getName());
             for(int j = 0; j < players.length; j++)
@@ -134,64 +139,62 @@ public class GameBoard {
                 {"9th Street","Yellow"},
                 {"5th Avenue","Yellow"},
         };
-        landLeft = new ArrayList<Land>();
+        land = new ArrayList<Land>();
         int nDecrement = 0;
         for(int i = 0; i <= 31;i++){
             if(i == 0) {
-                landLeft.add(new Land("Start", "corner"));
+                land.add(new Start("Start"));
                 nDecrement++;
             }
             else if(i == 8){
-                landLeft.add(new Land("Community Service", "corner"));
+                land.add(new Community("Community"));
                 nDecrement++;
             }
             else if(i == 16) {
-                landLeft.add(new Land("Free Parking", "corner"));
+                land.add(new Parking("Parking"));
                 nDecrement++;
             }
             else if(i == 24){
-                landLeft.add(new Land("Jail", "corner"));
+                land.add(new Jail("Jail"));
             }
             else if(i <= 23 && i >= 21){
                 if(i == 21)
-                    landLeft.add(new Land("North","railroad",200));
+                    land.add(new Railroad("North",200));
                 else if(i == 22)
-                    landLeft.add(new Land("South","railroad",200));
+                    land.add(new Railroad("South",200));
                 else
-                    landLeft.add(new Land("Metro","railroad",200));
+                    land.add(new Railroad("Metro",200));
             }
             else if(i == 25)
-                landLeft.add(new Land("Electric","utility",150));
+                land.add(new Utility("Electric",150));
             else if(i == 26)
-                landLeft.add(new Land("Water","utility",150));
+                land.add(new Utility("Water",150));
             else if(i <= 29 && i >= 27)
-                landLeft.add(new Land("Chance","chance"));
+                land.add(new Chance("Chance"));
             else if(i == 30)
-                landLeft.add(new Land("Income Tax","luxury"));
+                land.add(new Tax("Income Tax"));
             else if(i == 31)
-                landLeft.add(new Land("Luxury Tax","luxury"));
+                land.add(new Tax("Luxury Tax"));
             else{
-                    landLeft.add(new Property(strPropertyDetails[i-nDecrement][0],strPropertyDetails[i-nDecrement][1],dPropertyDetails[i-nDecrement]));
+                    land.add(new Property(strPropertyDetails[i-nDecrement][0],strPropertyDetails[i-nDecrement][1],dPropertyDetails[i-nDecrement]));
             }
         }
     }
 
-    //ADD RANDOMIZE FUNCTION
-
     public void randomizeLand(){
         land = new ArrayList<Land>(1);
-        for(int i = 0; i < landLeft.size();i++ ){
-            if(!(landLeft.get(i).getName().equals("Start") ||
-                    landLeft.get(i).getName().equals("Community Service") ||
-                    landLeft.get(i).getName().equals("Free Parking") ||
-                    landLeft.get(i).getName().equals("Jail")))
-            land.add(landLeft.get(i));
+        for(int i = 0; i < land.size();i++ ){
+            if(!(land.get(i).getName().equals("Start") ||
+                    land.get(i).getName().equals("Community Service") ||
+                    land.get(i).getName().equals("Free Parking") ||
+                    land.get(i).getName().equals("Jail")))
+            land.add(land.get(i));
         }
         Collections.shuffle(land);
-        land.add(0,landLeft.get(0));
-        land.add(8,landLeft.get(8));
-        land.add(16,landLeft.get(16));
-        land.add(24,landLeft.get(24));
+        land.add(0,land.get(0));
+        land.add(8,land.get(8));
+        land.add(16,land.get(16));
+        land.add(24,land.get(24));
     }
 
     /**
@@ -206,7 +209,7 @@ public class GameBoard {
      * Initializes Cards to cardPile and shuffles it
      *
      */
-    private void initializeCards(){
+    private void initializeCards(){ //TODO Implement with new Cards
         cardPile = new ArrayList<Card>();
         cardDiscard = new ArrayList<Card>();
         int[] cardCount = {2,6,6,4,7,3};
@@ -263,11 +266,11 @@ public class GameBoard {
      *
      */
     private void initializePlayers(){
-        int nPlayers = 4; //Adjust to add more players
+        int nPlayers = 2; //Adjust to add more players
         bank = new People("Bank",true,4); //Initialize bank
         players = new Player[nPlayers];
         for(int i = 0; i < nPlayers; i++){
-            players[i] = new Player("Albert" + i);
+            players[i] = new Player("Albert " + i);
         }
         Random rgen = new Random();  // Random number generator
 
@@ -291,38 +294,38 @@ public class GameBoard {
         int[] nPropertyCount = {0,0,0,0,0,0,0}; //Counts the no. of properties player has per color
         int nFullSet = 0;
         for(int j = 0; j < player.getProperties().size() && nFullSet < 2;j++){
-            if(player.getProperties().get(j).getLandType().equals("properties")){
-                if(player.getProperties().get(j).getColor().equalsIgnoreCase("silver")){
+            if(player.getProperties().get(j) instanceof Property){
+                if(((Property)player.getProperties().get(j)).getColor().equalsIgnoreCase("silver")){
                     nPropertyCount[0] += 1;
                     if(nPropertyCount[0] == 2)
                         nFullSet += 1;
                 }
-                else if(player.getProperties().get(j).getColor().equalsIgnoreCase("purple")){
+                else if(((Property)player.getProperties().get(j)).getColor().equalsIgnoreCase("purple")){
                     nPropertyCount[1] += 1;
                     if(nPropertyCount[1] == 3)
                         nFullSet += 1;
                 }
-                else if(player.getProperties().get(j).getColor().equalsIgnoreCase("pink")){
+                else if(((Property)player.getProperties().get(j)).getColor().equalsIgnoreCase("pink")){
                     nPropertyCount[2] += 1;
                     if(nPropertyCount[2] == 3)
                         nFullSet += 1;
                 }
-                else if(player.getProperties().get(j).getColor().equalsIgnoreCase("green")){
+                else if(((Property)player.getProperties().get(j)).getColor().equalsIgnoreCase("green")){
                     nPropertyCount[3] += 1;
                     if(nPropertyCount[3] == 3)
                         nFullSet += 1;
                 }
-                else if(player.getProperties().get(j).getColor().equalsIgnoreCase("blue")){
+                else if(((Property)player.getProperties().get(j)).getColor().equalsIgnoreCase("blue")){
                     nPropertyCount[4] += 1;
                     if(nPropertyCount[4] == 3)
                         nFullSet += 1;
                 }
-                else if(player.getProperties().get(j).getColor().equalsIgnoreCase("red")){
+                else if(((Property)player.getProperties().get(j)).getColor().equalsIgnoreCase("red")){
                     nPropertyCount[5] += 1;
                     if(nPropertyCount[5] == 2)
                         nFullSet += 1;
                 }
-                else if(player.getProperties().get(j).getColor().equalsIgnoreCase("yellow")){
+                else if(((Property)player.getProperties().get(j)).getColor().equalsIgnoreCase("yellow")){
                     nPropertyCount[6] += 1;
                     if(nPropertyCount[6] == 2)
                         nFullSet += 1;
@@ -353,14 +356,14 @@ public class GameBoard {
      * @return card that the user got from the pile
      */
     public Card drawChance(){
-        Card temp = cardPile.get(cardPile.size()-1); //Remove topmost card in cardPile
-        cardPile.remove(cardPile.size()-1);
         if(cardPile.size() == 0) //If cardPile is empty then shuffle discardPile into cardPile
             for(int i = 0; i < cardDiscard.size(); i++){
                 cardPile.add(cardDiscard.get(0));
                 cardDiscard.remove(0);
             }
         Collections.shuffle(cardPile);
+        Card temp = cardPile.get(cardPile.size()-1); //Remove topmost card in cardPile
+        cardPile.remove(cardPile.size()-1);
         return temp;
     }
 
@@ -376,21 +379,11 @@ public class GameBoard {
      * Method for playing the board until a player has won
      */
     public  void playGame(){
-        for(int i = 0; i < land.size(); i++){
-            if(land.get(i).getLandType().equals("utility")){
-                land.get(i).setOwner(players[1]);
-                players[1].getProperties().add(land.get(i));
-            }
-        }
-        players[0].setPosition(0);
-        players[0].addCard(new Card(1,1,false,"dasd"));
-        players[0].getCard().get(0).useCard(players[0],this);
         while(!isWin){//While no one has won
             for(int i = 0; i < players.length && !isWin; i++){
                 checkForWin();
                 printLand(players[i]);
-                players[i].roll(this);
-
+                events.add(players[i].roll(this));
             }
         }
         endResults();
@@ -413,11 +406,10 @@ public class GameBoard {
             // or it's at the first element where current >= a[j]
             players[j+1] = current;
         }
-        System.out.println(bank.getMoney());
         for(int i = players.length-1; i >= 0; i--){
             if(players[i].getMoney() == 0)
                 System.out.print("BANKRUPT");
-            System.out.println(i+1 + "." + players[i].getName() + "Money: " +
+            System.out.println(i+1 + "." + players[i].getName() + " Money: " +
                     decimalFormat.format(players[i].getMoney()));
         }
     }
