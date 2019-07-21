@@ -1,9 +1,11 @@
+import java.util.ArrayList;
+
 /**
  * Property class which inherits from Land and is used for making property objects inside the board
  *
- *  New Changes Made: Call the setRentCollected method in getRent()
+ *  New Changes Made: Adjustments for new design
  *
- *  Last Changes Made: setRentCollected(), getRentCollcted(), getFootTraffic()
+ *  Last Changes Made: Call the setRentCollected method in getRent()
  *
  *   @author  Lua & Tanting
  *   @version 1.1
@@ -12,9 +14,10 @@ public class Property extends Land {
     private String strColor;
     private double[] arrAttributes;
     private int nDevelopment;
-    boolean doubleRent;
     private double dFootTraffic;
     private double dRentCollected;
+    private ArrayList<Card> cardMultipliers;
+    private Player owner;
 
     /**
      * Creates a property subclass which inherits from Land
@@ -23,23 +26,25 @@ public class Property extends Land {
      * @param arrAttributes Array of attributes of the property
      */
     public Property(String strName, String strColor, double[] arrAttributes) {
-        super(strName, "property",arrAttributes[0]);
+        super(strName);
         this.strColor = strColor;
         this.arrAttributes = new double[9];
         this.arrAttributes = arrAttributes;
         nDevelopment = 0;
         dRentCollected = 0;
         dFootTraffic = 0;
-        doubleRent = false;
     }
 
     /**
      * Gets the price to buy the property
      * @return price of the property
      */
-    @Override
     public double getPrice(){
         return arrAttributes[0];
+    }
+
+    public Player getOwner(){
+        return owner;
     }
 
     /**
@@ -54,7 +59,6 @@ public class Property extends Land {
      * Gets the different attributes associated with the property
      * @return (double[]) of details regarding the property
      */
-    @Override
     public double[] getDetails() {
         return arrAttributes;
     }
@@ -71,7 +75,6 @@ public class Property extends Land {
      * Gets the foot traffic of the property
      * @return foot traffic of the property
      */
-    @Override
     public double getFootTraffic() {
         return dFootTraffic;
     }
@@ -79,29 +82,26 @@ public class Property extends Land {
     /**
      * Gets the amount of rent collected by the property
      */
-    @Override
     public double getRentCollected() {
         return dRentCollected;
     }
 
-    /**
-     * Changes the variable whether if a double rent card is applied
-     * @param val value to set the doubleRent variable to
-     */
-    @Override
-    public void setDoubleRent(boolean val){
-        doubleRent = val;
-    }
 
     /**
      * Adds development to property based on the parameter
      * @param n the value to add to property development
      */
-    @Override
     public void setDevelopment(int n){
         nDevelopment += n;
     }
 
+    public ArrayList<Card> getCardMultipliers(){
+        return cardMultipliers;
+    }
+
+    public void setOwner(Player player){
+        this.owner = player;
+    }
     /**
      * Adds an amount to the rent collected by the property based on the parameter
      * @param n the amount to be addded
@@ -111,17 +111,19 @@ public class Property extends Land {
     }
 
     /**
-     * Similar to the getRent() function of parent class land but computes differently for property land
-     * @return rent to be paid
+     * Increments footTraffic counter when player passes over property
      */
-    @Override
-    public double getRent(Player player){
+    public void addFootTraffic(){
+        dFootTraffic += 1;
+    }
+
+    public String triggerEvent(GameBoard gameBoard, Player player){
         int nCounter = 0;
         double dRent = 0;
-        for(int i = 0; i < getOwner().getProperties().size();i++){
+        for(int i = 0; i < owner.getProperties().size();i++){
             //Count the number of properties of the same color owned by player
-            if(getLandType().equals(getOwner().getProperties().get(i).getLandType())){
-                if(this.strColor.equals(getOwner().getProperties().get(i).getColor()))
+            if(owner.getProperties().get(i) instanceof Property){
+                if(this.strColor.equals(((Property) owner.getProperties().get(i)).getColor()))
                     nCounter++;
             }
         }
@@ -130,22 +132,26 @@ public class Property extends Land {
         else if(nCounter == 3)
             dRent += 20;
         dRent += arrAttributes[nDevelopment + 2]; //Add development level
-        dRent *= getMultiplier(); //Multiply multipliers
-        if(doubleRent){
-            dRent *= 2;
-            doubleRent = false;
+        double multiplier = 1;
+        //TODO Implement Card Multipliers
+        for(int i = 0; i < cardMultipliers.size();i++){
+            //if()
         }
+        dRent *= multiplier;
 
-        this.setRentCollected(dRent); //Updates the rent collected tracker 
+        this.setRentCollected(dRent); //Updates the rent collected tracker
 
-        return dRent;
+        String event = "";
+        double dAmount = player.getMoney();
+        if(player.giveMoney(owner, dRent) == true){
+            event += player.getName() + "paid " + dRent + "to " + owner.getName() + ".";
+        }
+        else{
+            event += player.getName() + "paid " + dRent + "to " + owner.getName() + ". ";
+            event += player.getName() + "is now bankrupt.";
+        }
+        return event;
     }
 
-    /**
-     * Increments footTraffic counter when player passes over property
-     */
-    @Override
-    public void addFootTraffic(){
-        dFootTraffic += 1;
-    }
+
 }
