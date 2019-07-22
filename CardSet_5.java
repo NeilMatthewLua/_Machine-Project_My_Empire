@@ -1,9 +1,25 @@
+/**
+ * Card class which acts as a template for the cards that can be used during the game
+ *
+ *  New Changes Made: Fixed Bugs
+ 
+ *  Last Changes Made: Created this subclass
+
+ */
+
 import java.util.*;
 
 public abstract class CardSet_5 extends Card{
 
+    private double multiplier;
+
     public CardSet_5(int nIndex,int nGroup, boolean canKeep, String[][] list){
         super(nIndex, nGroup, canKeep, list);
+        multiplier = 1;
+    }
+
+    private double getMultiplier(){
+        return multiplier;
     }
 
     @Override
@@ -31,7 +47,7 @@ System.out.println(i + "." + player.getProperties().get(tempArr.get(i)).getName(
                 Scanner sc = new Scanner(System.in);
                 nUserInput = sc.nextInt();
                 if(nIndex == 0){//Double Rent
-                    player.getProperties().get(nUserInput).setDoubleRent(true);
+                    multiplier = 2;
                     event += "Rent of " + player.getProperties().get(nUserInput).getName() + " doubled for next collection.";
                 }
                 else if(nIndex == 1){//Renovation
@@ -47,14 +63,14 @@ System.out.println(i + "." + player.getProperties().get(tempArr.get(i)).getName(
 
                     if(player.getMoney() - dRenovation > 0){//If rent is applicable
                         player.giveMoney(gameBoard.getBank(),dRenovation);
-                        player.getProperties().get(nUserInput).setMultiplier(1.5);
+                        multiplier = 1.5;
                         System.out.println("Rent of " +player.getProperties().get(nUserInput).getName()+" increased by 50%");
                     }
                     else
 System.out.println("Insuficient Funds. Cannot Develop");
                 }
                 else if(nIndex == 2){//Dilapidated Houses
-                    player.getProperties().get(nUserInput).setMultiplier(.9);
+                    multiplier = 0.9;
                     event += "Rent of " +player.getProperties().get(nUserInput).getName()+" decreased by 10%";
                 }
             }
@@ -81,11 +97,11 @@ for(int i = 0; i < tempArr.size(); i++)//Display possible utilities/railroads to
                 nUserInput = sc.nextInt();
 
                 if(nIndex == 3){//Decrease by 10%
-                    player.getProperties().get(nUserInput).setMultiplier(.9);
+                    multiplier = 0.9;
 System.out.println("Rent of " +player.getProperties().get(nUserInput).getName()+ " decreased by 10%");
                 }
                 else if(nIndex == 4){//Increase by 10%
-                    player.getProperties().get(nUserInput).setMultiplier(1.1);
+                    multiplier = 1.1;
 System.out.println("Rent of " +player.getProperties().get(nUserInput).getName()+ " increased by 10%");
                 }
             }

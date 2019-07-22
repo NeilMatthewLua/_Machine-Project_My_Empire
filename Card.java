@@ -5,12 +5,12 @@ import java.util.Scanner;
 /**
  * Card class which acts as a template for the cards that can be used during the game
  *
- *  New Changes Made: Seprarated Card class to subclasses
+ *  New Changes Made: Fixed Bugs
  
- *  Last Changes Made: Small NPE problems with some cards
+ *  Last Changes Made: Seprarated Card class to subclasses
  
  *   @author  Lua and Tanting
- *   @version 1.5
+ *   @version 1.6
  */
     public abstract class Card {
 

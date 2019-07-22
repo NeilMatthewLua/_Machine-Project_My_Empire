@@ -1,3 +1,12 @@
+/**
+ * Card class which acts as a template for the cards that can be used during the game
+ *
+ *  New Changes Made: Fixed Bugs
+ 
+ *  Last Changes Made: Created this subclass
+
+ */
+
 import java.util.Random;
 
 public abstract class CardSet_2 extends Card{
