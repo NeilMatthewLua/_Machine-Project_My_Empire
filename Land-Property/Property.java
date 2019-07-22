@@ -95,6 +95,10 @@ public class Property extends Land {
         nDevelopment += n;
     }
 
+    /**
+     * Gets the array list of card multipliers currently on the property
+     * @return ArrayList of Cards
+     */
     public ArrayList<Card> getCardMultipliers(){
         return cardMultipliers;
     }
@@ -117,6 +121,7 @@ public class Property extends Land {
         dFootTraffic += 1;
     }
 
+    @Override
     public String triggerEvent(GameBoard gameBoard, Player player){
         int nCounter = 0;
         double dRent = 0;
@@ -135,7 +140,14 @@ public class Property extends Land {
         double multiplier = 1;
         //TODO Implement Card Multipliers
         for(int i = 0; i < cardMultipliers.size();i++){
-            //if()
+            if(cardMultipliers.get(i) instanceof CardSet_5 && cardMultipliers.get(i).getIndex() == 0){//Remove double rent card
+                multiplier *= 2;
+                gameBoard.addCardDiscard(cardMultipliers.get(i)); // Add to discard pile
+                cardMultipliers.remove(i); //Remove from property
+            }
+            else{
+                //multiplier *= cardMultipliers.get(i).getMultiplier();
+            }
         }
         dRent *= multiplier;
 
