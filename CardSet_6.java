@@ -1,3 +1,4 @@
+package Model;
 import java.util.Random;
 
 /**
@@ -9,12 +10,18 @@ import java.util.Random;
 
  */
 
-public abstract class CardSet_6 extends Card{
+public class CardSet_6 extends Card{
 
     public CardSet_6(int nIndex,int nGroup, boolean canKeep, String[][] list){
         super(nIndex, nGroup, canKeep, list);
     }
 
+    /**
+     * Abstracted method that triggers the effects of each card
+     * @param player    player who got the card
+     * @param gameBoard the gameboard
+     * @return string which contains the details of the event
+     */
     @Override
     public String useCard(Player player, GameBoard gameBoard){
         String event = "";

@@ -2,10 +2,12 @@
  * Card class which acts as a template for the cards that can be used during the game
  *
  *  New Changes Made: Fixed Bugs
- 
+
  *  Last Changes Made: Created this subclass
 
  */
+
+package Model;
 
 import java.util.Random;
 
@@ -19,7 +21,7 @@ public class CardSet_2 extends Card{
      * Abstracted method that triggers the effects of each card
      * @param player    player who got the card
      * @param gameBoard the gameboard
-     * @return
+     * @return string which contains the details of the event
      */
     @Override
     public String useCard(Player player, GameBoard gameBoard){
@@ -33,7 +35,7 @@ public class CardSet_2 extends Card{
             int nRandProperty = rand.nextInt(32);
             while(!(gameBoard.getLand().get(nRandProperty) instanceof Property)){//Loops until a property is found
                 nRandProperty = rand.nextInt(32);
-            }  
+            }
 
             while(player.getPosition() != nRandProperty){//While player has not landed on property
                 player.setPosition(1);//Player moves one space
@@ -48,8 +50,8 @@ public class CardSet_2 extends Card{
                 if (((Property)gameBoard.getLand().get(player.getPosition())).getOwner() != null) //checks if the landed tile is owned by the current Player
                     event += (gameBoard.getLand().get((player.getPosition()))).triggerEvent(gameBoard, player); //collects rent from property
                 else { //If not, checks if player is able to buy that title to the land
-                        if(player.getMoney() >= ((Property)gameBoard.getLand().get((player.getPosition()))).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land
-                            event += player.purchase(gameBoard);
+                    if(player.getMoney() >= ((Property)gameBoard.getLand().get((player.getPosition()))).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land
+                        event += player.purchase(gameBoard);
                     }
                 }
             }
@@ -64,16 +66,7 @@ public class CardSet_2 extends Card{
 
                 if(player.getPosition() == 0){
                     //the bank shells out 200$
-                    double temp  = gameBoard.getBank().getMoney();
-
-                    if(gameBoard.getBank().giveMoney(player, 200)){
-                        event += "Bank pays $"+ 200 +" to: " + player.getName();
-                    }
-                    else{//If bank can't pay
-                        event += "Bank pays $"+ temp +" to: " + player.getName() + "\n";
-                        event += "Bank is now bankrupt. Game is over.";
-                        gameBoard.setIsWin(true);
-                    }
+                    event += ((Start)gameBoard.getLand().get(player.getPosition())).triggerEvent(gameBoard, player);
                 }
 
                 if (gameBoard.getLand().get(player.getPosition()) instanceof Property)
@@ -117,19 +110,9 @@ public class CardSet_2 extends Card{
 
                 if(player.getPosition() == 0){
                     //the bank shells out 200$
-
-                    temp  = gameBoard.getBank().getMoney();
-
-                    if(gameBoard.getBank().giveMoney(player, 200)){
-                        event += "Bank pays $"+ 200 +" to: " + player.getName();
-                    }
-                    else{//If bank can't pay
-                        event += "Bank pays $"+ temp +" to: " + player.getName() + "\n";
-                        event += "Bank is now bankrupt. Game is over.";
-                        gameBoard.setIsWin(true);
-                    }
+                    event += ((Start)gameBoard.getLand().get(player.getPosition())).triggerEvent(gameBoard, player);
                 }
-            
+
                 if(gameBoard.getLand().get(player.getPosition()) instanceof Property) {
                     if (((Property)gameBoard.getLand().get(player.getPosition())).getOwner() != null)
                         //If land is owned and is property type
@@ -155,7 +138,7 @@ public class CardSet_2 extends Card{
                     player.purchase(gameBoard);
                 }
             }
-            
+
         }
 
         gameBoard.addCardDiscard(player.getCards().get(player.getCards().size() - 1)); //put used card into card discarded pile

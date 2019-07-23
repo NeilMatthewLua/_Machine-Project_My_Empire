@@ -1,13 +1,16 @@
-import java.util.Random;
 
 /**
  * Card class which acts as a template for the cards that can be used during the game
  *
  *  New Changes Made: Fixed Bugs
- 
+
  *  Last Changes Made: Created this subclass
 
  */
+
+package Model;
+
+import java.util.Random;
 
 public class CardSet_4 extends Card{
 
@@ -19,11 +22,11 @@ public class CardSet_4 extends Card{
      * Abstracted method that triggers the effects of each card
      * @param player    player who got the card
      * @param gameBoard the gameboard
-     * @return
+     * @return string which contains the details of the event
      */
     @Override
     public String useCard(Player player, GameBoard gameBoard){
-    
+
         String event = "";
         int nIndex = player.getCards().get(player.getCards().size() - 1).getIndex(); //gets the index of the card to navigate through its set
 
@@ -46,21 +49,12 @@ public class CardSet_4 extends Card{
             while(player.getPosition() != nRandProperty){//While player has not landed on property
                 player.setPosition(1);//Player moves one space
                 if(player.getPosition() == 0){
+                    event += ((Start)gameBoard.getLand().get(player.getPosition())).triggerEvent(gameBoard, player);
 
-                    double temp  = gameBoard.getBank().getMoney();
-
-                    if(gameBoard.getBank().giveMoney(player, 200)){
-                        event += "Bank pays $"+ 200 +" to: " + player.getName();
-                    }
-                    else{//If bank can't pay
-                        event += "Bank pays $"+ temp +" to: " + player.getName() + "\n";
-                        event += "Bank is now bankrupt. Game is over.";
-                        gameBoard.setIsWin(true);
-                    }
                 }
                 if (gameBoard.getLand().get(player.getPosition()) instanceof Property)
                     if (((Property)gameBoard.getLand().get(player.getPosition())).getOwner() != null){
-                    //If land is owned and is property type
+                        //If land is owned and is property type
                         ((Property)gameBoard.getLand().get(player.getPosition())).addFootTraffic();
                     }
             }
@@ -69,8 +63,8 @@ public class CardSet_4 extends Card{
                 if (((Property)gameBoard.getLand().get(player.getPosition())).getOwner() != null) //checks if the landed tile is owned by the current Player
                     event += ((Property)gameBoard.getLand().get((player.getPosition()))).triggerEvent(gameBoard, player); //collects rent from property
                 else { //If not, checks if player is able to buy that title to the land
-                        if(player.getMoney() >= ((Property)gameBoard.getLand().get((player.getPosition()))).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land
-                            event += player.purchase(gameBoard);
+                    if(player.getMoney() >= ((Property)gameBoard.getLand().get((player.getPosition()))).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land
+                        event += player.purchase(gameBoard);
                     }
                 }
             }
