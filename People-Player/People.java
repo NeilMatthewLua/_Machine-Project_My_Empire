@@ -1,5 +1,6 @@
+package Model;
 /**
- * People Class
+ * People Class parent class of players and contains name and money
  *    
  *      New Changes: Changed class constructor implementation
 
@@ -15,7 +16,7 @@ public class People{
     protected double dMoney;
 
     /**
-     * This constructor creates a People object that is assumed to be a player (due to the lack of isBank identifier)
+     * This constructor creates a People object that is assumed to be a player
      @param strName name of the Player 
      */
     public People(String strName) {
@@ -24,7 +25,7 @@ public class People{
     }
 
     /**
-     * This constructor creates a People object that can either be a Player or a bank
+     * This constructor creates a People object that is a bank
      @param strName name of the Player
      */
     public People(String strName, int nPlayers) {
