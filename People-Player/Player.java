@@ -155,7 +155,8 @@ public class Player extends People{
         }
         else if((gameBoard.getLand().get(nPosition) instanceof Utility) || (gameBoard.getLand().get(nPosition) instanceof Railroad) || (gameBoard.getLand().get(nPosition) instanceof Property)){
                 if(!isMine(gameBoard)) { //checks if the current Player owns that piece of land
-                    if (((Property) gameBoard.getLand().get(nPosition)).getOwner() != null) //checks if the landed tile is owned by the current Player
+                    if (((Property) gameBoard.getLand().get(nPosition)).getOwner() != null || ((Railroad) gameBoard.getLand().get(nPosition)).getOwner() != null ||
+                            ((Utility) gameBoard.getLand().get(nPosition)).getOwner() != null) //checks if the landed tile is owned by the current Player
                         gameBoard.getLand().get(nPosition).triggerEvent(gameBoard, this);
                     else { //If not, checks if that tile is free to purchase form the bank
                         if (dMoney >= ((Property) gameBoard.getLand().get(nPosition)).getPrice()) { //checks if the current player has sufficient funds before offering to buy that land
