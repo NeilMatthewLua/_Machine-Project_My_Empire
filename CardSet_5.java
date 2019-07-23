@@ -7,9 +7,11 @@
 
  */
 
+package Model;
+
 import java.util.*;
 
-public abstract class CardSet_5 extends Card{
+public class CardSet_5 extends Card{
 
     private double multiplier; //multiplier that can be applied to a property
 
@@ -22,7 +24,7 @@ public abstract class CardSet_5 extends Card{
      * Returns the multiplier value of a card
      * @return the multiplier of the card
      */
-    private double getMultiplier(){
+    public double getMultiplier(){
         return multiplier;
     }
 

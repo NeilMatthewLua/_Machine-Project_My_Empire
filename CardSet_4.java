@@ -1,13 +1,16 @@
-import java.util.Random;
 
 /**
  * Card class which acts as a template for the cards that can be used during the game
  *
  *  New Changes Made: Fixed Bugs
- 
+
  *  Last Changes Made: Created this subclass
 
  */
+
+package Model;
+
+import java.util.Random;
 
 public class CardSet_4 extends Card{
 
@@ -46,17 +49,8 @@ public class CardSet_4 extends Card{
             while(player.getPosition() != nRandProperty){//While player has not landed on property
                 player.setPosition(1);//Player moves one space
                 if(player.getPosition() == 0){
+                    event += ((Start)gameBoard.getLand().get(player.getPosition())).triggerEvent(gameBoard, player);
 
-                    double temp  = gameBoard.getBank().getMoney();
-
-                    if(gameBoard.getBank().giveMoney(player, 200)){
-                        event += "Bank pays $"+ 200 +" to: " + player.getName();
-                    }
-                    else{//If bank can't pay
-                        event += "Bank pays $"+ temp +" to: " + player.getName() + "\n";
-                        event += "Bank is now bankrupt. Game is over.";
-                        gameBoard.setIsWin(true);
-                    }
                 }
                 if (gameBoard.getLand().get(player.getPosition()) instanceof Property)
                     if (((Property)gameBoard.getLand().get(player.getPosition())).getOwner() != null){

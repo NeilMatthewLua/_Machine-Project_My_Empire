@@ -7,6 +7,8 @@
 
  */
 
+package Model;
+
 import java.util.Random;
 
 public class CardSet_2 extends Card{
@@ -64,16 +66,7 @@ public class CardSet_2 extends Card{
 
                 if(player.getPosition() == 0){
                     //the bank shells out 200$
-                    double temp  = gameBoard.getBank().getMoney();
-
-                    if(gameBoard.getBank().giveMoney(player, 200)){
-                        event += "Bank pays $"+ 200 +" to: " + player.getName();
-                    }
-                    else{//If bank can't pay
-                        event += "Bank pays $"+ temp +" to: " + player.getName() + "\n";
-                        event += "Bank is now bankrupt. Game is over.";
-                        gameBoard.setIsWin(true);
-                    }
+                    event += ((Start)gameBoard.getLand().get(player.getPosition())).triggerEvent(gameBoard, player);
                 }
 
                 if (gameBoard.getLand().get(player.getPosition()) instanceof Property)
@@ -117,17 +110,7 @@ public class CardSet_2 extends Card{
 
                 if(player.getPosition() == 0){
                     //the bank shells out 200$
-
-                    temp  = gameBoard.getBank().getMoney();
-
-                    if(gameBoard.getBank().giveMoney(player, 200)){
-                        event += "Bank pays $"+ 200 +" to: " + player.getName();
-                    }
-                    else{//If bank can't pay
-                        event += "Bank pays $"+ temp +" to: " + player.getName() + "\n";
-                        event += "Bank is now bankrupt. Game is over.";
-                        gameBoard.setIsWin(true);
-                    }
+                    event += ((Start)gameBoard.getLand().get(player.getPosition())).triggerEvent(gameBoard, player);
                 }
             
                 if(gameBoard.getLand().get(player.getPosition()) instanceof Property) {

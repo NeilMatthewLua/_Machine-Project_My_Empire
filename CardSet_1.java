@@ -7,6 +7,8 @@
 
  */
 
+package Model;
+
 public class CardSet_1 extends Card{
 
     public CardSet_1(int nIndex,int nGroup, boolean canKeep, String[][] list){

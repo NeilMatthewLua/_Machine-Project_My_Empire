@@ -1,17 +1,22 @@
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+
 
 /**
  * Card class which acts as a template for the cards that can be used during the game
  *
- *  New Changes Made: Fixed Bugs (Again)
+ *  New Changes Made: Organized Files and Updated Methods
  
- *  Last Changes Made: Fixed Bugs
+ *  Last Changes Made: Fixed Bugs (Again)
  
  *   @author  Lua and Tanting
- *   @version 1.7
+ *   @version 1.8
  */
+
+package Model;
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+
     public abstract class Card {
 
         private int nIndex; //Index of the card from the set
