@@ -1,10 +1,10 @@
 /**
  * People Class
  *    
- *      New Changes: Changed the implementation of giveMoney()
+ *      New Changes: Changed class constructor implementation
 
  * 
- *      Last Changes Made: Minor adjustment to constructors (Bank)
+ *      Last Changes Made: Changed the implementation of giveMoney()
  * Version 1.03
  */
 
@@ -13,7 +13,6 @@ public class People{
 
     private String strName;
     protected double dMoney;
-    private boolean isBank;
 
     /**
      * This constructor creates a People object that is assumed to be a player (due to the lack of isBank identifier)
@@ -21,25 +20,16 @@ public class People{
      */
     public People(String strName) {
         this.strName = strName;
-        this.dMoney = 1500;
-        this.isBank = false;
+        this.dMoney = 2500;
     }
 
     /**
      * This constructor creates a People object that can either be a Player or a bank
-     @param strName name of the Player 
-     @param isBank  identifies if it is a bank or a Player
+     @param strName name of the Player
      */
-    public People(String strName, boolean isBank, int nPlayers) {
+    public People(String strName, int nPlayers) {
         this.strName = strName;
-        if(!isBank) {
-            this.dMoney = 1500;
-            this.isBank = !(isBank);
-        }
-        else {
-            this.dMoney = nPlayers * 2500;
-            this.isBank = isBank;
-        }
+        this.dMoney = nPlayers * 2500;
     }
 
     /**
