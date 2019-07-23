@@ -5,11 +5,15 @@
  *
  * Previous Change Made:
  */
+
+package Model;
+
 public class Tax extends Land {
     public Tax(String strName){
         super(strName);
     }
 
+    @Override
     public String triggerEvent(GameBoard gameBoard, Player player){
         double dRent = 0;
         String space = "";
@@ -23,7 +27,7 @@ public class Tax extends Land {
             space = " Income Tax Space";
         }
         double dAmount = player.getMoney();
-        if(player.giveMoney(gameBoard.getBank(),dRent) == true){
+        if(player.giveMoney(gameBoard.getBank(),dRent)){
             event += player.getName() + "paid " + dRent + " for" + space + ".";
         }
         else{

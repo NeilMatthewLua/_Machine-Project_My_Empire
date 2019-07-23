@@ -5,6 +5,9 @@
  *
  * Previous Change:
  */
+
+package Model;
+
 public class Railroad extends Land {
     double dPrice;
     Player owner;
@@ -48,10 +51,11 @@ public class Railroad extends Land {
         return dRent;
     }
 
+    @Override
     public String triggerEvent(GameBoard gameBoard, Player player){
         String event = "";
         double playerMoney = player.getMoney();
-        if(player.giveMoney(owner, this.getRent()) == true){
+        if(player.giveMoney(owner, this.getRent())){
             event += player.getName() + " gave " + owner.getName() + " " + this.getRent() + ".";
         }
         else{

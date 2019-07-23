@@ -1,16 +1,20 @@
-import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Land class which acts as a template for the different places found on the board
  *
- *  New Changes Made: Updated Jail Class
+ *  New Changes Made: Fixed Methods 
  *
- *  Last Changes Made:made Land Class Abstract
+ *  Last Changes Made: Made Land abstract
  *
  *   @author  Lua & Tanting
  *   @version 1.3
  */
+
+package Model;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
 public abstract class Land {
     private String strName;
 

@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 /**
  * Property class which inherits from Land and is used for making property objects inside the board
@@ -10,6 +9,12 @@ import java.util.ArrayList;
  *   @author  Lua & Tanting
  *   @version 1.1
  */
+
+package Model;
+
+import java.util.ArrayList;
+
+
 public class Property extends Land {
     private String strColor;
     private double[] arrAttributes;
@@ -155,7 +160,7 @@ public class Property extends Land {
 
         String event = "";
         double dAmount = player.getMoney();
-        if(player.giveMoney(owner, dRent) == true){
+        if(player.giveMoney(owner, dRent)){
             event += player.getName() + "paid " + dRent + "to " + owner.getName() + ".";
         }
         else{

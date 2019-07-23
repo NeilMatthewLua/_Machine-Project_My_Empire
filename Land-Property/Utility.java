@@ -6,10 +6,11 @@
  * Previous Change:
  */
 
+package Model;
 
 public class Utility extends Land{
-    double dPrice;
-    Player owner;
+    private double dPrice;
+    private Player owner;
 
     public Utility(String strName, double dPrice){
         super(strName);
@@ -49,6 +50,7 @@ public class Utility extends Land{
         return dRent;
     }
 
+    @Override
     public String triggerEvent(GameBoard gameBoard, Player player){
         String event = "";
         double playerMoney = player.getMoney();
