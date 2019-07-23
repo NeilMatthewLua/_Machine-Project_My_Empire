@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="150.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@./images/P1.png" />
+               </image>
+            </ImageView>
+            <TextField promptText="Enter Name....">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TextField>
+            <Button fx:id="readyOne" onAction="#changeButton" text="Ready">
+               <VBox.margin>
+                  <Insets left="50.0" top="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="150.0">
+         <children>
+            <VBox fx:id="box1" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@./images/P2.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="text1" promptText="Enter Name....">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
+                  <Button fx:id="readyTwo" mnemonicParsing="false" onAction="#changeButton" text="Ready">
+                     <VBox.margin>
+                        <Insets left="50.0" top="20.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <Button fx:id="add1" mnemonicParsing="false" onAction="#readyPlayer" text="Add">
+               <VBox.margin>
+                  <Insets left="55.0" top="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="150.0">
+         <children>
+            <VBox fx:id="box2" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@./images/P3.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="text2" promptText="Enter Name....">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
+                  <Button fx:id="readyThree" mnemonicParsing="false" onAction="#changeButton" text="Ready">
+                     <VBox.margin>
+                        <Insets left="50.0" top="20.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <Button fx:id="add2" mnemonicParsing="false" onAction="#readyPlayer" text="Add" visible="false">
+               <VBox.margin>
+                  <Insets left="55.0" top="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="150.0">
+         <children>
+            <VBox fx:id="box3" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@./images/P4.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="text3" promptText="Enter Name....">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
+                  <Button fx:id="readyFour" mnemonicParsing="false" onAction="#changeButton" text="Ready">
+                     <VBox.margin>
+                        <Insets left="50.0" top="20.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <Button fx:id="add3" mnemonicParsing="false" onAction="#readyPlayer" text="Add" visible="false">
+               <VBox.margin>
+                  <Insets left="55.0" top="20.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id = "play" mnemonicParsing="false" onAction="#switchScene" text="YOUR MOM GAY" visible="false">
+               <VBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</HBox>

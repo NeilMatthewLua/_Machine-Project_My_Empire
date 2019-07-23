@@ -2,19 +2,14 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="anchorPane" fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/StartStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartController">
    <children>
-      <HBox alignment="CENTER" layoutX="272.0" layoutY="273.0">
-         <children>
-            <Label fx:id="playLabel" alignment="CENTER" onMouseClicked="#labelClick" text="PLAY">
-               <font>
-                  <Font size="32.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
+      <Label fx:id="playLabel" alignment="CENTER" layoutX="278.0" layoutY="277.0" onMouseClicked="#labelClick" text="PLAY">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
