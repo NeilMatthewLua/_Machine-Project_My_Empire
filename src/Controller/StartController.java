@@ -24,7 +24,7 @@ public class StartController {
        if(e.getSource() == playLabel){
            Stage stage = (Stage)anchorPane.getScene().getWindow();
            FXMLLoader loader = new FXMLLoader();
-           loader.setLocation(getClass().getResource("/View/ViewInit.fxml"));
+           loader.setLocation(getClass().getResource("/View/GamePlay.fxml"));
            Scene scene = new Scene(loader.load());
            stage.setScene(scene);
 

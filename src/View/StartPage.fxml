@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="anchorPane" fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/StartStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartController">
+<AnchorPane id="anchorPane" fx:id="anchorPane" prefHeight="620.0" prefWidth="1080.0" stylesheets="@../CSS/StartStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartController">
    <children>
-      <Label fx:id="playLabel" alignment="CENTER" layoutX="278.0" layoutY="277.0" onMouseClicked="#labelClick" text="PLAY">
+      <Label fx:id="playLabel" alignment="CENTER" layoutX="464.0" layoutY="477.0" onMouseClicked="#labelClick" text="PLAY">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
+      <ImageView fitHeight="350.0" fitWidth="393.0" layoutX="332.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/MY_Title.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="385.0" fitWidth="693.0" layoutX="209.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/EMPIRE_Title.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
