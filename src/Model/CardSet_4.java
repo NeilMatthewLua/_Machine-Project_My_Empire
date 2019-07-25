@@ -22,11 +22,11 @@ public class CardSet_4 extends Card{
      * Abstracted method that triggers the effects of each card
      * @param player    player who got the card
      * @param gameBoard the gameboard
-     * @return
+     * @return string which contains the details of the event
      */
     @Override
     public String useCard(Player player, GameBoard gameBoard){
-    
+
         String event = "";
         int nIndex = player.getCards().get(player.getCards().size() - 1).getIndex(); //gets the index of the card to navigate through its set
 
@@ -54,7 +54,7 @@ public class CardSet_4 extends Card{
                 }
                 if (gameBoard.getLand().get(player.getPosition()) instanceof Property)
                     if (((Property)gameBoard.getLand().get(player.getPosition())).getOwner() != null){
-                    //If land is owned and is property type
+                        //If land is owned and is property type
                         ((Property)gameBoard.getLand().get(player.getPosition())).addFootTraffic();
                     }
             }
@@ -63,8 +63,8 @@ public class CardSet_4 extends Card{
                 if (((Property)gameBoard.getLand().get(player.getPosition())).getOwner() != null) //checks if the landed tile is owned by the current Player
                     event += ((Property)gameBoard.getLand().get((player.getPosition()))).triggerEvent(gameBoard, player); //collects rent from property
                 else { //If not, checks if player is able to buy that title to the land
-                        if(player.getMoney() >= ((Property)gameBoard.getLand().get((player.getPosition()))).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land
-                            event += player.purchase(gameBoard);
+                    if(player.getMoney() >= ((Property)gameBoard.getLand().get((player.getPosition()))).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land
+                        event += player.purchase(gameBoard);
                     }
                 }
             }

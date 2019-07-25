@@ -1,6 +1,8 @@
+package Model;
+import java.util.ArrayList;
 
 /**
- * Property class which inherits from Land and is used for making property objects inside the board
+ * Property Class which is a subclass of land and is used as the property space on game board
  *
  *  New Changes Made: Adjustments for new design
  *
@@ -9,12 +11,6 @@
  *   @author  Lua & Tanting
  *   @version 1.1
  */
-
-package Model;
-
-import java.util.ArrayList;
-
-
 public class Property extends Land {
     private String strColor;
     private double[] arrAttributes;
@@ -48,6 +44,10 @@ public class Property extends Land {
         return arrAttributes[0];
     }
 
+    /**
+     * Returns the owner of the property
+     * @return
+     */
     public Player getOwner(){
         return owner;
     }
@@ -126,6 +126,12 @@ public class Property extends Land {
         dFootTraffic += 1;
     }
 
+    /**
+     * Overridden method which prompts player to pay rent when stepped on
+     * @param gameBoard instance of the game board
+     * @param player the player which triggered the event
+     * @return string which contains the details of the event
+     */
     @Override
     public String triggerEvent(GameBoard gameBoard, Player player){
         int nCounter = 0;
@@ -143,7 +149,6 @@ public class Property extends Land {
             dRent += 20;
         dRent += arrAttributes[nDevelopment + 2]; //Add development level
         double multiplier = 1;
-        //TODO Implement Card Multipliers
         for(int i = 0; i < cardMultipliers.size();i++){
             if(cardMultipliers.get(i) instanceof CardSet_5 && cardMultipliers.get(i).getIndex() == 0){//Remove double rent card
                 multiplier *= 2;
@@ -151,7 +156,7 @@ public class Property extends Land {
                 cardMultipliers.remove(i); //Remove from property
             }
             else{
-                //multiplier *= cardMultipliers.get(i).getMultiplier();
+                multiplier *= ((CardSet_5)cardMultipliers.get(i)).getMultiplier();
             }
         }
         dRent *= multiplier;
@@ -161,14 +166,13 @@ public class Property extends Land {
         String event = "";
         double dAmount = player.getMoney();
         if(player.giveMoney(owner, dRent)){
-            event += player.getName() + "paid " + dRent + "to " + owner.getName() + ".";
+            event += player.getName() + "paid " + dRent + " to " + owner.getName() + ".";
         }
         else{
-            event += player.getName() + "paid " + dRent + "to " + owner.getName() + ". ";
+            event += player.getName() + "paid " + dAmount + " to " + owner.getName() + ". ";
             event += player.getName() + "is now bankrupt.";
+            gameBoard.setIsWin(true);
         }
         return event;
     }
-
-
 }

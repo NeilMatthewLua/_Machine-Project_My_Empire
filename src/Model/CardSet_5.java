@@ -2,7 +2,7 @@
  * Card class which acts as a template for the cards that can be used during the game
  *
  *  New Changes Made: Fixed Bugs
- 
+
  *  Last Changes Made: Created this subclass
 
  */
@@ -32,7 +32,7 @@ public class CardSet_5 extends Card{
      * Abstracted method that triggers the effects of each card
      * @param player    player who got the card
      * @param gameBoard the gameboard
-     * @return
+     * @return string which contains the details of the event
      */
     @Override
     public String useCard(Player player, GameBoard gameBoard){
@@ -55,8 +55,8 @@ public class CardSet_5 extends Card{
 
             if(isValid){
 
-for(int i = 0; i < tempArr.size(); i++)//Display possible properties to add effect
-System.out.println(i + "." + player.getProperties().get(tempArr.get(i)).getName());
+                for(int i = 0; i < tempArr.size(); i++)//Display possible properties to add effect
+                    System.out.println(i + "." + player.getProperties().get(tempArr.get(i)).getName());
                 Scanner sc = new Scanner(System.in);
                 nUserInput = sc.nextInt();
 
@@ -81,7 +81,7 @@ System.out.println(i + "." + player.getProperties().get(tempArr.get(i)).getName(
                         System.out.println("Rent of " +player.getProperties().get(nUserInput).getName()+" increased by 50%");
                     }
                     else
-System.out.println("Insuficient Funds. Cannot Develop");
+                        System.out.println("Insuficient Funds. Cannot Develop");
                 }
                 else if(nIndex == 2){//Dilapidated Houses
                     multiplier = 0.9;
@@ -89,7 +89,7 @@ System.out.println("Insuficient Funds. Cannot Develop");
                 }
             }
             else
-System.out.println("Not applicable. No owned properties.");
+                System.out.println("Not applicable. No owned properties.");
         }
         else if(nIndex == 3 || nIndex == 4){//For utilities / railroad
             int nUserInput = 0;
@@ -101,30 +101,30 @@ System.out.println("Not applicable. No owned properties.");
                     tempArr.add(i);
                 }
 
-                if(tempArr.size() > 0) //if there is at least one utility / railroad class
-                    isValid = true;
+            if(tempArr.size() > 0) //if there is at least one utility / railroad class
+                isValid = true;
 
             if(isValid){
-for(int i = 0; i < tempArr.size(); i++)//Display possible utilities/railroads to add effect
-    System.out.println(i + "." + player.getProperties().get(tempArr.get(i)).getName());
+                for(int i = 0; i < tempArr.size(); i++)//Display possible utilities/railroads to add effect
+                    System.out.println(i + "." + player.getProperties().get(tempArr.get(i)).getName());
                 Scanner sc = new Scanner(System.in);
                 nUserInput = sc.nextInt();
 
                 if(nIndex == 3){//Decrease by 10%
                     multiplier = 0.9;
-System.out.println("Rent of " +player.getProperties().get(nUserInput).getName()+ " decreased by 10%");
+                    System.out.println("Rent of " +player.getProperties().get(nUserInput).getName()+ " decreased by 10%");
                 }
                 else if(nIndex == 4){//Increase by 10%
                     multiplier = 1.1;
-System.out.println("Rent of " +player.getProperties().get(nUserInput).getName()+ " increased by 10%");
+                    System.out.println("Rent of " +player.getProperties().get(nUserInput).getName()+ " increased by 10%");
                 }
             }
             else
-System.out.println("Not applicable. No owned utilities or railroads.");
+                System.out.println("Not applicable. No owned utilities or railroads.");
         }
 
 
-              
+
         player.getCards().remove(player.getCards().size() - 1); //remove from the player's hand
         return event;
     }

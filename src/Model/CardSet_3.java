@@ -1,3 +1,4 @@
+package Model;
 /**
  * Card class which acts as a template for the cards that can be used during the game
  *
@@ -6,8 +7,6 @@
  *  Last Changes Made: Created this subclass
 
  */
-
-package Model;
 
 public class CardSet_3 extends Card{
 
@@ -19,7 +18,7 @@ public class CardSet_3 extends Card{
      * Abstracted method that triggers the effects of each card
      * @param player    player who got the card
      * @param gameBoard the gameboard
-     * @return
+     * @return string which contains the details of the event
      */
     @Override
     public String useCard(Player player, GameBoard gameBoard){

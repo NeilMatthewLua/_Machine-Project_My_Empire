@@ -1,31 +1,38 @@
 package Model;
-
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
-public class Driver extends Application {
-
-    private static Stage guiStage;
-
-    public Stage getStage(){return guiStage;}
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        guiStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("/ViewInit.fxml"));
-        primaryStage.setTitle("Welcome to My Empire");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
+public class Driver{
+    public static void main(String[]args){
+        GameBoard gameboard = new GameBoard();
+        Player p = new Player("bob");
+        gameboard.printCards();
     }
 }
+
+
+//public class Driver extends Application {
+//
+//    private static Stage guiStage;
+//
+//    public Stage getStage(){return guiStage;}
+//
+//    @Override
+//    public void start(Stage primaryStage) throws Exception {
+//        guiStage = primaryStage;
+//        Parent root = FXMLLoader.load(getClass().getResource("/ViewInit.fxml"));
+//        primaryStage.setTitle("Welcome to My Empire");
+//        primaryStage.setScene(new Scene(root));
+//        primaryStage.show();
+//    }
+//
+//    public static void main(String[] args) {
+//        launch(args);
+//    }
+//}
 
 
     //1. Adds button to a scene with a layout

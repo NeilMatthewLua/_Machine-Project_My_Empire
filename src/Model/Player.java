@@ -1,15 +1,14 @@
+package Model;
 /**
  * Player Class
  *    
- *      New Changes: Changed implementation of Roll() and Action()
+ *      New Changes: Adjustment to roll() implementation, dice roll only displayed if game has not ended, Added extra typecasts when player purchases land
    
-        Last Changes Made: Added conditionals to prevent bankrupt player from moving, Changes in roll()
+        Last Changes Made: Changed implementation of Roll() and Action()
    
  * Version 1.09
 
  */
-
-package Model;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -105,6 +104,7 @@ public class Player extends People{
     /**
      * Method that performs the rolling of die and the calculation of steps of the Player's token
      * @param gameBoard Gameboard where the players are playing on
+     * @return string which contains the details of the event
      */
     public String roll(GameBoard gameBoard) {//
         int nRoll;
@@ -112,6 +112,9 @@ public class Player extends People{
         Land temp;
         nRoll = (int)((Math.random() * (6 - 1)) + 1 ); //generates a random number form 1 - 6
         if(inJail){//If player is in jail then exact fine
+            if(this.getCards().get(0) instanceof CardSet_1){
+                gameBoard.getEvents().add(this.getCards().get(0).useCard(this,gameBoard));
+            }
             if(this.giveMoney(gameBoard.getBank(),50))
                 gameBoard.getEvents().add("Bank was given 50$ for Jail fine.");
             else{//If player can't pay
@@ -119,9 +122,9 @@ public class Player extends People{
                 gameBoard.setIsWin(true);
             }
         }
-        gameBoard.getEvents().add(this.getName() + " rolled "+ nRoll); // Display dice roll
         String event = "";
         if(!gameBoard.getIsWin()){
+            gameBoard.getEvents().add(this.getName() + " rolled "+ nRoll); // Display dice roll
             for( int i = start + 1 ; i <= start + nRoll; i++ ) {
                 if( i > 31 ) { //Checks if the token has reached the end of the board
                     nRoll = nRoll + start -i;
@@ -147,6 +150,7 @@ public class Player extends People{
     /**
      * This lets the player choose from a set of actions he/she may do during the turn
      * @param gameBoard Gameboard where the players are playing on
+     * @return string which contains the details of the event
      */
     public String action(GameBoard gameBoard) {
         String event = "";
@@ -157,10 +161,12 @@ public class Player extends People{
         }
         else if((gameBoard.getLand().get(nPosition) instanceof Utility) || (gameBoard.getLand().get(nPosition) instanceof Railroad) || (gameBoard.getLand().get(nPosition) instanceof Property)){
                 if(!isMine(gameBoard)) { //checks if the current Player owns that piece of land
-                    if (((Property) gameBoard.getLand().get(nPosition)).getOwner() != null) //checks if the landed tile is owned by the current Player
+                    if (((Property) gameBoard.getLand().get(nPosition)).getOwner() != null || ((Railroad) gameBoard.getLand().get(nPosition)).getOwner() != null ||
+                            ((Utility) gameBoard.getLand().get(nPosition)).getOwner() != null) //checks if the landed tile is owned by the current Player
                         gameBoard.getLand().get(nPosition).triggerEvent(gameBoard, this);
                     else { //If not, checks if that tile is free to purchase form the bank
-                        if (dMoney >= ((Property) gameBoard.getLand().get(nPosition)).getPrice()) { //checks if the current player has sufficient funds before offering to buy that land
+                        if (dMoney >= ((Property) gameBoard.getLand().get(nPosition)).getPrice() || dMoney >= ((Utility) gameBoard.getLand().get(nPosition)).getPrice() ||
+                                dMoney >= ((Railroad) gameBoard.getLand().get(nPosition)).getPrice()) { //checks if the current player has sufficient funds before offering to buy that land
                             event = purchase(gameBoard);
                         }
                     }
@@ -189,6 +195,7 @@ public class Player extends People{
     /**
      * Purchasing a Land Tile
      * @param gameBoard Gameboard where the players are playing on
+     * @return string which contains the details of the event
      */
     public String purchase (GameBoard gameBoard) {
         ((Property)gameBoard.getLand().get(nPosition)).setOwner(this); //sets the current player as the owner of the land
@@ -201,6 +208,7 @@ public class Player extends People{
     /**
      * Trades with another Player
      * @param gameBoard Gameboard where the players are playing on
+     * @return string which contains the details of the event
      */
     public String trade(GameBoard gameBoard) {
         int nChosenPosition = 0; //Property which player wants to get
@@ -249,6 +257,7 @@ public class Player extends People{
     /**
      * Develops land of the owner
      *  @param gameBoard Gameboard where the players are playing on
+     * @return string which contains the details of the event
      */
     private String develop(GameBoard gameBoard) {
         String event = "";

@@ -1,18 +1,22 @@
+package Model;
 /**
- * Tax class
+ * Tax Class which is a subclass of land and is used as the tax space on game board
  *
  * Last Change Made: Class Created
  *
  * Previous Change Made:
  */
-
-package Model;
-
 public class Tax extends Land {
     public Tax(String strName){
         super(strName);
     }
 
+    /**
+     * Overridden method which prompts player to pay tax when stepped on
+     * @param gameBoard instance of the game board
+     * @param player the player which triggered the event
+     * @return string which contains the details of the event
+     */
     @Override
     public String triggerEvent(GameBoard gameBoard, Player player){
         double dRent = 0;

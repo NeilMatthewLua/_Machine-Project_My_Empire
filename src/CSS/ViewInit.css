@@ -1,0 +1,72 @@
+#background{
+    -fx-background-image: url('../Images/PlayerScreen.png');
+    -fx-background-size: cover, auto;
+}
+
+#play{
+    -fx-background-color: rgb(0,48,73);
+}
+
+#play: hover{
+    -fx-underline: true;
+}
+
+#delete1:hover{
+    -fx-underline: true;
+}
+
+#delete2:hover{
+    -fx-underline: true;
+}
+
+#ready1:hover{
+    -fx-underline: true;
+}
+
+#ready2:hover{
+    -fx-underline: true;
+}
+
+#ready3:hover{
+    -fx-underline: true;
+}
+
+#ready4:hover{
+    -fx-underline: true;
+}
+
+#textField1 {
+    -fx-background-color: #a9a9a9 , white , white;
+    -fx-background-color: transparent;
+}
+
+#textField1:focused {
+    -fx-background-color: #a9a9a9 , white , white;
+}
+
+#textField2 {
+    -fx-background-color: #a9a9a9 , white , white;
+    -fx-background-color: transparent;
+}
+
+#textField2:focused {
+    -fx-background-color: #a9a9a9 , white , white;
+}
+
+#textField3 {
+    -fx-background-color: #a9a9a9 , white , white;
+    -fx-background-color: transparent;
+}
+
+#textField3:focused {
+    -fx-background-color: #a9a9a9 , white , white;
+}
+
+#textField4 {
+    -fx-background-color: #a9a9a9 , white , white;
+    -fx-background-color: transparent;
+}
+
+#textField4:focused {
+    -fx-background-color: #a9a9a9 , white , white;
+}
