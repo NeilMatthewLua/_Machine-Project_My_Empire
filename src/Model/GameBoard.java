@@ -9,11 +9,11 @@ import java.util.Random;
 /**
  * GameBoard class contains methods which plays the game
  *
- * New Changes Made: Adjustments for new project Design. Changed initialization of land and checking for complete sets
+ * New Changes Made: Initialized ArrayList
  *
- * Last Changes Made: Added conditional in checkForCompleteSet
+ * Last Changes Made: Adjustments for new project Design. Changed initialization of land and checking for complete sets
  * @author  Lua & Tanting
- * @version 1.2
+ * @version 1.3
  */
 public class GameBoard {
     private Player[] players;
@@ -27,6 +27,7 @@ public class GameBoard {
      * Creates a GameBoard object initialized with land, random set of cards, and players
      */
     public GameBoard(){
+        events = new ArrayList<>();
         initializeLand();
         initializeCards();
         randomizeLand();
@@ -63,6 +64,10 @@ public class GameBoard {
      */
     public boolean getIsWin(){return isWin;}
 
+    /**
+     * Gets the events list object from the board
+     * @return arrayList of events object
+     */
     public ArrayList<String> getEvents(){
         return events;
     }

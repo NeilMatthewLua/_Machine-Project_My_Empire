@@ -5,6 +5,7 @@ import Model.GameBoard;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
@@ -52,9 +53,13 @@ public class ViewInitController implements Initializable{
         if (e.getSource() == play) { //If user presses play then switch scene
             Stage stage = (Stage) background.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/View/StartPage.fxml"));
+            loader.setLocation(getClass().getResource("/View/GamePlay.fxml"));
             Scene scene = new Scene(loader.load());
+            GamePlay gamePlay = loader.getController();
+            gamePlay.initialize(players);
             stage.setScene(scene);
+
+
         }
     }
 
