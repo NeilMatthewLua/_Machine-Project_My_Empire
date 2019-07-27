@@ -1,3 +1,6 @@
+package Model;
+
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,11 +9,11 @@ import java.util.Random;
 /**
  * GameBoard class contains methods which plays the game
  *
- * New Changes Made: Adjustments for new project Design. Changed initialization of land and checking for complete sets
+ * New Changes Made: Initialized ArrayList
  *
- * Last Changes Made: Added conditional in checkForCompleteSet
+ * Last Changes Made: Adjustments for new project Design. Changed initialization of land and checking for complete sets
  * @author  Lua & Tanting
- * @version 1.2
+ * @version 1.3
  */
 public class GameBoard {
     private Player[] players;
@@ -24,9 +27,9 @@ public class GameBoard {
      * Creates a GameBoard object initialized with land, random set of cards, and players
      */
     public GameBoard(){
+        events = new ArrayList<>();
         initializeLand();
         initializeCards();
-        initializePlayers();
         randomizeLand();
         isWin = false;
     }
@@ -61,6 +64,10 @@ public class GameBoard {
      */
     public boolean getIsWin(){return isWin;}
 
+    /**
+     * Gets the events list object from the board
+     * @return arrayList of events object
+     */
     public ArrayList<String> getEvents(){
         return events;
     }
@@ -76,20 +83,20 @@ public class GameBoard {
     /**
      * Prints Land in Order
      */
-    private void printLand(Player player){
+    public void printLand(Player player){
         System.out.println("TURN: " + player.getName());
-        int[] arrPositions = new int[players.length];
-        for(int i = 0; i < players.length; i++)
-            arrPositions[i] = players[i].getPosition();
+//        int[] arrPositions = new int[players.length];
+//        for(int i = 0; i < players.length; i++)
+//            arrPositions[i] = players[i].getPosition();
         for(int i = 0; i < land.size(); i++){
             if(land.get(i) instanceof Property)
             if(((Property)land.get(i)).getOwner() != null )
                 if(((Property)land.get(i)).getOwner().equals(player))
                     System.out.print("(OWNED) ");
             System.out.println(i +"."+ land.get(i).getName());
-            for(int j = 0; j < players.length; j++)
-                if(i == arrPositions[j])
-                    System.out.println("Player: " + players[j].getName() + "is here. at " + i);
+//            for(int j = 0; j < players.length; j++)
+//                if(i == arrPositions[j])
+//                    System.out.println("Player: " + players[j].getName() + "is here. at " + i);
         }
         System.out.println();
         System.out.println();
@@ -98,7 +105,7 @@ public class GameBoard {
     /**
      * Creates land objects to be used in the board and places it in landLeft
      */
-    private void initializeLand(){
+    public void initializeLand(){
         double[][] dPropertyDetails = {
                 {60,50,2,10,30,90,160,250,2.5},
                 {60,50,4,20,60,180,320,450,3.0},
@@ -147,11 +154,11 @@ public class GameBoard {
                 nDecrement++;
             }
             else if(i == 8){
-                land.add(new Community("Community"));
+                land.add(new Community("Community Service"));
                 nDecrement++;
             }
             else if(i == 16) {
-                land.add(new Parking("Parking"));
+                land.add(new Parking("Free Parking"));
                 nDecrement++;
             }
             else if(i == 24){
@@ -182,25 +189,26 @@ public class GameBoard {
     }
 
     public void randomizeLand(){
-        land = new ArrayList<Land>(1);
+        ArrayList<Land> landLeft = new ArrayList<Land>(1);
         for(int i = 0; i < land.size();i++ ){
             if(!(land.get(i).getName().equals("Start") ||
                     land.get(i).getName().equals("Community Service") ||
                     land.get(i).getName().equals("Free Parking") ||
                     land.get(i).getName().equals("Jail")))
-            land.add(land.get(i));
+            landLeft.add(land.get(i));
         }
-        Collections.shuffle(land);
-        land.add(0,land.get(0));
-        land.add(8,land.get(8));
-        land.add(16,land.get(16));
-        land.add(24,land.get(24));
+        Collections.shuffle(landLeft);
+        landLeft.add(0,land.get(0));
+        landLeft.add(8,land.get(8));
+        landLeft.add(16,land.get(16));
+        landLeft.add(24,land.get(24));
+        land = (ArrayList<Land>) landLeft.clone();
     }
 
     /**
      * Prints Cards in Order
      */
-    private void printCards(){
+    public void printCards(){
         for(int i = 0; i < cardPile.size();i++){
             System.out.println(i +"."+ cardPile.get(i).getDescription());
         }
@@ -209,7 +217,7 @@ public class GameBoard {
      * Initializes Cards to cardPile and shuffles it
      *
      */
-    private void initializeCards(){ //TODO Implement with new Cards
+    private void initializeCards(){
         cardPile = new ArrayList<Card>();
         cardDiscard = new ArrayList<Card>();
         int[] cardCount = {2,6,6,4,7,3};
@@ -240,8 +248,8 @@ public class GameBoard {
                     "Pay taxes (random amount)"
                 }
         };
-        cardPile.add(new Card(0,0,true,"Get out of Jail Free."));
-        cardPile.add(new Card(0,0,true,"Get out of Jail Free."));
+        cardPile.add(new CardSet_1(0, 0, true, cardDesc));
+        cardPile.add(new CardSet_1(0,0,true,cardDesc));
         Random rand = new Random();
         int nRandInt;
         for(int i = 1; i < 6;i++){
@@ -255,7 +263,21 @@ public class GameBoard {
                 else {
                     nRandInt = rand.nextInt(5);
                 }
-                cardPile.add(new Card(i,nRandInt,false,cardDesc[i][nRandInt]));
+                if(i == 1){
+                    cardPile.add(new CardSet_2(nRandInt,i,false,cardDesc));
+                }
+                else if(i == 2){
+                    cardPile.add(new CardSet_3(nRandInt,i,false,cardDesc));
+                }
+                else if(i == 3){
+                    cardPile.add(new CardSet_4(nRandInt,i,false,cardDesc));
+                }
+                else if(i == 4){
+                    cardPile.add(new CardSet_5(nRandInt,i,false,cardDesc));
+                }
+                else{
+                    cardPile.add(new CardSet_6(nRandInt,i,false,cardDesc));
+                }
             }
         }
         Collections.shuffle(cardPile);
@@ -265,21 +287,22 @@ public class GameBoard {
      * Initializes players based on the number specified by user and randomizes their order
      *
      */
-    private void initializePlayers(){
-        int nPlayers = 2; //Adjust to add more players
-        bank = new People("Bank",true,4); //Initialize bank
-        players = new Player[nPlayers];
-        for(int i = 0; i < nPlayers; i++){
-            players[i] = new Player("Albert " + i);
+    public void initializePlayers(ArrayList<String> strPlayers){
+        bank = new People("Bank",strPlayers.size()); //Initialize bank
+        players = new Player[strPlayers.size()];
+        for(int i = 0; i < strPlayers.size(); i++){
+            players[i] = new Player(strPlayers.get(i));
         }
+
         Random rgen = new Random();  // Random number generator
 
-        for (int i=0; i<players.length; i++) {//Randomizes the order of the players inside the array
+        for (int i=0; i < players.length; i++) {//Randomizes the order of the players inside the array
             int randomPosition = rgen.nextInt(players.length);
             Player temp = players[i];
             players[i] = players[randomPosition];
             players[randomPosition] = temp;
         }
+
         for (int i = 0; i < players.length;i++){
             System.out.println(players[i].getName());
         }
@@ -357,6 +380,7 @@ public class GameBoard {
      */
     public Card drawChance(){
         if(cardPile.size() == 0) //If cardPile is empty then shuffle discardPile into cardPile
+            events.add("Card pile empty. Shuffling discard pile into card pile.");
             for(int i = 0; i < cardDiscard.size(); i++){
                 cardPile.add(cardDiscard.get(0));
                 cardDiscard.remove(0);
