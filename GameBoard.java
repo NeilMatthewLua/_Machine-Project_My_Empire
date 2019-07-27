@@ -27,16 +27,15 @@ public class GameBoard {
      * Creates a GameBoard object initialized with land, random set of cards, and players
      */
     public GameBoard(){
-<<<<<<< HEAD
         events = new ArrayList<>();
-=======
-        ArrayList<String> peeps = new ArrayList<String>();
-        peeps.add("Bob");
-        peeps.add("Bernard");
-        peeps.add("Ben");
-        peeps.add("Bilbo");
-        initializePlayers(peeps);
->>>>>>> e6a3be084deecff0013a018c61e0e671935caf7b
+
+//         ArrayList<String> peeps = new ArrayList<String>();
+//         peeps.add("Bob");
+//         peeps.add("Bernard");
+//         peeps.add("Ben");
+//         peeps.add("Bilbo");
+//         initializePlayers(peeps);
+
         initializeLand();
         initializeCards();
         randomizeLand();
@@ -296,11 +295,8 @@ public class GameBoard {
      * Initializes players based on the number specified by user and randomizes their order
      *
      */
-<<<<<<< HEAD
     public void initializePlayers(ArrayList<String> strPlayers){
-=======
-    private void initializePlayers(ArrayList<String> strPlayers){
->>>>>>> e6a3be084deecff0013a018c61e0e671935caf7b
+
         bank = new People("Bank",strPlayers.size()); //Initialize bank
         players = new Player[strPlayers.size()];
         for(int i = 0; i < strPlayers.size(); i++){
