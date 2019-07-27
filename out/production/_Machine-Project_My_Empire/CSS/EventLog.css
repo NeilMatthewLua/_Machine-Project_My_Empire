@@ -1,0 +1,20 @@
+.list-cell{
+    -fx-background-color: rgb(185, 193, 233);
+    -fx-padding: 2px;
+    -fx-font-family: Calibri;
+    -fx-font-size: 15px;
+    -fx-padding: 6 6 6 20;
+
+
+;
+}
+
+#anchorPane{
+    -fx-background-color: rgb(185, 193, 233);
+}
+
+#titleAnchor{
+
+    -fx-background-color: black;
+}
+

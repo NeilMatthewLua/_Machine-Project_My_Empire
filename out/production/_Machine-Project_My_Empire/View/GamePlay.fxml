@@ -33,7 +33,7 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label fx:id="endButton" layoutX="552.0" layoutY="350.0" prefHeight="79.0" prefWidth="185.0" text="endButton">
+            <Label fx:id="endButton" layoutX="552.0" layoutY="350.0" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="185.0" text="endButton">
                <font>
                   <Font size="25.0" />
                </font>
