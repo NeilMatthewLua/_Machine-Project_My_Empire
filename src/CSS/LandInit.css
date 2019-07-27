@@ -1,0 +1,89 @@
+#background {
+    -fx-background-image: url('../Images/LandInit.png');
+    -fx-background-size: cover, auto;
+}
+
+#Metro, #North,  #South{
+    -fx-graphic: url('../Images/SmallSpaces/Railroad.png');
+    -fx-content-display: graphic-only;
+}
+
+#Income, #Luxury{
+    -fx-graphic: url('../Images/SmallSpaces/Tax.png');
+        -fx-content-display: graphic-only;
+}
+
+#Chance1, #Chance2, #Chance3{
+    -fx-graphic: url('../Images/SmallSpaces/Chance.png');
+            -fx-content-display: graphic-only;
+}
+
+
+#Water, #Electric{
+    -fx-graphic: url('../Images/SmallSpaces/Utility.png');
+            -fx-content-display: graphic-only;
+}
+
+
+#Play {
+    -fx-graphic: url('../Images/Play.png');
+        -fx-content-display: graphic-only;
+}
+
+#Almond, #Kasoy {
+    -fx-graphic: url('../Images/SmallSpaces/Silver.png');
+        -fx-content-display: graphic-only;
+}
+
+#Rodeo, #Orange , #Ventura{
+    -fx-graphic: url('../Images/SmallSpaces/Purple.png');
+        -fx-content-display: graphic-only;
+}
+
+#Juan, #Ylaya , #Abad{
+    -fx-graphic: url('../Images/SmallSpaces/Pink.png');
+        -fx-content-display: graphic-only;
+}
+
+#Madison, #Annapolis, #Connecticut{
+    -fx-graphic: url('../Images/SmallSpaces/Green.png');
+        -fx-content-display: graphic-only;
+}
+
+#Bougainvilla, #Dama, #Acacia{
+    -fx-graphic: url('../Images/SmallSpaces/Blue.png');
+        -fx-content-display: graphic-only;
+}
+
+#Solar, #Galaxy{
+    -fx-graphic: url('../Images/SmallSpaces/Red.png');
+        -fx-content-display: graphic-only;
+}
+
+#Ninth, #Fifth{
+    -fx-graphic: url('../Images/SmallSpaces/Yellow.png');
+        -fx-content-display: graphic-only;
+}
+
+#empty1, #empty2, #empty3, #empty4, #empty5,
+#empty6, #empty7, #empty8, #empty9, #empty10,
+#empty11, #empty12, #empty13, #empty14, #empty15,
+#empty16, #empty17, #empty18, #empty19, #empty20,
+#empty21, #empty22, #empty23, #empty24, #empty25,
+#empty26, #empty27, #empty28{
+    -fx-content-display: graphic-only;
+}
+
+#delete1, #delete2, #delete3, #delete4, #delete5,
+#delete6, #delete7, #delete8, #delete9, #delete10,
+#delete11, #delete12, #delete13, #delete14, #delete15,
+#delete16, #delete17, #delete18, #delete19, #delete20,
+#delete21, #delete22, #delete23, #delete24, #delete25,
+#delete26, #delete27, #delete28 {
+    -fx-graphic: url('../Images/Clear.png');
+    -fx-content-display: graphic-only;
+}
+
+
+
+

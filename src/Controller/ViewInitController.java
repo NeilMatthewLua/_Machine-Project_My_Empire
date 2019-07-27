@@ -2,10 +2,10 @@ package Controller;
 
 
 import Model.GameBoard;
+import Controller.LandInitController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
@@ -18,7 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class ViewInitController implements Initializable{
+public class ViewInitController {
 
     @FXML private HBox background;
     @FXML private Label play;
@@ -53,13 +53,10 @@ public class ViewInitController implements Initializable{
         if (e.getSource() == play) { //If user presses play then switch scene
             Stage stage = (Stage) background.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/View/GamePlay.fxml"));
+            loader.setLocation(getClass().getResource("/View/LandInit.fxml"));
             Scene scene = new Scene(loader.load());
-            GamePlay gamePlay = loader.getController();
-            gamePlay.initialize(players);
             stage.setScene(scene);
-
-
+            ((LandInitController)loader.getController()).setGameBoard(gameBoard);
         }
     }
 
@@ -68,6 +65,7 @@ public class ViewInitController implements Initializable{
         if(e.getSource() == ready1){
             if(ready1.getText().equalsIgnoreCase("ready")){
             if(!(textField1.getText() == null || textField1.getText().trim().isEmpty())){
+                textField1.setEditable(false);
                 ready1.setText("UNREADY");
                 textField1.setPromptText("Enter name..");
             }
@@ -77,11 +75,13 @@ public class ViewInitController implements Initializable{
             }
             else{
                 ready1.setText("READY");
+                textField1.setEditable(true);
             }
         }
         else if(e.getSource() == ready2){
             if(ready2.getText().equalsIgnoreCase("ready")){
                 if(!(textField2.getText() == null || textField2.getText().trim().isEmpty())){
+                    textField2.setEditable(false);
                     ready2.setText("UNREADY");
                     textField2.setPromptText("Enter name..");
                 }
@@ -91,11 +91,13 @@ public class ViewInitController implements Initializable{
             }
             else{
                 ready2.setText("READY");
+                textField2.setEditable(true);
             }
         }
         else if(e.getSource() == ready3){
             if(ready3.getText().equalsIgnoreCase("ready")){
                 if(!(textField3.getText() == null || textField3.getText().trim().isEmpty())){
+                    textField3.setEditable(false);
                     ready3.setText("UNREADY");
                     textField3.setPromptText("Enter name..");
                 }
@@ -105,11 +107,13 @@ public class ViewInitController implements Initializable{
             }
             else{
                 ready3.setText("READY");
+                textField3.setEditable(true);
             }
         }
         else if(e.getSource() == ready4){
             if(ready4.getText().equalsIgnoreCase("ready")){
                 if(!(textField4.getText() == null || textField4.getText().trim().isEmpty())){
+                    textField4.setEditable(false);
                     ready4.setText("UNREADY");
                     textField4.setPromptText("Enter name..");
                 }
@@ -119,6 +123,7 @@ public class ViewInitController implements Initializable{
             }
             else{
                 ready4.setText("READY");
+                textField4.setEditable(true);
             }
         }
         if(checkForReady()){
@@ -204,9 +209,5 @@ public class ViewInitController implements Initializable{
         else{
             play.setVisible(false);
         }
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
     }
 }

@@ -1,6 +1,5 @@
 package Model;
 
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,9 +8,9 @@ import java.util.Random;
 /**
  * GameBoard class contains methods which plays the game
  *
- * New Changes Made: Initialized ArrayList
+ * New Changes Made: Added setLand method()
  *
- * Last Changes Made: Adjustments for new project Design. Changed initialization of land and checking for complete sets
+ * Last Changes Made: Initialized ArrayList
  * @author  Lua & Tanting
  * @version 1.3
  */
@@ -27,7 +26,7 @@ public class GameBoard {
      * Creates a GameBoard object initialized with land, random set of cards, and players
      */
     public GameBoard(){
-        events = new ArrayList<>();
+        events = new ArrayList<String>();
 
 //         ArrayList<String> peeps = new ArrayList<String>();
 //         peeps.add("Bob");
@@ -35,10 +34,9 @@ public class GameBoard {
 //         peeps.add("Ben");
 //         peeps.add("Bilbo");
 //         initializePlayers(peeps);
-
         initializeLand();
         initializeCards();
-        randomizeLand();
+//        randomizeLand();
         isWin = false;
     }
 
@@ -113,7 +111,7 @@ public class GameBoard {
     /**
      * Creates land objects to be used in the board and places it in landLeft
      */
-    public void initializeLand(){
+    public ArrayList<Land> initializeLand(){
         double[][] dPropertyDetails = {
                 {60,50,2,10,30,90,160,250,2.5},
                 {60,50,4,20,60,180,320,450,3.0},
@@ -194,6 +192,14 @@ public class GameBoard {
                     land.add(new Property(strPropertyDetails[i-nDecrement][0],strPropertyDetails[i-nDecrement][1],dPropertyDetails[i-nDecrement]));
             }
         }
+        return land;
+    }
+
+    public void setLand(ArrayList<Land> newLand){
+        land = new ArrayList<Land>(newLand);
+        for(int i = 0; i < land.size();i++){
+            System.out.println(land.get(i).getName());
+        }
     }
 
     public void randomizeLand(){
@@ -210,7 +216,7 @@ public class GameBoard {
         landLeft.add(8,land.get(8));
         landLeft.add(16,land.get(16));
         landLeft.add(24,land.get(24));
-        land = (ArrayList<Land>) landLeft.clone();
+        land = new ArrayList<Land>(landLeft);
     }
 
     /**
