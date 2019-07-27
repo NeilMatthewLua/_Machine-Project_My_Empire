@@ -1,6 +1,7 @@
 package Model;
 /**
  * Player Class
+<<<<<<< HEAD
  *
  *      New Changes: Made Develop Public
  *                   Removed action() in roll()
@@ -14,6 +15,12 @@ package Model;
  *
    
         Last Changes Made: Adjustment to roll() implementation, dice roll only displayed if game has not ended, Added extra typecasts when player purchases land
+=======
+ *    
+ *      New Changes: Adjustment to roll() implementation, dice roll only displayed if game has not ended, Added extra typecasts when player purchases land
+   
+        Last Changes Made: Changed implementation of Roll() and Action()
+>>>>>>> 5fbd016ac0910b6059e0705ea556662549982f94
    
  * Version 1.1
 
@@ -133,7 +140,11 @@ public class Player extends People{
         }
         String event = "";
         if(!gameBoard.getIsWin()){
+<<<<<<< HEAD
 
+=======
+            gameBoard.getEvents().add(this.getName() + " rolled "+ nRoll); // Display dice roll
+>>>>>>> 5fbd016ac0910b6059e0705ea556662549982f94
             for( int i = start + 1 ; i <= start + nRoll; i++ ) {
                 if( i > 31 ) { //Checks if the token has reached the end of the board
                     nRoll = nRoll + start -i;
@@ -162,9 +173,33 @@ public class Player extends People{
      * @return string which contains the details of the event
      */
     public String action(GameBoard gameBoard) {
+<<<<<<< HEAD
         String event = gameBoard.getLand().get(nPosition).triggerEvent(gameBoard, this);
         return event;
     }
+=======
+        String event = "";
+        //TODO Connect functionality with GUI
+        if((gameBoard.getLand().get(nPosition) instanceof Tax) || (gameBoard.getLand().get(nPosition) instanceof Chance) || (gameBoard.getLand().get(nPosition) instanceof Community) ||
+                (gameBoard.getLand().get(nPosition) instanceof Jail) || (gameBoard.getLand().get(nPosition) instanceof Parking)){
+            gameBoard.getLand().get(nPosition).triggerEvent(gameBoard, this);
+        }
+        else if((gameBoard.getLand().get(nPosition) instanceof Utility) || (gameBoard.getLand().get(nPosition) instanceof Railroad) || (gameBoard.getLand().get(nPosition) instanceof Property)){
+                if(!isMine(gameBoard)) { //checks if the current Player owns that piece of land
+                    if (((Property) gameBoard.getLand().get(nPosition)).getOwner() != null || ((Railroad) gameBoard.getLand().get(nPosition)).getOwner() != null ||
+                            ((Utility) gameBoard.getLand().get(nPosition)).getOwner() != null) //checks if the landed tile is owned by the current Player
+                        gameBoard.getLand().get(nPosition).triggerEvent(gameBoard, this);
+                    else { //If not, checks if that tile is free to purchase form the bank
+                        if (dMoney >= ((Property) gameBoard.getLand().get(nPosition)).getPrice() || dMoney >= ((Utility) gameBoard.getLand().get(nPosition)).getPrice() ||
+                                dMoney >= ((Railroad) gameBoard.getLand().get(nPosition)).getPrice()) { //checks if the current player has sufficient funds before offering to buy that land
+                            event = purchase(gameBoard);
+                        }
+                    }
+                }
+                else { //this means the land tile is owned by the current Player
+                    
+                    event = trade(gameBoard);
+>>>>>>> 5fbd016ac0910b6059e0705ea556662549982f94
 
     /**
      * This checks if the tile the player is on is that player's owned Utility / Railroad

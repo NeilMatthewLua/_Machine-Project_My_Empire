@@ -21,7 +21,11 @@ public class People{
      */
     public People(String strName) {
         this.strName = strName;
+<<<<<<< HEAD
         this.dMoney = 1500;
+=======
+        this.dMoney = 2500;
+>>>>>>> 5fbd016ac0910b6059e0705ea556662549982f94
     }
 
     /**
