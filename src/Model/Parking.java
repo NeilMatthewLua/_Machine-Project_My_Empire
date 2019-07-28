@@ -7,7 +7,7 @@ package Model;
  * Previous Change:
  */
 public class Parking extends Land {
-    Parking(String strName){
+    public Parking(String strName){
         super(strName);
     }
 

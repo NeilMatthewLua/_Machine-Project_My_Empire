@@ -218,7 +218,6 @@ public class GameBoard {
         landLeft.add(24,land.get(24));
         land = new ArrayList<Land>(landLeft);
     }
-
     /**
      * Prints Cards in Order
      */

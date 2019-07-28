@@ -1,30 +1,21 @@
 package Controller;
 
-import Model.GameBoard;
-import Model.Land;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
+import Model.*;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import javafx.beans.Observable;
-import jdk.internal.org.objectweb.asm.tree.analysis.Analyzer;
-import org.jcp.xml.dsig.internal.MacOutputStream;
-import sun.plugin.javascript.navig.Anchor;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -127,6 +118,8 @@ public class LandInitController implements Initializable {
 
     @FXML private Label currentSelected;
     @FXML private Label Play;
+    @FXML private Label Randomize;
+    @FXML private Label ClearAll;
 
     @FXML private AnchorPane anchor1;
     @FXML private AnchorPane anchor2;
@@ -164,36 +157,36 @@ public class LandInitController implements Initializable {
     private ArrayList<Label> deleteLabels;
 
     private String[][] urls = {
-            {"../Images/SmallSpaces/Silver.png"},
-            {"../Images/SmallSpaces/Silver.png"},
-            {"../Images/SmallSpaces/Purple.png"},
-            {"../Images/SmallSpaces/Purple.png"},
-            {"../Images/SmallSpaces/Purple.png"},
-            {"../Images/SmallSpaces/Pink.png"},
-            {"../Images/SmallSpaces/Pink.png"},
-            {"../Images/SmallSpaces/Pink.png"},
-            {"../Images/SmallSpaces/Green.png"},
-            {"../Images/SmallSpaces/Green.png"},
-            {"../Images/SmallSpaces/Green.png"},
-            {"../Images/SmallSpaces/Blue.png"},
-            {"../Images/SmallSpaces/Blue.png"},
-            {"../Images/SmallSpaces/Blue.png"},
-            {"../Images/SmallSpaces/Red.png"},
-            {"../Images/SmallSpaces/Red.png"},
-            {"../Images/SmallSpaces/Yellow.png"},
-            {"../Images/SmallSpaces/Yellow.png"},
-            {"../Images/SmallSpaces/Railroad.png"},
-            {"../Images/SmallSpaces/Railroad.png"},
-            {"../Images/SmallSpaces/Railroad.png"},
-            {"../Images/SmallSpaces/Utility.png"},
-            {"../Images/SmallSpaces/Utility.png"},
-            {"../Images/SmallSpaces/Tax.png"},
-            {"../Images/SmallSpaces/Tax.png"},
-            {"../Images/SmallSpaces/Chance.png"},
-            {"../Images/SmallSpaces/Chance.png"},
-            {"../Images/SmallSpaces/Chance.png"},
+            {"Almond Drive","../Images/SmallSpaces/Silver.png"},
+            {"Kasoy Street","../Images/SmallSpaces/Silver.png"},
+            {"Rodeo Drive","../Images/SmallSpaces/Purple.png"},
+            {"Orange Street","../Images/SmallSpaces/Purple.png"},
+            {"Ventura Street","../Images/SmallSpaces/Purple.png"},
+            {"Juan Luna","../Images/SmallSpaces/Pink.png"},
+            {"Ylaya","../Images/SmallSpaces/Pink.png"},
+            {"J. Abad Santos","../Images/SmallSpaces/Pink.png"},
+            {"Madison","../Images/SmallSpaces/Green.png"},
+            {"Annapolis","../Images/SmallSpaces/Green.png"},
+            {"Connecticut","../Images/SmallSpaces/Green.png"},
+            {"Bougainvilla","../Images/SmallSpaces/Blue.png"},
+            {"Dama de Noche","../Images/SmallSpaces/Blue.png"},
+            {"Acacia","../Images/SmallSpaces/Blue.png"},
+            {"Solar Street","../Images/SmallSpaces/Red.png"},
+            {"Galaxy Street","../Images/SmallSpaces/Red.png"},
+            {"9th Street","../Images/SmallSpaces/Yellow.png"},
+            {"5th Avenue","../Images/SmallSpaces/Yellow.png"},
+            {"North","../Images/SmallSpaces/Railroad.png"},
+            {"South","../Images/SmallSpaces/Railroad.png"},
+            {"Metro","../Images/SmallSpaces/Railroad.png"},
+            {"Water","../Images/SmallSpaces/Utility.png"},
+            {"Electric","../Images/SmallSpaces/Utility.png"},
+            {"Luxury Tax","../Images/SmallSpaces/Tax.png"},
+            {"Income Tax","../Images/SmallSpaces/Tax.png"},
+            {"Chance","../Images/SmallSpaces/Chance.png"},
+            {"Chance","../Images/SmallSpaces/Chance.png"},
+            {"Chance","../Images/SmallSpaces/Chance.png"},
     };
-
+    private String[][] finalUrls;
     private Label current;
 
     public void setGameBoard(GameBoard gameBoard){
@@ -247,16 +240,19 @@ public class LandInitController implements Initializable {
             possibleSpaces.get(possibleSpaces.indexOf(current)).setVisible(false);
 
             //Set the image of space to selected object
-            Image img = new Image(getClass().getResourceAsStream(urls[possibleSpaces.indexOf(current)][0]));
+            Image img = new Image(getClass().getResourceAsStream(urls[possibleSpaces.indexOf(current)][1]));
             emptySpaces.get(emptySpaces.indexOf((e.getSource()))).
                     setGraphic(new ImageView(img));
 
             //Rename Space to Object placed
-            emptySpaces.get(emptySpaces.indexOf((e.getSource()))).setText(possibleSpaces.get(possibleSpaces.indexOf(current)).getText());
+            emptySpaces.get(emptySpaces.indexOf((e.getSource()))).setText(urls[possibleSpaces.indexOf(current)][0]);
             current = null;
             currentSelected.setText("Nothing Selected");
             System.out.println(emptySpaces);
         }
+
+        ClearAll.setVisible(true);
+
          boolean isValid = true;
          for(int i = 0; i < emptySpaces.size() && isValid; i++){//Check if there are empty spaces left
              if(emptySpaces.get(i).getText().equalsIgnoreCase("Empty")){
@@ -274,7 +270,6 @@ public class LandInitController implements Initializable {
         if(!(emptySpaces.get(deleteLabels.indexOf(e.getSource())).getText().equalsIgnoreCase("Empty"))){
             Image image = new Image(getClass().getResourceAsStream("../Images/SmallSpaces/Empty.png"));
             emptySpaces.get(deleteLabels.indexOf(e.getSource())).setGraphic(new ImageView(image));
-
             boolean isFound = true;
             for(int i = 0; i < 28 && isFound; i++){
                 if(emptySpaces.get(deleteLabels.indexOf(e.getSource())).getText().equalsIgnoreCase(possibleSpaces.get(i).getText())){
@@ -300,42 +295,144 @@ public class LandInitController implements Initializable {
                     }
                 }
             }
+            emptySpaces.get(deleteLabels.indexOf(e.getSource())).setText("Empty");
+            boolean isEmptyBoard= true;
+            for(int i = 0; i < emptySpaces.size() && isEmptyBoard; i++){//Check if there are empty spaces left
+                if(!(emptySpaces.get(i).getText().equalsIgnoreCase("Empty"))){
+                    isEmptyBoard = false;
+                }
+            }
+            if(isEmptyBoard){
+                ClearAll.setVisible(false);
+            }
             Play.setVisible(false);
             emptySpaces.get(deleteLabels.indexOf(e.getSource())).setText("Empty");
         }
     }
 
     @FXML
+    public void clearAll(MouseEvent e){
+        for(int i = 0; i < emptySpaces.size(); i++){
+            if(!(emptySpaces.get(i).getText().equalsIgnoreCase("Empty"))){
+                boolean isFound = true;
+                for(int j = 0; j < possibleSpaces.size() && isFound;j++){
+                    if(emptySpaces.get(i).getText().equalsIgnoreCase(possibleSpaces.get(j).getText())){
+                        Image image = new Image(getClass().getResourceAsStream("../Images/SmallSpaces/Empty.png"));
+                        emptySpaces.get(i).setGraphic(new ImageView(image));
+
+                        if(emptySpaces.get(i).getText().equalsIgnoreCase("Chance")){
+                            if(possibleSpaces.get(25).isVisible()){
+                                if(possibleSpaces.get(26).isVisible()){
+                                    possibleSpaces.get(27).setVisible(true);
+                                    isFound = false;
+                                }
+                                else{
+                                    possibleSpaces.get(26).setVisible(true);
+                                    isFound = false;
+                                }
+                            }
+                            else{
+                                possibleSpaces.get(25).setVisible(true);
+                                isFound = false;
+                            }
+                        }
+                        else{
+                            possibleSpaces.get(j).setVisible(true);
+                        }
+                        emptySpaces.get(i).setText("Empty");
+                    }
+                }
+            }
+        }
+        ClearAll.setVisible(false);
+        Play.setVisible(false);
+    }
+
+    @FXML
+    public void randomize(MouseEvent e){
+        gameBoard.randomizeLand();
+        ArrayList<Land> randomizedLand = new ArrayList<Land>(gameBoard.getLand());
+        randomizedLand.remove(0);
+        randomizedLand.remove(7);
+        randomizedLand.remove(14);
+        randomizedLand.remove(21);
+        for(int i = 0; i < randomizedLand.size();i++){
+            boolean isFound = true;
+            for(int j = 0; j < possibleSpaces.size() && isFound;j++)
+                if(possibleSpaces.get(j).getText().equalsIgnoreCase(randomizedLand.get(i).getName())){
+                    if(randomizedLand.get(i).getName().equalsIgnoreCase("Chance")){
+                        if(possibleSpaces.get(25).isVisible()){
+                            possibleSpaces.get(25).setVisible(false);
+                            isFound = false;
+                        }
+                        else{
+                            if(possibleSpaces.get(26).isVisible() && isFound){
+                                possibleSpaces.get(26).setVisible(false);
+                                isFound = false;
+                            }
+                            else{
+                                possibleSpaces.get(27).setVisible(false);
+                                isFound = false;
+                            }
+                        }
+                    }
+                    else{
+                        possibleSpaces.get(j).setVisible(false);
+                        isFound = false;
+                    }
+                    emptySpaces.get(i).setText(possibleSpaces.get(j).getText());
+                    Image image = new Image(getClass().getResourceAsStream(urls[j][1]));
+                    emptySpaces.get(i).setGraphic(new ImageView(image));
+                }
+        }
+        ClearAll.setVisible(true);
+        Play.setVisible(true);
+    }
+
+    @FXML
     public void play(MouseEvent e){
         ArrayList<Land> unsortedLand = new ArrayList<>(gameBoard.getLand());
+        unsortedLand.remove(0);
+        unsortedLand.remove(7);
+        unsortedLand.remove(14);
+        unsortedLand.remove(21);
         ArrayList<Land> finalLand = new ArrayList<>();
         for(int i = 0; i < emptySpaces.size();i++){
             boolean isFound = true;
-            for(int j = 0; j < unsortedLand.size() && isFound;j++)
+            for(int j = 0; j < 28 && isFound;j++)
                 if(unsortedLand.get(j).getName().equalsIgnoreCase(emptySpaces.get(i).getText())){
                     finalLand.add(unsortedLand.get(j));
                     isFound = false;
                 }
         }
-        finalLand.add(0,unsortedLand.get(0));
-        finalLand.add(8,unsortedLand.get(8));
-        finalLand.add(16,unsortedLand.get(16));
-        finalLand.add(24,unsortedLand.get(24));
+        finalLand.add(0,new Start("Start"));
+        finalLand.add(8,new Community("Community Service"));
+        finalLand.add(16,new Parking("Free Parking"));
+        finalLand.add(24,new Jail("Jail"));
         gameBoard.setLand(finalLand);
-        if(e.getSource() == Play){
-            try {
-                Stage stage = (Stage) background.getScene().getWindow();
 
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/View/LandInit.fxml")); //Insert your FXML here
-                Scene scene = new Scene(loader.load());
-                stage.setScene(scene);
-                ((LandInitController) loader.getController()).setGameBoard(gameBoard); //Change the typecast to your controller and the method there
-            } catch(IOException error){
+        for(int i = 0; i < gameBoard.getLand().size();i++){
+            System.out.println(i + 1 +" " + gameBoard.getLand().get(i).getName());
+        }
 
+//        try{
+//            Stage stage = (Stage) background.getScene().getWindow();
+//
+//            FXMLLoader loader = new FXMLLoader();
+//            loader.setLocation(getClass().getResource("/View/Troll.fxml")); //Insert your FXML here
+//            Scene scene = new Scene(loader.load());
+//            stage.setScene(scene);
+//
+//            String musicFile = "pillar.mp3";     // For example
+//            Media sound = new Media(new File(musicFile).toURI().toString());
+//            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+//            mediaPlayer.play();
+//        } catch (IOException event){
+//            System.out.println("Something happened");
+//        }
+                //((LandInitController) loader.getController()).setGameBoard(gameBoard); //Change the typecast to your controller and the method there
             }
-            }
-    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

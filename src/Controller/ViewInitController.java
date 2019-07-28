@@ -51,12 +51,16 @@ public class ViewInitController {
         gameBoard = new GameBoard();
         gameBoard.initializePlayers(players);
         if (e.getSource() == play) { //If user presses play then switch scene
-            Stage stage = (Stage) background.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/View/LandInit.fxml"));
-            Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
-            ((LandInitController)loader.getController()).setGameBoard(gameBoard);
+            try {
+                Stage stage = (Stage) background.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/View/LandInit.fxml"));
+                Scene scene = new Scene(loader.load());
+                stage.setScene(scene);
+                ((LandInitController) loader.getController()).setGameBoard(gameBoard);
+            } catch(IOException problem){
+                System.out.println("Something happened");
+            }
         }
     }
 

@@ -24,6 +24,23 @@
             -fx-content-display: graphic-only;
 }
 
+#Randomize{
+-fx-graphic: url('../Images/Randomize.png');
+            -fx-content-display: graphic-only;
+}
+
+#Randomize:hover{
+    -fx-underline: true;
+}
+
+#ClearAll{
+-fx-graphic: url('../Images/ClearAll.png');
+            -fx-content-display: graphic-only;
+}
+
+#ClearAll:hover{
+    -fx-underline: true;
+}
 
 #Play {
     -fx-graphic: url('../Images/Play.png');
