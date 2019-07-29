@@ -4,11 +4,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
+
 <AnchorPane id="background" fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../CSS/LandInit.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LandInitController">
-=======
-<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../CSS/LandInit.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LandInitController">
->>>>>>> 6788e719b757a230a355294de44a1998d80d0143
+
    <children>
       <Label fx:id="Almond" layoutX="649.0" layoutY="139.0" onMouseClicked="#chooseSpace" onMouseEntered="#hover" onMouseExited="#hoverOff" prefHeight="65.0" prefWidth="65.0" text="Almond Drive" />
       <Label fx:id="Kasoy" layoutX="691.0" layoutY="139.0" onMouseClicked="#chooseSpace" onMouseEntered="#hover" onMouseExited="#hoverOff" prefHeight="65.0" prefWidth="65.0" text="Kasoy Street" />
@@ -221,12 +219,7 @@
       <Label fx:id="Chance1" layoutX="659.0" layoutY="634.0" onMouseClicked="#chooseSpace" onMouseEntered="#hover" onMouseExited="#hoverOff" prefHeight="65.0" prefWidth="65.0" text="Chance" />
       <Label fx:id="Chance2" layoutX="724.0" layoutY="634.0" onMouseClicked="#chooseSpace" onMouseEntered="#hover" onMouseExited="#hoverOff" prefHeight="65.0" prefWidth="65.0" text="Chance" />
       <Label fx:id="Chance3" layoutX="789.0" layoutY="634.0" onMouseClicked="#chooseSpace" onMouseEntered="#hover" onMouseExited="#hoverOff" prefHeight="65.0" prefWidth="65.0" text="Chance" />
-<<<<<<< HEAD
       <Label fx:id="ClearAll" layoutX="64.0" layoutY="645.0" onMouseClicked="#clearAll" prefHeight="43.0" prefWidth="148.0" text="ClearAll" visible="false" />
       <Label id="Randomize" fx:id="Randomize" layoutX="237.0" layoutY="645.0" onMouseClicked="#randomize" prefHeight="43.0" prefWidth="148.0" stylesheets="@../CSS/LandInit.css" text="Randomize" />
-=======
-      <Label fx:id="ClearAll" onMouseClicked="#clearAll" layoutX="64.0" layoutY="645.0" prefHeight="43.0" prefWidth="148.0" text="ClearAll" visible="false" />
-      <Label fx:id="Randomize" onMouseClicked="#randomize" layoutX="237.0" layoutY="645.0" prefHeight="43.0" prefWidth="148.0" text="Randomize" />
->>>>>>> 6788e719b757a230a355294de44a1998d80d0143
    </children>
 </AnchorPane>

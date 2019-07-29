@@ -415,7 +415,6 @@ public class LandInitController implements Initializable {
             System.out.println(i + 1 +" " + gameBoard.getLand().get(i).getName());
         }
 
-<<<<<<< HEAD
         try{
             Stage stage = (Stage) background.getScene().getWindow();
 
@@ -424,34 +423,18 @@ public class LandInitController implements Initializable {
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);
 
-=======
-//        try{
-//            Stage stage = (Stage) background.getScene().getWindow();
-//
-//            FXMLLoader loader = new FXMLLoader();
-//            loader.setLocation(getClass().getResource("/View/Troll.fxml")); //Insert your FXML here
-//            Scene scene = new Scene(loader.load());
-//            stage.setScene(scene);
-//
->>>>>>> 6788e719b757a230a355294de44a1998d80d0143
+
 //            String musicFile = "pillar.mp3";     // For example
 //            Media sound = new Media(new File(musicFile).toURI().toString());
 //            MediaPlayer mediaPlayer = new MediaPlayer(sound);
 //            mediaPlayer.play();
-<<<<<<< HEAD
+
             ((GamePlayController) loader.getController()).setGameBoard(gameBoard); //Change the typecast to your controller and the method there
         } catch (IOException event){
             System.out.println("Something happened");
         }
     }
-=======
-//        } catch (IOException event){
-//            System.out.println("Something happened");
-//        }
-                //((LandInitController) loader.getController()).setGameBoard(gameBoard); //Change the typecast to your controller and the method there
-            }
 
->>>>>>> 6788e719b757a230a355294de44a1998d80d0143
 
 
     @Override
