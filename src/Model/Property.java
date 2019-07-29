@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *   @author  Lua & Tanting
  *   @version 1.1
  */
-public class Property extends Land {
+public class Property extends Ownable {
     private String strColor;
     private double[] arrAttributes;
     private int nDevelopment;
@@ -27,29 +27,13 @@ public class Property extends Land {
      * @param arrAttributes Array of attributes of the property
      */
     public Property(String strName, String strColor, double[] arrAttributes) {
-        super(strName);
+        super(strName,arrAttributes[0]);
         this.strColor = strColor;
         this.arrAttributes = new double[9];
         this.arrAttributes = arrAttributes;
         nDevelopment = 0;
         dRentCollected = 0;
         dFootTraffic = 0;
-    }
-
-    /**
-     * Gets the price to buy the property
-     * @return price of the property
-     */
-    public double getPrice(){
-        return arrAttributes[0];
-    }
-
-    /**
-     * Returns the owner of the property
-     * @return
-     */
-    public Player getOwner(){
-        return owner;
     }
 
     /**

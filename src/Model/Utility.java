@@ -8,38 +8,12 @@ package Model;
  */
 
 
-public class Utility extends Land{
-    private double dPrice;
+public class Utility extends Ownable{
     private Player owner;
 
     public Utility(String strName, double dPrice){
-        super(strName);
-        this.dPrice = dPrice;
+        super(strName,dPrice);
         owner = null;
-    }
-
-    /**
-     * Gets the price of the utility
-     * @return price of the utility
-     */
-    public double getPrice(){
-        return dPrice;
-    }
-
-    /**
-     * Gets the owner of the utility
-     * @return the owner of the utility
-     */
-    public Player getOwner(){
-        return owner;
-    }
-
-    /**
-     * Sets the owner of the utility to the specified player
-     * @param player which will own the utility
-     */
-    public void setOwner(Player player){
-        this.owner = player;
     }
 
     /**

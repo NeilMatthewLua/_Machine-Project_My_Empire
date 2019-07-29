@@ -1,7 +1,6 @@
 package Controller;
 
-import Model.GameBoard;
-import Model.Player;
+import Model.*;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -326,6 +325,17 @@ public class GamePlayController  {
               Image image = new Image(getClass().getResourceAsStream(urls[i][2]));
               Zoomed.setImage(image);
               isFound = false;
+              if(gameBoard.getLand().get(i) instanceof Ownable){
+                if(((Ownable) gameBoard.getLand().get(i)).getOwner() != null){
+                  if(gameBoard.getLand().get(i) instanceof Property){
+                    ownerZoom.setText(((Property) gameBoard.getLand().get(i)).getOwner().getName());
+                    footTrafficZoom.setText(""+((Property) gameBoard.getLand().get(i)).getFootTraffic());
+                  }
+                  else {
+                    ownerZoom.setText(((Ownable) gameBoard.getLand().get(i)).getOwner().getName());
+                  }
+                }
+              }
             }
           }
         }

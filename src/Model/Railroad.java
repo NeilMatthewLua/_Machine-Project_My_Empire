@@ -6,38 +6,12 @@ package Model;
  *
  * Previous Change:
  */
-public class Railroad extends Land {
-    private double dPrice;
+public class Railroad extends Ownable {
     private Player owner;
 
     public Railroad(String strName, double dPrice){
-        super(strName);
-        this.dPrice = dPrice;
+        super(strName,dPrice);
         owner = null;
-    }
-
-    /**
-     * Gets the price of the railroad
-     * @return the price of the railroad
-     */
-    public double getPrice(){
-        return dPrice;
-    }
-
-    /**
-     * Gets the owner of the railroad
-     * @return the owner of the railroad
-     */
-    public Player getOwner(){
-        return owner;
-    }
-
-    /**
-     * Sets the owner of the railroad to specified player
-     * @param player the player that will own the railroad
-     */
-    public void setOwner(Player player){
-        this.owner = player;
     }
 
     /**
