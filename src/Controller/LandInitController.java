@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.*;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -118,8 +117,12 @@ public class LandInitController implements Initializable {
 
     @FXML private Label currentSelected;
     @FXML private Label Play;
-    @FXML private Label Randomize;
     @FXML private Label ClearAll;
+    @FXML private ImageView Zoomed;
+    @FXML private Label closeZoomed;
+    @FXML private Label ownerZoom;
+    @FXML private Label footTrafficZoom;
+    @FXML private Label playersZoom;
 
     @FXML private AnchorPane anchor1;
     @FXML private AnchorPane anchor2;
@@ -157,36 +160,35 @@ public class LandInitController implements Initializable {
     private ArrayList<Label> deleteLabels;
 
     private String[][] urls = {
-            {"Almond Drive","../Images/SmallSpaces/Silver.png"},
-            {"Kasoy Street","../Images/SmallSpaces/Silver.png"},
-            {"Rodeo Drive","../Images/SmallSpaces/Purple.png"},
-            {"Orange Street","../Images/SmallSpaces/Purple.png"},
-            {"Ventura Street","../Images/SmallSpaces/Purple.png"},
-            {"Juan Luna","../Images/SmallSpaces/Pink.png"},
-            {"Ylaya","../Images/SmallSpaces/Pink.png"},
-            {"J. Abad Santos","../Images/SmallSpaces/Pink.png"},
-            {"Madison","../Images/SmallSpaces/Green.png"},
-            {"Annapolis","../Images/SmallSpaces/Green.png"},
-            {"Connecticut","../Images/SmallSpaces/Green.png"},
-            {"Bougainvilla","../Images/SmallSpaces/Blue.png"},
-            {"Dama de Noche","../Images/SmallSpaces/Blue.png"},
-            {"Acacia","../Images/SmallSpaces/Blue.png"},
-            {"Solar Street","../Images/SmallSpaces/Red.png"},
-            {"Galaxy Street","../Images/SmallSpaces/Red.png"},
-            {"9th Street","../Images/SmallSpaces/Yellow.png"},
-            {"5th Avenue","../Images/SmallSpaces/Yellow.png"},
-            {"North","../Images/SmallSpaces/Railroad.png"},
-            {"South","../Images/SmallSpaces/Railroad.png"},
-            {"Metro","../Images/SmallSpaces/Railroad.png"},
-            {"Water","../Images/SmallSpaces/Utility.png"},
-            {"Electric","../Images/SmallSpaces/Utility.png"},
-            {"Luxury Tax","../Images/SmallSpaces/Tax.png"},
-            {"Income Tax","../Images/SmallSpaces/Tax.png"},
-            {"Chance","../Images/SmallSpaces/Chance.png"},
-            {"Chance","../Images/SmallSpaces/Chance.png"},
-            {"Chance","../Images/SmallSpaces/Chance.png"},
+            {"Almond Drive","../Images/SmallSpaces/Silver.png","../Images/BigSpaces/Almond.png"},
+            {"Kasoy Street","../Images/SmallSpaces/Silver.png","../Images/BigSpaces/Kasoy.png"},
+            {"Rodeo Drive","../Images/SmallSpaces/Purple.png","../Images/BigSpaces/Rodeo.png"},
+            {"Orange Street","../Images/SmallSpaces/Purple.png","../Images/BigSpaces/Orange.png"},
+            {"Ventura Street","../Images/SmallSpaces/Purple.png","../Images/BigSpaces/Ventura.png"},
+            {"Juan Luna","../Images/SmallSpaces/Pink.png","../Images/BigSpaces/Juan.png"},
+            {"Ylaya","../Images/SmallSpaces/Pink.png","../Images/BigSpaces/Ylaya.png"},
+            {"J. Abad Santos","../Images/SmallSpaces/Pink.png","../Images/BigSpaces/Abad.png"},
+            {"Madison","../Images/SmallSpaces/Green.png","../Images/BigSpaces/Madison.png"},
+            {"Annapolis","../Images/SmallSpaces/Green.png","../Images/BigSpaces/Annapolis.png"},
+            {"Connecticut","../Images/SmallSpaces/Green.png","../Images/BigSpaces/Connecticut.png"},
+            {"Bougainvilla","../Images/SmallSpaces/Blue.png","../Images/BigSpaces/Bougainvilla.png"},
+            {"Dama de Noche","../Images/SmallSpaces/Blue.png","../Images/BigSpaces/Dama.png"},
+            {"Acacia","../Images/SmallSpaces/Blue.png","../Images/BigSpaces/Acacia.png"},
+            {"Solar Street","../Images/SmallSpaces/Red.png","../Images/BigSpaces/Solar.png"},
+            {"Galaxy Street","../Images/SmallSpaces/Red.png","../Images/BigSpaces/Galaxy.png"},
+            {"9th Street","../Images/SmallSpaces/Yellow.png","../Images/BigSpaces/9th.png"},
+            {"5th Avenue","../Images/SmallSpaces/Yellow.png","../Images/BigSpaces/5th.png"},
+            {"North","../Images/SmallSpaces/Railroad.png","../Images/BigSpaces/North.png"},
+            {"South","../Images/SmallSpaces/Railroad.png","../Images/BigSpaces/South.png"},
+            {"Metro","../Images/SmallSpaces/Railroad.png","../Images/BigSpaces/Metro.png"},
+            {"Water","../Images/SmallSpaces/Utility.png","../Images/BigSpaces/Water.png"},
+            {"Electric","../Images/SmallSpaces/Utility.png","../Images/BigSpaces/Electric.png"},
+            {"Luxury Tax","../Images/SmallSpaces/Tax.png","../Images/BigSpaces/Luxury.png"},
+            {"Income Tax","../Images/SmallSpaces/Tax.png","../Images/BigSpaces/Income.png"},
+            {"Chance","../Images/SmallSpaces/Chance.png","../Images/BigSpaces/Chance.png"},
+            {"Chance","../Images/SmallSpaces/Chance.png","../Images/BigSpaces/Chance.png"},
+            {"Chance","../Images/SmallSpaces/Chance.png","../Images/BigSpaces/Chance.png"},
     };
-    private String[][] finalUrls;
     private Label current;
 
     public void setGameBoard(GameBoard gameBoard){
@@ -227,42 +229,146 @@ public class LandInitController implements Initializable {
 
     @FXML
     public void chooseSpace(MouseEvent e) {
-        if (isPlacable((Label) e.getSource())) {
-            current = (Label) e.getSource();
-            currentSelected.setText(possibleSpaces.get(possibleSpaces.indexOf(current)).getText());
+        if(e.getButton() == MouseButton.PRIMARY){
+            if (isPlacable((Label) e.getSource())) {
+                current = (Label) e.getSource();
+                currentSelected.setText(possibleSpaces.get(possibleSpaces.indexOf(current)).getText());
+            }
+        }
+        else if(e.getButton() == MouseButton.SECONDARY){
+            if(!Zoomed.isVisible()){
+                if(!((Label)e.getSource()).getText().equalsIgnoreCase("Empty")){
+                    boolean isFound = true;
+                    for(int i = 0; i < possibleSpaces.size(); i++){
+                        if(((Label)e.getSource()).getText().equalsIgnoreCase(urls[i][0])){
+                            Image ig = new Image(getClass().getResourceAsStream(urls[i][2]));
+                            Zoomed.setImage(ig);
+                        }
+                    }
+                }
+                else{
+                    Image ig = new Image(getClass().getResourceAsStream("../Images/SmallSpaces/Empty.png"));
+                    Zoomed.setImage(ig);
+                }
+                openZoomed(e);
+            }
+            else{
+                closeZoomed(e);
+            }
+        }
+    }
+
+    @FXML
+    public void closeZoomed(MouseEvent e){
+        if(Zoomed.isVisible()){
+            closeZoomed.setVisible(false);
+            Zoomed.setVisible(false);
+            ownerZoom.setVisible(false);
+            footTrafficZoom.setVisible(false);
+            playersZoom.setVisible(false);
+        }
+    }
+
+    @FXML
+    public void openZoomed(MouseEvent e){
+        if(!Zoomed.isVisible()){
+            closeZoomed.setVisible(true);
+            Zoomed.setVisible(true);
+            boolean isFound = true;
+            for(int i = 0; (i < urls.length - 5) && isFound ;i++){
+                if(((Label)e.getSource()).getText().equalsIgnoreCase(urls[i][0])){
+                    ownerZoom.setVisible(true);
+                    isFound = false;
+                    if(i <= 17){
+                        playersZoom.setVisible(true);
+                        playersZoom.setText("" + gameBoard.getPlayers().length);
+                        footTrafficZoom.setVisible(true);
+                    }
+                }
+            }
         }
     }
 
     @FXML
     public void addSpace(MouseEvent e){
-        if(current != null && (emptySpaces.get(emptySpaces.indexOf((e.getSource()))).getText().equalsIgnoreCase("Empty"))){
-            ((Label) e.getSource()).setVisible(true);
-            possibleSpaces.get(possibleSpaces.indexOf(current)).setVisible(false);
+        if(e.getButton() == MouseButton.PRIMARY){
+            if(!(((Label)e.getSource()).getText().equalsIgnoreCase("Start") || ((Label)e.getSource()).getText().equalsIgnoreCase("Community") ||
+                    ((Label)e.getSource()).getText().equalsIgnoreCase("Jail") || ((Label)e.getSource()).getText().equalsIgnoreCase("Free Parking"))){
+                if(current != null && (emptySpaces.get(emptySpaces.indexOf((e.getSource()))).getText().equalsIgnoreCase("Empty"))){
+                    ((Label) e.getSource()).setVisible(true);
+                    possibleSpaces.get(possibleSpaces.indexOf(current)).setVisible(false);
 
-            //Set the image of space to selected object
-            Image img = new Image(getClass().getResourceAsStream(urls[possibleSpaces.indexOf(current)][1]));
-            emptySpaces.get(emptySpaces.indexOf((e.getSource()))).
-                    setGraphic(new ImageView(img));
+                    //Set the image of space to selected object
+                    Image img = new Image(getClass().getResourceAsStream(urls[possibleSpaces.indexOf(current)][1]));
+                    emptySpaces.get(emptySpaces.indexOf((e.getSource()))).
+                            setGraphic(new ImageView(img));
 
-            //Rename Space to Object placed
-            emptySpaces.get(emptySpaces.indexOf((e.getSource()))).setText(urls[possibleSpaces.indexOf(current)][0]);
-            current = null;
-            currentSelected.setText("Nothing Selected");
-            System.out.println(emptySpaces);
+                    //Rename Space to Object placed
+                    emptySpaces.get(emptySpaces.indexOf((e.getSource()))).setText(urls[possibleSpaces.indexOf(current)][0]);
+                    current = null;
+                    currentSelected.setText("Nothing Selected");
+                    System.out.println(emptySpaces);
+                }
+
+                ClearAll.setVisible(true);
+
+                boolean isValid = true;
+                for(int i = 0; i < emptySpaces.size() && isValid; i++){//Check if there are empty spaces left
+                    if(emptySpaces.get(i).getText().equalsIgnoreCase("Empty")){
+                        isValid = false;
+                    }
+                }
+                if(isValid){
+                    closeZoomed(e);
+                    Play.setVisible(true);
+                }
+            }
         }
-
-        ClearAll.setVisible(true);
-
-         boolean isValid = true;
-         for(int i = 0; i < emptySpaces.size() && isValid; i++){//Check if there are empty spaces left
-             if(emptySpaces.get(i).getText().equalsIgnoreCase("Empty")){
-                isValid = false;
-             }
-         }
-         if(isValid){
-            Play.setVisible(true);
-         }
-
+        else if(e.getButton() == MouseButton.SECONDARY) {
+            if (!(((Label) e.getSource()).getText().equalsIgnoreCase("Start") || ((Label) e.getSource()).getText().equalsIgnoreCase("Community") ||
+                    ((Label) e.getSource()).getText().equalsIgnoreCase("Jail") || ((Label) e.getSource()).getText().equalsIgnoreCase("Free Parking"))) {
+                if (!Zoomed.isVisible()) {
+                    if (!((Label) e.getSource()).getText().equalsIgnoreCase("Empty")) {
+                        boolean isFound = true;
+                        for (int i = 0; i < possibleSpaces.size(); i++) {
+                            if (((Label) e.getSource()).getText().equalsIgnoreCase(urls[i][0])) {
+                                Image ig = new Image(getClass().getResourceAsStream(urls[i][2]));
+                                Zoomed.setImage(ig);
+                            }
+                        }
+                    } else {
+                        Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Empty.png"));
+                        Zoomed.setImage(ig);
+                    }
+                    openZoomed(e);
+                } else {
+                    closeZoomed(e);
+                }
+            }
+            else{
+                if (!Zoomed.isVisible()) {
+                    if(((Label) e.getSource()).getText().equalsIgnoreCase("Start")){
+                        Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Start.png"));
+                        Zoomed.setImage(ig);
+                    }
+                    else if(((Label) e.getSource()).getText().equalsIgnoreCase("Community")){
+                        Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Community.png"));
+                        Zoomed.setImage(ig);
+                    }
+                    else if(((Label) e.getSource()).getText().equalsIgnoreCase("Jail")){
+                        Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Jail.png"));
+                        Zoomed.setImage(ig);
+                    }
+                    else{
+                        Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/FreeParking.png"));
+                        Zoomed.setImage(ig);
+                    }
+                    openZoomed(e);
+                } else {
+                    closeZoomed(e);
+                }
+            }
+        }
     }
 
     @FXML
@@ -346,6 +452,7 @@ public class LandInitController implements Initializable {
         }
         ClearAll.setVisible(false);
         Play.setVisible(false);
+        closeZoomed(e);
     }
 
     @FXML
@@ -356,27 +463,24 @@ public class LandInitController implements Initializable {
         randomizedLand.remove(7);
         randomizedLand.remove(14);
         randomizedLand.remove(21);
-        for(int i = 0; i < randomizedLand.size();i++){
+        for(int i = 0; i < randomizedLand.size();i++) {
             boolean isFound = true;
-            for(int j = 0; j < possibleSpaces.size() && isFound;j++)
-                if(possibleSpaces.get(j).getText().equalsIgnoreCase(randomizedLand.get(i).getName())){
-                    if(randomizedLand.get(i).getName().equalsIgnoreCase("Chance")){
-                        if(possibleSpaces.get(25).isVisible()){
+            for (int j = 0; j < possibleSpaces.size() && isFound; j++)
+                if (possibleSpaces.get(j).getText().equalsIgnoreCase(randomizedLand.get(i).getName())) {
+                    if (randomizedLand.get(i).getName().equalsIgnoreCase("Chance")) {
+                        if (possibleSpaces.get(25).isVisible()) {
                             possibleSpaces.get(25).setVisible(false);
                             isFound = false;
-                        }
-                        else{
-                            if(possibleSpaces.get(26).isVisible() && isFound){
+                        } else {
+                            if (possibleSpaces.get(26).isVisible() && isFound) {
                                 possibleSpaces.get(26).setVisible(false);
                                 isFound = false;
-                            }
-                            else{
+                            } else {
                                 possibleSpaces.get(27).setVisible(false);
                                 isFound = false;
                             }
                         }
-                    }
-                    else{
+                    } else {
                         possibleSpaces.get(j).setVisible(false);
                         isFound = false;
                     }
@@ -385,8 +489,11 @@ public class LandInitController implements Initializable {
                     emptySpaces.get(i).setGraphic(new ImageView(image));
                 }
         }
+
         ClearAll.setVisible(true);
         Play.setVisible(true);
+
+        closeZoomed(e);
     }
 
     @FXML
@@ -414,28 +521,19 @@ public class LandInitController implements Initializable {
         for(int i = 0; i < gameBoard.getLand().size();i++){
             System.out.println(i + 1 +" " + gameBoard.getLand().get(i).getName());
         }
-
-        try{
+        try {
             Stage stage = (Stage) background.getScene().getWindow();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/View/GamePlay.fxml")); //Insert your FXML here
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);
-
-
-//            String musicFile = "pillar.mp3";     // For example
-//            Media sound = new Media(new File(musicFile).toURI().toString());
-//            MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//            mediaPlayer.play();
-
-            ((GamePlayController) loader.getController()).setGameBoard(gameBoard); //Change the typecast to your controller and the method there
-        } catch (IOException event){
+            ((GamePlayController) loader.getController()).setGameBoard(gameBoard);
+        }
+        catch(IOException event){
             System.out.println("Something happened");
         }
     }
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
