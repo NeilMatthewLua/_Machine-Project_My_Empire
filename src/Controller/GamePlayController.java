@@ -169,6 +169,7 @@ public class GamePlayController  {
       eventLabel.setText(event);
     }
     else if(e.getSource() == endButton) {
+      eventLabel.setText("");
       purchasePane.setVisible(false);
       tradePane.setVisible(false);
       rollPane.setVisible(true);

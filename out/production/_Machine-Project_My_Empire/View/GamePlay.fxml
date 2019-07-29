@@ -7,7 +7,7 @@
 
 <AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../CSS/GamePlay.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GamePlayController">
    <children>
-      <Label id="eventButton" fx:id="logButton" layoutX="888.0" layoutY="659.0" stylesheets="@../CSS/GamePlay.css" text="Event Log" textFill="WHITE">
+      <Label id="eventButton" fx:id="logButton" layoutX="888.0" layoutY="659.0" onMouseClicked="#mouseClick" stylesheets="@../CSS/GamePlay.css" text="Event Log" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>

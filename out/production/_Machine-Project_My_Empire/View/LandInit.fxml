@@ -4,7 +4,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane id="background" fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../CSS/LandInit.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LandInitController">
+
    <children>
       <Label fx:id="Almond" layoutX="649.0" layoutY="139.0" onMouseClicked="#chooseSpace" onMouseEntered="#hover" onMouseExited="#hoverOff" prefHeight="65.0" prefWidth="65.0" text="Almond Drive" />
       <Label fx:id="Kasoy" layoutX="691.0" layoutY="139.0" onMouseClicked="#chooseSpace" onMouseEntered="#hover" onMouseExited="#hoverOff" prefHeight="65.0" prefWidth="65.0" text="Kasoy Street" />
