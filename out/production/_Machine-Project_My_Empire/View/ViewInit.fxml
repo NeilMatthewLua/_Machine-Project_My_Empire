@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1080.0" stylesheets="@../CSS/ViewInit.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ViewInitController">
+<HBox fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../CSS/ViewInit.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ViewInitController">
    <children>
       <VBox prefHeight="720.0" prefWidth="540.0">
          <children>
             <AnchorPane prefHeight="360.0" prefWidth="540.0">
                <children>
-                  <TextField fx:id="textField1" alignment="CENTER" layoutX="196.0" layoutY="201.0" promptText="Enter name.." />
-                  <Label fx:id="ready1" alignment="CENTER" layoutX="219.0" layoutY="234.0" onMouseClicked="#ready" prefHeight="25.0" prefWidth="101.0" text="READY" textAlignment="CENTER" textFill="#f4e8a6">
+                  <TextField fx:id="textField1" alignment="CENTER" layoutX="196.0" layoutY="242.0" promptText="Enter name.." />
+                  <Label fx:id="ready1" alignment="CENTER" layoutX="219.0" layoutY="275.0" onMouseClicked="#ready" prefHeight="25.0" prefWidth="101.0" text="READY" textAlignment="CENTER" textFill="#f4e8a6">
                      <font>
                         <Font name="Broadway" size="18.0" />
                      </font>
@@ -23,16 +23,16 @@
             </AnchorPane>
             <AnchorPane prefHeight="360.0" prefWidth="540.0">
                <children>
-                  <TextField fx:id="textField3" alignment="CENTER" layoutX="196.0" layoutY="202.0" promptText="Enter name.." visible="false" />
-                  <Label fx:id="add1" alignment="CENTER" layoutX="213.0" layoutY="105.0" onMouseClicked="#add" prefHeight="70.0" prefWidth="115.0" text="ADD" textAlignment="CENTER" textFill="#f4e8a6" wrapText="true">
+                  <TextField fx:id="textField3" alignment="CENTER" layoutX="196.0" layoutY="194.0" promptText="Enter name.." visible="false" />
+                  <Label fx:id="add1" alignment="CENTER" layoutX="213.0" layoutY="97.0" onMouseClicked="#add" prefHeight="70.0" prefWidth="115.0" text="ADD" textAlignment="CENTER" textFill="#f4e8a6" wrapText="true">
                      <font>
                         <Font name="Broadway" size="44.0" />
                      </font></Label>
-                  <Label fx:id="delete1" alignment="CENTER" layoutX="414.0" layoutY="14.0" onMouseClicked="#delete" prefHeight="43.0" prefWidth="91.0" text="DELETE" textFill="#f4e8a6" visible="false">
+                  <Label fx:id="delete1" alignment="CENTER" layoutX="414.0" layoutY="6.0" onMouseClicked="#delete" prefHeight="43.0" prefWidth="91.0" text="DELETE" textFill="#f4e8a6" visible="false">
                      <font>
                         <Font name="Broadway" size="13.0" />
                      </font></Label>
-                  <Label fx:id="ready3" alignment="CENTER" layoutX="218.0" layoutY="236.0" onMouseClicked="#ready" prefHeight="25.0" prefWidth="101.0" text="READY" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
+                  <Label fx:id="ready3" alignment="CENTER" layoutX="218.0" layoutY="228.0" onMouseClicked="#ready" prefHeight="25.0" prefWidth="101.0" text="READY" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
                      <font>
                         <Font name="Broadway" size="18.0" />
                      </font>
@@ -45,13 +45,13 @@
          <children>
             <AnchorPane prefHeight="360.0" prefWidth="540.0">
                <children>
-                  <TextField fx:id="textField2" alignment="CENTER" layoutX="196.0" layoutY="200.0" promptText="Enter name.." />
-                  <Label fx:id="ready2" alignment="CENTER" layoutX="221.0" layoutY="234.0" onMouseClicked="#ready" prefHeight="25.0" prefWidth="101.0" text="READY" textAlignment="CENTER" textFill="#f4e8a6">
+                  <TextField fx:id="textField2" alignment="CENTER" layoutX="196.0" layoutY="242.0" promptText="Enter name.." />
+                  <Label fx:id="ready2" alignment="CENTER" layoutX="221.0" layoutY="276.0" onMouseClicked="#ready" prefHeight="25.0" prefWidth="101.0" text="READY" textAlignment="CENTER" textFill="#f4e8a6">
                      <font>
                         <Font name="Broadway" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="play" alignment="CENTER" layoutX="-64.0" layoutY="271.0" onMouseClicked="#play" prefHeight="43.0" prefWidth="115.0" text="PLAY" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
+                  <Label fx:id="play" alignment="CENTER" layoutX="-64.0" layoutY="313.0" onMouseClicked="#play" prefHeight="43.0" prefWidth="115.0" text="PLAY" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
                      <font>
                         <Font name="Broadway" size="18.0" />
                      </font>
@@ -61,17 +61,17 @@
             <AnchorPane prefHeight="360.0" prefWidth="540.0">
                <children>
                   <TextField fx:id="textField4" alignment="CENTER" layoutX="197.0" layoutY="198.0" promptText="Enter name.." visible="false" />
-                  <Label fx:id="add2" alignment="CENTER" layoutX="214.0" layoutY="105.0" onMouseClicked="#add" prefHeight="70.0" prefWidth="115.0" text="ADD" textAlignment="CENTER" textFill="#f4e8a6" visible="false" wrapText="true">
+                  <Label fx:id="add2" alignment="CENTER" layoutX="214.0" layoutY="97.0" onMouseClicked="#add" prefHeight="70.0" prefWidth="115.0" text="ADD" textAlignment="CENTER" textFill="#f4e8a6" visible="false" wrapText="true">
                      <font>
                         <Font name="Broadway" size="44.0" />
                      </font>
                   </Label>
-                  <Label fx:id="delete2" alignment="CENTER" layoutX="424.0" layoutY="6.0" onMouseClicked="#delete" prefHeight="43.0" prefWidth="91.0" text="DELETE" textFill="#f4e8a6" visible="false">
+                  <Label fx:id="delete2" alignment="CENTER" layoutX="414.0" layoutY="6.0" onMouseClicked="#delete" prefHeight="43.0" prefWidth="91.0" text="DELETE" textFill="#f4e8a6" visible="false">
                      <font>
                         <Font name="Broadway" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="ready4" alignment="CENTER" layoutX="220.0" layoutY="232.0" onMouseClicked="#ready" prefHeight="25.0" prefWidth="101.0" text="READY" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
+                  <Label fx:id="ready4" alignment="CENTER" layoutX="218.0" layoutY="228.0" onMouseClicked="#ready" prefHeight="25.0" prefWidth="101.0" text="READY" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
                      <font>
                         <Font name="Broadway" size="18.0" />
                      </font>

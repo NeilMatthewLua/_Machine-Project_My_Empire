@@ -9,10 +9,10 @@ package Model;
  *                   public boolean isOwnedUtilityRailroad(GameBoard gameBoard)
  *                   public boolean isOwnedProperty(GameBoard gameBoard)
  *                   public String payRent(GameBoard gameBoard)
- *                   public boolean isOwnedUtilityRailroad(GameBoard gameBoard)
  *                   public boolean isPropertyUtilityRailroad(GameBoard gameBoard)
- *
-   
+ *                   public boolean canTrade(GameBoard gameBoard)
+ *                   public boolean isFree(GameBoard gameBoard)
+
         Last Changes Made: Adjustment to roll() implementation, dice roll only displayed if game has not ended, Added extra typecasts when player purchases land
    
  * Version 1.1

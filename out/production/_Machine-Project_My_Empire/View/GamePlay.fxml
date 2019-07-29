@@ -2,47 +2,136 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="620.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GamePlay">
+<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../CSS/GamePlay.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GamePlayController">
    <children>
-      <AnchorPane id="anchorPane" layoutX="-25.0" prefHeight="645.0" prefWidth="1121.0" stylesheets="@../CSS/GamePlay.css">
+      <Label id="eventButton" fx:id="logButton" layoutX="888.0" layoutY="659.0" stylesheets="@../CSS/GamePlay.css" text="Event Log" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="empty2" layoutX="429.0" layoutY="549.0" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+      <Label fx:id="empty3" layoutX="363.0" layoutY="549.0" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+      <Label fx:id="empty4" layoutX="297.0" layoutY="549.0" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+      <Label fx:id="empty5" layoutX="222.0" layoutY="549.0" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+      <Label fx:id="empty6" layoutX="156.0" layoutY="549.0" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+      <Label fx:id="empty7" layoutX="90.0" layoutY="549.0" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+      <Label fx:id="delete8" prefHeight="20.0" prefWidth="50.0" text="Empty" visible="false" />
+      <Label fx:id="empty8" layoutX="4.0" layoutY="498.0" prefHeight="65.0" prefWidth="65.0" rotate="90.0" text="Empty" />
+      <Label fx:id="empty9" layoutX="4.0" layoutY="429.0" prefHeight="65.0" prefWidth="65.0" rotate="90.0" text="Empty" />
+      <Label fx:id="empty10" layoutX="4.0" layoutY="360.0" prefHeight="65.0" prefWidth="65.0" rotate="90.0" text="Empty" />
+      <Label fx:id="empty11" layoutX="4.0" layoutY="292.0" prefHeight="65.0" prefWidth="65.0" rotate="90.0" text="Empty" />
+      <Label fx:id="empty12" layoutX="4.0" layoutY="223.0" prefHeight="65.0" prefWidth="65.0" rotate="90.0" text="Empty" />
+      <Label fx:id="empty13" layoutX="4.0" layoutY="154.0" prefHeight="65.0" prefWidth="65.0" rotate="90.0" text="Empty" />
+      <Label fx:id="empty14" layoutX="4.0" layoutY="85.0" prefHeight="65.0" prefWidth="65.0" rotate="90.0" text="Empty" />
+      <Label fx:id="empty15" layoutX="58.0" layoutY="1.0" prefHeight="65.0" prefWidth="65.0" rotate="180.0" text="Empty" />
+      <Label fx:id="empty16" layoutX="124.0" layoutY="1.0" prefHeight="65.0" prefWidth="65.0" rotate="180.0" text="Empty" />
+      <Label fx:id="empty17" layoutX="193.0" layoutY="1.0" prefHeight="65.0" prefWidth="65.0" rotate="180.0" text="Empty" />
+      <Label fx:id="empty18" layoutX="268.0" layoutY="1.0" prefHeight="65.0" prefWidth="65.0" rotate="180.0" text="Empty" />
+      <Label fx:id="empty19" layoutX="334.0" layoutY="1.0" prefHeight="65.0" prefWidth="65.0" rotate="180.0" text="Empty" />
+      <Label fx:id="empty20" layoutX="400.0" layoutY="1.0" prefHeight="65.0" prefWidth="65.0" rotate="180.0" text="Empty" />
+      <Label fx:id="empty21" layoutX="468.0" layoutY="1.0" prefHeight="65.0" prefWidth="65.0" rotate="180.0" text="Empty" />
+      <Label fx:id="empty22" layoutX="553.0" layoutY="54.0" prefHeight="65.0" prefWidth="65.0" rotate="270.0" text="Empty" />
+      <Label fx:id="empty23" layoutX="554.0" layoutY="124.0" prefHeight="65.0" prefWidth="65.0" rotate="270.0" text="Empty" />
+      <Label fx:id="empty24" layoutX="554.0" layoutY="191.0" prefHeight="65.0" prefWidth="65.0" rotate="270.0" text="Empty" />
+      <Label fx:id="empty25" layoutX="556.0" layoutY="260.0" prefHeight="65.0" prefWidth="65.0" rotate="270.0" text="Empty" />
+      <Label fx:id="empty26" layoutX="558.0" layoutY="329.0" prefHeight="65.0" prefWidth="65.0" rotate="270.0" text="Empty" />
+      <Label fx:id="empty27" layoutX="557.0" layoutY="399.0" prefHeight="65.0" prefWidth="65.0" rotate="270.0" text="Empty" />
+      <Label fx:id="empty28" layoutX="554.0" layoutY="471.0" prefHeight="65.0" prefWidth="65.0" rotate="270.0" text="Empty" />
+      <Label fx:id="empty1" layoutX="497.0" layoutY="549.0" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+      <Label id="eventLabel" fx:id="eventLabel" alignment="TOP_CENTER" layoutX="685.0" layoutY="198.0" prefHeight="161.0" prefWidth="341.0" stylesheets="@../CSS/GamePlay.css" text="Label" />
+      <Label id="turnLabel" fx:id="turnLabel" alignment="CENTER" layoutX="667.0" layoutY="58.0" prefHeight="71.0" prefWidth="376.0" stylesheets="@../CSS/GamePlay.css" text="Albert's Turn" textFill="#fcd670">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="25.0" layoutY="640.0" prefHeight="74.0" prefWidth="156.0">
          <children>
-            <Label fx:id="rollButton" layoutX="40.0" layoutY="298.0" onMouseClicked="#mouseClick" prefHeight="116.0" prefWidth="145.0" text="Roll">
+            <Label id="moneySummary" fx:id="money1" alignment="CENTER" layoutX="25.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" text="\$300" textFill="WHITE">
                <font>
-                  <Font size="53.0" />
+                  <Font size="28.0" />
                </font>
             </Label>
-            <Label fx:id="eventLabel" layoutX="124.0" layoutY="166.0" prefHeight="105.0" prefWidth="313.0" text="eventLabel">
+            <Label id="nameSummary" fx:id="player1" alignment="CENTER" layoutX="3.0" layoutY="-2.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" text="Sharmaine" textFill="#fcd670">
                <font>
-                  <Font size="13.0" />
+                  <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="turnLabel" layoutX="59.0" layoutY="35.0" prefHeight="139.0" prefWidth="305.0" text="turnLabel">
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="221.0" layoutY="639.0" prefHeight="74.0" prefWidth="156.0">
+         <children>
+            <Label id="moneySummary" fx:id="money2" alignment="CENTER" layoutX="22.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" text="\$300" textFill="WHITE">
                <font>
-                  <Font size="53.0" />
+                  <Font size="28.0" />
                </font>
             </Label>
-            <Label fx:id="rentButton" layoutX="518.0" layoutY="116.0" prefHeight="79.0" prefWidth="185.0" text="rentButton">
+            <Label id="nameSummary" fx:id="player2" alignment="CENTER" layoutX="3.0" layoutY="-1.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" text="Sharmaine" textFill="#fcd670">
                <font>
-                  <Font size="25.0" />
+                  <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="tradeButton" layoutX="535.0" layoutY="236.0" prefHeight="79.0" prefWidth="185.0" text="tradeButton">
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="415.0" layoutY="640.0" prefHeight="74.0" prefWidth="156.0" visible="false">
+         <children>
+            <Label id="moneySummary" fx:id="money3" alignment="CENTER" layoutX="22.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" text="\$300" textFill="WHITE">
                <font>
-                  <Font size="25.0" />
+                  <Font size="28.0" />
                </font>
             </Label>
-            <Label fx:id="endButton" layoutX="552.0" layoutY="350.0" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="185.0" text="endButton">
+            <Label id="nameSummary" fx:id="player3" alignment="CENTER" layoutX="3.0" layoutY="-2.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" text="Sharmaine" textFill="#fcd670">
                <font>
-                  <Font size="25.0" />
+                  <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="purchaseButton" layoutX="571.0" layoutY="482.0" prefHeight="79.0" prefWidth="185.0" text="purchaseButton">
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="607.0" layoutY="640.0" prefHeight="74.0" prefWidth="156.0" visible="false">
+         <children>
+            <Label id="moneySummary" fx:id="money4" alignment="CENTER" layoutX="22.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" text="\$300" textFill="WHITE">
                <font>
-                  <Font size="25.0" />
+                  <Font size="28.0" />
                </font>
             </Label>
-         </children></AnchorPane>
+            <Label id="nameSummary" fx:id="player4" alignment="CENTER" layoutX="3.0" layoutY="-2.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" text="Sharmaine" textFill="#fcd670">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <StackPane fx:id="tradePane" layoutX="871.0" layoutY="428.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="tradeButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Trade" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="purchasePane" layoutX="685.0" layoutY="428.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="purchaseButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Purchase" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="rentPane" layoutX="685.0" layoutY="523.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="rentButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Pay Rent" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="endPane" layoutX="874.0" layoutY="523.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="endButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="End Turn" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="rollPane" layoutX="778.0" layoutY="476.0" prefHeight="80.0" prefWidth="129.0">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" />
+            <Label id="actionButton" fx:id="rollButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="80.0" prefWidth="204.0" stylesheets="@../CSS/GamePlay.css" text="Roll" textFill="WHITE" />
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

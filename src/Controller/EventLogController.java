@@ -6,7 +6,7 @@ import javafx.scene.control.ListView;
 import java.util.ArrayList;
 
 
-public class EventLog {
+public class EventLogController {
 
     @FXML
     private ListView eventList;

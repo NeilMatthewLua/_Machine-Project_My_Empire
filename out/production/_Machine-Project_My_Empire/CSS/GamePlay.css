@@ -1,3 +1,47 @@
-#anchorPane{
-    -fx-background-color: rgb(233,185,186);
+#background{
+    -fx-background-image: url('../Images/GamePlay.png');
+}
+
+#moneySummary{
+    -fx-font-family: Broadway;
+    -fx-font-size: 25px;
+}
+
+#nameSummary{
+    -fx-font-family: Broadway;
+    -fx-font-size: 25px;
+}
+
+#turnLabel{
+    -fx-font-color: rgb(252,214,112);
+    -fx-font-family: Broadway;
+    -fx-font-size: 25px;
+}
+
+#actionButton{
+    -fx-font-family: Broadway;
+    -fx-font-size: 25px;
+}
+
+#actionButtonBackground{
+    -fx-graphic: url('../Images/ActionButton.png');
+}
+
+#actionButton:hover{
+    -fx-underline: true;
+    -fx-font-size: 25px;
+}
+
+#eventButton:hover{
+    -fx-underline: true;
+    -fx-font-size: 20px;
+}
+
+#eventLabel{
+    -fx-font-family: Broadway;
+    -fx-font-size: 20px;
+}
+
+#eventButton{
+    -fx-font-family: Broadway;
 }
