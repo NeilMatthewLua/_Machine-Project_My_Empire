@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -22,12 +23,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import static javafx.stage.Modality.APPLICATION_MODAL;
 
 public class GamePlayController  {
@@ -154,6 +162,7 @@ public class GamePlayController  {
 
   private GameBoard gameBoard;
   private int nTurnCounter = 0;
+  private int i = 0;
 
   public void setGameBoard(GameBoard gameBoard){
     this.gameBoard = gameBoard;
@@ -167,8 +176,13 @@ public class GamePlayController  {
       rollPane.setVisible(false);
 
       String event = gameBoard.getPlayers()[nTurnCounter % nTotal].roll(gameBoard);
-      eventLabel.setText(event);
+      //eventLabel.setText(event);
       gameBoard.getEvents().add(event);
+      String[] strings = event.split("\n");
+        System.out.println(event);
+//      if(strings.length > 1)
+           delayStart(strings);
+
       turnLabel.setText(gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + "'s Turn!");
 
       //Checks if the tile is either Property, Utility, or Railroad
@@ -220,9 +234,34 @@ public class GamePlayController  {
           endPane.setVisible(true);
         }
       }
-      //else, it's either Jail, Chance, Start, Tax, or Free Parking
+      //else, it's either Jail, Chance, Start, Tax, Community Service or Free Parking
       else {
-        event = gameBoard.getPlayers()[nTurnCounter % nTotal].action(gameBoard);
+        double[] temp = new double[nTotal + 1]; //temporary holder of everyone's(including bank's) money before the chance card takes action
+        int[] nIndex = new int[2]; //holds the which players/bank's money has been changed
+        int j = 0; //index of the players/bank whose money was changed
+        int i;
+
+        for( i = 0; i < nTotal; i ++){
+            temp[i] = gameBoard.getPlayers()[i].getMoney(); //holds the money of everybody on a temp array
+        }
+        temp[i] = gameBoard.getBank().getMoney();
+
+        event = gameBoard.getPlayers()[nTurnCounter % nTotal].action(gameBoard); //performs the action
+
+        //goes through everybody's money to check whose were changed
+        for( i = 0; i < nTotal; i ++){
+            if(temp[i] != gameBoard.getPlayers()[i].getMoney()){
+                nIndex[j] = i;    //holds their index in an array
+                j++;
+            }
+        }
+        if(temp[i] != gameBoard.getBank().getMoney()) //checks the bank's value changed
+            nIndex[j] = 5;
+
+        //updates teh labels in the GUI if there are changes with their money
+        if(j == 1)
+            updateMoney(nIndex[0],nIndex[1]);
+
         eventLabel.setText(event);
         gameBoard.getEvents().add(event);
         endPane.setVisible(true);
@@ -296,21 +335,37 @@ public class GamePlayController  {
       }
   }
 
+    private void delayStart(String[] string) {
+      for(String a: string)
+          System.out.println("D" + a);
+        eventLabel.setText(string[0]);
+        for(int i = 0; i < string.length; i++){
+          int nIndex = i;
+          PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
+          pauseTransition.setOnFinished(e -> eventLabel.setText(string[nIndex]));
+          pauseTransition.play();
+      }
 
-  public void updateMoney(int nTotal){
-    //Updates Player Money on the board
-    if((nTurnCounter % nTotal) == 0){
-      money1.setText(String.valueOf(gameBoard.getPlayers()[nTurnCounter % nTotal].getMoney()));
-    }
-    else if((nTurnCounter % nTotal) == 1){
-      money2.setText(String.valueOf(gameBoard.getPlayers()[nTurnCounter % nTotal].getMoney()));
-    }
-    else if((nTurnCounter % nTotal) == 1){
-      money3.setText(String.valueOf(gameBoard.getPlayers()[nTurnCounter % nTotal].getMoney()));
-    }
-    else if((nTurnCounter % nTotal) == 1){
-      money4.setText(String.valueOf(gameBoard.getPlayers()[nTurnCounter % nTotal].getMoney()));
-    }
+//        i = 0;
+//        ScheduledExecutorService timer =
+//             Executors.newScheduledThreadPool(1);
+////        ScheduledExecutorService timer = Executors
+////                .newSingleThreadScheduledExecutor();
+//        timer.scheduleWithFixedDelay(new TimerTask() {
+//            @Override
+//            public void run() {
+//                Platform.runLater(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        if (i < string.length) {
+//                            eventLabel.setText(string[i]);
+//                            System.out.println("D");
+//                            i++;
+//                        }
+//                    }
+//                });
+//            }
+//        }, 0, 3L , TimeUnit.SECONDS);
   }
 
   public void updateMoney(int nPlayer1, int nPlayer2){
@@ -339,6 +394,9 @@ public class GamePlayController  {
     }
     else if(nPlayer2 == 2){
       money3.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
+    }
+    else if(nPlayer1 == 3){
+        money4.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
     }
     else if(nPlayer2 == 5){
       money5.setText(String.valueOf(gameBoard.getBank().getMoney()));

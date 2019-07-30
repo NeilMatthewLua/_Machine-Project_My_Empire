@@ -21,11 +21,11 @@ public class Community extends Land {
     public String triggerEvent(GameBoard gameBoard, Player player){
         String event = "";
         double dAmount = player.getMoney();
-        if(player.giveMoney(gameBoard.getBank(),50) == true){//If the player can pay the bank
-            event += player.getName() + "donated " + 50 + " to Bank.";
+        if(player.giveMoney(gameBoard.getBank(),50)){//If the player can pay the bank
+            event += player.getName() + " donated " + 50 + " to Bank.";
         }
         else{//If the player can't pay the bank
-            event += player.getName() + "donated " + dAmount + "to Bank. " + player.getName() + " is now bankrupt.";
+            event += player.getName() + " donated " + dAmount + "to Bank. \n" + player.getName() + " is now bankrupt.";
             gameBoard.setIsWin(true);
         }
         return event;

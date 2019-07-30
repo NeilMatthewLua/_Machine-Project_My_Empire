@@ -23,7 +23,7 @@ public class Start extends Land{
         String event = "";
         double dAmount = gameBoard.getBank().getMoney();
         if(gameBoard.getBank().giveMoney(player,200)){
-            event += player.getName() + " passed by START and got $200.";
+            event += player.getName() + " passed by START and got $200.\n";
         }
         else{
             event += player.getName() + " was given " + dAmount +

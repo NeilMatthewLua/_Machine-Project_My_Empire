@@ -20,6 +20,7 @@ public class Chance extends Land {
     @Override
     public String triggerEvent(GameBoard gameBoard, Player player){
         Card temp = gameBoard.drawChance();
+        System.out.println(temp.getDescription());
         player.addCard(temp);
         String event = "Player drew " + temp.getDescription();
         String event2 = "";

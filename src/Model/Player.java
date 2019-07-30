@@ -120,18 +120,26 @@ public class Player extends People{
         int start = nPosition; //Initializes the starting position of the token
         Land temp;
         nRoll = (int)((Math.random() * (6 - 1)) + 1 ); //generates a random number form 1 - 6
+        this.nDiceRoll = nRoll;
+        String event = "";
         if(inJail){//If player is in jail then exact fine
-            if(this.getCards().get(0) instanceof CardSet_1){
-                gameBoard.getEvents().add(this.getCards().get(0).useCard(this,gameBoard));
+            if(this.getCards().size() > 0){
+                if(this.getCards().get(0) instanceof CardSet_1){
+                    event += this.getCards().get(0).useCard(this,gameBoard)+"\n";
+                    gameBoard.getEvents().add(event);
+                }
             }
-            if(this.giveMoney(gameBoard.getBank(),50))
-                gameBoard.getEvents().add("Bank was given 50$ for Jail fine.");
+            if(this.giveMoney(gameBoard.getBank(),50)){
+                event += "Bank was given 50$ for Jail fine.\n";
+                gameBoard.getEvents().add(event);
+            }
             else{//If player can't pay
-                gameBoard.getEvents().add(getName() +" was not able to pay Jail Fine.");
+                event += getName() +" was not able to pay Jail Fine.\n";
+                gameBoard.getEvents().add(event);
                 gameBoard.setIsWin(true);
             }
         }
-        String event = "";
+        event += getName() + " rolled a " + nRoll + "\n";
         if(!gameBoard.getIsWin()){
 
             for( int i = start + 1 ; i <= start + nRoll; i++ ) {
@@ -140,7 +148,8 @@ public class Player extends People{
                     i = 0;
                     nPosition = 0; //this sets the token at start (index 0)
                     start = 0;
-                    gameBoard.getEvents().add(gameBoard.getLand().get(0).triggerEvent(gameBoard,this));
+                    event += gameBoard.getLand().get(0).triggerEvent(gameBoard,this);
+                    gameBoard.getEvents().add(event);
                 }
                 else {
                     nPosition += 1;
@@ -151,7 +160,6 @@ public class Player extends People{
                         ((Property) gameBoard.getLand().get(this.getPosition())).addFootTraffic();
                     }
             }
-            event = getName() + " rolled a " + nRoll + "!\n"; //calls the actions to be offered to the player
             event += getName() + " landed on " + gameBoard.getLand().get(getPosition()).getName();
         }
         return event;
