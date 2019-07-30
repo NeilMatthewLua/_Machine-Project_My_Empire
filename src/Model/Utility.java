@@ -9,11 +9,9 @@ package Model;
 
 
 public class Utility extends Ownable{
-    private Player owner;
 
     public Utility(String strName, double dPrice){
         super(strName,dPrice);
-        owner = null;
     }
 
     /**
@@ -24,8 +22,8 @@ public class Utility extends Ownable{
     public double getRent(Player player){
         int nCounter = 0;
         double dRent = 0;
-        for (int i = 0; i < owner.getProperties().size(); i++)
-            if (owner.getProperties().get(i) instanceof Utility) {
+        for (int i = 0; i < getOwner().getProperties().size(); i++)
+            if (getOwner().getProperties().get(i) instanceof Utility) {
                 nCounter++;
             }
         switch (nCounter) {//Calculations made based on owned properties and dice rolls
@@ -51,11 +49,11 @@ public class Utility extends Ownable{
     public String triggerEvent(GameBoard gameBoard, Player player){
         String event = "";
         double playerMoney = player.getMoney();
-        if(player.giveMoney(owner, this.getRent(player))){
-            event += player.getName() + " gave " + owner.getName() + " " + this.getRent(player) + ".";
+        if(player.giveMoney(getOwner(), this.getRent(player))){
+            event += player.getName() + " gave " + getOwner().getName() + " " + this.getRent(player) + ".";
         }
         else{
-            event += player.getName() + " gave " + owner.getName() + " " + playerMoney;
+            event += player.getName() + " gave " + getOwner().getName() + " " + playerMoney;
             event += ". " + player.getName() + " is now bankrupt.";
             gameBoard.setIsWin(true);
         }

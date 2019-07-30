@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="background" fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../CSS/LandInit.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LandInitController">
-
+<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../CSS/LandInit.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LandInitController">
    <children>
       <Label fx:id="Almond" layoutX="649.0" layoutY="139.0" onMouseClicked="#chooseSpace" onMouseEntered="#hover" onMouseExited="#hoverOff" prefHeight="65.0" prefWidth="65.0" text="Almond Drive" />
       <Label fx:id="Kasoy" layoutX="691.0" layoutY="139.0" onMouseClicked="#chooseSpace" onMouseEntered="#hover" onMouseExited="#hoverOff" prefHeight="65.0" prefWidth="65.0" text="Kasoy Street" />
@@ -208,7 +207,10 @@
             <Label fx:id="delete28" layoutX="11.0" layoutY="4.0" onMouseClicked="#deleteSpace" prefHeight="20.0" prefWidth="50.0" text="Empty" visible="false" />
          </children>
       </AnchorPane>
-      <Label fx:id="Play" layoutX="211.0" layoutY="389.0" onMouseClicked="#play" prefHeight="48.0" prefWidth="195.0" text="Play" visible="false" />
+      <Label fx:id="Play" layoutX="211.0" layoutY="389.0" onMouseClicked="#play" prefHeight="48.0" prefWidth="195.0" text="Play" textAlignment="CENTER" visible="false">
+         <font>
+            <Font name="Broadway" size="24.0" />
+         </font></Label>
       <Label fx:id="North" layoutX="659.0" layoutY="312.0" onMouseClicked="#chooseSpace" onMouseEntered="#hover" onMouseExited="#hoverOff" prefHeight="65.0" prefWidth="65.0" text="North" />
       <Label fx:id="South" layoutX="724.0" layoutY="312.0" onMouseClicked="#chooseSpace" onMouseEntered="#hover" onMouseExited="#hoverOff" prefHeight="65.0" prefWidth="65.0" text="South" />
       <Label fx:id="Metro" layoutX="789.0" layoutY="312.0" onMouseClicked="#chooseSpace" onMouseEntered="#hover" onMouseExited="#hoverOff" prefHeight="65.0" prefWidth="65.0" text="Metro" />
@@ -219,7 +221,39 @@
       <Label fx:id="Chance1" layoutX="659.0" layoutY="634.0" onMouseClicked="#chooseSpace" onMouseEntered="#hover" onMouseExited="#hoverOff" prefHeight="65.0" prefWidth="65.0" text="Chance" />
       <Label fx:id="Chance2" layoutX="724.0" layoutY="634.0" onMouseClicked="#chooseSpace" onMouseEntered="#hover" onMouseExited="#hoverOff" prefHeight="65.0" prefWidth="65.0" text="Chance" />
       <Label fx:id="Chance3" layoutX="789.0" layoutY="634.0" onMouseClicked="#chooseSpace" onMouseEntered="#hover" onMouseExited="#hoverOff" prefHeight="65.0" prefWidth="65.0" text="Chance" />
-      <Label fx:id="ClearAll" layoutX="64.0" layoutY="645.0" onMouseClicked="#clearAll" prefHeight="43.0" prefWidth="148.0" text="ClearAll" visible="false" />
-      <Label id="Randomize" fx:id="Randomize" layoutX="237.0" layoutY="645.0" onMouseClicked="#randomize" prefHeight="43.0" prefWidth="148.0" stylesheets="@../CSS/LandInit.css" text="Randomize" />
+      <Label fx:id="ClearAll" layoutX="64.0" layoutY="645.0" onMouseClicked="#clearAll" prefHeight="43.0" prefWidth="148.0" text="Clear All" textAlignment="CENTER" visible="false">
+         <font>
+            <Font name="Broadway" size="20.0" />
+         </font></Label>
+      <Label fx:id="Randomize" layoutX="237.0" layoutY="645.0" onMouseClicked="#randomize" prefHeight="45.0" prefWidth="150.0" text="Randomize" textAlignment="CENTER">
+         <font>
+            <Font name="Broadway" size="20.0" />
+         </font></Label>
+      <ImageView fx:id="Zoomed" fitHeight="300.0" fitWidth="300.0" layoutX="161.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      </ImageView>
+      <Label fx:id="playersZoom" layoutX="410.0" layoutY="302.0" prefHeight="20.0" prefWidth="35.0" text="2" visible="false">
+         <font>
+            <Font name="Broadway" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="closeZoomed" alignment="CENTER" contentDisplay="CENTER" layoutX="237.0" layoutY="117.0" onMouseClicked="#closeZoomed" prefHeight="45.0" prefWidth="150.0" text="Close" textAlignment="CENTER" textFill="#fcd670" visible="false">
+         <font>
+            <Font name="Broadway" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="ownerZoom" layoutX="369.0" layoutY="412.0" prefHeight="14.0" prefWidth="58.0" text="None" visible="false">
+         <font>
+            <Font name="Broadway" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="footTrafficZoom" layoutX="369.0" layoutY="429.0" prefHeight="14.0" prefWidth="58.0" text="0.0" visible="false">
+         <font>
+            <Font name="Broadway" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="Start" layoutX="553.0" layoutY="552.0" onMouseClicked="#addSpace" prefHeight="65.0" prefWidth="65.0" text="Start" />
+      <Label fx:id="Community" layoutX="3.0" layoutY="552.0" onMouseClicked="#addSpace" prefHeight="65.0" prefWidth="65.0" text="Community" />
+      <Label fx:id="Jail" layoutX="3.0" layoutY="2.0" onMouseClicked="#addSpace" prefHeight="65.0" prefWidth="65.0" text="Jail" />
+      <Label fx:id="FreeParking" layoutX="553.0" layoutY="2.0" onMouseClicked="#addSpace" prefHeight="65.0" prefWidth="65.0" text="Free Parking" />
    </children>
 </AnchorPane>

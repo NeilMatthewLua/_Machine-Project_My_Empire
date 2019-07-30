@@ -7,11 +7,9 @@ package Model;
  * Previous Change:
  */
 public class Railroad extends Ownable {
-    private Player owner;
 
     public Railroad(String strName, double dPrice){
         super(strName,dPrice);
-        owner = null;
     }
 
     /**
@@ -21,8 +19,8 @@ public class Railroad extends Ownable {
     public double getRent(){
         int nCounter = 0;
         double dRent = 0;
-        for(int i = 0; i < owner.getProperties().size(); i++)
-            if(owner.getProperties().get(i) instanceof Railroad)
+        for(int i = 0; i < getOwner().getProperties().size(); i++)
+            if(getOwner().getProperties().get(i) instanceof Railroad)
                 nCounter++;
         switch(nCounter) {//Calculations made based on no. of railroads owner has
             case 1:
@@ -49,11 +47,11 @@ public class Railroad extends Ownable {
     public String triggerEvent(GameBoard gameBoard, Player player){
         String event = "";
         double playerMoney = player.getMoney();
-        if(player.giveMoney(owner, this.getRent())){//If the player can pay
-            event += player.getName() + " gave " + owner.getName() + " " + this.getRent() + ".";
+        if(player.giveMoney(getOwner(), this.getRent())){//If the player can pay
+            event += player.getName() + " gave " + getOwner().getName() + " " + this.getRent() + ".";
         }
         else{//If the player cannot pay
-            event += player.getName() + " gave " + owner.getName() + " " + playerMoney;
+            event += player.getName() + " gave " + getOwner().getName() + " " + playerMoney;
             event += ". " + player.getName() + " is now bankrupt.";
             gameBoard.setIsWin(true);
         }

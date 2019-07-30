@@ -18,6 +18,9 @@
             -fx-content-display: graphic-only;
 }
 
+#Start, #Jail, #Community, #FreeParking{
+    -fx-content-display: graphic-only;
+}
 
 #Water, #Electric{
     -fx-graphic: url('../Images/SmallSpaces/Utility.png');
@@ -25,8 +28,8 @@
 }
 
 #Randomize{
--fx-graphic: url('../Images/Randomize.png');
-            -fx-content-display: graphic-only;
+     -fx-graphic: url('../Images/Randomize.png');
+     -fx-content-display: CENTER;
 }
 
 #Randomize:hover{
@@ -34,17 +37,30 @@
 }
 
 #ClearAll{
--fx-graphic: url('../Images/ClearAll.png');
-            -fx-content-display: graphic-only;
+     -fx-graphic: url('../Images/ClearAll.png');
+     -fx-content-display: CENTER;
 }
 
 #ClearAll:hover{
     -fx-underline: true;
 }
 
+#closeZoomed{
+    -fx-graphic: url('../Images/close.png');
+         -fx-content-display: CENTER;
+}
+
+#closeZoomed:hover{
+    -fx-underline: true;
+}
+
 #Play {
     -fx-graphic: url('../Images/Play.png');
-        -fx-content-display: graphic-only;
+    -fx-content-display: CENTER;
+}
+
+#Play:hover{
+    -fx-underline: true;
 }
 
 #Almond, #Kasoy {

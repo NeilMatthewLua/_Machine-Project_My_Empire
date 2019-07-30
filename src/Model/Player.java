@@ -2,7 +2,9 @@ package Model;
 /**
  * Player Class
  *
- *      New Changes: Made Develop Public
+ *      New Changes: Editeed EligiblePurchase()
+
+        Last Changes Made: Made Develop Public
  *                   Removed action() in roll()
  *                   Made some functionality in action independent
  *                   public boolean isFree(GameBoard gameBoard)
@@ -12,10 +14,8 @@ package Model;
  *                   public boolean isPropertyUtilityRailroad(GameBoard gameBoard)
  *                   public boolean canTrade(GameBoard gameBoard)
  *                   public boolean isFree(GameBoard gameBoard)
-
-        Last Changes Made: Adjustment to roll() implementation, dice roll only displayed if game has not ended, Added extra typecasts when player purchases land
    
- * Version 1.1
+ * Version 1.2
 
  */
 
@@ -24,7 +24,7 @@ import java.util.Scanner;
 
 public class Player extends People{
 
-    private ArrayList<Land> properties;
+    private ArrayList<Ownable> properties;
     private ArrayList<Card> cards;
     private int nPosition;
     private int nDiceRoll;
@@ -36,7 +36,7 @@ public class Player extends People{
      */
     public Player(String strName) {
         super(strName);
-        this.properties = new ArrayList<Land>();
+        this.properties = new ArrayList<Ownable>();
         this.cards = new ArrayList<Card>();
         nPosition = 0;
         this.nDiceRoll = 0;
@@ -47,7 +47,7 @@ public class Player extends People{
      * Getter for the properties
      * @return properties arrayList owned by the player
      */
-    public ArrayList<Land> getProperties() {
+    public ArrayList<Ownable> getProperties() {
         return this.properties;
     }
 
@@ -151,7 +151,8 @@ public class Player extends People{
                         ((Property) gameBoard.getLand().get(this.getPosition())).addFootTraffic();
                     }
             }
-            event = getName() + " rolled a " + nRoll + "!"; //calls the actions to be offered to the player
+            event = getName() + " rolled a " + nRoll + "!\n"; //calls the actions to be offered to the player
+            event += getName() + " landed on " + gameBoard.getLand().get(getPosition()).getName();
         }
         return event;
     }
@@ -265,26 +266,29 @@ public class Player extends People{
      * @return string which contains the details of the event
      */
     public String purchase (GameBoard gameBoard) {
+        String event = "";
         if(gameBoard.getLand().get(nPosition) instanceof Property){
             ((Property)gameBoard.getLand().get(nPosition)).setOwner(this); //sets the current player as the owner of the Property
-            properties.add(gameBoard.getLand().get(nPosition)); //adds the land to the current Player's list of Property owned
+            properties.add(((Ownable)gameBoard.getLand().get(nPosition))); //adds the land to the current Player's list of Property owned
             dMoney -= ((Property)gameBoard.getLand().get(nPosition)).getPrice(); //subtracts the money from the current Player
             gameBoard.getBank().receiveMoney(((Property)gameBoard.getLand().get(nPosition)).getPrice()); //gives the money to the bank
+            event += gameBoard.getLand().get(nPosition).getName() + " was purchased by " + getName() + " for $" + ((Property)gameBoard.getLand().get(nPosition)).getPrice();
         }
         else if(gameBoard.getLand().get(nPosition) instanceof Utility){
             ((Utility)gameBoard.getLand().get(nPosition)).setOwner(this); //sets the current player as the owner of the Utility
-            properties.add(gameBoard.getLand().get(nPosition)); //adds the land to the current Player's list of Utility owned
+            properties.add(((Ownable)gameBoard.getLand().get(nPosition))); //adds the land to the current Player's list of Utility owned
             dMoney -= ((Utility)gameBoard.getLand().get(nPosition)).getPrice(); //subtracts the money from the current Player
             gameBoard.getBank().receiveMoney(((Utility)gameBoard.getLand().get(nPosition)).getPrice()); //gives the money to the bank
+            event += gameBoard.getLand().get(nPosition).getName() + " was purchased by " + getName() + " for $" + ((Utility)gameBoard.getLand().get(nPosition)).getPrice();
         }
         else if(gameBoard.getLand().get(nPosition) instanceof Railroad){
             ((Railroad)gameBoard.getLand().get(nPosition)).setOwner(this); //sets the current player as the owner of the Railroad
-            properties.add(gameBoard.getLand().get(nPosition)); //adds the land to the current Player's list of Railroad owned
+            properties.add(((Ownable)gameBoard.getLand().get(nPosition))); //adds the land to the current Player's list of Railroad owned
             dMoney -= ((Railroad)gameBoard.getLand().get(nPosition)).getPrice(); //subtracts the money from the current Player
             gameBoard.getBank().receiveMoney(((Railroad)gameBoard.getLand().get(nPosition)).getPrice()); //gives the money to the bank
+            event += gameBoard.getLand().get(nPosition).getName() + " was purchased by " + getName() + " for $" + ((Railroad)gameBoard.getLand().get(nPosition)).getPrice();
         }
-
-        return gameBoard.getLand().get(nPosition).getName() + " was purchased by " + getName();
+        return event;
     }
 
     /**
@@ -316,9 +320,9 @@ public class Player extends People{
 
 
         //assuming other end agrees,
-        Land temp = gameBoard.getPlayers()[nChosenPlayer].getProperties().get(nChosenPosition);
+        Ownable temp = gameBoard.getPlayers()[nChosenPlayer].getProperties().get(nChosenPosition);
         //Sets owner to player and removes property traded from owned properties
-        ((Property)temp).setOwner(this);
+        (temp).setOwner(this);
         this.properties.add(temp);
 
         //Sets your chosen property to be owned by other player
@@ -350,9 +354,20 @@ public class Player extends People{
     }
 
     public boolean eligiblePurchase(GameBoard gameBoard){
-        if (dMoney >= ((Property) gameBoard.getLand().get(nPosition)).getPrice() || dMoney >= ((Utility) gameBoard.getLand().get(nPosition)).getPrice() ||
-                dMoney >= ((Railroad) gameBoard.getLand().get(nPosition)).getPrice()) { //checks if the current player has sufficient funds before offering to buy that land
-            return true;
+        if (gameBoard.getLand().get(nPosition) instanceof Property){
+            if(dMoney >= ((Property) gameBoard.getLand().get(nPosition)).getPrice()){
+                return true;
+            }
+        }
+        else if (gameBoard.getLand().get(nPosition) instanceof Utility){
+            if(dMoney >= ((Utility) gameBoard.getLand().get(nPosition)).getPrice()){
+                return true;
+            }
+        }
+        else if (gameBoard.getLand().get(nPosition) instanceof Railroad){
+            if(dMoney >= ((Railroad) gameBoard.getLand().get(nPosition)).getPrice()){
+                return true;
+            }
         }
 
         return false;

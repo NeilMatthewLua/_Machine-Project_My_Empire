@@ -40,8 +40,31 @@
 #eventLabel{
     -fx-font-family: Broadway;
     -fx-font-size: 20px;
+    -fx-wrap-text: true;
 }
 
 #eventButton{
     -fx-font-family: Broadway;
+}
+
+#Start, #Jail, #Community, #FreeParking{
+    -fx-content-display: graphic-only;
+}
+
+#closeZoomed{
+    -fx-graphic: url('../Images/close.png');
+         -fx-content-display: CENTER;
+}
+
+#closeZoomed:hover{
+    -fx-underline: true;
+}
+
+#empty1, #empty2, #empty3, #empty4, #empty5,
+#empty6, #empty7, #empty8, #empty9, #empty10,
+#empty11, #empty12, #empty13, #empty14, #empty15,
+#empty16, #empty17, #empty18, #empty19, #empty20,
+#empty21, #empty22, #empty23, #empty24, #empty25,
+#empty26, #empty27, #empty28{
+    -fx-content-display: graphic-only;
 }

@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -56,6 +57,8 @@ public class GamePlayController  {
   @FXML
     private Label money4;
   @FXML
+    private Label money5;
+  @FXML
     private Label player1;
   @FXML
     private Label player2;
@@ -73,6 +76,14 @@ public class GamePlayController  {
     private StackPane endPane;
   @FXML
     private StackPane rentPane;
+  @FXML
+    private AnchorPane playerPane1;
+  @FXML
+    private AnchorPane playerPane2;
+  @FXML
+    private AnchorPane playerPane3;
+  @FXML
+    private AnchorPane playerPane4;
 
   @FXML private Label empty1;
   @FXML private Label empty2;
@@ -150,7 +161,7 @@ public class GamePlayController  {
   }
 
   public void mouseClick(MouseEvent e) throws IOException {
-    int nTotal = (gameBoard.getPlayers().length + 1); // Total number of players + 1
+    int nTotal = gameBoard.getPlayers().length;// Total number of players
 
     if (e.getSource() == rollButton) {
       rollPane.setVisible(false);
@@ -161,7 +172,7 @@ public class GamePlayController  {
       turnLabel.setText(gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + "'s Turn!");
 
       //Checks if the tile is either Property, Utility, or Railroad
-      if (gameBoard.getPlayers()[nTurnCounter % nTotal].isPropertyUtilityRailroad(gameBoard)) {
+      if (gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Ownable) {
 
         //Checks if the spot is owned
         if (!gameBoard.getPlayers()[nTurnCounter % nTotal].isFree(gameBoard)) {
@@ -193,6 +204,7 @@ public class GamePlayController  {
             //Checks if player has anything to offer in trade
             if (gameBoard.getPlayers()[nTurnCounter % nTotal].canTrade(gameBoard)) {
               tradePane.setVisible(true);
+              rentPane.setVisible(true);
             }
             //else, he has no choice but to pay rent
             else {
@@ -218,11 +230,12 @@ public class GamePlayController  {
 
     }
     else if (e.getSource() == purchaseButton) {
+
       String event = gameBoard.getPlayers()[nTurnCounter % nTotal].purchase(gameBoard);
       gameBoard.getEvents().add(event);
       eventLabel.setText(event);
       purchasePane.setVisible(false);
-      updateMoney(nTotal);
+      updateMoney(nTurnCounter % nTotal, 5);
     }
     //TODO: Trade show properties to choose from
 //  else if(e.getSource() == tradeButton){
@@ -232,11 +245,30 @@ public class GamePlayController  {
 //  }
     else if(e.getSource() == rentButton){
       String event = gameBoard.getPlayers()[nTurnCounter % nTotal].payRent(gameBoard);
+      Player tempPlayer = null;
+
+      if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Property)
+        tempPlayer = ((Property)gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner();
+      if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Utility)
+        tempPlayer = ((Utility)gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner();
+      else if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Railroad)
+        tempPlayer = ((Railroad)gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner();
+
+      int nIndex = 0;
+      for( int i = 0; i < gameBoard.getPlayers().length; i++)
+        if(gameBoard.getPlayers()[i] == tempPlayer)
+           nIndex = i;
+
+      updateMoney(nTurnCounter % nTotal, nIndex);
+
+      rentPane.setVisible(false);
+      tradePane.setVisible(false);
       endPane.setVisible(true);
       gameBoard.getEvents().add(event);
       eventLabel.setText(event);
     }
     else if(e.getSource() == endButton) {
+      eventLabel.setText("");
       purchasePane.setVisible(false);
       tradePane.setVisible(false);
       rollPane.setVisible(true);
@@ -278,6 +310,38 @@ public class GamePlayController  {
     }
     else if((nTurnCounter % nTotal) == 1){
       money4.setText(String.valueOf(gameBoard.getPlayers()[nTurnCounter % nTotal].getMoney()));
+    }
+  }
+
+  public void updateMoney(int nPlayer1, int nPlayer2){
+     //Updates Player Money on the board
+    if(nPlayer1 == 0){
+      money1.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
+    }
+    else if(nPlayer1 == 1){
+      money2.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
+    }
+    else if(nPlayer1 == 2){
+      money3.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
+    }
+    else if(nPlayer1 == 3){
+      money4.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
+    }
+    else if(nPlayer1 == 5){
+      money5.setText(String.valueOf(gameBoard.getBank().getMoney()));
+    }
+
+    if(nPlayer2 == 0){
+      money1.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
+    }
+    else if(nPlayer2 == 1){
+      money2.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
+    }
+    else if(nPlayer2 == 2){
+      money3.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
+    }
+    else if(nPlayer2 == 5){
+      money5.setText(String.valueOf(gameBoard.getBank().getMoney()));
     }
   }
 
@@ -398,14 +462,19 @@ public class GamePlayController  {
 
 
     player1.setText(players[0].getName());
+    money1.setText(Double.toString(players[0].getMoney()));
     player2.setText(players[1].getName());
+    money2.setText(Double.toString(players[1].getMoney()));
 
-    if(gameBoard.getPlayers().length == 3){
-      player3.setVisible(true);
+    money5.setText(Double.toString(gameBoard.getBank().getMoney()));
+    if(gameBoard.getPlayers().length > 2){
+      playerPane3.setVisible(true);
       player3.setText(players[2].getName());
+      money3.setText(Double.toString(players[2].getMoney()));
       if(gameBoard.getPlayers().length == 4) {
-        player3.setVisible(true);
+        playerPane4.setVisible(true);
         player4.setText(players[3].getName());
+        money4.setText(Double.toString(players[3].getMoney()));
       }
     }
 

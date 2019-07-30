@@ -18,7 +18,6 @@ public class Property extends Ownable {
     private double dFootTraffic;
     private double dRentCollected;
     private ArrayList<Card> cardMultipliers;
-    private Player owner;
 
     /**
      * Creates a property subclass which inherits from Land
@@ -31,6 +30,7 @@ public class Property extends Ownable {
         this.strColor = strColor;
         this.arrAttributes = new double[9];
         this.arrAttributes = arrAttributes;
+        cardMultipliers = new ArrayList<Card>();
         nDevelopment = 0;
         dRentCollected = 0;
         dFootTraffic = 0;
@@ -92,9 +92,6 @@ public class Property extends Ownable {
         return cardMultipliers;
     }
 
-    public void setOwner(Player player){
-        this.owner = player;
-    }
     /**
      * Adds an amount to the rent collected by the property based on the parameter
      * @param n the amount to be addded
@@ -120,10 +117,10 @@ public class Property extends Ownable {
     public String triggerEvent(GameBoard gameBoard, Player player){
         int nCounter = 0;
         double dRent = 0;
-        for(int i = 0; i < owner.getProperties().size();i++){
+        for(int i = 0; i < this.getOwner().getProperties().size();i++){
             //Count the number of properties of the same color owned by player
-            if(owner.getProperties().get(i) instanceof Property){
-                if(this.strColor.equals(((Property) owner.getProperties().get(i)).getColor()))
+            if(this.getOwner().getProperties().get(i) instanceof Property){
+                if(this.strColor.equals(((Property) this.getOwner().getProperties().get(i)).getColor()))
                     nCounter++;
             }
         }
@@ -149,11 +146,11 @@ public class Property extends Ownable {
 
         String event = "";
         double dAmount = player.getMoney();
-        if(player.giveMoney(owner, dRent)){
-            event += player.getName() + "paid " + dRent + " to " + owner.getName() + ".";
+        if(player.giveMoney(this.getOwner(), dRent)){
+            event += player.getName() + "paid " + dRent + " to " + this.getOwner().getName() + ".";
         }
         else{
-            event += player.getName() + "paid " + dAmount + " to " + owner.getName() + ". ";
+            event += player.getName() + "paid " + dAmount + " to " + this.getOwner().getName() + ". ";
             event += player.getName() + "is now bankrupt.";
             gameBoard.setIsWin(true);
         }

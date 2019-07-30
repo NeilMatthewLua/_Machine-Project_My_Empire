@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.image.ImageView?>
 <AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../CSS/GamePlay.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GamePlayController">
    <children>
-      <Label id="eventButton" fx:id="logButton" layoutX="888.0" layoutY="659.0" onMouseClicked="#mouseClick" stylesheets="@../CSS/GamePlay.css" text="Event Log" textFill="WHITE">
+      <Label id="eventButton" fx:id="logButton" layoutX="924.0" layoutY="661.0" onMouseClicked="#mouseClick" stylesheets="@../CSS/GamePlay.css" text="Event Log" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
@@ -72,7 +72,7 @@
             <Label fx:id="empty6" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor7" layoutX="69.0" layoutY="524.0"  prefHeight="94.0" prefWidth="69.0">
+      <AnchorPane fx:id="anchor7" layoutX="69.0" layoutY="524.0" prefHeight="94.0" prefWidth="69.0">
          <children>
             <Label fx:id="empty7" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
          </children>
@@ -126,7 +126,7 @@
             <Label fx:id="empty16" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor17" layoutX="207.0" layoutY="2.0"  prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+      <AnchorPane fx:id="anchor17" layoutX="207.0" layoutY="2.0" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
          <children>
             <Label fx:id="empty17" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
          </children>
@@ -138,7 +138,7 @@
       </AnchorPane>
       <AnchorPane fx:id="anchor19" layoutX="344.0" layoutY="2.0" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
          <children>
-            <Label fx:id="empty19" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces"  prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <Label fx:id="empty19" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchor20" layoutX="413.0" layoutY="2.0" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
@@ -146,7 +146,7 @@
             <Label fx:id="empty20" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor21" layoutX="482.0" layoutY="2.0"  prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+      <AnchorPane fx:id="anchor21" layoutX="482.0" layoutY="2.0" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
          <children>
             <Label fx:id="empty21" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
          </children>
@@ -160,7 +160,7 @@
             <Label fx:id="empty22" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor23" layoutX="537.0" layoutY="126.0"  prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+      <AnchorPane fx:id="anchor23" layoutX="537.0" layoutY="126.0" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
          <children>
             <Label fx:id="empty23" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
          </children>
@@ -170,7 +170,7 @@
             <Label fx:id="empty24" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor25" layoutX="537.0" layoutY="264.0"  prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+      <AnchorPane fx:id="anchor25" layoutX="537.0" layoutY="264.0" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
          <children>
             <Label fx:id="empty25" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
          </children>
@@ -192,62 +192,76 @@
       </AnchorPane>
 
 
-      <Label id="eventLabel" fx:id="eventLabel" alignment="TOP_CENTER" layoutX="685.0" layoutY="198.0" prefHeight="161.0" prefWidth="341.0" stylesheets="@../CSS/GamePlay.css" text="Label" />
-      <Label id="turnLabel" fx:id="turnLabel" alignment="CENTER" layoutX="667.0" layoutY="58.0" prefHeight="71.0" prefWidth="376.0" stylesheets="@../CSS/GamePlay.css" text="Albert's Turn" textFill="#fcd670">
+      <Label id="eventLabel" fx:id="eventLabel" alignment="TOP_CENTER" layoutX="685.0" layoutY="198.0" prefHeight="161.0" prefWidth="341.0" stylesheets="@../CSS/GamePlay.css" />
+      <Label id="turnLabel" fx:id="turnLabel" alignment="CENTER" layoutX="667.0" layoutY="58.0" prefHeight="71.0" prefWidth="376.0" stylesheets="@../CSS/GamePlay.css" textFill="#fcd670">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="25.0" layoutY="640.0" prefHeight="74.0" prefWidth="156.0">
+      <AnchorPane fx:id="playerPane11" layoutX="-19.0" layoutY="636.0" prefHeight="74.0" prefWidth="156.0">
          <children>
-            <Label id="moneySummary" fx:id="money1" alignment="CENTER" layoutX="25.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" text="\$300" textFill="WHITE">
+            <Label id="moneySummary" fx:id="money5" alignment="CENTER" layoutX="25.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <Label id="nameSummary" fx:id="player1" alignment="CENTER" layoutX="3.0" layoutY="-2.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" text="Sharmaine" textFill="#fcd670">
+            <Label id="nameSummary" fx:id="player11" alignment="CENTER" layoutX="3.0" layoutY="-2.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" text="Bank" textFill="#fcd670">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="221.0" layoutY="639.0" prefHeight="74.0" prefWidth="156.0">
+      <AnchorPane fx:id="playerPane1" layoutX="140.0" layoutY="636.0" prefHeight="74.0" prefWidth="156.0">
          <children>
-            <Label id="moneySummary" fx:id="money2" alignment="CENTER" layoutX="22.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" text="\$300" textFill="WHITE">
+            <Label id="moneySummary" fx:id="money1" alignment="CENTER" layoutX="25.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <Label id="nameSummary" fx:id="player2" alignment="CENTER" layoutX="3.0" layoutY="-1.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" text="Sharmaine" textFill="#fcd670">
+            <Label id="nameSummary" fx:id="player1" alignment="CENTER" layoutX="3.0" layoutY="-2.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" textFill="#fcd670">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="415.0" layoutY="640.0" prefHeight="74.0" prefWidth="156.0" visible="false">
+      <AnchorPane fx:id="playerPane2" layoutX="307.0" layoutY="636.0" prefHeight="74.0" prefWidth="156.0">
          <children>
-            <Label id="moneySummary" fx:id="money3" alignment="CENTER" layoutX="22.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" text="\$300" textFill="WHITE">
+            <Label id="moneySummary" fx:id="money2" alignment="CENTER" layoutX="22.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <Label id="nameSummary" fx:id="player3" alignment="CENTER" layoutX="3.0" layoutY="-2.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" text="Sharmaine" textFill="#fcd670">
+            <Label id="nameSummary" fx:id="player2" alignment="CENTER" layoutX="3.0" layoutY="-1.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" textFill="#fcd670">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="607.0" layoutY="640.0" prefHeight="74.0" prefWidth="156.0" visible="false">
+      <AnchorPane fx:id="playerPane3" layoutX="494.0" layoutY="636.0" prefHeight="74.0" prefWidth="156.0" visible="false">
          <children>
-            <Label id="moneySummary" fx:id="money4" alignment="CENTER" layoutX="22.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" text="\$300" textFill="WHITE">
+            <Label id="moneySummary" fx:id="money3" alignment="CENTER" layoutX="22.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <Label id="nameSummary" fx:id="player4" alignment="CENTER" layoutX="3.0" layoutY="-2.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" text="Sharmaine" textFill="#fcd670">
+            <Label id="nameSummary" fx:id="player3" alignment="CENTER" layoutX="3.0" layoutY="-2.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" textFill="#fcd670">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="playerPane4" layoutX="705.0" layoutY="636.0" prefHeight="74.0" prefWidth="156.0" visible="false">
+         <children>
+            <Label id="moneySummary" fx:id="money4" alignment="CENTER" layoutX="22.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label id="nameSummary" fx:id="player4" alignment="CENTER" layoutX="3.0" layoutY="-2.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" textFill="#fcd670">
                <font>
                   <Font size="22.0" />
                </font>
