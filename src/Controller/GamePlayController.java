@@ -57,6 +57,10 @@ public class GamePlayController  {
   @FXML
     private Label logButton;
   @FXML
+    private Label keepButton;
+  @FXML
+    private Label discardButton;
+  @FXML
     private Label money1;
   @FXML
     private Label money2;
@@ -84,6 +88,10 @@ public class GamePlayController  {
     private StackPane endPane;
   @FXML
     private StackPane rentPane;
+  @FXML
+    private StackPane keepPane;
+  @FXML
+    private StackPane discardPane;
   @FXML
     private AnchorPane playerPane1;
   @FXML
@@ -176,12 +184,12 @@ public class GamePlayController  {
       rollPane.setVisible(false);
 
       String event = gameBoard.getPlayers()[nTurnCounter % nTotal].roll(gameBoard);
-      //eventLabel.setText(event);
+      eventLabel.setText(event);
       gameBoard.getEvents().add(event);
-      String[] strings = event.split("\n");
-        System.out.println(event);
+//      String[] strings = event.split("\n");
+//        System.out.println(event);
 //      if(strings.length > 1)
-           delayStart(strings);
+//           delayStart(strings);
 
       turnLabel.setText(gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + "'s Turn!");
 
@@ -234,7 +242,73 @@ public class GamePlayController  {
           endPane.setVisible(true);
         }
       }
-      //else, it's either Jail, Chance, Start, Tax, Community Service or Free Parking
+      else if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Chance){
+          Card temp = gameBoard.drawChance();
+          gameBoard.getPlayers()[nTurnCounter % nTotal].addCard(temp);
+
+          event = gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + " drew " + temp.getDescription();
+          if(temp instanceof CardSet_1){
+              keepPane.setVisible(true);
+          }
+          else if(temp instanceof CardSet_2){
+              //TODO SHOW LABEL AK KURT IF HE WANTS A USE CARD BUTTON
+              temp.useCard(gameBoard.getPlayers()[nTurnCounter % nTotal], gameBoard);
+              //Checks if the spot is owned
+              if (!gameBoard.getPlayers()[nTurnCounter % nTotal].isFree(gameBoard)) {
+
+                  //Checks if the player lands on an owned Utility / Railroad
+                  if (gameBoard.getPlayers()[nTurnCounter % nTotal].isOwnedUtilityRailroad(gameBoard)) {
+                      //There's nothing the player can do for that turn
+                      endPane.setVisible(true);
+                  }
+                  //Checks if player lands on an owned property
+                  else if (gameBoard.getPlayers()[nTurnCounter % nTotal].isOwnedProperty(gameBoard)) {
+
+                      //checks if that property is eligible for development
+                      if (gameBoard.getPlayers()[nTurnCounter % nTotal].eligibleDev(gameBoard)) {
+                          //Automatically develops the property if eligible
+                          event = gameBoard.getPlayers()[nTurnCounter % nTotal].develop(gameBoard);
+                          eventLabel.setText(event);
+                          gameBoard.getEvents().add(event);
+                          endPane.setVisible(true);
+                      }
+                      //else, player ends his/her turn
+                      else {
+                          endPane.setVisible(true);
+                      }
+                  }
+                  //Else, player will either pay rent or offer a trade
+                  else {
+
+                      //Checks if player has anything to offer in trade
+                      if (gameBoard.getPlayers()[nTurnCounter % nTotal].canTrade(gameBoard)) {
+                          tradePane.setVisible(true);
+                          rentPane.setVisible(true);
+                      }
+                      //else, he has no choice but to pay rent
+                      else {
+                          if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Utility){
+                              double dPay = 10 * gameBoard.getPlayers()[nTurnCounter % nTotal].getLastRoll();
+                              gameBoard.getPlayers()[nTurnCounter % nTotal].giveMoney(((Utility) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner(), dPay);
+                              event += gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + " paid $" + dPay + " to " +  ((Utility) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner().getName();
+                          }
+                          else{
+                              rentPane.setVisible(true);
+                          }
+                      }
+                  }
+              }
+              else {
+                  //Checks if player can buy the tile
+                  if (gameBoard.getPlayers()[nTurnCounter % nTotal].eligiblePurchase(gameBoard)) {
+                      purchasePane.setVisible(true);
+                  }
+                  endPane.setVisible(true);
+              }
+          }
+          eventLabel.setText(event);
+      }
+      //else, it's either Jail, Start, Tax, Community Service or Free Parking
       else {
         double[] temp = new double[nTotal + 1]; //temporary holder of everyone's(including bank's) money before the chance card takes action
         int[] nIndex = new int[2]; //holds the which players/bank's money has been changed
@@ -258,7 +332,7 @@ public class GamePlayController  {
         if(temp[i] != gameBoard.getBank().getMoney()) //checks the bank's value changed
             nIndex[j] = 5;
 
-        //updates teh labels in the GUI if there are changes with their money
+        //updates the labels in the GUI if there are changes with their money
         if(j == 1)
             updateMoney(nIndex[0],nIndex[1]);
 
@@ -267,6 +341,9 @@ public class GamePlayController  {
         endPane.setVisible(true);
       }
 
+    }
+    else if (e.getSource() == keepButton) {
+        keepButton.setVisible(false);
     }
     else if (e.getSource() == purchaseButton) {
 

@@ -46,19 +46,7 @@ public class CardSet_2 extends Card{
                     }
             }
 
-            if(!player.isMine(gameBoard)) { //checks if the current Player owns that piece of land
-                if (((Property)gameBoard.getLand().get(player.getPosition())).getOwner() != null) //checks if the landed tile is owned by the current Player
-                    event += (gameBoard.getLand().get((player.getPosition()))).triggerEvent(gameBoard, player); //collects rent from property
-                else { //If not, checks if player is able to buy that title to the land
-                    if(player.getMoney() >= ((Property)gameBoard.getLand().get((player.getPosition()))).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land
-                        event += player.purchase(gameBoard);
-                    }
-                }
-            }
-            else { //this means the land tile is owned by the current Player
-                event += player.trade(gameBoard);
-            }
-
+            event += player.getName() + " landed on " + gameBoard.getLand().get(player.getPosition()).getName() + "\n";
         }
         else if (nIndex == 1) {
             while(!(gameBoard.getLand().get(player.getPosition()) instanceof Utility)) {//Loops until a utility is found
@@ -75,29 +63,7 @@ public class CardSet_2 extends Card{
                         ((Property)gameBoard.getLand().get(player.getPosition())).addFootTraffic();
                     }
             }
-
-            if(((Utility)gameBoard.getLand().get(player.getPosition())).getOwner() != null) { //checks if the utility tile is owned by anyone
-                if(!(player.isMine(gameBoard))) { //checks if you don't own it, you'll pay 10 times dice roll to the owner
-                    Random rand = new Random();
-                    int nRand = rand.nextInt(7);
-
-                    double temp = player.getMoney();
-
-                    if(player.giveMoney(((Utility)gameBoard.getLand().get(player.getPosition())).getOwner(), 10 * nRand)){
-                        event += player.getName() + " pays $" + (10 * nRand) + " to: " + ((Utility)gameBoard.getLand().get(player.getPosition())).getOwner().getName();
-                    }
-                    else{//If player can't pay
-                        event += player.getName() + " pays $" + temp + " to: " + ((Utility)gameBoard.getLand().get(player.getPosition())).getOwner().getName() + "\n";
-                        event += player.getName() +" is now bankrupt. Game is over.";
-                        gameBoard.setIsWin(true);
-                    }
-                }
-            }
-            else { //the utility tile is free to buy
-                if(player.getMoney() >= ((Utility)gameBoard.getLand().get(player.getPosition())).getPrice()) { //checks if the current player has sufficient funds before offering to buy that land
-                    player.purchase(gameBoard);
-                }
-            }
+            event += player.getName() + " landed on " + gameBoard.getLand().get(player.getPosition()).getName() + "\n";
         }
         else if (nIndex == 2) {
             Random rand = new Random();
