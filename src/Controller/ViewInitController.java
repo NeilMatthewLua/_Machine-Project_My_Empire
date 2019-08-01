@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -40,7 +41,12 @@ public class ViewInitController implements Initializable{
     ArrayList<Label> errorLabels;
     ArrayList<Label> readyButtons;
     ArrayList<TextField> textFields;
+    @FXML private ImageView player3Avatar;
+    @FXML private ImageView player4Avatar;
     GameBoard gameBoard;
+    String [][] avatarUrls = {
+        {"../Images/Players/player1.png"},{"../Images/Players/player2.png"},{"../Images/Players/player3.png"},{"../Images/Players/player4.png"}
+    };
 
     @FXML
     public void play(MouseEvent e) throws IOException {
@@ -53,8 +59,18 @@ public class ViewInitController implements Initializable{
                 players.add(textField4.getText());
             }
         }
+        ArrayList<String> playerAvatars = new ArrayList<String>();
         gameBoard = new GameBoard();
         gameBoard.initializePlayers(players);
+        for(int i = 0; i < gameBoard.getPlayers().length;i++){
+            boolean isFound = false;
+            for(int j = 0; j < gameBoard.getPlayers().length && !isFound;j++){
+                if(gameBoard.getPlayers()[i].getName().equalsIgnoreCase(textFields.get(j).getText())){
+                    playerAvatars.add(avatarUrls[j][0]);
+                    isFound = true;
+                }
+            }
+        }
         if (e.getSource() == play) { //If user presses play then switch scene
             try {
                 Stage stage = (Stage) background.getScene().getWindow();
@@ -63,6 +79,7 @@ public class ViewInitController implements Initializable{
                 Scene scene = new Scene(loader.load());
                 stage.setScene(scene);
                 ((LandInitController) loader.getController()).setGameBoard(gameBoard);
+                ((LandInitController) loader.getController()).setPlayerAvatars(playerAvatars);
             } catch(IOException problem){
                 System.out.println("Something happened");
             }
@@ -141,6 +158,7 @@ public class ViewInitController implements Initializable{
             ready3.setVisible(true);
             add2.setVisible(true);
             play.setVisible(false);
+            player3Avatar.setVisible(true);
         }
         else if(e.getSource() == add2){
             delete1.setVisible(false);
@@ -149,6 +167,7 @@ public class ViewInitController implements Initializable{
             textField4.setVisible(true);
             ready4.setVisible(true);
             play.setVisible(false);
+            player4Avatar.setVisible(true);
         }
         if(checkForReady()){
             play.setVisible(true);
@@ -168,6 +187,7 @@ public class ViewInitController implements Initializable{
             textField3.setText("");
             ready3.setText("READY");
             add1.setVisible(true);
+            player3Avatar.setVisible(false);
         }
         else if(e.getSource() == delete2){
             delete2.setVisible(false);
@@ -177,6 +197,7 @@ public class ViewInitController implements Initializable{
             textField4.setText("");
             ready4.setText("READY");
             add2.setVisible(true);
+            player4Avatar.setVisible(false);
         }
         if(checkForReady()){
             play.setVisible(true);

@@ -159,6 +159,7 @@ public class LandInitController implements Initializable {
     private ArrayList<AnchorPane> panes;
     private ArrayList<Label> deleteLabels;
 
+    private ArrayList<String> playerAvatars;
     private String[][] urls = {
             {"Almond Drive","../Images/SmallSpaces/Silver.png","../Images/BigSpaces/Almond.png"},
             {"Kasoy Street","../Images/SmallSpaces/Silver.png","../Images/BigSpaces/Kasoy.png"},
@@ -193,6 +194,13 @@ public class LandInitController implements Initializable {
 
     public void setGameBoard(GameBoard gameBoard){
         this.gameBoard = gameBoard;
+    }
+
+    public void setPlayerAvatars(ArrayList<String> playerAvatars){
+        this.playerAvatars = new ArrayList<String>();
+        for(int i = 0; i < playerAvatars.size();i++){
+            this.playerAvatars.add(playerAvatars.get(i));
+        }
     }
 
     public boolean isPlacable(Label label){//Checks if label is placable
@@ -529,6 +537,7 @@ public class LandInitController implements Initializable {
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);
             ((GamePlayController) loader.getController()).setGameBoard(gameBoard);
+            ((GamePlayController) loader.getController()).setPlayerAvatars(playerAvatars);
         }
         catch(IOException event){
             System.out.println("Something happened");

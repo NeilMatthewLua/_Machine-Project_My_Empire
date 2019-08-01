@@ -105,34 +105,204 @@ public class GamePlayController  {
   @FXML
     private AnchorPane playerPane4;
 
-  @FXML private Label empty1;
-  @FXML private Label empty2;
-  @FXML private Label empty3;
-  @FXML private Label empty4;
-  @FXML private Label empty5;
-  @FXML private Label empty6;
-  @FXML private Label empty7;
-  @FXML private Label empty8;
-  @FXML private Label empty9;
-  @FXML private Label empty10;
-  @FXML private Label empty11;
-  @FXML private Label empty12;
-  @FXML private Label empty13;
-  @FXML private Label empty14;
-  @FXML private Label empty15;
-  @FXML private Label empty16;
-  @FXML private Label empty17;
-  @FXML private Label empty18;
-  @FXML private Label empty19;
-  @FXML private Label empty20;
-  @FXML private Label empty21;
-  @FXML private Label empty22;
-  @FXML private Label empty23;
-  @FXML private Label empty24;
-  @FXML private Label empty25;
-  @FXML private Label empty26;
-  @FXML private Label empty27;
-  @FXML private Label empty28;
+
+  @FXML private Label space1;
+  @FXML private Label space2;
+  @FXML private Label space3;
+  @FXML private Label space4;
+  @FXML private Label space5;
+  @FXML private Label space6;
+  @FXML private Label space7;
+  @FXML private Label space8;
+  @FXML private Label space9;
+  @FXML private Label space10;
+  @FXML private Label space11;
+  @FXML private Label space12;
+  @FXML private Label space13;
+  @FXML private Label space14;
+  @FXML private Label space15;
+  @FXML private Label space16;
+  @FXML private Label space17;
+  @FXML private Label space18;
+  @FXML private Label space19;
+  @FXML private Label space20;
+  @FXML private Label space21;
+  @FXML private Label space22;
+  @FXML private Label space23;
+  @FXML private Label space24;
+  @FXML private Label space25;
+  @FXML private Label space26;
+  @FXML private Label space27;
+  @FXML private Label space28;
+  @FXML private Label space29;
+  @FXML private Label space30;
+  @FXML private Label space31;
+  @FXML private Label space32;
+
+  @FXML private ImageView playerOne1;
+  @FXML private ImageView playerOne2;
+  @FXML private ImageView playerOne3;
+  @FXML private ImageView playerOne4;
+  @FXML private ImageView playerOne5;
+  @FXML private ImageView playerOne6;
+  @FXML private ImageView playerOne7;
+  @FXML private ImageView playerOne8;
+  @FXML private ImageView playerOne9;
+  @FXML private ImageView playerOne10;
+  @FXML private ImageView playerOne11;
+  @FXML private ImageView playerOne12;
+  @FXML private ImageView playerOne13;
+  @FXML private ImageView playerOne14;
+  @FXML private ImageView playerOne15;
+  @FXML private ImageView playerOne16;
+  @FXML private ImageView playerOne17;
+  @FXML private ImageView playerOne18;
+  @FXML private ImageView playerOne19;
+  @FXML private ImageView playerOne20;
+  @FXML private ImageView playerOne21;
+  @FXML private ImageView playerOne22;
+  @FXML private ImageView playerOne23;
+  @FXML private ImageView playerOne24;
+  @FXML private ImageView playerOne25;
+  @FXML private ImageView playerOne26;
+  @FXML private ImageView playerOne27;
+  @FXML private ImageView playerOne28;
+  @FXML private ImageView playerOne29;
+  @FXML private ImageView playerOne30;
+  @FXML private ImageView playerOne31;
+  @FXML private ImageView playerOne32;
+
+  @FXML private ImageView playerTwo1;
+  @FXML private ImageView playerTwo2;
+  @FXML private ImageView playerTwo3;
+  @FXML private ImageView playerTwo4;
+  @FXML private ImageView playerTwo5;
+  @FXML private ImageView playerTwo6;
+  @FXML private ImageView playerTwo7;
+  @FXML private ImageView playerTwo8;
+  @FXML private ImageView playerTwo9;
+  @FXML private ImageView playerTwo10;
+  @FXML private ImageView playerTwo11;
+  @FXML private ImageView playerTwo12;
+  @FXML private ImageView playerTwo13;
+  @FXML private ImageView playerTwo14;
+  @FXML private ImageView playerTwo15;
+  @FXML private ImageView playerTwo16;
+  @FXML private ImageView playerTwo17;
+  @FXML private ImageView playerTwo18;
+  @FXML private ImageView playerTwo19;
+  @FXML private ImageView playerTwo20;
+  @FXML private ImageView playerTwo21;
+  @FXML private ImageView playerTwo22;
+  @FXML private ImageView playerTwo23;
+  @FXML private ImageView playerTwo24;
+  @FXML private ImageView playerTwo25;
+  @FXML private ImageView playerTwo26;
+  @FXML private ImageView playerTwo27;
+  @FXML private ImageView playerTwo28;
+  @FXML private ImageView playerTwo29;
+  @FXML private ImageView playerTwo30;
+  @FXML private ImageView playerTwo31;
+  @FXML private ImageView playerTwo32;
+
+  @FXML private ImageView playerThree1;
+  @FXML private ImageView playerThree2;
+  @FXML private ImageView playerThree3;
+  @FXML private ImageView playerThree4;
+  @FXML private ImageView playerThree5;
+  @FXML private ImageView playerThree6;
+  @FXML private ImageView playerThree7;
+  @FXML private ImageView playerThree8;
+  @FXML private ImageView playerThree9;
+  @FXML private ImageView playerThree10;
+  @FXML private ImageView playerThree11;
+  @FXML private ImageView playerThree12;
+  @FXML private ImageView playerThree13;
+  @FXML private ImageView playerThree14;
+  @FXML private ImageView playerThree15;
+  @FXML private ImageView playerThree16;
+  @FXML private ImageView playerThree17;
+  @FXML private ImageView playerThree18;
+  @FXML private ImageView playerThree19;
+  @FXML private ImageView playerThree20;
+  @FXML private ImageView playerThree21;
+  @FXML private ImageView playerThree22;
+  @FXML private ImageView playerThree23;
+  @FXML private ImageView playerThree24;
+  @FXML private ImageView playerThree25;
+  @FXML private ImageView playerThree26;
+  @FXML private ImageView playerThree27;
+  @FXML private ImageView playerThree28;
+  @FXML private ImageView playerThree29;
+  @FXML private ImageView playerThree30;
+  @FXML private ImageView playerThree31;
+  @FXML private ImageView playerThree32;
+
+  @FXML private ImageView playerFour1;
+  @FXML private ImageView playerFour2;
+  @FXML private ImageView playerFour3;
+  @FXML private ImageView playerFour4;
+  @FXML private ImageView playerFour5;
+  @FXML private ImageView playerFour6;
+  @FXML private ImageView playerFour7;
+  @FXML private ImageView playerFour8;
+  @FXML private ImageView playerFour9;
+  @FXML private ImageView playerFour10;
+  @FXML private ImageView playerFour11;
+  @FXML private ImageView playerFour12;
+  @FXML private ImageView playerFour13;
+  @FXML private ImageView playerFour14;
+  @FXML private ImageView playerFour15;
+  @FXML private ImageView playerFour16;
+  @FXML private ImageView playerFour17;
+  @FXML private ImageView playerFour18;
+  @FXML private ImageView playerFour19;
+  @FXML private ImageView playerFour20;
+  @FXML private ImageView playerFour21;
+  @FXML private ImageView playerFour22;
+  @FXML private ImageView playerFour23;
+  @FXML private ImageView playerFour24;
+  @FXML private ImageView playerFour25;
+  @FXML private ImageView playerFour26;
+  @FXML private ImageView playerFour27;
+  @FXML private ImageView playerFour28;
+  @FXML private ImageView playerFour29;
+  @FXML private ImageView playerFour30;
+  @FXML private ImageView playerFour31;
+  @FXML private ImageView playerFour32;
+
+  @FXML private AnchorPane anchor1;
+  @FXML private AnchorPane anchor2;
+  @FXML private AnchorPane anchor3;
+  @FXML private AnchorPane anchor4;
+  @FXML private AnchorPane anchor5;
+  @FXML private AnchorPane anchor6;
+  @FXML private AnchorPane anchor7;
+  @FXML private AnchorPane anchor8;
+  @FXML private AnchorPane anchor9;
+  @FXML private AnchorPane anchor10;
+  @FXML private AnchorPane anchor11;
+  @FXML private AnchorPane anchor12;
+  @FXML private AnchorPane anchor13;
+  @FXML private AnchorPane anchor14;
+  @FXML private AnchorPane anchor15;
+  @FXML private AnchorPane anchor16;
+  @FXML private AnchorPane anchor17;
+  @FXML private AnchorPane anchor18;
+  @FXML private AnchorPane anchor19;
+  @FXML private AnchorPane anchor20;
+  @FXML private AnchorPane anchor21;
+  @FXML private AnchorPane anchor22;
+  @FXML private AnchorPane anchor23;
+  @FXML private AnchorPane anchor24;
+  @FXML private AnchorPane anchor25;
+  @FXML private AnchorPane anchor26;
+  @FXML private AnchorPane anchor27;
+  @FXML private AnchorPane anchor28;
+  @FXML private AnchorPane anchor29;
+  @FXML private AnchorPane anchor30;
+  @FXML private AnchorPane anchor31;
+  @FXML private AnchorPane anchor32;
 
   @FXML private ImageView Zoomed;
   @FXML private Label closeZoomed;
@@ -140,8 +310,19 @@ public class GamePlayController  {
   @FXML private Label footTrafficZoom;
   @FXML private Label playersZoom;
 
+  private ArrayList<ImageView> player1Spaces;
+  private ArrayList<ImageView> player2Spaces;
+  private ArrayList<ImageView> player3Spaces;
+  private ArrayList<ImageView> player4Spaces;
+  private ArrayList<ArrayList<ImageView>> playersSpaces;
   private ArrayList<Label> spaces;
+  private ArrayList<AnchorPane> anchors;
+  private ArrayList<String> playerAvatars;
   private String[][] urls = {
+          {"Start","../Images/SmallSpaces/placeholder.png","../Images/BigSpaces/Start.png"},
+          {"Community Service","../Images/SmallSpaces/placeholder.png","../Images/BigSpaces/Community.png"},
+          {"Jail","../Images/SmallSpaces/placeholder.png","../Images/BigSpaces/Jail.png"},
+          {"Free Parking","../Images/SmallSpaces/placeholder.png","../Images/BigSpaces/FreeParking.png"},
           {"Almond Drive","../Images/SmallSpaces/Silver.png","../Images/BigSpaces/Almond.png"},
           {"Kasoy Street","../Images/SmallSpaces/Silver.png","../Images/BigSpaces/Kasoy.png"},
           {"Rodeo Drive","../Images/SmallSpaces/Purple.png","../Images/BigSpaces/Rodeo.png"},
@@ -181,6 +362,13 @@ public class GamePlayController  {
     initialize(gameBoard.getPlayers());
   }
 
+  public void setPlayerAvatars(ArrayList<String> playerAvatars){
+    this.playerAvatars = new ArrayList<String>();
+    for(int i = 0; i < playerAvatars.size();i++){
+      this.playerAvatars.add(playerAvatars.get(i));
+    }
+  }
+
   public void mouseClick(MouseEvent e) throws IOException {
     int nTotal = gameBoard.getPlayers().length;// Total number of players
 
@@ -190,6 +378,7 @@ public class GamePlayController  {
       String event = gameBoard.getPlayers()[nTurnCounter % nTotal].roll(gameBoard);
       eventLabel.setText(event);
       gameBoard.getEvents().add(event);
+      updatePlayerPositions();
 //      String[] strings = event.split("\n");
 //        System.out.println(event);
 //      if(strings.length > 1)
@@ -645,104 +834,138 @@ public class GamePlayController  {
   @FXML
   public void openZoomed(MouseEvent e){
     if(!Zoomed.isVisible()){
+      System.out.println("Kill me now");
       closeZoomed.setVisible(true);
       Zoomed.setVisible(true);
       boolean isFound = true;
-      for(int i = 0; (i < urls.length - 5) && isFound ;i++){
-        if(((Label)e.getSource()).getText().equalsIgnoreCase(urls[i][0])){
-          ownerZoom.setVisible(true);
-          isFound = false;
-          if(i <= 17){
-            playersZoom.setVisible(true);
-            playersZoom.setText("" + gameBoard.getPlayers().length);
-            footTrafficZoom.setVisible(true);
+      int index;
+      if(e.getSource() instanceof Label){
+        index = spaces.indexOf(e.getSource());
+      }
+      else {
+        index = anchors.indexOf(e.getSource());
+      }
+        for(int i = 0; i < urls.length && isFound ;i++){
+          if(spaces.get(index).getText().equalsIgnoreCase(urls[i][0])){
+            ownerZoom.setVisible(true);
+            isFound = false;
+            if(i <= 17){
+              playersZoom.setVisible(true);
+              playersZoom.setText("" + gameBoard.getPlayers().length);
+              footTrafficZoom.setVisible(true);
+            }
           }
         }
+      }
+    }
+
+
+  @FXML
+  public void displaySpaces(MouseEvent event) {
+    //Display land when clicked
+    int index;
+    if (event.getSource() instanceof Label)
+      index = spaces.indexOf(event.getSource());
+    else
+      index = anchors.indexOf(event.getSource());
+    if (event.getButton() == MouseButton.SECONDARY) {//Include Owner, Foot Traffic, and Multipliers
+      if (!Zoomed.isVisible()) {
+        boolean isFound = true;
+        for (int i = 0; i < urls.length && isFound; i++) {
+          if (spaces.get(index).getText().equalsIgnoreCase(urls[i][0])) {
+            System.out.println(index + urls[i][2]);
+            Image image = new Image(getClass().getResourceAsStream(urls[i][2]));
+            Zoomed.setImage(image);
+            Zoomed.toFront();
+            isFound = false;
+            openZoomed(event);
+//            boolean isSame = false;
+//            for (int j = 0; j < gameBoard.getLand().size() && !isSame; j++) {
+//              if (gameBoard.getLand().get(j).getName().equalsIgnoreCase(spaces.get(index).getText())) {
+//                isSame = true;
+//                if (gameBoard.getLand().get(j) instanceof Ownable) {
+//                  if (((Ownable) gameBoard.getLand().get(j)).getOwner() != null) {
+//                    if (gameBoard.getLand().get(j) instanceof Property) {
+//                      ownerZoom.setText(((Property) gameBoard.getLand().get(j)).getOwner().getName());
+//                      footTrafficZoom.setText("" + ((Property) gameBoard.getLand().get(j)).getFootTraffic());
+//                      System.out.println(((Property) gameBoard.getLand().get(j)).getFootTraffic());
+//                    } else {
+//                      ownerZoom.setText(((Ownable) gameBoard.getLand().get(j)).getOwner().getName());
+//                    }
+//                  } else {
+//                    footTrafficZoom.setText("0.0");
+//                    ownerZoom.setText("None");
+//                  }
+//                }
+//              }
+//            }
+          }
+        }
+      }
+      else {
+        closeZoomed(event);
       }
     }
   }
 
   @FXML
-  public void displaySpaces(MouseEvent event){
-    //Display land when clicked
-    if(event.getButton() == MouseButton.SECONDARY){//Include Owner, Foot Traffic, and Multipliers
-      if(!Zoomed.isVisible()){
-        boolean isFound = true;
-        if (!(((Label) event.getSource()).getText().equalsIgnoreCase("Start") || ((Label) event.getSource()).getText().equalsIgnoreCase("Community") ||
-                ((Label) event.getSource()).getText().equalsIgnoreCase("Jail") || ((Label) event.getSource()).getText().equalsIgnoreCase("Free Parking"))) {
-          for (int i = 0; i < urls.length && isFound; i++) {
-            if (((Label) event.getSource()).getText().equalsIgnoreCase(urls[i][0])) {
-              Image image = new Image(getClass().getResourceAsStream(urls[i][2]));
-              Zoomed.setImage(image);
-              isFound = false;
-              boolean isSame = false;
-              for(int j = 0; j < gameBoard.getLand().size() && !isSame;j++){
-                if(gameBoard.getLand().get(j).getName().equalsIgnoreCase(((Label) event.getSource()).getText())){
-                  if(gameBoard.getLand().get(j) instanceof Ownable){
-                    if(((Ownable) gameBoard.getLand().get(j)).getOwner() != null){
-                      if(gameBoard.getLand().get(j) instanceof Property){
-                        ownerZoom.setText(((Property) gameBoard.getLand().get(j)).getOwner().getName());
-                        footTrafficZoom.setText(""+((Property) gameBoard.getLand().get(j)).getFootTraffic());
-                        System.out.println(((Property)gameBoard.getLand().get(j)).getFootTraffic());
-                      }
-                      else {
-                        ownerZoom.setText(((Ownable) gameBoard.getLand().get(j)).getOwner().getName());
-                      }
-                    }
-                    else{
-                      footTrafficZoom.setText("0.0");
-                      ownerZoom.setText("None");
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        else{
-          if(((Label) event.getSource()).getText().equalsIgnoreCase("Start")){
-            Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Start.png"));
-            Zoomed.setImage(ig);
-          }
-          else if(((Label) event.getSource()).getText().equalsIgnoreCase("Community Service")){
-            Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Community.png"));
-            Zoomed.setImage(ig);
-          }
-          else if(((Label) event.getSource()).getText().equalsIgnoreCase("Jail")){
-            Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Jail.png"));
-            Zoomed.setImage(ig);
-          }
-          else{
-            Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/FreeParking.png"));
-            Zoomed.setImage(ig);
-          }
-        }
-        openZoomed(event);
-      }
-      else{
-        closeZoomed(event);
+  public void updatePlayerPositions(){
+    for(int i = 0; i < playersSpaces.size();i++){
+      for(int j = 0; j < playersSpaces.get(i).size();j++){
+        if(j == gameBoard.getPlayers()[i].getPosition())
+          playersSpaces.get(i).get(j).setVisible(true);
+        else
+          playersSpaces.get(i).get(j).setVisible(false);
       }
     }
   }
 
   // Run everything in this function whenever this view has been initialized
   public void initialize(Player[] players) {
-    spaces = new ArrayList<Label>();
-    spaces.add(empty1);spaces.add(empty2);spaces.add(empty3);spaces.add(empty4);spaces.add(empty5);
-    spaces.add(empty6);spaces.add(empty7);spaces.add(empty8);spaces.add(empty9);spaces.add(empty10);
-    spaces.add(empty11);spaces.add(empty12);spaces.add(empty13);spaces.add(empty14);spaces.add(empty15);
-    spaces.add(empty16);spaces.add(empty17);spaces.add(empty18);spaces.add(empty19);spaces.add(empty20);
-    spaces.add(empty21);spaces.add(empty22);spaces.add(empty23);spaces.add(empty24);spaces.add(empty25);
-    spaces.add(empty26);spaces.add(empty27);spaces.add(empty28);
+    player1Spaces = new ArrayList<ImageView>();
+    player2Spaces = new ArrayList<ImageView>();
+    player3Spaces = new ArrayList<ImageView>();
+    player4Spaces = new ArrayList<ImageView>();
 
-    int corners = 0;
+    player1Spaces.add(playerOne1); player1Spaces.add(playerOne2);player1Spaces.add(playerOne3);player1Spaces.add(playerOne4);player1Spaces.add(playerOne5);player1Spaces.add(playerOne6);player1Spaces.add(playerOne7);player1Spaces.add(playerOne8);player1Spaces.add(playerOne9);player1Spaces.add(playerOne10);player1Spaces.add(playerOne11);player1Spaces.add(playerOne12);player1Spaces.add(playerOne13);player1Spaces.add(playerOne14);player1Spaces.add(playerOne15);player1Spaces.add(playerOne16);player1Spaces.add(playerOne17);player1Spaces.add(playerOne18);player1Spaces.add(playerOne19);player1Spaces.add(playerOne20);player1Spaces.add(playerOne21);player1Spaces.add(playerOne22);player1Spaces.add(playerOne23);player1Spaces.add(playerOne24);player1Spaces.add(playerOne25);player1Spaces.add(playerOne26);player1Spaces.add(playerOne27);player1Spaces.add(playerOne28);player1Spaces.add(playerOne29);player1Spaces.add(playerOne30);player1Spaces.add(playerOne31);player1Spaces.add(playerOne32);
+    player2Spaces.add(playerTwo1);player2Spaces.add(playerTwo2);player2Spaces.add(playerTwo3);player2Spaces.add(playerTwo4);player2Spaces.add(playerTwo5);player2Spaces.add(playerTwo6);player2Spaces.add(playerTwo7);player2Spaces.add(playerTwo8);player2Spaces.add(playerTwo9);player2Spaces.add(playerTwo10);player2Spaces.add(playerTwo11);player2Spaces.add(playerTwo12);player2Spaces.add(playerTwo13);player2Spaces.add(playerTwo14);player2Spaces.add(playerTwo15);player2Spaces.add(playerTwo16);player2Spaces.add(playerTwo17);player2Spaces.add(playerTwo18);player2Spaces.add(playerTwo19);player2Spaces.add(playerTwo20);player2Spaces.add(playerTwo21);player2Spaces.add(playerTwo22);player2Spaces.add(playerTwo23);player2Spaces.add(playerTwo24);player2Spaces.add(playerTwo25);player2Spaces.add(playerTwo26);player2Spaces.add(playerTwo27);player2Spaces.add(playerTwo28);player2Spaces.add(playerTwo29);player2Spaces.add(playerTwo30);player2Spaces.add(playerTwo31);player2Spaces.add(playerTwo32);
+
+
+
+    playersSpaces = new ArrayList<ArrayList<ImageView>>();
+
+    playersSpaces.add(player1Spaces);playersSpaces.add(player2Spaces);
+    if(players.length >= 3){
+      playersSpaces.add(player3Spaces);
+      player3Spaces.add(playerThree1);player3Spaces.add(playerThree2);player3Spaces.add(playerThree3);player3Spaces.add(playerThree4);player3Spaces.add(playerThree5);player3Spaces.add(playerThree6);player3Spaces.add(playerThree7);player3Spaces.add(playerThree8);player3Spaces.add(playerThree9);player3Spaces.add(playerThree10);player3Spaces.add(playerThree11);player3Spaces.add(playerThree12);player3Spaces.add(playerThree13);player3Spaces.add(playerThree14);player3Spaces.add(playerThree15);player3Spaces.add(playerThree16);player3Spaces.add(playerThree17);player3Spaces.add(playerThree18);player3Spaces.add(playerThree19);player3Spaces.add(playerThree20);player3Spaces.add(playerThree21);player3Spaces.add(playerThree22);player3Spaces.add(playerThree23);player3Spaces.add(playerThree24);player3Spaces.add(playerThree25);player3Spaces.add(playerThree26);player3Spaces.add(playerThree27);player3Spaces.add(playerThree28);player3Spaces.add(playerThree29);player3Spaces.add(playerThree30);player3Spaces.add(playerThree31);player3Spaces.add(playerThree32);
+
+      if(players.length == 4){
+        player4Spaces.add(playerFour1);player4Spaces.add(playerFour2);player4Spaces.add(playerFour3);player4Spaces.add(playerFour4);player4Spaces.add(playerFour5);player4Spaces.add(playerFour6);player4Spaces.add(playerFour7);player4Spaces.add(playerFour8);player4Spaces.add(playerFour9);player4Spaces.add(playerFour10);player4Spaces.add(playerFour11);player4Spaces.add(playerFour12);player4Spaces.add(playerFour13);player4Spaces.add(playerFour14);player4Spaces.add(playerFour15);player4Spaces.add(playerFour16);player4Spaces.add(playerFour17);player4Spaces.add(playerFour18);player4Spaces.add(playerFour19);player4Spaces.add(playerFour20);player4Spaces.add(playerFour21);player4Spaces.add(playerFour22);player4Spaces.add(playerFour23);player4Spaces.add(playerFour24);player4Spaces.add(playerFour25);player4Spaces.add(playerFour26);player4Spaces.add(playerFour27);player4Spaces.add(playerFour28);player4Spaces.add(playerFour29);player4Spaces.add(playerFour30);player4Spaces.add(playerFour31);player4Spaces.add(playerFour32);
+        playersSpaces.add(player4Spaces);
+      }
+    }
+
+    spaces = new ArrayList<Label>();
+    spaces.add(space1);spaces.add(space2);spaces.add(space3);spaces.add(space4);spaces.add(space5);
+    spaces.add(space6);spaces.add(space7);spaces.add(space8);spaces.add(space9);spaces.add(space10);
+    spaces.add(space11);spaces.add(space12);spaces.add(space13);spaces.add(space14);spaces.add(space15);
+    spaces.add(space16);spaces.add(space17);spaces.add(space18);spaces.add(space19);spaces.add(space20);
+    spaces.add(space21);spaces.add(space22);spaces.add(space23);spaces.add(space24);spaces.add(space25);
+    spaces.add(space26);spaces.add(space27);spaces.add(space28);spaces.add(space29);spaces.add(space30);
+    spaces.add(space31);spaces.add(space32);
+
+    anchors = new ArrayList<AnchorPane>();
+    anchors.add(anchor1);anchors.add(anchor2);anchors.add(anchor3);anchors.add(anchor4);anchors.add(anchor5);
+    anchors.add(anchor6);anchors.add(anchor7);anchors.add(anchor8);anchors.add(anchor9);anchors.add(anchor10);
+    anchors.add(anchor11);anchors.add(anchor12);anchors.add(anchor13);anchors.add(anchor14);anchors.add(anchor15);
+    anchors.add(anchor16);anchors.add(anchor17);anchors.add(anchor18);anchors.add(anchor19);anchors.add(anchor20);
+    anchors.add(anchor21);anchors.add(anchor22);anchors.add(anchor23);anchors.add(anchor24);anchors.add(anchor25);
+    anchors.add(anchor26);anchors.add(anchor27);anchors.add(anchor28);anchors.add(anchor29);anchors.add(anchor30);
+    anchors.add(anchor31);anchors.add(anchor32);
+
+
     for(int i = 0; i < gameBoard.getLand().size();i++){
-      if(i == 0 || i == 8 || i == 16 || i == 24){
-        corners +=1;
-      }
-      else{
-        spaces.get(i-corners).setText(gameBoard.getLand().get(i).getName());
-      }
+      spaces.get(i).setText(gameBoard.getLand().get(i).getName());
     }
 
     for(int i = 0; i < spaces.size();i++){
@@ -755,7 +978,7 @@ public class GamePlayController  {
         }
       }
     }
-
+    updatePlayerPositions();
 
     player1.setText(players[0].getName());
     money1.setText(Double.toString(players[0].getMoney()));

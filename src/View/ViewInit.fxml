@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -24,6 +26,11 @@
                         <Font name="Broadway" size="18.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="240.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/Players/player1.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="360.0" prefWidth="540.0">
@@ -47,6 +54,11 @@
                         <Font name="Broadway" size="18.0" />
                      </font>
                   </Label>
+                  <ImageView fx:id="player3Avatar" fitHeight="60.0" fitWidth="60.0" layoutX="240.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Players/player3.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </children>
@@ -71,6 +83,11 @@
                         <Font name="Broadway" size="18.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="240.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/Players/player2.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="360.0" prefWidth="540.0">
@@ -96,6 +113,11 @@
                         <Font name="Broadway" size="18.0" />
                      </font>
                   </Label>
+                  <ImageView fx:id="player4Avatar" fitHeight="60.0" fitWidth="60.0" layoutX="241.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Players/player4.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </children>
