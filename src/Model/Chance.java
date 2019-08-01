@@ -6,7 +6,7 @@ package Model;
  *
  * Previous Change:
  */
-public abstract class Chance extends Land {
+public class Chance extends Land {
     public Chance(String strName){
         super(strName);
     }
@@ -18,6 +18,12 @@ public abstract class Chance extends Land {
      * @return string which contains the details of the event
      */
 
-    public abstract String triggerEvent(GameBoard gameBoard, Player player);
+    public String triggerEvent(GameBoard gameBoard, Player player){
+        Card temp = gameBoard.drawChance();
+        player.addCard(temp);
+        String event = player.getName() + " drew  a card";
+
+        return event;
+    }
 }
 

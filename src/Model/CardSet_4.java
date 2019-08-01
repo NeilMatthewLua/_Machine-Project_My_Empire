@@ -59,18 +59,6 @@ public class CardSet_4 extends Card{
                     }
             }
 
-            if(!player.isMine(gameBoard)) { //checks if the current Player owns that piece of land
-                if (((Property)gameBoard.getLand().get(player.getPosition())).getOwner() != null) //checks if the landed tile is owned by the current Player
-                    event += ((Property)gameBoard.getLand().get((player.getPosition()))).triggerEvent(gameBoard, player); //collects rent from property
-                else { //If not, checks if player is able to buy that title to the land
-                    if(player.getMoney() >= ((Property)gameBoard.getLand().get((player.getPosition()))).getDetails()[0]) { //checks if the current player has sufficient funds before offering to buy that land
-                        event += player.purchase(gameBoard);
-                    }
-                }
-            }
-            else { //this means the land tile is owned by the current Player
-                event += player.trade(gameBoard);
-            }
         }
 
         gameBoard.addCardDiscard(player.getCards().get(player.getCards().size() - 1)); //put used card into card discarded pile

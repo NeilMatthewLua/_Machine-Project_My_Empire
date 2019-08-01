@@ -206,6 +206,22 @@ public class Player extends People{
     }
 
     /**
+     * Checks if the player own at least one property
+     * @return the arrayList of Properties
+     */
+    public ArrayList<Property> getOnlyProperty(){
+
+        //Loops through properties to check if player has property of applicable type
+        ArrayList<Property> tempArr = new ArrayList<Property>(getProperties().size());
+
+        for(int i = 0; i < getProperties().size();i++)
+            if(getProperties().get(i) instanceof Property){
+                tempArr.add(((Property)getProperties().get(i)));
+            }
+        return tempArr;
+    }
+
+    /**
      * This checks if the tile the player is on is that player's owned Property
      * @param gameBoard  Gameboard where the players are playing on
      * @return boolean value to confirm

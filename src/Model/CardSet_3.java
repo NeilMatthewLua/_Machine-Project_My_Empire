@@ -43,7 +43,7 @@ public class CardSet_3 extends Card{
             dPayment = 150;
         }
         if(gameBoard.getBank().giveMoney(player, dPayment)){
-            event += "Bank pays $"+ dPayment +" to: " + player.getName();
+            event += "Bank pays $"+ dPayment +" to: " + player.getName() + "\n";
         }
         else{//If bank can't pay
             event += "Bank pays $"+ temp +" to: " + player.getName() + "\n";

@@ -61,6 +61,8 @@ public class GamePlayController  {
   @FXML
     private Label discardButton;
   @FXML
+    private Label useButton;
+  @FXML
     private Label money1;
   @FXML
     private Label money2;
@@ -90,6 +92,8 @@ public class GamePlayController  {
     private StackPane rentPane;
   @FXML
     private StackPane keepPane;
+  @FXML
+    private StackPane usePane;
   @FXML
     private StackPane discardPane;
   @FXML
@@ -243,70 +247,17 @@ public class GamePlayController  {
         }
       }
       else if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Chance){
-          Card temp = gameBoard.drawChance();
-          gameBoard.getPlayers()[nTurnCounter % nTotal].addCard(temp);
-
-          event = gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + " drew " + temp.getDescription();
-          if(temp instanceof CardSet_1){
-              keepPane.setVisible(true);
-          }
-          else if(temp instanceof CardSet_2){
-              //TODO SHOW LABEL AK KURT IF HE WANTS A USE CARD BUTTON
-              temp.useCard(gameBoard.getPlayers()[nTurnCounter % nTotal], gameBoard);
-              //Checks if the spot is owned
-              if (!gameBoard.getPlayers()[nTurnCounter % nTotal].isFree(gameBoard)) {
-
-                  //Checks if the player lands on an owned Utility / Railroad
-                  if (gameBoard.getPlayers()[nTurnCounter % nTotal].isOwnedUtilityRailroad(gameBoard)) {
-                      //There's nothing the player can do for that turn
-                      endPane.setVisible(true);
-                  }
-                  //Checks if player lands on an owned property
-                  else if (gameBoard.getPlayers()[nTurnCounter % nTotal].isOwnedProperty(gameBoard)) {
-
-                      //checks if that property is eligible for development
-                      if (gameBoard.getPlayers()[nTurnCounter % nTotal].eligibleDev(gameBoard)) {
-                          //Automatically develops the property if eligible
-                          event = gameBoard.getPlayers()[nTurnCounter % nTotal].develop(gameBoard);
-                          eventLabel.setText(event);
-                          gameBoard.getEvents().add(event);
-                          endPane.setVisible(true);
-                      }
-                      //else, player ends his/her turn
-                      else {
-                          endPane.setVisible(true);
-                      }
-                  }
-                  //Else, player will either pay rent or offer a trade
-                  else {
-
-                      //Checks if player has anything to offer in trade
-                      if (gameBoard.getPlayers()[nTurnCounter % nTotal].canTrade(gameBoard)) {
-                          tradePane.setVisible(true);
-                          rentPane.setVisible(true);
-                      }
-                      //else, he has no choice but to pay rent
-                      else {
-                          if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Utility){
-                              double dPay = 10 * gameBoard.getPlayers()[nTurnCounter % nTotal].getLastRoll();
-                              gameBoard.getPlayers()[nTurnCounter % nTotal].giveMoney(((Utility) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner(), dPay);
-                              event += gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + " paid $" + dPay + " to " +  ((Utility) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner().getName();
-                          }
-                          else{
-                              rentPane.setVisible(true);
-                          }
-                      }
-                  }
-              }
-              else {
-                  //Checks if player can buy the tile
-                  if (gameBoard.getPlayers()[nTurnCounter % nTotal].eligiblePurchase(gameBoard)) {
-                      purchasePane.setVisible(true);
-                  }
-                  endPane.setVisible(true);
-              }
-          }
+          Card temp = gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1 );
+          event = gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()).triggerEvent(gameBoard, gameBoard.getPlayers()[nTurnCounter % nTotal]);
+//TODO Add Card Desc FXML for Zoomed Card
           eventLabel.setText(event);
+
+          if(temp instanceof CardSet_1){
+            keepPane.setVisible(true);
+          }
+//TODO Eligible Double Rent blah discardPane
+          else
+            usePane.setVisible(true);
       }
       //else, it's either Jail, Start, Tax, Community Service or Free Parking
       else {
@@ -344,6 +295,190 @@ public class GamePlayController  {
     }
     else if (e.getSource() == keepButton) {
         keepButton.setVisible(false);
+    }
+    else if (e.getSource() == discardButton) {
+        gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().remove(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1);
+        discardButton.setVisible(false);
+    }
+    else if (e.getSource() == useButton){
+      double[] temp = new double[nTotal + 1]; //temporary holder of everyone's(including bank's) money before the chance card takes action
+      int[] nIndex = new int[2]; //holds the which players/bank's money has been changed
+      int j = 0; //index of the players/bank whose money was changed
+      int i;
+
+      for( i = 0; i < nTotal; i ++){
+        temp[i] = gameBoard.getPlayers()[i].getMoney(); //holds the money of everybody on a temp array
+      }
+      temp[i] = gameBoard.getBank().getMoney();
+
+
+      String event = "";
+      Card tempCard = gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1 );
+
+      if(tempCard instanceof CardSet_2){
+        event += tempCard.useCard(gameBoard.getPlayers()[nTurnCounter % nTotal], gameBoard);
+        eventLabel.setText(event);
+        //Checks if the spot is owned
+        if (!gameBoard.getPlayers()[nTurnCounter % nTotal].isFree(gameBoard)) {
+
+          //Checks if the player lands on an owned Utility / Railroad
+          if (gameBoard.getPlayers()[nTurnCounter % nTotal].isOwnedUtilityRailroad(gameBoard)) {
+            //There's nothing the player can do for that turn
+            endPane.setVisible(true);
+          }
+          //Checks if player lands on an owned property
+          else if (gameBoard.getPlayers()[nTurnCounter % nTotal].isOwnedProperty(gameBoard)) {
+
+            //checks if that property is eligible for development
+            if (gameBoard.getPlayers()[nTurnCounter % nTotal].eligibleDev(gameBoard)) {
+              //Automatically develops the property if eligible
+              event = gameBoard.getPlayers()[nTurnCounter % nTotal].develop(gameBoard);
+              eventLabel.setText(event);
+              gameBoard.getEvents().add(event);
+              endPane.setVisible(true);
+            }
+            //else, player ends his/her turn
+            else {
+              endPane.setVisible(true);
+            }
+          }
+          //Else, player will either pay rent or offer a trade
+          else {
+
+            //Checks if player has anything to offer in trade
+            if (gameBoard.getPlayers()[nTurnCounter % nTotal].canTrade(gameBoard)) {
+              tradePane.setVisible(true);
+              rentPane.setVisible(true);
+            }
+            //else, he has no choice but to pay rent
+            else {
+              if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Utility){
+                double dPay = 10 * gameBoard.getPlayers()[nTurnCounter % nTotal].getLastRoll();
+                gameBoard.getPlayers()[nTurnCounter % nTotal].giveMoney(((Utility) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner(), dPay);
+                event += gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + " paid $" + dPay + " to " +  ((Utility) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner().getName();
+                eventLabel.setText(event);
+              }
+              else{
+                rentPane.setVisible(true);
+              }
+            }
+          }
+        }
+        else {
+          //Checks if player can buy the tile
+          if (gameBoard.getPlayers()[nTurnCounter % nTotal].eligiblePurchase(gameBoard)) {
+            purchasePane.setVisible(true);
+          }
+          endPane.setVisible(true);
+        }
+      }
+      else if(tempCard instanceof CardSet_3){
+        event += tempCard.useCard(gameBoard.getPlayers()[nTurnCounter % nTotal], gameBoard);
+//TODO CHECKFORWIN METHOD HERE
+      }
+      else if(tempCard instanceof  CardSet_4){
+        event += tempCard.useCard(gameBoard.getPlayers()[nTurnCounter % nTotal], gameBoard);
+        eventLabel.setText(event);
+
+        //Checks if the spot is owned
+        if (!gameBoard.getPlayers()[nTurnCounter % nTotal].isFree(gameBoard)) {
+
+          //Checks if the player lands on an owned Utility / Railroad
+          if (gameBoard.getPlayers()[nTurnCounter % nTotal].isOwnedUtilityRailroad(gameBoard)) {
+            //There's nothing the player can do for that turn
+            endPane.setVisible(true);
+          }
+          //Checks if player lands on an owned property
+          else if (gameBoard.getPlayers()[nTurnCounter % nTotal].isOwnedProperty(gameBoard)) {
+
+            //checks if that property is eligible for development
+            if (gameBoard.getPlayers()[nTurnCounter % nTotal].eligibleDev(gameBoard)) {
+              //Automatically develops the property if eligible
+              event = gameBoard.getPlayers()[nTurnCounter % nTotal].develop(gameBoard);
+              eventLabel.setText(event);
+              gameBoard.getEvents().add(event);
+              endPane.setVisible(true);
+            }
+            //else, player ends his/her turn
+            else {
+              endPane.setVisible(true);
+            }
+          }
+          //Else, player will either pay rent or offer a trade
+          else {
+
+            //Checks if player has anything to offer in trade
+            if (gameBoard.getPlayers()[nTurnCounter % nTotal].canTrade(gameBoard)) {
+              tradePane.setVisible(true);
+              rentPane.setVisible(true);
+            }
+            //else, he has no choice but to pay rent
+            else {
+              if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Utility){
+                double dPay = 10 * gameBoard.getPlayers()[nTurnCounter % nTotal].getLastRoll();
+                gameBoard.getPlayers()[nTurnCounter % nTotal].giveMoney(((Utility) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner(), dPay);
+                event += gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + " paid $" + dPay + " to " +  ((Utility) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner().getName();
+                eventLabel.setText(event);
+              }
+              else{
+                rentPane.setVisible(true);
+              }
+            }
+          }
+        }
+        else {
+          //Checks if player can buy the tile
+          if (gameBoard.getPlayers()[nTurnCounter % nTotal].eligiblePurchase(gameBoard)) {
+            purchasePane.setVisible(true);
+          }
+          endPane.setVisible(true);
+        }
+      }
+      else if(tempCard instanceof CardSet_5){
+        if(tempCard.getIndex() == 0 || tempCard.getIndex() == 2){
+          ArrayList<Property> tempArr = gameBoard.getPlayers()[nTurnCounter % nTotal].getOnlyProperty();
+          if(tempArr.size() > 0){
+            setFalseVisible();
+            chooseVisible(tempArr);
+            if(tempCard.getIndex() == 0){
+
+            }
+            else{
+
+            }
+          }
+          else{
+            discardPane.setVisible(true);
+          }
+        }
+        else if(tempCard.getIndex() == 3 || tempCard.getIndex() == 4){
+          if(tempCard.getIndex() == 3){
+
+          }
+          else{
+
+          }
+        }
+      }
+      else if(tempCard instanceof CardSet_6){
+        event += tempCard.useCard(gameBoard.getPlayers()[nTurnCounter % nTotal], gameBoard);
+        eventLabel.setText(event);
+        //TODO Check isWin here
+      }
+
+      //goes through everybody's money to check whose were changed
+      for( i = 0; i < nTotal; i ++){
+        if(temp[i] != gameBoard.getPlayers()[i].getMoney()){
+          nIndex[j] = i;    //holds their index in an array
+          j++;
+        }
+      }
+      if(temp[i] != gameBoard.getBank().getMoney()) //checks the bank's value changed
+        nIndex[j] = 5;
+
+      //updates the labels in the GUI if there are changes with their money
+      if(j == 1)
+        updateMoney(nIndex[0],nIndex[1]);
     }
     else if (e.getSource() == purchaseButton) {
 
@@ -477,6 +612,22 @@ public class GamePlayController  {
     }
     else if(nPlayer2 == 5){
       money5.setText(String.valueOf(gameBoard.getBank().getMoney()));
+    }
+  }
+
+  public void setFalseVisible() {
+    for(int i = 0; i < spaces.size(); i++){
+        spaces.get(i).setVisible(false);
+    }
+  }
+
+  public void chooseVisible(ArrayList<Property> properties) {
+    int counter = 0;
+    for(int i = 0; i < spaces.size(); i++){
+      if (spaces.get(i).getText().equalsIgnoreCase(properties.get(counter).getName())){
+          spaces.get(i).setVisible(true);
+          counter++;
+      }
     }
   }
 

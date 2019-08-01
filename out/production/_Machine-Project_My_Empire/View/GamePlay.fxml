@@ -298,5 +298,17 @@
             <Label id="actionButton" fx:id="rollButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="80.0" prefWidth="204.0" stylesheets="@../CSS/GamePlay.css" text="Roll" textFill="WHITE" />
          </children>
       </StackPane>
+      <StackPane fx:id="keepPane" layoutX="778.0" layoutY="476.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="keepButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Keep" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="discardPane" layoutX="778.0" layoutY="476.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="discardButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Discard" textFill="WHITE" />
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>
