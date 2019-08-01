@@ -675,14 +675,24 @@ public class GamePlayController  {
               Image image = new Image(getClass().getResourceAsStream(urls[i][2]));
               Zoomed.setImage(image);
               isFound = false;
-              if(gameBoard.getLand().get(i) instanceof Ownable){
-                if(((Ownable) gameBoard.getLand().get(i)).getOwner() != null){
-                  if(gameBoard.getLand().get(i) instanceof Property){
-                    ownerZoom.setText(((Property) gameBoard.getLand().get(i)).getOwner().getName());
-                    footTrafficZoom.setText(""+((Property) gameBoard.getLand().get(i)).getFootTraffic());
-                  }
-                  else {
-                    ownerZoom.setText(((Ownable) gameBoard.getLand().get(i)).getOwner().getName());
+              boolean isSame = false;
+              for(int j = 0; j < gameBoard.getLand().size() && !isSame;j++){
+                if(gameBoard.getLand().get(j).getName().equalsIgnoreCase(((Label) event.getSource()).getText())){
+                  if(gameBoard.getLand().get(j) instanceof Ownable){
+                    if(((Ownable) gameBoard.getLand().get(j)).getOwner() != null){
+                      if(gameBoard.getLand().get(j) instanceof Property){
+                        ownerZoom.setText(((Property) gameBoard.getLand().get(j)).getOwner().getName());
+                        footTrafficZoom.setText(""+((Property) gameBoard.getLand().get(j)).getFootTraffic());
+                        System.out.println(((Property)gameBoard.getLand().get(j)).getFootTraffic());
+                      }
+                      else {
+                        ownerZoom.setText(((Ownable) gameBoard.getLand().get(j)).getOwner().getName());
+                      }
+                    }
+                    else{
+                      footTrafficZoom.setText("0.0");
+                      ownerZoom.setText("None");
+                    }
                   }
                 }
               }

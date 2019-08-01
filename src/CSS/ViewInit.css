@@ -11,6 +11,10 @@
     -fx-underline: true;
 }
 
+#error{
+    -fx-background-color: rgb(0,48,73);
+}
+
 #delete1:hover{
     -fx-underline: true;
 }

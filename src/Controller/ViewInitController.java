@@ -2,8 +2,6 @@ package Controller;
 
 
 import Model.GameBoard;
-import Controller.LandInitController;
-import Model.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,7 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class ViewInitController {
+public class ViewInitController implements Initializable{
 
     @FXML private HBox background;
     @FXML private Label play;
@@ -35,7 +33,13 @@ public class ViewInitController {
     @FXML private TextField textField2;
     @FXML private TextField textField3;
     @FXML private TextField textField4;
-
+    @FXML private Label error1;
+    @FXML private Label error2;
+    @FXML private Label error3;
+    @FXML private Label error4;
+    ArrayList<Label> errorLabels;
+    ArrayList<Label> readyButtons;
+    ArrayList<TextField> textFields;
     GameBoard gameBoard;
 
     @FXML
@@ -67,68 +71,41 @@ public class ViewInitController {
 
     @FXML
     public void ready(MouseEvent e){//Handles events for ready buttons
-        if(e.getSource() == ready1){
-            if(ready1.getText().equalsIgnoreCase("ready")){
-            if(!(textField1.getText() == null || textField1.getText().trim().isEmpty())){
-                textField1.setEditable(false);
-                ready1.setText("UNREADY");
-                textField1.setPromptText("Enter name..");
-            }
-            else{
-                textField1.setPromptText("Error. Empty name.");
-            }
-            }
-            else{
-                ready1.setText("READY");
-                textField1.setEditable(true);
-            }
-        }
-        else if(e.getSource() == ready2){
-            if(ready2.getText().equalsIgnoreCase("ready")){
-                if(!(textField2.getText() == null || textField2.getText().trim().isEmpty())){
-                    textField2.setEditable(false);
-                    ready2.setText("UNREADY");
-                    textField2.setPromptText("Enter name..");
+        ArrayList<String> tempNames = new ArrayList<String>();
+        for(int i = 0; i <readyButtons.size(); i++){
+            tempNames.add(textField1.getText());
+            if(e.getSource().equals(readyButtons.get(i))){
+                errorLabels.get(i).setVisible(false);
+                if(readyButtons.get(i).getText().equalsIgnoreCase("READY")){
+                    boolean isDuplicate = false;
+                    for(int j = 0; j < tempNames.size();j++){
+                        if(textFields.get(i).getText().trim().equals(textFields.get(j).getText().trim()) && i != j)
+                            isDuplicate = true;
+                    }
+                    if (isDuplicate){
+                        errorLabels.get(i).setVisible(true);
+                        errorLabels.get(i).setText("Error. Duplicate name. :(");
+                    }
+
+                    else if(textFields.get(i).getText().trim().length() == 0 || textFields.get(i).getText() == null){
+                        errorLabels.get(i).setVisible(true);
+                        errorLabels.get(i).setText("Error. Empty name. :O");
+                    }
+                    else if(textFields.get(i).getText().trim().length() >= 6){
+                        errorLabels.get(i).setVisible(true);
+                        errorLabels.get(i).setText("Error. Name too long. :>");
+                    }
+                    else{
+                            textFields.get(i).setEditable(false);
+                            readyButtons.get(i).setText("UNREADY");
+                            textFields.get(i).setPromptText("Enter name..");
+                    }
                 }
                 else{
-                    textField2.setPromptText("Error. Empty name.");
+                    errorLabels.get(i).setVisible(false);
+                    readyButtons.get(i).setText("READY");
+                    textFields.get(i).setEditable(true);
                 }
-            }
-            else{
-                ready2.setText("READY");
-                textField2.setEditable(true);
-            }
-        }
-        else if(e.getSource() == ready3){
-            if(ready3.getText().equalsIgnoreCase("ready")){
-                if(!(textField3.getText() == null || textField3.getText().trim().isEmpty())){
-                    textField3.setEditable(false);
-                    ready3.setText("UNREADY");
-                    textField3.setPromptText("Enter name..");
-                }
-                else{
-                    textField3.setPromptText("Error. Empty name.");
-                }
-            }
-            else{
-                ready3.setText("READY");
-                textField3.setEditable(true);
-            }
-        }
-        else if(e.getSource() == ready4){
-            if(ready4.getText().equalsIgnoreCase("ready")){
-                if(!(textField4.getText() == null || textField4.getText().trim().isEmpty())){
-                    textField4.setEditable(false);
-                    ready4.setText("UNREADY");
-                    textField4.setPromptText("Enter name..");
-                }
-                else{
-                    textField4.setPromptText("Error. Empty name.");
-                }
-            }
-            else{
-                ready4.setText("READY");
-                textField4.setEditable(true);
             }
         }
         if(checkForReady()){
@@ -141,22 +118,15 @@ public class ViewInitController {
 
     private boolean checkForReady(){
         boolean valid = false;
-        if(!(textField1.getText() == null || textField1.getText().trim().isEmpty()) && ready1.getText().equalsIgnoreCase("UNREADY")){
-            if(!(textField2.getText() == null || textField2.getText().trim().isEmpty()) && ready2.getText().equalsIgnoreCase("UNREADY")){
-                if(ready3.isVisible()){
-                    if(!(textField3.getText() == null || textField3.getText().trim().isEmpty()) && ready3.getText().equalsIgnoreCase("UNREADY")){
-                        if(ready4.isVisible()){
-                            if(!(textField4.getText() == null || textField4.getText().trim().isEmpty()) && ready4.getText().equalsIgnoreCase("UNREADY")){
-                                valid = true;
-                            }
-                        }
-                        else{
-                            valid = true;
-                        }
-                    }
+        boolean stop = true;
+        for(int i = 0; i < textFields.size() && stop;i++){
+            if(textFields.get(i).isVisible()){
+                if(!(textFields.get(i).getText() == null || textFields.get(i).getText().trim().isEmpty()) && readyButtons.get(i).getText().equalsIgnoreCase("UNREADY")){
+                    valid = true;
                 }
                 else{
-                    valid = true;
+                    stop = false;
+                    valid = false;
                 }
             }
         }
@@ -214,5 +184,15 @@ public class ViewInitController {
         else{
             play.setVisible(false);
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb){
+        readyButtons = new ArrayList<Label>();
+        textFields = new ArrayList<TextField>();
+        errorLabels = new ArrayList<Label>();
+        errorLabels.add(error1);errorLabels.add(error2);errorLabels.add(error3);errorLabels.add(error4);
+        readyButtons.add(ready1);readyButtons.add(ready2);readyButtons.add(ready3);readyButtons.add(ready4);
+        textFields.add(textField1);textFields.add(textField2);textFields.add(textField3);textFields.add(textField4);
     }
 }

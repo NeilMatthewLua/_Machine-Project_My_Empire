@@ -19,10 +19,20 @@
                         <Font name="Broadway" size="18.0" />
                      </font>
                   </Label>
+                  <Label fx:id="error1" alignment="CENTER" layoutX="135.0" layoutY="25.0" onMouseClicked="#play" prefHeight="43.0" prefWidth="270.0" text="Error" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="360.0" prefWidth="540.0">
                <children>
+                  <Label fx:id="error3" alignment="CENTER" layoutX="135.0" layoutY="-25.0" onMouseClicked="#play" prefHeight="43.0" prefWidth="270.0" text="Error" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                  </Label>
                   <TextField fx:id="textField3" alignment="CENTER" layoutX="196.0" layoutY="194.0" promptText="Enter name.." visible="false" />
                   <Label fx:id="add1" alignment="CENTER" layoutX="213.0" layoutY="97.0" onMouseClicked="#add" prefHeight="70.0" prefWidth="115.0" text="ADD" textAlignment="CENTER" textFill="#f4e8a6" wrapText="true">
                      <font>
@@ -56,12 +66,22 @@
                         <Font name="Broadway" size="18.0" />
                      </font>
                   </Label>
+                  <Label fx:id="error2" alignment="CENTER" layoutX="135.0" layoutY="25.0" onMouseClicked="#play" prefHeight="43.0" prefWidth="270.0" text="Error" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="360.0" prefWidth="540.0">
                <children>
-                  <TextField fx:id="textField4" alignment="CENTER" layoutX="197.0" layoutY="194.0" promptText="Enter name.." visible="false" />
-                  <Label fx:id="add2" alignment="CENTER" layoutX="214.0" layoutY="97.0" onMouseClicked="#add" prefHeight="70.0" prefWidth="115.0" text="ADD" textAlignment="CENTER" textFill="#f4e8a6" visible="false" wrapText="true">
+                  <Label fx:id="error4" alignment="CENTER" layoutX="135.0" layoutY="-25.0" onMouseClicked="#play" prefHeight="43.0" prefWidth="270.0" text="Error" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="textField4" alignment="CENTER" layoutX="196.0" layoutY="194.0" promptText="Enter name.." visible="false" />
+                  <Label fx:id="add2" alignment="CENTER" layoutX="213.0" layoutY="92.0" onMouseClicked="#add" prefHeight="70.0" prefWidth="115.0" text="ADD" textAlignment="CENTER" textFill="#f4e8a6" visible="false" wrapText="true">
                      <font>
                         <Font name="Broadway" size="44.0" />
                      </font>
