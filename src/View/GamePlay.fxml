@@ -38,9 +38,9 @@
          </font>
       </Label>
 
-      <AnchorPane fx:id="anchor2" onMouseClicked="#displaySpaces" layoutX="482.0" layoutY="524.0" prefHeight="94.0" prefWidth="69.0">
+      <AnchorPane fx:id="anchor2" layoutX="482.0" layoutY="524.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0">
          <children>
-            <Label fx:id="space2" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces"  prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <Label fx:id="space2" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner2" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="playerOne2" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
@@ -64,7 +64,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor3" onMouseClicked="#displaySpaces" layoutX="413.0" layoutY="524.0" prefHeight="94.0" prefWidth="69.0">
+      <AnchorPane fx:id="anchor3" layoutX="413.0" layoutY="524.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0">
          <children>
             <Label fx:id="space3" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner3" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -90,7 +90,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor4" onMouseClicked="#displaySpaces" layoutX="344.0" layoutY="524.0" prefHeight="94.0" prefWidth="69.0">
+      <AnchorPane fx:id="anchor4" layoutX="344.0" layoutY="524.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0">
          <children>
             <Label fx:id="space4" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner4" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -116,7 +116,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor5" onMouseClicked="#displaySpaces" layoutX="276.0" layoutY="524.0" prefHeight="94.0" prefWidth="69.0">
+      <AnchorPane fx:id="anchor5" layoutX="276.0" layoutY="524.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0">
          <children>
             <Label fx:id="space5" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner5" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -142,7 +142,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor6" onMouseClicked="#displaySpaces" layoutX="207.0" layoutY="524.0" prefHeight="94.0" prefWidth="69.0">
+      <AnchorPane fx:id="anchor6" layoutX="207.0" layoutY="524.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0">
          <children>
             <Label fx:id="space6" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner6" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -168,7 +168,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor7" onMouseClicked="#displaySpaces" layoutX="138.0" layoutY="524.0" prefHeight="94.0" prefWidth="69.0">
+      <AnchorPane fx:id="anchor7" layoutX="138.0" layoutY="524.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0">
          <children>
             <Label fx:id="space7" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner7" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -195,7 +195,7 @@
 
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor8" onMouseClicked="#displaySpaces" layoutX="69.0" layoutY="524.0" prefHeight="94.0" prefWidth="69.0">
+      <AnchorPane fx:id="anchor8" layoutX="69.0" layoutY="524.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0">
          <children>
             <Label fx:id="space8" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner8" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -222,7 +222,7 @@
          </children>
       </AnchorPane>
 
-      <AnchorPane fx:id="anchor10" onMouseClicked="#displaySpaces" layoutX="15.0" layoutY="470.0" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
+      <AnchorPane fx:id="anchor10" layoutX="15.0" layoutY="470.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
          <children>
             <Label fx:id="space10" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner10" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -248,7 +248,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor11" onMouseClicked="#displaySpaces" layoutX="15.0" layoutY="401.0" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
+      <AnchorPane fx:id="anchor11" layoutX="15.0" layoutY="401.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
          <children>
             <Label fx:id="space11" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner11" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -274,7 +274,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor12" onMouseClicked="#displaySpaces" layoutX="15.0" layoutY="332.0" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
+      <AnchorPane fx:id="anchor12" layoutX="15.0" layoutY="332.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
          <children>
             <Label fx:id="space12" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner12" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -300,7 +300,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor13" onMouseClicked="#displaySpaces" layoutX="15.0" layoutY="264.0" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
+      <AnchorPane fx:id="anchor13" layoutX="15.0" layoutY="264.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
          <children>
             <Label fx:id="space13" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner13" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -326,7 +326,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor14" onMouseClicked="#displaySpaces" layoutX="15.0" layoutY="195.0" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
+      <AnchorPane fx:id="anchor14" layoutX="15.0" layoutY="195.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
          <children>
             <Label fx:id="space14" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner14" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -352,7 +352,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor15" onMouseClicked="#displaySpaces" layoutX="15.0" layoutY="126.0" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
+      <AnchorPane fx:id="anchor15" layoutX="15.0" layoutY="126.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
          <children>
             <Label fx:id="space15" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner15" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -378,7 +378,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor16" onMouseClicked="#displaySpaces" layoutX="15.0" layoutY="57.0" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
+      <AnchorPane fx:id="anchor16" layoutX="15.0" layoutY="57.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
          <children>
             <Label fx:id="space16" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner16" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -404,7 +404,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor18" onMouseClicked="#displaySpaces" layoutX="69.0" layoutY="2.0" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+      <AnchorPane fx:id="anchor18" layoutX="69.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
          <children>
             <Label fx:id="space18" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="playerOne18" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -429,7 +429,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor19" onMouseClicked="#displaySpaces" layoutX="138.0" layoutY="2.0" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+      <AnchorPane fx:id="anchor19" layoutX="138.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
          <children>
             <Label fx:id="space19" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner19" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -455,7 +455,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor20" onMouseClicked="#displaySpaces" layoutX="207.0" layoutY="2.0" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+      <AnchorPane fx:id="anchor20" layoutX="207.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
          <children>
             <Label fx:id="space20" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner20" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -481,7 +481,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor21" onMouseClicked="#displaySpaces" layoutX="276.0" layoutY="2.0" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+      <AnchorPane fx:id="anchor21" layoutX="276.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
          <children>
             <Label fx:id="space21" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner21" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -507,7 +507,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor22" onMouseClicked="#displaySpaces" layoutX="344.0" layoutY="2.0" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+      <AnchorPane fx:id="anchor22" layoutX="344.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
          <children>
             <Label fx:id="space22" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner22" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -533,7 +533,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor23" onMouseClicked="#displaySpaces" layoutX="413.0" layoutY="2.0" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+      <AnchorPane fx:id="anchor23" layoutX="413.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
          <children>
             <Label fx:id="space23" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner23" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -559,7 +559,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor24" onMouseClicked="#displaySpaces" layoutX="482.0" layoutY="2.0" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+      <AnchorPane fx:id="anchor24" layoutX="482.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
          <children>
             <Label fx:id="space24" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner24" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -589,7 +589,7 @@
 
 
 
-      <AnchorPane fx:id="anchor26" onMouseClicked="#displaySpaces" layoutX="537.0" layoutY="57.0" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+      <AnchorPane fx:id="anchor26" layoutX="537.0" layoutY="57.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
          <children>
             <Label fx:id="space26" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner26" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -615,10 +615,10 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor27" onMouseClicked="#displaySpaces" layoutX="537.0" layoutY="126.0" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+      <AnchorPane fx:id="anchor27" layoutX="537.0" layoutY="126.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
          <children>
             <Label fx:id="space27" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
-            <ImageView fx:id="owner27" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false"/>
+            <ImageView fx:id="owner27" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
             <ImageView fx:id="playerOne27" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../Images/Players/player1.png" />
@@ -641,10 +641,10 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor28" onMouseClicked="#displaySpaces" layoutX="537.0" layoutY="195.0" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+      <AnchorPane fx:id="anchor28" layoutX="537.0" layoutY="195.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
          <children>
             <Label fx:id="space28" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
-            <ImageView fx:id="owner28" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false"/>
+            <ImageView fx:id="owner28" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
             <ImageView fx:id="playerOne28" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../Images/Players/player1.png" />
@@ -667,10 +667,10 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor29" onMouseClicked="#displaySpaces" layoutX="537.0" layoutY="264.0" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+      <AnchorPane fx:id="anchor29" layoutX="537.0" layoutY="264.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
          <children>
             <Label fx:id="space29" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
-            <ImageView fx:id="owner29" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false"/>
+            <ImageView fx:id="owner29" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
             <ImageView fx:id="playerOne29" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../Images/Players/player1.png" />
@@ -693,7 +693,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor30" onMouseClicked="#displaySpaces" layoutX="537.0" layoutY="332.0" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+      <AnchorPane fx:id="anchor30" layoutX="537.0" layoutY="332.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
          <children>
             <Label fx:id="space30" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
             <ImageView fx:id="owner30" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
@@ -719,10 +719,10 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor31" onMouseClicked="#displaySpaces" layoutX="537.0" layoutY="401.0" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+      <AnchorPane fx:id="anchor31" layoutX="537.0" layoutY="401.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
          <children>
             <Label fx:id="space31" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
-            <ImageView fx:id="owner31" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false"/>
+            <ImageView fx:id="owner31" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
             <ImageView fx:id="playerOne31" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../Images/Players/player1.png" />
@@ -745,10 +745,10 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor32" onMouseClicked="#displaySpaces" layoutX="537.0" layoutY="470.0" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+      <AnchorPane fx:id="anchor32" layoutX="537.0" layoutY="470.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
          <children>
             <Label fx:id="space32" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
-            <ImageView fx:id="owner32" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false"/>
+            <ImageView fx:id="owner32" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" visible="false" />
             <ImageView fx:id="playerOne32" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../Images/Players/player1.png" />
@@ -891,13 +891,19 @@
             <Label id="actionButton" fx:id="discardButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Discard" textFill="WHITE" />
          </children>
       </StackPane>
-      <StackPane fx:id="discardPane1" layoutX="778.0" layoutY="476.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+      <StackPane fx:id="usePane" layoutX="778.0" layoutY="476.0" prefHeight="80.0" prefWidth="129.0" visible="false">
          <children>
             <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
-            <Label id="actionButton" fx:id="useButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Use" textFill="WHITE" visible="false" />
+            <Label id="actionButton" fx:id="useButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Use" textFill="WHITE" />
          </children>
       </StackPane>
-      <AnchorPane fx:id="anchor17" onMouseClicked="#displaySpaces" layoutX="-2.0" layoutY="2.0" prefHeight="65.0" prefWidth="69.0" rotate="-180.0">
+      <StackPane fx:id="choosePane" layoutX="778.0" layoutY="476.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="chooseButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Choose" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <AnchorPane fx:id="anchor17" layoutX="-2.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="69.0" rotate="-180.0">
          <children>
             <Label fx:id="space17" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Jail" />
             <ImageView fx:id="playerTwo17" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -922,7 +928,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor9" onMouseClicked="#displaySpaces" layoutX="-2.0" layoutY="554.0" prefHeight="65.0" prefWidth="69.0" rotate="90.0">
+      <AnchorPane fx:id="anchor9" layoutX="-2.0" layoutY="554.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="69.0" rotate="90.0">
          <children>
             <Label fx:id="space9" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Community" />
             <ImageView fx:id="playerTwo9" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -943,7 +949,7 @@
                </image></ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor25" onMouseClicked="#displaySpaces" layoutX="551.0" layoutY="2.0" prefHeight="65.0" prefWidth="69.0" rotate="-90.0">
+      <AnchorPane fx:id="anchor25" layoutX="551.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="69.0" rotate="-90.0">
          <children>
             <Label fx:id="space25" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Free Parking" />
             <ImageView fx:id="playerTwo25" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -964,7 +970,7 @@
                </image></ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchor1" onMouseClicked="#displaySpaces" layoutX="551.0" layoutY="552.0" prefHeight="65.0" prefWidth="69.0">
+      <AnchorPane fx:id="anchor1" layoutX="551.0" layoutY="552.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="69.0">
          <children>
             <Label fx:id="space1" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Start" />
             <ImageView fx:id="playerTwo1" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" pickOnBounds="true" preserveRatio="true" visible="false">

@@ -17,7 +17,6 @@ public class Property extends Ownable {
     private int nDevelopment;
     private double dFootTraffic;
     private double dRentCollected;
-    private ArrayList<Card> cardMultipliers;
 
     /**
      * Creates a property subclass which inherits from Land
@@ -30,7 +29,6 @@ public class Property extends Ownable {
         this.strColor = strColor;
         this.arrAttributes = new double[9];
         this.arrAttributes = arrAttributes;
-        cardMultipliers = new ArrayList<Card>();
         nDevelopment = 0;
         dRentCollected = 0;
         dFootTraffic = 0;
@@ -85,14 +83,6 @@ public class Property extends Ownable {
     }
 
     /**
-     * Gets the array list of card multipliers currently on the property
-     * @return ArrayList of Cards
-     */
-    public ArrayList<Card> getCardMultipliers(){
-        return cardMultipliers;
-    }
-
-    /**
      * Adds an amount to the rent collected by the property based on the parameter
      * @param n the amount to be addded
      */
@@ -130,14 +120,14 @@ public class Property extends Ownable {
             dRent += 20;
         dRent += arrAttributes[nDevelopment + 2]; //Add development level
         double multiplier = 1;
-        for(int i = 0; i < cardMultipliers.size();i++){
-            if(cardMultipliers.get(i) instanceof CardSet_5 && cardMultipliers.get(i).getIndex() == 0){//Remove double rent card
+        for(int i = 0; i < getCardMultipliers().size();i++){
+            if(getCardMultipliers().get(i) instanceof CardSet_5 && getCardMultipliers().get(i).getIndex() == 0){//Remove double rent card
                 multiplier *= 2;
-                gameBoard.addCardDiscard(cardMultipliers.get(i)); // Add to discard pile
-                cardMultipliers.remove(i); //Remove from property
+                gameBoard.addCardDiscard(getCardMultipliers().get(i)); // Add to discard pile
+                getCardMultipliers().remove(i); //Remove from property
             }
             else{
-                multiplier *= ((CardSet_5)cardMultipliers.get(i)).getMultiplier();
+                multiplier *= ((CardSet_5)getCardMultipliers().get(i)).getMultiplier();
             }
         }
         dRent *= multiplier;

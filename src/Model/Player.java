@@ -2,20 +2,14 @@ package Model;
 /**
  * Player Class
  *
- *      New Changes: Editeed EligiblePurchase()
+ *      New Changes:
+                  public ArrayList<Property> getOnlyProperty()
+                  public ArrayList<Property> getOnlyPropertyRenovate()
+                  public ArrayList<Utility> getOnlyUtility()
+                  public ArrayList<Railroad> getOnlyRailroad()
 
-        Last Changes Made: Made Develop Public
- *                   Removed action() in roll()
- *                   Made some functionality in action independent
- *                   public boolean isFree(GameBoard gameBoard)
- *                   public boolean isOwnedUtilityRailroad(GameBoard gameBoard)
- *                   public boolean isOwnedProperty(GameBoard gameBoard)
- *                   public String payRent(GameBoard gameBoard)
- *                   public boolean isPropertyUtilityRailroad(GameBoard gameBoard)
- *                   public boolean canTrade(GameBoard gameBoard)
- *                   public boolean isFree(GameBoard gameBoard)
-   
- * Version 1.2
+        Last Changes Made: Editeed EligiblePurchase()
+ * Version 1.3
 
  */
 
@@ -29,6 +23,7 @@ public class Player extends People{
     private int nPosition;
     private int nDiceRoll;
     private boolean inJail;
+    private Ownable chosen;
 
     /**
      * This constructor creats a new Player
@@ -83,6 +78,11 @@ public class Player extends People{
         return this.inJail;
     }
 
+    /**
+     * Getter for player's chosen owned Property / Utility / Railroad
+     * @return chosen Property / Utility / Railroad from Player
+     */
+    public Ownable getChosen() { return this.chosen; }
 
     /**
      * Adds a card on hand
@@ -109,7 +109,12 @@ public class Player extends People{
     public void setJail(boolean value) {
         this.inJail = value;
     }
-        
+
+    /**
+     * Setter for player's chosen owned Property / Utility / Railroad
+     */
+    public void setChosen(Ownable chosen) { this.chosen = chosen; }
+
     /**
      * Method that performs the rolling of die and the calculation of steps of the Player's token
      * @param gameBoard Gameboard where the players are playing on
@@ -206,17 +211,81 @@ public class Player extends People{
     }
 
     /**
-     * Checks if the player own at least one property
+     * Gets the player's properties that the player can renovate
      * @return the arrayList of Properties
+     */
+    public ArrayList<Property> getOnlyPropertyRenovate(){
+
+        //Loops through properties to check if player has property of applicable type
+        ArrayList<Property> tempArr = new ArrayList<Property>();
+        double dRenovation = 0; //Renovation price
+
+        for(int i = 0; i < getProperties().size();i++){
+            dRenovation = 0;
+            if(getProperties().get(i) instanceof Property){
+                if (((Property) getProperties().get(i)).getDevelopment() >= 1) {//Calculates price of renovation
+                    if (((Property) getProperties().get(i)).getDevelopment() == 5) {
+                        dRenovation += 50;
+                        dRenovation += (((Property) getProperties().get(i)).getDevelopment() - 1) * 25;
+                    }
+                    else {
+                        dRenovation += ((Property) getProperties().get(i)).getDevelopment() * 25;
+                    }
+                }
+
+                if (getMoney() - dRenovation >= 0) {//If funds for renovation is applicable
+                    tempArr.add(((Property)getProperties().get(i)));
+                }
+            }
+        }
+
+        return tempArr;
+    }
+
+    /**
+     * Gets the player's properties that the player has
+     * @return the arrayList of Property
      */
     public ArrayList<Property> getOnlyProperty(){
 
         //Loops through properties to check if player has property of applicable type
-        ArrayList<Property> tempArr = new ArrayList<Property>(getProperties().size());
+        ArrayList<Property> tempArr = new ArrayList<Property>();
 
         for(int i = 0; i < getProperties().size();i++)
             if(getProperties().get(i) instanceof Property){
                 tempArr.add(((Property)getProperties().get(i)));
+            }
+        return tempArr;
+    }
+
+    /**
+     * Gets the player's utilities that the player has
+     * @return the arrayList of Utility
+     */
+    public ArrayList<Utility> getOnlyUtility(){
+
+        //Loops through properties to check if player has property of applicable type
+        ArrayList<Utility> tempArr = new ArrayList<Utility>();
+
+        for(int i = 0; i < getProperties().size();i++)
+            if(getProperties().get(i) instanceof Utility){
+                tempArr.add(((Utility)getProperties().get(i)));
+            }
+        return tempArr;
+    }
+
+    /**
+     * Gets the player's railroad that the player has
+     * @return the arrayList of Railroad
+     */
+    public ArrayList<Railroad> getOnlyRailroad(){
+
+        //Loops through properties to check if player has property of applicable type
+        ArrayList<Railroad> tempArr = new ArrayList<Railroad>();
+
+        for(int i = 0; i < getProperties().size();i++)
+            if(getProperties().get(i) instanceof Railroad){
+                tempArr.add(((Railroad)getProperties().get(i)));
             }
         return tempArr;
     }

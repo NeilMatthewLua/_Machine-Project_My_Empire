@@ -1,12 +1,17 @@
 package Model;
 
+import java.util.ArrayList;
+
 public abstract class Ownable extends Land {
 
     private double dPrice;
     private Player owner;
+    private ArrayList<Card> cardMultipliers;
+
 
     public Ownable(String strName,double dPrice){
         super(strName);
+        cardMultipliers = new ArrayList<Card>();
         this.dPrice = dPrice;
     }
 
@@ -24,6 +29,15 @@ public abstract class Ownable extends Land {
      */
     public Player getOwner(){
         return owner;
+    }
+
+
+    /**
+     * Gets the array list of card multipliers currently on the property
+     * @return ArrayList of Cards
+     */
+    public ArrayList<Card> getCardMultipliers(){
+        return cardMultipliers;
     }
 
     /**

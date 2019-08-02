@@ -28,102 +28,83 @@ public class CardSet_5 extends Card{
         return multiplier;
     }
 
+
     /**
-     * Abstracted method that triggers the effects of each card
+     * Finds the index of the ownable from the player's ownables
+     * @param player player whose properties will be checked
+     * @return index of the property inside the player's properties
+     */
+    public int findIndex(Player player, Ownable chosen) {
+        for( int i = 0; i <  player.getProperties().size(); i++) {
+                if(player.getProperties().get(i).getName().equalsIgnoreCase(chosen.getName())) {
+                    return i;
+                }
+        }
+        return 0;
+    }
+
+    /**
+     * Method that triggers the effects of each card (For Property)
      * @param player    player who got the card
      * @param gameBoard the gameboard
      * @return string which contains the details of the event
      */
     @Override
-    public String useCard(Player player, GameBoard gameBoard){
+    public String useCard(Player player, GameBoard gameBoard) {
         String event = "";
+        int nChosenIndex = 0;
         int nIndex = player.getCards().get(player.getCards().size() - 1).getIndex(); //gets the index of the card to navigate through its set
 
-        if(nIndex >= 0 && nIndex <= 2){//For properties
-            int nUserInput = 0;
-            boolean isValid = false;
-            //Loops through properties to check if player has property of applicable type
-            ArrayList<Integer> tempArr = new ArrayList<Integer>(player.getProperties().size());
+        //gets the index of the chosen tile from the player's Ownable tiles
+        if (player.getChosen() instanceof Property)
+            nChosenIndex = findIndex(player, player.getChosen());
+        else if (player.getChosen() instanceof Utility)
+            nChosenIndex = findIndex(player, player.getChosen());
+        else if (player.getChosen() instanceof Railroad)
+            nChosenIndex = findIndex(player, player.getChosen());
 
-            for(int i = 0; i < player.getProperties().size();i++)
-                if(player.getProperties().get(i) instanceof Property){
-                    tempArr.add(i);
-                }
+        if (nIndex >= 0 && nIndex <= 2) {//For properties
 
-            if(tempArr.size() > 0) //if there is at least one property class owned
-                isValid = true;
-
-            if(isValid){
-
-                for(int i = 0; i < tempArr.size(); i++)//Display possible properties to add effect
-                    System.out.println(i + "." + player.getProperties().get(tempArr.get(i)).getName());
-                Scanner sc = new Scanner(System.in);
-                nUserInput = sc.nextInt();
-
-                if(nIndex == 0){//Double Rent
-                    multiplier = 2;
-                    event += "Rent of " + player.getProperties().get(nUserInput).getName() + " doubled for next collection.";
-                }
-                else if(nIndex == 1){//Renovation
-                    double dRenovation = 0; //Renovation price
-                    if(((Property)player.getProperties().get(nUserInput)).getDevelopment() >= 1){//Calculates price of renovation
-                        if(((Property)player.getProperties().get(nUserInput)).getDevelopment() == 5){
-                            dRenovation += 50;
-                            dRenovation += (((Property)player.getProperties().get(nUserInput)).getDevelopment() - 1) * 25;
-                        }
-                        else
-                            dRenovation += ((Property)player.getProperties().get(nUserInput)).getDevelopment() * 25;
-                    }
-
-                    if(player.getMoney() - dRenovation > 0){//If rent is applicable
-                        player.giveMoney(gameBoard.getBank(),dRenovation);
-                        multiplier = 1.5;
-                        System.out.println("Rent of " +player.getProperties().get(nUserInput).getName()+" increased by 50%");
+            if (nIndex == 0) {//Double Rent
+                multiplier = 2;
+                //adds the multiplier card to the property
+                player.getProperties().get(nChosenIndex).getCardMultipliers().add(this);
+                event += "Rent of " + player.getProperties().get(nChosenIndex).getName() + " doubled for next collection.\n";
+            }
+            else if (nIndex == 1) {//Renovation
+                double dRenovation = 0; //Renovation price
+                if (((Property) player.getProperties().get(nChosenIndex)).getDevelopment() >= 1) {//Calculates price of renovation
+                    if (((Property) player.getProperties().get(nChosenIndex)).getDevelopment() == 5) {
+                        dRenovation += 50;
+                        dRenovation += (((Property) player.getProperties().get(nChosenIndex)).getDevelopment() - 1) * 25;
                     }
                     else
-                        System.out.println("Insuficient Funds. Cannot Develop");
+                        dRenovation += ((Property) player.getProperties().get(nChosenIndex)).getDevelopment() * 25;
                 }
-                else if(nIndex == 2){//Dilapidated Houses
-                    multiplier = 0.9;
-                    event += "Rent of " +player.getProperties().get(nUserInput).getName()+" decreased by 10%";
-                }
+
+                player.giveMoney(gameBoard.getBank(), dRenovation);
+                multiplier = 1.5;
+                player.getProperties().get(nChosenIndex).getCardMultipliers().add(this);
+                event += "Rent of " + player.getProperties().get(nChosenIndex).getName() + " increased by 50%\n";
             }
-            else
-                System.out.println("Not applicable. No owned properties.");
+            else if (nIndex == 2) {//Dilapidated Houses
+                multiplier = 0.9;
+                 player.getProperties().get(nChosenIndex).getCardMultipliers().add(this);
+                event += "Rent of " + player.getProperties().get(nChosenIndex).getName() + " decreased by 10%";
+            }
         }
         else if(nIndex == 3 || nIndex == 4){//For utilities / railroad
-            int nUserInput = 0;
-            boolean isValid = false;
-            //Loops through properties to check if player has property of applicable type
-            ArrayList<Integer> tempArr = new ArrayList<Integer>(player.getProperties().size());
-            for(int i = 0; i < player.getProperties().size();i++)
-                if(player.getProperties().get(i) instanceof Utility || player.getProperties().get(i) instanceof Railroad){
-                    tempArr.add(i);
-                }
 
-            if(tempArr.size() > 0) //if there is at least one utility / railroad class
-                isValid = true;
-
-            if(isValid){
-                for(int i = 0; i < tempArr.size(); i++)//Display possible utilities/railroads to add effect
-                    System.out.println(i + "." + player.getProperties().get(tempArr.get(i)).getName());
-                Scanner sc = new Scanner(System.in);
-                nUserInput = sc.nextInt();
-
-                if(nIndex == 3){//Decrease by 10%
-                    multiplier = 0.9;
-                    System.out.println("Rent of " +player.getProperties().get(nUserInput).getName()+ " decreased by 10%");
-                }
-                else if(nIndex == 4){//Increase by 10%
-                    multiplier = 1.1;
-                    System.out.println("Rent of " +player.getProperties().get(nUserInput).getName()+ " increased by 10%");
-                }
+            if(nIndex == 3){//Decrease by 10%
+                multiplier = 0.9;
+                event += "Rent of " +player.getProperties().get(nChosenIndex).getName()+ " decreased by 10%";
             }
-            else
-                System.out.println("Not applicable. No owned utilities or railroads.");
+            else if(nIndex == 4){//Increase by 10%
+                multiplier = 1.1;
+                 player.getProperties().get(nChosenIndex).getCardMultipliers().add(this);
+                event += "Rent of " +player.getProperties().get(nChosenIndex).getName()+ " increased by 10%";
+            }
         }
-
-
 
         player.getCards().remove(player.getCards().size() - 1); //remove from the player's hand
         return event;
