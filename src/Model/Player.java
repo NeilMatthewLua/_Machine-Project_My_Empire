@@ -2,14 +2,14 @@ package Model;
 /**
  * Player Class
  *
- *      New Changes:
-                  public ArrayList<Property> getOnlyProperty()
-                  public ArrayList<Property> getOnlyPropertyRenovate()
-                  public ArrayList<Utility> getOnlyUtility()
-                  public ArrayList<Railroad> getOnlyRailroad()
+ *      New Changes: Updated Trade()
 
-        Last Changes Made: Editeed EligiblePurchase()
- * Version 1.3
+        Last Changes Made: public ArrayList<Property> getOnlyProperty()
+                         public ArrayList<Property> getOnlyPropertyRenovate()
+                         public ArrayList<Utility> getOnlyUtility()
+                         public ArrayList<Railroad> getOnlyRailroad()
+
+ * Version 1.4
 
  */
 
@@ -384,52 +384,34 @@ public class Player extends People{
         return event;
     }
 
+
     /**
-     * Trades with another Player
-     * @param gameBoard Gameboard where the players are playing on
-     * @return string which contains the details of the event
+     * Conducts the trading of property
+     * @param gameBoard main board of the game
+     * @param player player that owns the land
+     * @param nChosenPosition current player's chosen land to give to the other player
+     * @return
      */
-    public String trade(GameBoard gameBoard) {
-        int nChosenPosition = 0; //Property which player wants to get
-        int nChosenPlayer = 0; //Player which this player wishes to trade with
-        int nProperty = 0; //Property which this player wishes to trade in return
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Which player to trade to:");
-        for(int i = 0; i < gameBoard.getPlayers().length; i++)
-            if(gameBoard.getPlayers()[i].getName() != getName())
-                System.out.println(i+"."+gameBoard.getPlayers()[i].getName());
-        nChosenPlayer = sc.nextInt();
-
-        //TODO Connect this with GUI
-        System.out.println("Which property to trade?");
-        for(int i = 0; i < gameBoard.getPlayers()[nChosenPlayer].getProperties().size();i++)
-            System.out.println(i+"."+gameBoard.getPlayers()[nChosenPlayer].getProperties().get(i).getName());
-        nChosenPosition = sc.nextInt();
-
-        System.out.println("Which property to trade? to " + gameBoard.getPlayers()[nChosenPlayer].getName());
-        for(int i = 0; i < properties.size();i++)
-            System.out.println(i+"."+properties.get(i).getName());
-        nProperty = sc.nextInt();
+    public String trade(GameBoard gameBoard, Player player, int nChosenPosition) {
 
 
-        //assuming other end agrees,
-        Ownable temp = gameBoard.getPlayers()[nChosenPlayer].getProperties().get(nChosenPosition);
+        Ownable temp = ((Property)gameBoard.getLand().get(nChosenPosition));
         //Sets owner to player and removes property traded from owned properties
-        (temp).setOwner(this);
-        this.properties.add(temp);
+        this.properties.remove(temp);
+        (temp).setOwner(player);
+        player.getProperties().add((Property)gameBoard.getLand().get(nChosenPosition));
 
-        //Sets your chosen property to be owned by other player
-        ((Property)properties.get(nProperty)).setOwner(gameBoard.getPlayers()[nChosenPlayer]);
-        gameBoard.getPlayers()[nChosenPlayer].properties.add(properties.get(nProperty));
+        //Sets your chosen property to be owned by you
+        ((Property)gameBoard.getLand().get(this.getPosition())).getOwner().getProperties().remove((gameBoard.getLand().get(this.getPosition())));
+        ((Property)gameBoard.getLand().get(this.getPosition())).setOwner(this);
+        this.properties.add((Property)gameBoard.getLand().get(this.getPosition()));
 
-        //Remove traded properties from both players
-        this.properties.remove(properties.get(nProperty ));
 
-        gameBoard.getPlayers()[nChosenPlayer].properties.remove(nChosenPosition);
         String event = "";
-        event += getName() + " now owns " + this.properties.get(properties.size()-1).getName();
-        event += gameBoard.getPlayers()[nChosenPlayer].getName() +" now owns " +
-                gameBoard.getPlayers()[nChosenPlayer].properties.get(gameBoard.getPlayers()[nChosenPlayer].properties.size()-1).getName();
+        event += getName() + " now owns " + this.properties.get(properties.size()-1).getName() + "\n";
+        event += ((Property) gameBoard.getLand().get(nChosenPosition)).getOwner().getName() +" now owns " +
+                gameBoard.getLand().get(nChosenPosition).getName() + "\n";
+
         return event;
     }
 

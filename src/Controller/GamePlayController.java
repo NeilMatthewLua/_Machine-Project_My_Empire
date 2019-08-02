@@ -63,6 +63,10 @@ public class GamePlayController  {
   @FXML
     private Label useButton;
   @FXML
+    private Label yesTradeButton;
+  @FXML
+    private Label noTradeButton;
+  @FXML
     private Label chooseButton;
   @FXML
     private Label money1;
@@ -100,6 +104,8 @@ public class GamePlayController  {
     private StackPane discardPane;
   @FXML
     private StackPane choosePane;
+  @FXML
+    private AnchorPane tradeAnchorPane;
   @FXML
     private AnchorPane playerPane1;
   @FXML
@@ -765,6 +771,19 @@ public class GamePlayController  {
 //        eventLabel.setText(event);
 //        gameBoard.getEvents().add(event);
 //    }
+    else if (e.getSource() == yesTradeButton) {
+      String event ="";
+      //event += gameBoard.getPlayers()[nTurnCounter % nTotal].trade(gameBoard);
+//TODO GET NAME OF DISPLAYSPACE
+
+      eventLabel.setText(event);
+      gameBoard.getEvents().add(event);
+
+    }
+    else if (e.getSource() == yesTradeButton) {
+      tradePane.setVisible(false);
+      rentPane.setVisible(true);
+    }
     else if (e.getSource() == purchaseButton) {
 
       String event = gameBoard.getPlayers()[nTurnCounter % nTotal].purchase(gameBoard);
@@ -774,12 +793,17 @@ public class GamePlayController  {
       purchasePane.setVisible(false);
       updateMoney(nTurnCounter % nTotal, 5);
     }
-    //TODO: Trade show properties to choose from
-//  else if(e.getSource() == tradeButton){
-//    gameBoard.getPlayers()[nTurnCounter % nTotal].trade(gameBoard);
-//    gameBoard.getEvents().add(event);
-//    eventLabel.setText(event);
-//  }
+    else if(e.getSource() == tradeButton) {
+      ArrayList<Property> tempArr = gameBoard.getPlayers()[nTurnCounter % nTotal].getOnlyProperty();
+      setFalseVisible();
+      chooseVisibleProperty(tempArr);
+      rentPane.setVisible(false);
+      tradePane.setVisible(false);
+      tradeAnchorPane.setVisible(true);
+      if (Zoomed.isVisible()) {
+        tradeAnchorPane.setVisible(true);
+      }
+    }
     else if(e.getSource() == rentButton){
       String event = gameBoard.getPlayers()[nTurnCounter % nTotal].payRent(gameBoard);
       Player tempPlayer = null;
@@ -836,21 +860,21 @@ public class GamePlayController  {
   }
 
     private void delayStart(String[] string) {
-      for(String a: string)
-          System.out.println("D" + a);
-        eventLabel.setText(string[0]);
-        for(int i = 0; i < string.length; i++){
-          int nIndex = i;
-          PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
-          pauseTransition.setOnFinished(e -> eventLabel.setText(string[nIndex]));
-          pauseTransition.play();
-      }
+//      for(String a: string)
+//          System.out.println("D" + a);
+//        eventLabel.setText(string[0]);
+//        for(int i = 0; i < string.length; i++){
+//          int nIndex = i;
+//          PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
+//          pauseTransition.setOnFinished(e -> eventLabel.setText(string[nIndex]));
+//          pauseTransition.play();
+//      }
 
 //        i = 0;
-//        ScheduledExecutorService timer =
-//             Executors.newScheduledThreadPool(1);
-////        ScheduledExecutorService timer = Executors
-////                .newSingleThreadScheduledExecutor();
+////        ScheduledExecutorService timer =
+////             Executors.newScheduledThreadPool(1);
+//        ScheduledExecutorService timer = Executors
+//                .newSingleThreadScheduledExecutor();
 //        timer.scheduleWithFixedDelay(new TimerTask() {
 //            @Override
 //            public void run() {
@@ -964,13 +988,13 @@ public class GamePlayController  {
             playersZoom.setVisible(true);
             playersZoom.setText("" + gameBoard.getPlayers().length);
             footTrafficZoom.setVisible(true);
+           }
           }
         }
       }
     }
-  }
 
-  
+  //TODO CHANGE TO RETURN INT
   @FXML
   public void displaySpaces(MouseEvent event) {
     //Display land when clicked
@@ -990,26 +1014,26 @@ public class GamePlayController  {
             Zoomed.toFront();
             isFound = false;
             openZoomed(event);
-//            boolean isSame = false;
-//            for (int j = 0; j < gameBoard.getLand().size() && !isSame; j++) {
-//              if (gameBoard.getLand().get(j).getName().equalsIgnoreCase(spaces.get(index).getText())) {
-//                isSame = true;
-//                if (gameBoard.getLand().get(j) instanceof Ownable) {
-//                  if (((Ownable) gameBoard.getLand().get(j)).getOwner() != null) {
-//                    if (gameBoard.getLand().get(j) instanceof Property) {
-//                      ownerZoom.setText(((Property) gameBoard.getLand().get(j)).getOwner().getName());
-//                      footTrafficZoom.setText("" + ((Property) gameBoard.getLand().get(j)).getFootTraffic());
-//                      System.out.println(((Property) gameBoard.getLand().get(j)).getFootTraffic());
-//                    } else {
-//                      ownerZoom.setText(((Ownable) gameBoard.getLand().get(j)).getOwner().getName());
-//                    }
-//                  } else {
-//                    footTrafficZoom.setText("0.0");
-//                    ownerZoom.setText("None");
-//                  }
-//                }
-//              }
-//            }
+            boolean isSame = false;
+            for (int j = 0; j < gameBoard.getLand().size() && !isSame; j++) {
+              if (gameBoard.getLand().get(j).getName().equalsIgnoreCase(spaces.get(index).getText())) {
+                isSame = true;
+                if (gameBoard.getLand().get(j) instanceof Ownable) {
+                  if (((Ownable) gameBoard.getLand().get(j)).getOwner() != null) {
+                    if (gameBoard.getLand().get(j) instanceof Property) {
+                      ownerZoom.setText(((Property) gameBoard.getLand().get(j)).getOwner().getName());
+                      footTrafficZoom.setText("" + ((Property) gameBoard.getLand().get(j)).getFootTraffic());
+                      System.out.println(((Property) gameBoard.getLand().get(j)).getFootTraffic());
+                    } else {
+                      ownerZoom.setText(((Ownable) gameBoard.getLand().get(j)).getOwner().getName());
+                    }
+                  } else {
+                    footTrafficZoom.setText("0.0");
+                    ownerZoom.setText("None");
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1019,58 +1043,58 @@ public class GamePlayController  {
     }
   }
 
-  // @FXML
-  // public void displaySpaces(MouseEvent event){
-  //   //Display land when clicked
-  //   if(event.getButton() == MouseButton.SECONDARY){//Include Owner, Foot Traffic, and Multipliers
-  //     if(!Zoomed.isVisible()){
-  //       boolean isFound = true;
-  //       if (!(((Label) event.getSource()).getText().equalsIgnoreCase("Start") || ((Label) event.getSource()).getText().equalsIgnoreCase("Community") ||
-  //               ((Label) event.getSource()).getText().equalsIgnoreCase("Jail") || ((Label) event.getSource()).getText().equalsIgnoreCase("Free Parking"))) {
-  //         for (int i = 0; i < urls.length && isFound; i++) {
-  //           if (((Label) event.getSource()).getText().equalsIgnoreCase(urls[i][0])) {
-  //             Image image = new Image(getClass().getResourceAsStream(urls[i][2]));
-  //             Zoomed.setImage(image);
-  //             isFound = false;
-  //             if(gameBoard.getLand().get(i) instanceof Ownable){
-  //               if(((Ownable) gameBoard.getLand().get(i)).getOwner() != null){
-  //                 if(gameBoard.getLand().get(i) instanceof Property){
-  //                   ownerZoom.setText(((Property) gameBoard.getLand().get(i)).getOwner().getName());
-  //                   footTrafficZoom.setText(""+((Property) gameBoard.getLand().get(i)).getFootTraffic());
-  //                 }
-  //                 else {
-  //                   ownerZoom.setText(((Ownable) gameBoard.getLand().get(i)).getOwner().getName());
-  //                 }
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //       else{
-  //         if(((Label) event.getSource()).getText().equalsIgnoreCase("Start")){
-  //           Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Start.png"));
-  //           Zoomed.setImage(ig);
-  //         }
-  //         else if(((Label) event.getSource()).getText().equalsIgnoreCase("Community Service")){
-  //           Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Community.png"));
-  //           Zoomed.setImage(ig);
-  //         }
-  //         else if(((Label) event.getSource()).getText().equalsIgnoreCase("Jail")){
-  //           Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Jail.png"));
-  //           Zoomed.setImage(ig);
-  //         }
-  //         else{
-  //           Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/FreeParking.png"));
-  //           Zoomed.setImage(ig);
-  //         }
-  //       }
-  //       openZoomed(event);
-  //     }
-  //     else{
-  //       closeZoomed(event);
-  //     }
-  //   }
-  // }
+//   @FXML
+//   public void displaySpaces(MouseEvent event){
+//     //Display land when clicked
+//     if(event.getButton() == MouseButton.SECONDARY){//Include Owner, Foot Traffic, and Multipliers
+//       if(!Zoomed.isVisible()){
+//         boolean isFound = true;
+//         if (!(((Label) event.getSource()).getText().equalsIgnoreCase("Start") || ((Label) event.getSource()).getText().equalsIgnoreCase("Community") ||
+//                 ((Label) event.getSource()).getText().equalsIgnoreCase("Jail") || ((Label) event.getSource()).getText().equalsIgnoreCase("Free Parking"))) {
+//           for (int i = 0; i < urls.length && isFound; i++) {
+//             if (((Label) event.getSource()).getText().equalsIgnoreCase(urls[i][0])) {
+//               Image image = new Image(getClass().getResourceAsStream(urls[i][2]));
+//               Zoomed.setImage(image);
+//               isFound = false;
+//               if(gameBoard.getLand().get(i) instanceof Ownable){
+//                 if(((Ownable) gameBoard.getLand().get(i)).getOwner() != null){
+//                   if(gameBoard.getLand().get(i) instanceof Property){
+//                     ownerZoom.setText(((Property) gameBoard.getLand().get(i)).getOwner().getName());
+//                     footTrafficZoom.setText(""+((Property) gameBoard.getLand().get(i)).getFootTraffic());
+//                   }
+//                   else {
+//                     ownerZoom.setText(((Ownable) gameBoard.getLand().get(i)).getOwner().getName());
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//         else{
+//           if(((Label) event.getSource()).getText().equalsIgnoreCase("Start")){
+//             Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Start.png"));
+//             Zoomed.setImage(ig);
+//           }
+//           else if(((Label) event.getSource()).getText().equalsIgnoreCase("Community Service")){
+//             Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Community.png"));
+//             Zoomed.setImage(ig);
+//           }
+//           else if(((Label) event.getSource()).getText().equalsIgnoreCase("Jail")){
+//             Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Jail.png"));
+//             Zoomed.setImage(ig);
+//           }
+//           else{
+//             Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/FreeParking.png"));
+//             Zoomed.setImage(ig);
+//           }
+//         }
+//         openZoomed(event);
+//       }
+//       else{
+//         closeZoomed(event);
+//       }
+//     }
+//   }
 
   @FXML
   public void updatePlayerPositions(){
@@ -1083,7 +1107,11 @@ public class GamePlayController  {
       }
     }
   }
-
+//TODO CHECKISWIN
+//  public void checkWin(){
+//    if(gameBoard.getIsWin())
+//
+//  }
  // Run everything in this function whenever this view has been initialized
   public void initialize(Player[] players) {
     player1Spaces = new ArrayList<ImageView>();

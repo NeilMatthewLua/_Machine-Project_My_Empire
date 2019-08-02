@@ -903,6 +903,23 @@
             <Label id="actionButton" fx:id="chooseButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Choose" textFill="WHITE" />
          </children>
       </StackPane>
+      <AnchorPane fx:id="tradeAnchorPane" layoutX="676.0" layoutY="416.0" prefHeight="200.0" prefWidth="359.0" visible="false">
+         <children>
+            <StackPane fx:id="yesTradePane" layoutX="23.0" layoutY="83.0" prefHeight="80.0" prefWidth="129.0">
+               <children>
+                  <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+                  <Label id="actionButton" fx:id="yesTradeButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Yes!" textFill="WHITE" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="noTradePane" layoutX="153.0" layoutY="64.0" prefHeight="117.0" prefWidth="204.0">
+               <children>
+                  <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+                  <Label id="actionButton" fx:id="noTradeButton" alignment="CENTER" layoutX="30.0" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="No!" textFill="WHITE" />
+               </children>
+            </StackPane>
+            <Label id="nameSummary" layoutX="83.0" layoutY="24.0" stylesheets="@../CSS/GamePlay.css" text="Accept Trade?" />
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="anchor17" layoutX="-2.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="69.0" rotate="-180.0">
          <children>
             <Label fx:id="space17" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Jail" />
