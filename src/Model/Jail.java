@@ -5,6 +5,8 @@ package Model;
  * Last Change Made:
  *
  * Previous Change Made: Class Created
+ *   @author  Lua and Tanting
+ *   @version 1.7
  */
 public class Jail extends Land {
 

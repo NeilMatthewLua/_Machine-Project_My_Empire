@@ -1,11 +1,13 @@
 
 /**
- * Card class which acts as a template for the cards that can be used during the game
+ * Card subclass which contains cards from group 4. This includes
+ * the go to jail card or take a trip to property card.
  *
  *  New Changes Made: Fixed Bugs
 
  *  Last Changes Made: Created this subclass
-
+ *   @author  Lua and Tanting
+ *   @version 1.7
  */
 
 package Model;

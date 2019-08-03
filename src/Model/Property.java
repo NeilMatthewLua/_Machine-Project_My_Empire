@@ -8,10 +8,10 @@ import java.util.ArrayList;
  *
  *  Last Changes Made: Call the setRentCollected method in getRent()
  *
- *   @author  Lua & Tanting
- *   @version 1.1
+ *   @author  Lua and Tanting
+ *   @version 1.7
  */
-public class Property extends Ownable {
+public class Property extends Ownable implements IsRentable{
     private String strColor;
     private double[] arrAttributes;
     private int nDevelopment;
@@ -97,14 +97,13 @@ public class Property extends Ownable {
         dFootTraffic += 1;
     }
 
+
     /**
-     * Overridden method which prompts player to pay rent when stepped on
-     * @param gameBoard instance of the game board
-     * @param player the player which triggered the event
-     * @return string which contains the details of the event
+     * Gets the rent of the property
+     * @param player the owner of the property
+     * @return the computed cost of the rent
      */
-    @Override
-    public String triggerEvent(GameBoard gameBoard, Player player){
+    public double getRent(Player player){
         int nCounter = 0;
         double dRent = 0;
         for(int i = 0; i < this.getOwner().getProperties().size();i++){
@@ -119,8 +118,22 @@ public class Property extends Ownable {
         else if(nCounter == 3)
             dRent += 20;
         dRent += arrAttributes[nDevelopment + 2]; //Add development level
+        return dRent;
+    }
+
+    /**
+     * Overridden method which prompts player to pay rent when stepped on
+     * @param gameBoard instance of the game board
+     * @param player the player which triggered the event
+     * @return string which contains the details of the event
+     */
+    @Override
+    public String triggerEvent(GameBoard gameBoard, Player player){
+
+        double dRent = getRent(this.getOwner());
+
         double multiplier = 1;
-        for(int i = 0; i < getCardMultipliers().size();i++){
+        for(int i = 0; i < getCardMultipliers().size();i++){//Apply card multipliers
             if(getCardMultipliers().get(i) instanceof CardSet_5 && getCardMultipliers().get(i).getIndex() == 0){//Remove double rent card
                 multiplier *= 2;
                 gameBoard.addCardDiscard(getCardMultipliers().get(i)); // Add to discard pile

@@ -11,8 +11,8 @@ import java.util.Random;
  * New Changes Made: Added setLand method()
  *
  * Last Changes Made: Initialized ArrayList
- * @author  Lua & Tanting
- * @version 1.3
+ *   @author  Lua and Tanting
+ *   @version 1.7
  */
 public class GameBoard {
     private Player[] players;
@@ -27,16 +27,8 @@ public class GameBoard {
      */
     public GameBoard(){
         events = new ArrayList<String>();
-
-//         ArrayList<String> peeps = new ArrayList<String>();
-//         peeps.add("Bob");
-//         peeps.add("Bernard");
-//         peeps.add("Ben");
-//         peeps.add("Bilbo");
-//         initializePlayers(peeps);
         initializeLand();
         initializeCards();
-//        randomizeLand();
         isWin = false;
     }
 
@@ -87,29 +79,8 @@ public class GameBoard {
     }
 
     /**
-     * Prints Land in Order
-     */
-    public void printLand(Player player){
-        System.out.println("TURN: " + player.getName());
-//        int[] arrPositions = new int[players.length];
-//        for(int i = 0; i < players.length; i++)
-//            arrPositions[i] = players[i].getPosition();
-        for(int i = 0; i < land.size(); i++){
-            if(land.get(i) instanceof Property)
-            if(((Property)land.get(i)).getOwner() != null )
-                if(((Property)land.get(i)).getOwner().equals(player))
-                    System.out.print("(OWNED) ");
-            System.out.println(i +"."+ land.get(i).getName());
-//            for(int j = 0; j < players.length; j++)
-//                if(i == arrPositions[j])
-//                    System.out.println("Player: " + players[j].getName() + "is here. at " + i);
-        }
-        System.out.println();
-        System.out.println();
-        System.out.println();
-    }
-    /**
-     * Creates land objects to be used in the board and places it in landLeft
+     * Initializes the land spaces
+     * @return the array list of spaces which was created
      */
     public ArrayList<Land> initializeLand(){
         double[][] dPropertyDetails = {
@@ -195,6 +166,10 @@ public class GameBoard {
         return land;
     }
 
+    /**
+     * Takes an array list of land as input and sets it to the gameboard land
+     * @param newLand the array list to be copied
+     */
     public void setLand(ArrayList<Land> newLand){
         land = new ArrayList<Land>(newLand);
         for(int i = 0; i < land.size();i++){
@@ -202,6 +177,9 @@ public class GameBoard {
         }
     }
 
+    /**
+     * Randomizes the array list of spaces inside the gameboard
+     */
     public void randomizeLand(){
         ArrayList<Land> landLeft = new ArrayList<Land>(1);
         for(int i = 0; i < land.size();i++ ){
@@ -226,9 +204,9 @@ public class GameBoard {
             System.out.println(i +"."+ cardPile.get(i).getDescription());
         }
     }
+
     /**
-     * Initializes Cards to cardPile and shuffles it
-     *
+     * Initializes the card pile and shuffles it
      */
     private void initializeCards(){
         cardPile = new ArrayList<Card>();
@@ -297,8 +275,8 @@ public class GameBoard {
     }
 
     /**
-     * Initializes players based on the number specified by user and randomizes their order
-     *
+     * Initializes the players using the list of string player names
+     * @param strPlayers the array list of player names
      */
     public void initializePlayers(ArrayList<String> strPlayers){
 
@@ -413,19 +391,6 @@ public class GameBoard {
         cardDiscard.add(c);
     }
 
-    /**
-     * Method for playing the board until a player has won
-     */
-    public  void playGame(){
-        while(!isWin){//While no one has won
-            for(int i = 0; i < players.length && !isWin; i++){
-                checkForWin();
-                printLand(players[i]);
-                events.add(players[i].roll(this));
-            }
-        }
-        endResults();
-    }
 
     /**
      * Prints end results with players arranged in descending order of money

@@ -1,10 +1,12 @@
 /**
- * Card class which acts as a template for the cards that can be used during the game
+ * Card subclass which contains cards from group 5. This includes rent modifying cards such as:
+ * double rent, dilapidated houses, renovation, and increase/decrease the rent of utilities and railroads
  *
  *  New Changes Made: Fixed Bugs
 
  *  Last Changes Made: Created this subclass
-
+ *   @author  Lua and Tanting
+ *   @version 1.7
  */
 
 package Model;

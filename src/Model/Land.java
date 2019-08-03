@@ -9,8 +9,8 @@ import java.util.Collections;
  *
  *  Last Changes Made: Made Land abstract
  *
- *   @author  Lua & Tanting
- *   @version 1.2
+ *   @author  Lua and Tanting
+ *   @version 1.7
  */
 public abstract class Land {
     private String strName;

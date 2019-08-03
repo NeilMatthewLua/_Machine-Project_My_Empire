@@ -1,6 +1,6 @@
 package Model;
 /**
- * Player Class
+ * Player Class which is a subclass of people is used for the players within the game
  *
  *      New Changes: Updated Trade()
 
@@ -9,8 +9,9 @@ package Model;
                          public ArrayList<Utility> getOnlyUtility()
                          public ArrayList<Railroad> getOnlyRailroad()
 
- * Version 1.4
-
+ *
+ *   @author  Lua and Tanting
+ *   @version 1.7
  */
 
 import java.util.ArrayList;
@@ -85,129 +86,19 @@ public class Player extends People{
     public Ownable getChosen() { return this.chosen; }
 
     /**
-     * Adds a card on hand
-     * @param card a card that can be kept on hand
+     * Gets the player's properties that the player has
+     * @return the arrayList of Property
      */
-    public void addCard(Card card) {
-         this.cards.add(card);
-    }
+    public ArrayList<Property> getOnlyProperty(){
 
-    /**
-     * Setter for the Player's position
-     * @param nRoll number of spaces the token moves
-     */
-    public void setPosition(int nRoll) {
-        if(nPosition + nRoll > 31) { //checks if the token went through the whole board already
-            nPosition = nRoll - (31 - nPosition) - 1;
-        }
-        nPosition += nRoll;
-    }
-      
-    /**
-     * Setter for the Player's jail status. Changes status of player's jail status based on parameter
-     */
-    public void setJail(boolean value) {
-        this.inJail = value;
-    }
+        //Loops through properties to check if player has property of applicable type
+        ArrayList<Property> tempArr = new ArrayList<Property>();
 
-    /**
-     * Setter for player's chosen owned Property / Utility / Railroad
-     */
-    public void setChosen(Ownable chosen) { this.chosen = chosen; }
-
-    /**
-     * Method that performs the rolling of die and the calculation of steps of the Player's token
-     * @param gameBoard Gameboard where the players are playing on
-     * @return string which contains the details of the event
-     */
-    public String roll(GameBoard gameBoard) {//
-        int nRoll;
-        int start = nPosition; //Initializes the starting position of the token
-        Land temp;
-        nRoll = (int)((Math.random() * (6 - 1)) + 1 ); //generates a random number form 1 - 6
-        this.nDiceRoll = nRoll;
-        String event = "";
-        if(inJail){//If player is in jail then exact fine
-            if(this.getCards().size() > 0){
-                if(this.getCards().get(0) instanceof CardSet_1){
-                    event += this.getCards().get(0).useCard(this,gameBoard)+"\n";
-                    gameBoard.getEvents().add(event);
-                }
+        for(int i = 0; i < getProperties().size();i++)
+            if(getProperties().get(i) instanceof Property){
+                tempArr.add(((Property)getProperties().get(i)));
             }
-            if(this.giveMoney(gameBoard.getBank(),50)){
-                event += "Bank was given 50$ for Jail fine.\n";
-                gameBoard.getEvents().add(event);
-            }
-            else{//If player can't pay
-                event += getName() +" was not able to pay Jail Fine.\n";
-                gameBoard.getEvents().add(event);
-                gameBoard.setIsWin(true);
-            }
-        }
-        event += getName() + " rolled a " + nRoll + "\n";
-        if(!gameBoard.getIsWin()){
-
-            for( int i = start + 1 ; i <= start + nRoll; i++ ) {
-                if( i > 31 ) { //Checks if the token has reached the end of the board
-                    nRoll = nRoll + start -i;
-                    i = 0;
-                    nPosition = 0; //this sets the token at start (index 0)
-                    start = 0;
-                    event += gameBoard.getLand().get(0).triggerEvent(gameBoard,this);
-                    gameBoard.getEvents().add(event);
-                }
-                else {
-                    nPosition += 1;
-                }
-                if (gameBoard.getLand().get(i) instanceof Property)
-                    if(((Property) gameBoard.getLand().get(i)).getOwner() != null) {
-                        //If land is owned and is property type
-                        ((Property) gameBoard.getLand().get(this.getPosition())).addFootTraffic();
-                    }
-            }
-            event += getName() + " landed on " + gameBoard.getLand().get(getPosition()).getName();
-        }
-        return event;
-    }
-
-    /**
-     * This triggers the Jail / Chance / Tax / Free Parking / Start events
-     * @param gameBoard Gameboard where the players are playing on
-     * @return string which contains the details of the event
-     */
-    public String action(GameBoard gameBoard) {
-        String event = gameBoard.getLand().get(nPosition).triggerEvent(gameBoard, this);
-        return event;
-    }
-
-    /**
-     * This checks if the tile the player is on is that player's owned Utility / Railroad
-     * @param gameBoard  Gameboard where the players are playing on
-     * @return boolean value to confirm
-     */
-    public boolean isOwnedUtilityRailroad(GameBoard gameBoard){
-        //Checks if the tile is a Utility / Railroad subclass first
-        if( (gameBoard.getLand().get(nPosition) instanceof Utility) || (gameBoard.getLand().get(nPosition) instanceof Railroad ))
-            //Calls isMine to check if the player owns it
-            if(isMine(gameBoard)) {
-                return true;
-            }
-        return false;
-    }
-
-    /**
-     * This checks if the player owns any property that can be traded
-     * @param gameBoard  Gameboard where the players are playing on
-     * @return boolean value to confirm
-     */
-    public boolean canTrade(GameBoard gameBoard){
-        //goes through player's assets
-        for(int i = 0; i < this.getProperties().size(); i++ ){
-            //Checks if there is at least one Property subclass in the player's assets
-            if(this.getProperties().get(i) instanceof Property)
-                return true;
-        }
-        return false;
+        return tempArr;
     }
 
     /**
@@ -243,22 +134,6 @@ public class Player extends People{
     }
 
     /**
-     * Gets the player's properties that the player has
-     * @return the arrayList of Property
-     */
-    public ArrayList<Property> getOnlyProperty(){
-
-        //Loops through properties to check if player has property of applicable type
-        ArrayList<Property> tempArr = new ArrayList<Property>();
-
-        for(int i = 0; i < getProperties().size();i++)
-            if(getProperties().get(i) instanceof Property){
-                tempArr.add(((Property)getProperties().get(i)));
-            }
-        return tempArr;
-    }
-
-    /**
      * Gets the player's utilities that the player has
      * @return the arrayList of Utility
      */
@@ -289,6 +164,37 @@ public class Player extends People{
             }
         return tempArr;
     }
+    /**
+     * Adds a card on hand
+     * @param card a card that can be kept on hand
+     */
+    public void addCard(Card card) {
+         this.cards.add(card);
+    }
+
+    /**
+     * Setter for the Player's position
+     * @param nRoll number of spaces the token moves
+     */
+    public void setPosition(int nRoll) {
+        if(nPosition + nRoll > 31) { //checks if the token went through the whole board already
+            nPosition = nRoll - (31 - nPosition) - 1;
+        }
+        nPosition += nRoll;
+    }
+      
+    /**
+     * Setter for the Player's jail status. Changes status of player's jail status based on parameter
+     */
+    public void setJail(boolean value) {
+        this.inJail = value;
+    }
+
+    /**
+     * Setter for player's chosen owned Property / Utility / Railroad
+     */
+    public void setChosen(Ownable chosen) { this.chosen = chosen; }
+
 
     /**
      * This checks if the tile the player is on is that player's owned Property
@@ -304,25 +210,6 @@ public class Player extends People{
             }
 
         return false;
-     }
-
-    /**
-     * This charges rent to the player
-     * @param gameBoard  Gameboard where the players are playing on
-     * @return string event to be displayed on the window
-     */
-    public String payRent(GameBoard gameBoard) {
-         String event = gameBoard.getLand().get(nPosition).triggerEvent(gameBoard, this);
-         return event;
-    }
-
-    /**
-     * This checks if the tile the player is on a Property / Utility / Railroad tile
-     * @param gameBoard Gameboard where the players are playing on
-     * @return boolean value to confirm
-     */
-    public boolean isPropertyUtilityRailroad(GameBoard gameBoard){
-        return (gameBoard.getLand().get(nPosition) instanceof Property || gameBoard.getLand().get(nPosition) instanceof Utility || gameBoard.getLand().get(nPosition) instanceof Railroad);
     }
 
     /**
@@ -345,12 +232,117 @@ public class Player extends People{
     }
 
     /**
+     * This checks if the tile the player is on is that player's owned Utility / Railroad
+     * @param gameBoard  Gameboard where the players are playing on
+     * @return boolean value to confirm
+     */
+    public boolean isOwnedUtilityRailroad(GameBoard gameBoard){
+        //Checks if the tile is a Utility / Railroad subclass first
+        if( (gameBoard.getLand().get(nPosition) instanceof Utility) || (gameBoard.getLand().get(nPosition) instanceof Railroad ))
+            //Calls isMine to check if the player owns it
+            if(isMine(gameBoard)) {
+                return true;
+            }
+        return false;
+    }
+
+    /**
      * Checks if the current Player owns that piece of land
      * @param gameBoard Gameboard where the players are playing on
      * @return if current Player owns that land
      */
     public boolean isMine(GameBoard gameBoard) {
-       return this.properties.contains(gameBoard.getLand().get(nPosition));
+        return this.properties.contains(gameBoard.getLand().get(nPosition));
+    }
+
+    /**
+     * Method that performs the rolling of die and the calculation of steps of the Player's token
+     * @param gameBoard Gameboard where the players are playing on
+     * @return string which contains the details of the event
+     */
+    public String roll(GameBoard gameBoard) {//
+        int nRoll;
+        int start = nPosition; //Initializes the starting position of the token
+        Land temp;
+        nRoll = (int)((Math.random() * (6 - 1)) + 1 ); //generates a random number form 1 - 6
+        this.nDiceRoll = nRoll;
+        String event = "";
+        if(inJail){//If player is in jail then exact fine
+            if(this.getCards().size() > 0){
+                if(this.getCards().get(0) instanceof CardSet_1){
+                    event += this.getCards().get(0).useCard(this,gameBoard)+"\n";
+                    gameBoard.getEvents().add(event);
+                }
+            }
+            if(this.giveMoney(gameBoard.getBank(),50)){
+                event += "Bank was given 50$ for Jail fine.\n";
+                inJail = false;
+                gameBoard.getEvents().add(event);
+            }
+            else{//If player can't pay
+                event += getName() +" was not able to pay Jail Fine.\n";
+                gameBoard.getEvents().add(event);
+                gameBoard.setIsWin(true);
+            }
+        }
+        event += getName() + " rolled a " + nRoll + "\n";
+        if(!gameBoard.getIsWin()){
+            for( int i = start + 1 ; i <= start + nRoll; i++ ) {
+                if( i > 31 ) { //Checks if the token has reached the end of the board
+                    nRoll = nRoll + start -i;
+                    i = 0;
+                    nPosition = 0; //this sets the token at start (index 0)
+                    start = 0;
+                    event += gameBoard.getLand().get(0).triggerEvent(gameBoard,this);
+                    gameBoard.getEvents().add(event);
+                }
+                else {
+                    nPosition += 1;
+                }
+                if (gameBoard.getLand().get(i) instanceof Property)
+                    if(((Property) gameBoard.getLand().get(i)).getOwner() != null) {
+                        //If land is owned and is property type
+                        ((Property) gameBoard.getLand().get(this.getPosition())).addFootTraffic();
+                    }
+            }
+            event += getName() + " landed on " + gameBoard.getLand().get(getPosition()).getName();
+        }
+        return event;
+    }
+
+    /**
+     * This triggers the Jail / Chance / Tax / Free Parking / Start events
+     * @param gameBoard Gameboard where the players are playing on
+     * @return string which contains the details of the event
+     */
+    public String action(GameBoard gameBoard) {
+        String event = gameBoard.getLand().get(nPosition).triggerEvent(gameBoard, this);
+        return event;
+    }
+    
+    /**
+     * This checks if the player owns any property that can be traded
+     * @param gameBoard  Gameboard where the players are playing on
+     * @return boolean value to confirm
+     */
+    public boolean canTrade(GameBoard gameBoard){
+        //goes through player's assets
+        for(int i = 0; i < this.getProperties().size(); i++ ){
+            //Checks if there is at least one Property subclass in the player's assets
+            if(this.getProperties().get(i) instanceof Property)
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * This charges rent to the player
+     * @param gameBoard  Gameboard where the players are playing on
+     * @return string event to be displayed on the window
+     */
+    public String payRent(GameBoard gameBoard) {
+         String event = gameBoard.getLand().get(nPosition).triggerEvent(gameBoard, this);
+         return event;
     }
 
     /**
@@ -390,7 +382,7 @@ public class Player extends People{
      * @param gameBoard main board of the game
      * @param player player that owns the land
      * @param nChosenPosition current player's chosen land to give to the other player
-     * @return
+     * @return the summary of the trade event
      */
     public String trade(GameBoard gameBoard, Player player, int nChosenPosition) {
 
@@ -428,6 +420,11 @@ public class Player extends People{
                "Now at Development Level: " + ((Property)gameBoard.getLand().get(nPosition)).getDevelopment();
     }
 
+    /**
+     * Checks if the land can be purchased or not
+     * @param gameBoard Gameboard where the players are playing on
+     * @return boolean if land can be purchased
+     */
     public boolean eligiblePurchase(GameBoard gameBoard){
         if (gameBoard.getLand().get(nPosition) instanceof Property){
             if(dMoney >= ((Property) gameBoard.getLand().get(nPosition)).getPrice()){

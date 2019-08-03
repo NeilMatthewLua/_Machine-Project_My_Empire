@@ -2,12 +2,14 @@ package Model;
 import java.util.Random;
 
 /**
- * Card class which acts as a template for the cards that can be used during the game
+ * Card subclass which contains cards from group 6. This includes payment cards with randomly generated amounts
+ * that can either be 50, 100, or 150.
  *
  *  New Changes Made: Fixed Bugs
  
  *  Last Changes Made: Created this subclass
-
+ *   @author  Lua and Tanting
+ *   @version 1.7
  */
 
 public class CardSet_6 extends Card{

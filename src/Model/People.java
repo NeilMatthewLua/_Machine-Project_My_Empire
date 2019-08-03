@@ -3,10 +3,11 @@ package Model;
  * People Class parent class of players and contains name and money
  *    
  *      New Changes: Changed class constructor implementation
-
  * 
  *      Last Changes Made: Changed the implementation of giveMoney()
- * Version 1.03
+ *   @author  Lua and Tanting
+ *   @version 1.7
+ *
  */
 
 

@@ -196,7 +196,7 @@ public class LandInitController implements Initializable {
         this.gameBoard = gameBoard;
     }
 
-    public void setPlayerAvatars(ArrayList<String> playerAvatars){
+    public void setPlayerAvatars(ArrayList<String> playerAvatars){//Sets the player avatar urls
         this.playerAvatars = new ArrayList<String>();
         for(int i = 0; i < playerAvatars.size();i++){
             this.playerAvatars.add(playerAvatars.get(i));
@@ -222,7 +222,7 @@ public class LandInitController implements Initializable {
     }
 
     @FXML
-    public void hoverPaneIn(MouseEvent e){
+    public void hoverPaneIn(MouseEvent e){//Shows clear button when hovered over a space in the board
         if(!(emptySpaces.get(panes.indexOf(e.getSource())).getText().equalsIgnoreCase("Empty"))){
             System.out.println(emptySpaces.get(panes.indexOf(e.getSource())).getText());
             deleteLabels.get(panes.indexOf(e.getSource())).setVisible(true);
@@ -230,20 +230,20 @@ public class LandInitController implements Initializable {
     }
 
     @FXML
-    public void hoverPaneOut(MouseEvent e){
+    public void hoverPaneOut(MouseEvent e){//Hides the button when hovered away
         if(deleteLabels.get(panes.indexOf(e.getSource())).isVisible())
             deleteLabels.get(panes.indexOf(e.getSource())).setVisible(false);
     }
 
     @FXML
-    public void chooseSpace(MouseEvent e) {
-        if(e.getButton() == MouseButton.PRIMARY){
+    public void chooseSpace(MouseEvent e) {//
+        if(e.getButton() == MouseButton.PRIMARY){//Selects current space when left clicked
             if (isPlacable((Label) e.getSource())) {
                 current = (Label) e.getSource();
                 currentSelected.setText(possibleSpaces.get(possibleSpaces.indexOf(current)).getText());
             }
         }
-        else if(e.getButton() == MouseButton.SECONDARY){
+        else if(e.getButton() == MouseButton.SECONDARY){//Zooms into the property when right clicked
             if(!Zoomed.isVisible()){
                 if(!((Label)e.getSource()).getText().equalsIgnoreCase("Empty")){
                     boolean isFound = true;
@@ -267,7 +267,7 @@ public class LandInitController implements Initializable {
     }
 
     @FXML
-    public void closeZoomed(MouseEvent e){
+    public void closeZoomed(MouseEvent e){//Closes zoomed space
         if(Zoomed.isVisible()){
             closeZoomed.setVisible(false);
             Zoomed.setVisible(false);
@@ -278,7 +278,7 @@ public class LandInitController implements Initializable {
     }
 
     @FXML
-    public void openZoomed(MouseEvent e){
+    public void openZoomed(MouseEvent e){//Opens zoomed space
         if(!Zoomed.isVisible()){
             closeZoomed.setVisible(true);
             Zoomed.setVisible(true);
@@ -299,7 +299,7 @@ public class LandInitController implements Initializable {
 
     @FXML
     public void addSpace(MouseEvent e){
-        if(e.getButton() == MouseButton.PRIMARY){
+        if(e.getButton() == MouseButton.PRIMARY){//When left clicked
             if(!(((Label)e.getSource()).getText().equalsIgnoreCase("Start") || ((Label)e.getSource()).getText().equalsIgnoreCase("Community") ||
                     ((Label)e.getSource()).getText().equalsIgnoreCase("Jail") || ((Label)e.getSource()).getText().equalsIgnoreCase("Free Parking"))){
                 if(current != null && (emptySpaces.get(emptySpaces.indexOf((e.getSource()))).getText().equalsIgnoreCase("Empty"))){
@@ -311,6 +311,8 @@ public class LandInitController implements Initializable {
                     emptySpaces.get(emptySpaces.indexOf((e.getSource()))).
                             setGraphic(new ImageView(img));
 
+                    ClearAll.setVisible(true);
+
                     //Rename Space to Object placed
                     emptySpaces.get(emptySpaces.indexOf((e.getSource()))).setText(urls[possibleSpaces.indexOf(current)][0]);
                     current = null;
@@ -318,7 +320,7 @@ public class LandInitController implements Initializable {
                     System.out.println(emptySpaces);
                 }
 
-                ClearAll.setVisible(true);
+
 
                 boolean isValid = true;
                 for(int i = 0; i < emptySpaces.size() && isValid; i++){//Check if there are empty spaces left
@@ -332,7 +334,7 @@ public class LandInitController implements Initializable {
                 }
             }
         }
-        else if(e.getButton() == MouseButton.SECONDARY) {
+        else if(e.getButton() == MouseButton.SECONDARY) {//If right click then zoom
             if (!(((Label) e.getSource()).getText().equalsIgnoreCase("Start") || ((Label) e.getSource()).getText().equalsIgnoreCase("Community") ||
                     ((Label) e.getSource()).getText().equalsIgnoreCase("Jail") || ((Label) e.getSource()).getText().equalsIgnoreCase("Free Parking"))) {
                 if (!Zoomed.isVisible()) {
@@ -385,7 +387,7 @@ public class LandInitController implements Initializable {
             Image image = new Image(getClass().getResourceAsStream("../Images/SmallSpaces/Empty.png"));
             emptySpaces.get(deleteLabels.indexOf(e.getSource())).setGraphic(new ImageView(image));
             boolean isFound = true;
-            for(int i = 0; i < 28 && isFound; i++){
+            for(int i = 0; i < 28 && isFound; i++){//Deletes space from board and makes it visible in the right side of the screen
                 if(emptySpaces.get(deleteLabels.indexOf(e.getSource())).getText().equalsIgnoreCase(possibleSpaces.get(i).getText())){
                     if(emptySpaces.get(deleteLabels.indexOf(e.getSource())).getText().equalsIgnoreCase("Chance")){
                         if(possibleSpaces.get(25).isVisible()){
@@ -425,7 +427,7 @@ public class LandInitController implements Initializable {
     }
 
     @FXML
-    public void clearAll(MouseEvent e){
+    public void clearAll(MouseEvent e){//Empties all the properties on the board
         for(int i = 0; i < emptySpaces.size(); i++){
             if(!(emptySpaces.get(i).getText().equalsIgnoreCase("Empty"))){
                 boolean isFound = true;
@@ -464,7 +466,7 @@ public class LandInitController implements Initializable {
     }
 
     @FXML
-    public void randomize(MouseEvent e){
+    public void randomize(MouseEvent e){//Randomizes the positions of the spaces on the board
         gameBoard.randomizeLand();
         ArrayList<Land> randomizedLand = new ArrayList<Land>(gameBoard.getLand());
         randomizedLand.remove(0);
@@ -512,7 +514,8 @@ public class LandInitController implements Initializable {
         unsortedLand.remove(14);
         unsortedLand.remove(21);
         ArrayList<Land> finalLand = new ArrayList<>();
-        for(int i = 0; i < emptySpaces.size();i++){
+
+        for(int i = 0; i < emptySpaces.size();i++){//Retrieve the land at the spaces on the visual board
             boolean isFound = true;
             for(int j = 0; j < 28 && isFound;j++)
                 if(unsortedLand.get(j).getName().equalsIgnoreCase(emptySpaces.get(i).getText())){
@@ -520,10 +523,12 @@ public class LandInitController implements Initializable {
                     isFound = false;
                 }
         }
+
+        //Lastly, add in the corners
         finalLand.add(0,new Start("Start"));
         finalLand.add(8,new Community("Community Service"));
-        finalLand.add(16,new Parking("Free Parking"));
-        finalLand.add(24,new Jail("Jail"));
+        finalLand.add(16,new Jail("Jail"));
+        finalLand.add(24,new Parking("Free Parking"));
         gameBoard.setLand(finalLand);
 
         for(int i = 0; i < gameBoard.getLand().size();i++){
@@ -533,11 +538,11 @@ public class LandInitController implements Initializable {
             Stage stage = (Stage) background.getScene().getWindow();
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/View/GamePlay.fxml")); //Insert your FXML here
+            loader.setLocation(getClass().getResource("/View/GamePlay.fxml"));
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);
-            ((GamePlayController) loader.getController()).setGameBoard(gameBoard);
-            ((GamePlayController) loader.getController()).setPlayerAvatars(playerAvatars);
+            ((GamePlayController) loader.getController()).setPlayerAvatars(playerAvatars); //Pass the playerAvatar urls
+            ((GamePlayController) loader.getController()).setGameBoard(gameBoard); //Pass the new GameBoard
         }
         catch(IOException event){
             System.out.println("Something happened");
@@ -548,6 +553,7 @@ public class LandInitController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         GameBoard gameBoard = new GameBoard();
         panes = new ArrayList<AnchorPane>();
+        //Add the anchorpanes to an arraylist
         panes.add(anchor1);panes.add(anchor2);panes.add(anchor3);panes.add(anchor4);panes.add(anchor5);
         panes.add(anchor6);panes.add(anchor7);panes.add(anchor8);panes.add(anchor9);panes.add(anchor10);
         panes.add(anchor11);panes.add(anchor12);panes.add(anchor13);panes.add(anchor14);panes.add(anchor15);
@@ -555,6 +561,7 @@ public class LandInitController implements Initializable {
         panes.add(anchor21);panes.add(anchor22);panes.add(anchor23);panes.add(anchor24);panes.add(anchor25);
         panes.add(anchor26);panes.add(anchor27);panes.add(anchor28);
 
+        //Add the clickable spaces into an arraylist
         possibleSpaces = new ArrayList<Label>();
         possibleSpaces.add(Almond);possibleSpaces.add(Kasoy);possibleSpaces.add(Rodeo);
         possibleSpaces.add(Orange);possibleSpaces.add(Ventura);possibleSpaces.add(Juan);
@@ -565,6 +572,7 @@ public class LandInitController implements Initializable {
 
         possibleSpaces.add(North);possibleSpaces.add(South);possibleSpaces.add(Metro);possibleSpaces.add(Water);possibleSpaces.add(Electric);
         possibleSpaces.add(Luxury);possibleSpaces.add(Income);possibleSpaces.add(Chance1);possibleSpaces.add(Chance2);possibleSpaces.add(Chance3);
+
 
         emptySpaces = new ArrayList<Label>();
         emptySpaces.add(empty1);emptySpaces.add(empty2);emptySpaces.add(empty3);emptySpaces.add(empty4);emptySpaces.add(empty5);

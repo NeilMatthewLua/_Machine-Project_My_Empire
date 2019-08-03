@@ -5,22 +5,26 @@ package Model;
  * Last Change Made: Created Class
  *
  * Previous Change:
+ *   @author  Lua and Tanting
+ *   @version 1.7
  */
-public class Railroad extends Ownable {
+public class Railroad extends Ownable implements IsRentable{
 
     public Railroad(String strName, double dPrice){
         super(strName,dPrice);
     }
 
     /**
-     * Calculates the rent for the given railroad
-     * @return the rent of the railroad
+     * Gets the rent of the railroad
+     * @param player the owner of the railroad
+     * @return the computed cost of the rent
      */
-    public double getRent(){
+    @Override
+    public double getRent(Player player){
         int nCounter = 0;
         double dRent = 0;
-        for(int i = 0; i < getOwner().getProperties().size(); i++)
-            if(getOwner().getProperties().get(i) instanceof Railroad)
+        for(int i = 0; i < player.getProperties().size(); i++)
+            if(player.getProperties().get(i) instanceof Railroad)
                 nCounter++;
         switch(nCounter) {//Calculations made based on no. of railroads owner has
             case 1:
@@ -47,8 +51,8 @@ public class Railroad extends Ownable {
     public String triggerEvent(GameBoard gameBoard, Player player){
         String event = "";
         double playerMoney = player.getMoney();
-        if(player.giveMoney(getOwner(), this.getRent())){//If the player can pay
-            event += player.getName() + " gave " + getOwner().getName() + " " + this.getRent() + ".";
+        if(player.giveMoney(getOwner(), this.getRent(this.getOwner()))){//If the player can pay
+            event += player.getName() + " gave " + getOwner().getName() + " " + this.getRent(this.getOwner()) + ".";
         }
         else{//If the player cannot pay
             event += player.getName() + " gave " + getOwner().getName() + " " + playerMoney;
@@ -57,6 +61,4 @@ public class Railroad extends Ownable {
         }
         return event;
     }
-
-
 }

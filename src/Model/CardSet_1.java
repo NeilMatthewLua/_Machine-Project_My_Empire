@@ -1,6 +1,6 @@
 package Model;
 /**
- * Card class which acts as a template for the cards that can be used during the game
+ * Card subclass which contains the cards from group 1. This includes the get out of jail card.
  *
  *  New Changes Made: Fixed Bugs
  

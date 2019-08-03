@@ -1,11 +1,14 @@
 package Model;
 /**
- * Card class which acts as a template for the cards that can be used during the game
+ * Card subclass which contains cards from group 3. This includes
+ * various payments from the bank to the player or vice versa.
  *
  *  New Changes Made: Fixed Bugs
- 
+ *
  *  Last Changes Made: Created this subclass
-
+ *
+ *   @author  Lua and Tanting
+ *   @version 1.7
  */
 
 public class CardSet_3 extends Card{

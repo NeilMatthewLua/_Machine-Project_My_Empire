@@ -5,6 +5,8 @@ package Model;
  * Last Change Made: Created Class
  *
  * Previous Change:
+ *   @author  Lua and Tanting
+ *   @version 1.7
  */
 public class Chance extends Land {
     public Chance(String strName){

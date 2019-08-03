@@ -50,27 +50,30 @@ public class ViewInitController implements Initializable{
 
     @FXML
     public void play(MouseEvent e) throws IOException {
+        //Retrieve the Text found in the textfields and register as player names
         ArrayList<String> players = new ArrayList<String>();
         players.add(textField1.getText());
         players.add(textField2.getText());
-        if(textField3.isVisible()){
+        if(textField3.isVisible()){ //If player 3 exists
             players.add(textField3.getText());
-            if(textField4.isVisible()){
+            if(textField4.isVisible()){ //If player 4 exists
                 players.add(textField4.getText());
             }
         }
         ArrayList<String> playerAvatars = new ArrayList<String>();
         gameBoard = new GameBoard();
-        gameBoard.initializePlayers(players);
+        gameBoard.initializePlayers(players); //Initialize the players in the model based off their names
+
         for(int i = 0; i < gameBoard.getPlayers().length;i++){
             boolean isFound = false;
             for(int j = 0; j < gameBoard.getPlayers().length && !isFound;j++){
-                if(gameBoard.getPlayers()[i].getName().equalsIgnoreCase(textFields.get(j).getText())){
+                if(gameBoard.getPlayers()[i].getName().equalsIgnoreCase(textFields.get(j).getText())){//The proper avatars to the players
                     playerAvatars.add(avatarUrls[j][0]);
                     isFound = true;
                 }
             }
         }
+
         if (e.getSource() == play) { //If user presses play then switch scene
             try {
                 Stage stage = (Stage) background.getScene().getWindow();
@@ -93,39 +96,39 @@ public class ViewInitController implements Initializable{
             tempNames.add(textField1.getText());
             if(e.getSource().equals(readyButtons.get(i))){
                 errorLabels.get(i).setVisible(false);
-                if(readyButtons.get(i).getText().equalsIgnoreCase("READY")){
+                if(readyButtons.get(i).getText().equalsIgnoreCase("READY")){ //If player wishes to click ready
                     boolean isDuplicate = false;
-                    for(int j = 0; j < tempNames.size();j++){
+                    for(int j = 0; j < tempNames.size();j++){ //Checks if name has been taken
                         if(textFields.get(i).getText().trim().equals(textFields.get(j).getText().trim()) && i != j)
                             isDuplicate = true;
                     }
-                    if (isDuplicate){
+                    if (isDuplicate){ //If duplicate
                         errorLabels.get(i).setVisible(true);
-                        errorLabels.get(i).setText("Error. Duplicate name. :(");
+                        errorLabels.get(i).setText("Error. Duplicate name.");
                     }
 
-                    else if(textFields.get(i).getText().trim().length() == 0 || textFields.get(i).getText() == null){
+                    else if(textFields.get(i).getText().trim().length() == 0 || textFields.get(i).getText() == null){//If empty name
                         errorLabels.get(i).setVisible(true);
-                        errorLabels.get(i).setText("Error. Empty name. :O");
+                        errorLabels.get(i).setText("Error. Empty name.");
                     }
-                    else if(textFields.get(i).getText().trim().length() >= 6){
+                    else if(textFields.get(i).getText().trim().length() > 6){//If name is too long
                         errorLabels.get(i).setVisible(true);
-                        errorLabels.get(i).setText("Error. Name too long. :>");
+                        errorLabels.get(i).setText("Error. Name is too long.");
                     }
-                    else{
+                    else{//If name is valid then continue
                             textFields.get(i).setEditable(false);
                             readyButtons.get(i).setText("UNREADY");
                             textFields.get(i).setPromptText("Enter name..");
                     }
                 }
-                else{
+                else{ //If the player wants to unready
                     errorLabels.get(i).setVisible(false);
                     readyButtons.get(i).setText("READY");
                     textFields.get(i).setEditable(true);
                 }
             }
         }
-        if(checkForReady()){
+        if(checkForReady()){ //If the game is valid for playing
             play.setVisible(true);
         }
         else{
@@ -136,12 +139,12 @@ public class ViewInitController implements Initializable{
     private boolean checkForReady(){
         boolean valid = false;
         boolean stop = true;
-        for(int i = 0; i < textFields.size() && stop;i++){
-            if(textFields.get(i).isVisible()){
+        for(int i = 0; i < textFields.size() && stop;i++){//Loops through the visible players and checks if they are all ready
+            if(textFields.get(i).isVisible()){//If player is visible then check
                 if(!(textFields.get(i).getText() == null || textFields.get(i).getText().trim().isEmpty()) && readyButtons.get(i).getText().equalsIgnoreCase("UNREADY")){
                     valid = true;
                 }
-                else{
+                else{//If player is visible and does not comply to requirements
                     stop = false;
                     valid = false;
                 }

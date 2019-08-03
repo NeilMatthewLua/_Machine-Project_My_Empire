@@ -2,6 +2,13 @@ package Model;
 
 import java.util.ArrayList;
 
+/**
+ * Ownable class is a subclass of land and are spaces which can be owned by the player.
+ *
+ *   @author  Lua and Tanting
+ *   @version 1.7
+ */
+
 public abstract class Ownable extends Land {
 
     private double dPrice;

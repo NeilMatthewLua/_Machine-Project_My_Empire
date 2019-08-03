@@ -147,7 +147,36 @@ public class GamePlayController  {
     @FXML private Label space30;
     @FXML private Label space31;
     @FXML private Label space32;
-  
+
+    @FXML private ImageView owner1;
+    @FXML private ImageView owner2;
+    @FXML private ImageView owner3;
+    @FXML private ImageView owner4;
+    @FXML private ImageView owner5;
+    @FXML private ImageView owner6;
+    @FXML private ImageView owner7;
+    @FXML private ImageView owner8;
+    @FXML private ImageView owner9;
+    @FXML private ImageView owner10;
+    @FXML private ImageView owner11;
+    @FXML private ImageView owner12;
+    @FXML private ImageView owner13;
+    @FXML private ImageView owner14;
+    @FXML private ImageView owner15;
+    @FXML private ImageView owner16;
+    @FXML private ImageView owner17;
+    @FXML private ImageView owner18;
+    @FXML private ImageView owner19;
+    @FXML private ImageView owner20;
+    @FXML private ImageView owner21;
+    @FXML private ImageView owner22;
+    @FXML private ImageView owner23;
+    @FXML private ImageView owner24;
+    @FXML private ImageView owner25;
+    @FXML private ImageView owner26;
+    @FXML private ImageView owner27;
+    @FXML private ImageView owner28;
+
     @FXML private ImageView playerOne1;
     @FXML private ImageView playerOne2;
     @FXML private ImageView playerOne3;
@@ -320,20 +349,22 @@ public class GamePlayController  {
     @FXML private Label ownerZoom;
     @FXML private Label footTrafficZoom;
     @FXML private Label playersZoom;
-    
-    private ArrayList<ImageView> player1Spaces;
+    @FXML private ImageView playerOneAvatar;
+    @FXML private ImageView playerTwoAvatar;
+    @FXML private ImageView playerThreeAvatar;
+    @FXML private ImageView playerFourAvatar;
+
+
+  private ArrayList<ImageView> player1Spaces;
     private ArrayList<ImageView> player2Spaces;
     private ArrayList<ImageView> player3Spaces;
     private ArrayList<ImageView> player4Spaces;
     private ArrayList<ArrayList<ImageView>> playersSpaces;
+    private ArrayList<ImageView> owners;
     private ArrayList<Label> spaces;
     private ArrayList<AnchorPane> anchors;
     private ArrayList<String> playerAvatars;
     private String[][] urls = {
-      {"Start","../Images/SmallSpaces/placeholder.png","../Images/BigSpaces/Start.png"},
-      {"Community Service","../Images/SmallSpaces/placeholder.png","../Images/BigSpaces/Community.png"},
-      {"Jail","../Images/SmallSpaces/placeholder.png","../Images/BigSpaces/Jail.png"},
-      {"Free Parking","../Images/SmallSpaces/placeholder.png","../Images/BigSpaces/FreeParking.png"},
       {"Almond Drive","../Images/SmallSpaces/Silver.png","../Images/BigSpaces/Almond.png"},
       {"Kasoy Street","../Images/SmallSpaces/Silver.png","../Images/BigSpaces/Kasoy.png"},
       {"Rodeo Drive","../Images/SmallSpaces/Purple.png","../Images/BigSpaces/Rodeo.png"},
@@ -362,6 +393,10 @@ public class GamePlayController  {
       {"Chance","../Images/SmallSpaces/Chance.png","../Images/BigSpaces/Chance.png"},
       {"Chance","../Images/SmallSpaces/Chance.png","../Images/BigSpaces/Chance.png"},
       {"Chance","../Images/SmallSpaces/Chance.png","../Images/BigSpaces/Chance.png"},
+            {"Start","../Images/SmallSpaces/placeholder.png","../Images/BigSpaces/Start.png"},
+            {"Community Service","../Images/SmallSpaces/placeholder.png","../Images/BigSpaces/Community.png"},
+            {"Jail","../Images/SmallSpaces/placeholder.png","../Images/BigSpaces/Jail.png"},
+            {"Free Parking","../Images/SmallSpaces/placeholder.png","../Images/BigSpaces/FreeParking.png"},
 };
 
   private GameBoard gameBoard;
@@ -385,7 +420,7 @@ public class GamePlayController  {
 
     if (e.getSource() == rollButton) {
       rollPane.setVisible(false);
-
+      updateMoney(nTurnCounter % nTotal, 5);
       String event = gameBoard.getPlayers()[nTurnCounter % nTotal].roll(gameBoard);
       eventLabel.setText(event);
       gameBoard.getEvents().add(event);
@@ -446,20 +481,20 @@ public class GamePlayController  {
           endPane.setVisible(true);
         }
       }
-      else if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Chance){
-          Card temp = gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1 );
-          event = gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()).triggerEvent(gameBoard, gameBoard.getPlayers()[nTurnCounter % nTotal]);
-//TODO Add Card Desc FXML for Zoomed Card
-          usePane.setVisible(true);
-          eventLabel.setText(event);
-          gameBoard.getEvents().add(event);
-
-          if(temp instanceof CardSet_1){
-            keepPane.setVisible(true);
-          }
-          else
-            usePane.setVisible(true);
-      }
+//      else if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Chance){
+//          Card temp = gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1 );
+//          event = gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()).triggerEvent(gameBoard, gameBoard.getPlayers()[nTurnCounter % nTotal]);
+////TODO Add Card Desc FXML for Zoomed Card
+//          usePane.setVisible(true);
+//          eventLabel.setText(event);
+//          gameBoard.getEvents().add(event);
+//
+//          if(temp instanceof CardSet_1){
+//            keepPane.setVisible(true);
+//          }
+//          else
+//            usePane.setVisible(true);
+//      }
       //else, it's either Jail, Start, Tax, Community Service or Free Parking
       else {
         double[] temp = new double[nTotal + 1]; //temporary holder of everyone's(including bank's) money before the chance card takes action
@@ -488,6 +523,7 @@ public class GamePlayController  {
         if(j == 1)
             updateMoney(nIndex[0],nIndex[1]);
 
+        updateMoney(nTurnCounter % nTotal, 5);
         eventLabel.setText(event);
         gameBoard.getEvents().add(event);
         endPane.setVisible(true);
@@ -790,6 +826,7 @@ public class GamePlayController  {
       gameBoard.getEvents().add(event);
       eventLabel.setText(event);
       gameBoard.getEvents().add(event);
+      updateOwnerIcons();
       purchasePane.setVisible(false);
       updateMoney(nTurnCounter % nTotal, 5);
     }
@@ -963,150 +1000,115 @@ public class GamePlayController  {
     }
   }
 
-  @FXML
-  public void closeZoomed(MouseEvent e){
-    if(Zoomed.isVisible()){
+
+
+  public void openZoomed(MouseEvent e){
+    if(Zoomed.isVisible() == false){
+      closeZoomed.setVisible(true);
+      Zoomed.setVisible(true);
+      boolean isFound = true;
+      int index;
+      if(e.getSource() instanceof Label){
+        index = spaces.indexOf(e.getSource());
+      }
+      else {
+        index = anchors.indexOf(e.getSource());
+      }
+      if(gameBoard.getLand().get(index) instanceof Ownable)
+        ownerZoom.setVisible(true);
+      if(gameBoard.getLand().get(index) instanceof Property){
+        playersZoom.setVisible(true);
+        playersZoom.setText("" + gameBoard.getPlayers().length);
+        footTrafficZoom.setVisible(true);
+      }
+    }
+    else{
       closeZoomed.setVisible(false);
       Zoomed.setVisible(false);
       ownerZoom.setVisible(false);
       footTrafficZoom.setVisible(false);
       playersZoom.setVisible(false);
-    }
-  }
+    }}
 
-  @FXML
-  public void openZoomed(MouseEvent e){
-    if(!Zoomed.isVisible()){
-      closeZoomed.setVisible(true);
-      Zoomed.setVisible(true);
-      boolean isFound = true;
-      for(int i = 0; (i < urls.length - 5) && isFound ;i++){
-        if(((Label)e.getSource()).getText().equalsIgnoreCase(urls[i][0])){
-          ownerZoom.setVisible(true);
-          isFound = false;
-          if(i <= 17){
-            playersZoom.setVisible(true);
-            playersZoom.setText("" + gameBoard.getPlayers().length);
-            footTrafficZoom.setVisible(true);
-           }
-          }
-        }
-      }
-    }
 
-  //TODO CHANGE TO RETURN INT
   @FXML
   public void displaySpaces(MouseEvent event) {
     //Display land when clicked
     int index;
-    if (event.getSource() instanceof Label)
+    if(event.getSource() instanceof Label){
       index = spaces.indexOf(event.getSource());
-    else
+    }
+    else{
       index = anchors.indexOf(event.getSource());
-    if (event.getButton() == MouseButton.SECONDARY) {//Include Owner, Foot Traffic, and Multipliers
-      if (!Zoomed.isVisible()) {
-        boolean isFound = true;
-        for (int i = 0; i < urls.length && isFound; i++) {
-          if (spaces.get(index).getText().equalsIgnoreCase(urls[i][0])) {
-            System.out.println(index + urls[i][2]);
-            Image image = new Image(getClass().getResourceAsStream(urls[i][2]));
-            Zoomed.setImage(image);
-            Zoomed.toFront();
-            isFound = false;
-            openZoomed(event);
-            boolean isSame = false;
-            for (int j = 0; j < gameBoard.getLand().size() && !isSame; j++) {
-              if (gameBoard.getLand().get(j).getName().equalsIgnoreCase(spaces.get(index).getText())) {
-                isSame = true;
-                if (gameBoard.getLand().get(j) instanceof Ownable) {
-                  if (((Ownable) gameBoard.getLand().get(j)).getOwner() != null) {
-                    if (gameBoard.getLand().get(j) instanceof Property) {
-                      ownerZoom.setText(((Property) gameBoard.getLand().get(j)).getOwner().getName());
-                      footTrafficZoom.setText("" + ((Property) gameBoard.getLand().get(j)).getFootTraffic());
-                      System.out.println(((Property) gameBoard.getLand().get(j)).getFootTraffic());
-                    } else {
-                      ownerZoom.setText(((Ownable) gameBoard.getLand().get(j)).getOwner().getName());
-                    }
-                  } else {
-                    footTrafficZoom.setText("0.0");
-                    ownerZoom.setText("None");
-                  }
+    }
+    boolean isFound = false;
+    Image img;
+    for(int i = 0; i < urls.length && !isFound; i++){//Loop through to get the corresponding url for the space that was clicked
+      if(spaces.get(index).getText().equalsIgnoreCase(urls[i][0])){
+        isFound = true;
+        img = new Image(getClass().getResourceAsStream(urls[i][2]));
+        Zoomed.setImage(img);
+        openZoomed(event);
+            if (gameBoard.getLand().get(index) instanceof Ownable) {
+              gameBoard.getPlayers()[nTurnCounter % gameBoard.getPlayers().length].setChosen((Ownable) gameBoard.getLand().get(index)); //Set ownable clicked to chosen ownable
+              System.out.println(gameBoard.getPlayers()[nTurnCounter % gameBoard.getPlayers().length].getChosen().getName());
+              if (((Ownable) gameBoard.getLand().get(index)).getOwner() != null) {//If the Ownable is owned then display the following
+                if (gameBoard.getLand().get(index) instanceof Property) {//If the space is a property, also show the foot traffic
+                  ownerZoom.setText(((Property) gameBoard.getLand().get(index)).getOwner().getName());
+                  footTrafficZoom.setText("" + ((Property) gameBoard.getLand().get(index)).getFootTraffic());
+                } else {//Just display the owner
+                  ownerZoom.setText(((Ownable) gameBoard.getLand().get(index)).getOwner().getName());
                 }
+              } else {//If not owned, then show the following
+                footTrafficZoom.setText("0.0");
+                ownerZoom.setText("None");
+              }
+            }
+        }
+      }
+    }
+
+  public void updateOwnerIcons(){ //Updates icons of owners of properties
+      for(int i = 0; i < gameBoard.getLand().size();i++){
+        if(gameBoard.getLand().get(i) instanceof Ownable){
+          for(int j = 0; j < gameBoard.getPlayers().length;j++){
+            if(((Ownable) gameBoard.getLand().get(i)).getOwner() != null){
+              if(((Ownable) gameBoard.getLand().get(i)).getOwner().equals(gameBoard.getPlayers()[j])){
+                Image ig = new Image(getClass().getResourceAsStream(playerAvatars.get(j)));
+                owners.get(i - (i / 8 + 1)).setImage(ig);
               }
             }
           }
-        }
+//          if(((Ownable) gameBoard.getLand().get(i)).getOwner() != null){
+//            boolean isFound = false;
+//            for(int j = 0; i < gameBoard.getPlayers().length && !isFound;j++){
+//              System.out.println(((Ownable) gameBoard.getLand().get(i)).getOwner() + " " + gameBoard.getPlayers()[j]);
+//              if(((Ownable) gameBoard.getLand().get(i)).getOwner().getName().equalsIgnoreCase(gameBoard.getPlayers()[j].getName())){
+//                System.out.println(gameBoard.getPlayers()[j].getName());
+//                isFound = true;
+//                Image ig = new Image(getClass().getResourceAsStream(playerAvatars.get(j)));
+//                owners.get(i-(i / 8 + 1)).setImage(ig);
+//              }
+//            }
+//          }
+          }
       }
-      else {
-        closeZoomed(event);
-      }
-    }
   }
-
-//   @FXML
-//   public void displaySpaces(MouseEvent event){
-//     //Display land when clicked
-//     if(event.getButton() == MouseButton.SECONDARY){//Include Owner, Foot Traffic, and Multipliers
-//       if(!Zoomed.isVisible()){
-//         boolean isFound = true;
-//         if (!(((Label) event.getSource()).getText().equalsIgnoreCase("Start") || ((Label) event.getSource()).getText().equalsIgnoreCase("Community") ||
-//                 ((Label) event.getSource()).getText().equalsIgnoreCase("Jail") || ((Label) event.getSource()).getText().equalsIgnoreCase("Free Parking"))) {
-//           for (int i = 0; i < urls.length && isFound; i++) {
-//             if (((Label) event.getSource()).getText().equalsIgnoreCase(urls[i][0])) {
-//               Image image = new Image(getClass().getResourceAsStream(urls[i][2]));
-//               Zoomed.setImage(image);
-//               isFound = false;
-//               if(gameBoard.getLand().get(i) instanceof Ownable){
-//                 if(((Ownable) gameBoard.getLand().get(i)).getOwner() != null){
-//                   if(gameBoard.getLand().get(i) instanceof Property){
-//                     ownerZoom.setText(((Property) gameBoard.getLand().get(i)).getOwner().getName());
-//                     footTrafficZoom.setText(""+((Property) gameBoard.getLand().get(i)).getFootTraffic());
-//                   }
-//                   else {
-//                     ownerZoom.setText(((Ownable) gameBoard.getLand().get(i)).getOwner().getName());
-//                   }
-//                 }
-//               }
-//             }
-//           }
-//         }
-//         else{
-//           if(((Label) event.getSource()).getText().equalsIgnoreCase("Start")){
-//             Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Start.png"));
-//             Zoomed.setImage(ig);
-//           }
-//           else if(((Label) event.getSource()).getText().equalsIgnoreCase("Community Service")){
-//             Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Community.png"));
-//             Zoomed.setImage(ig);
-//           }
-//           else if(((Label) event.getSource()).getText().equalsIgnoreCase("Jail")){
-//             Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Jail.png"));
-//             Zoomed.setImage(ig);
-//           }
-//           else{
-//             Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/FreeParking.png"));
-//             Zoomed.setImage(ig);
-//           }
-//         }
-//         openZoomed(event);
-//       }
-//       else{
-//         closeZoomed(event);
-//       }
-//     }
-//   }
 
   @FXML
-  public void updatePlayerPositions(){
-    for(int i = 0; i < playersSpaces.size();i++){
+  public void updatePlayerPositions(){//Updates the positions of all players
+    for(int i = 0; i < playerAvatars.size();i++){
       for(int j = 0; j < playersSpaces.get(i).size();j++){
-        if(j == gameBoard.getPlayers()[i].getPosition())
-          playersSpaces.get(i).get(j).setVisible(true);
-        else
-          playersSpaces.get(i).get(j).setVisible(false);
+        if(j == gameBoard.getPlayers()[i].getPosition()){
+          Image img = new Image(getClass().getResourceAsStream(playerAvatars.get(i)));
+          playersSpaces.get(i).get(j).setImage(img);
+        }
+        else //Set the images in empty spaces to null
+          playersSpaces.get(i).get(j).setImage(null);
       }
     }
   }
+
 //TODO CHECKISWIN
 //  public void checkWin(){
 //    if(gameBoard.getIsWin())
@@ -1119,23 +1121,31 @@ public class GamePlayController  {
     player3Spaces = new ArrayList<ImageView>();
     player4Spaces = new ArrayList<ImageView>();
 
+
+    //Add in the imageviews of the player positions into their corresponding arraylists
     player1Spaces.add(playerOne1); player1Spaces.add(playerOne2);player1Spaces.add(playerOne3);player1Spaces.add(playerOne4);player1Spaces.add(playerOne5);player1Spaces.add(playerOne6);player1Spaces.add(playerOne7);player1Spaces.add(playerOne8);player1Spaces.add(playerOne9);player1Spaces.add(playerOne10);player1Spaces.add(playerOne11);player1Spaces.add(playerOne12);player1Spaces.add(playerOne13);player1Spaces.add(playerOne14);player1Spaces.add(playerOne15);player1Spaces.add(playerOne16);player1Spaces.add(playerOne17);player1Spaces.add(playerOne18);player1Spaces.add(playerOne19);player1Spaces.add(playerOne20);player1Spaces.add(playerOne21);player1Spaces.add(playerOne22);player1Spaces.add(playerOne23);player1Spaces.add(playerOne24);player1Spaces.add(playerOne25);player1Spaces.add(playerOne26);player1Spaces.add(playerOne27);player1Spaces.add(playerOne28);player1Spaces.add(playerOne29);player1Spaces.add(playerOne30);player1Spaces.add(playerOne31);player1Spaces.add(playerOne32);
     player2Spaces.add(playerTwo1);player2Spaces.add(playerTwo2);player2Spaces.add(playerTwo3);player2Spaces.add(playerTwo4);player2Spaces.add(playerTwo5);player2Spaces.add(playerTwo6);player2Spaces.add(playerTwo7);player2Spaces.add(playerTwo8);player2Spaces.add(playerTwo9);player2Spaces.add(playerTwo10);player2Spaces.add(playerTwo11);player2Spaces.add(playerTwo12);player2Spaces.add(playerTwo13);player2Spaces.add(playerTwo14);player2Spaces.add(playerTwo15);player2Spaces.add(playerTwo16);player2Spaces.add(playerTwo17);player2Spaces.add(playerTwo18);player2Spaces.add(playerTwo19);player2Spaces.add(playerTwo20);player2Spaces.add(playerTwo21);player2Spaces.add(playerTwo22);player2Spaces.add(playerTwo23);player2Spaces.add(playerTwo24);player2Spaces.add(playerTwo25);player2Spaces.add(playerTwo26);player2Spaces.add(playerTwo27);player2Spaces.add(playerTwo28);player2Spaces.add(playerTwo29);player2Spaces.add(playerTwo30);player2Spaces.add(playerTwo31);player2Spaces.add(playerTwo32);
-
-
+    player3Spaces.add(playerThree1);player3Spaces.add(playerThree2);player3Spaces.add(playerThree3);player3Spaces.add(playerThree4);player3Spaces.add(playerThree5);player3Spaces.add(playerThree6);player3Spaces.add(playerThree7);player3Spaces.add(playerThree8);player3Spaces.add(playerThree9);player3Spaces.add(playerThree10);player3Spaces.add(playerThree11);player3Spaces.add(playerThree12);player3Spaces.add(playerThree13);player3Spaces.add(playerThree14);player3Spaces.add(playerThree15);player3Spaces.add(playerThree16);player3Spaces.add(playerThree17);player3Spaces.add(playerThree18);player3Spaces.add(playerThree19);player3Spaces.add(playerThree20);player3Spaces.add(playerThree21);player3Spaces.add(playerThree22);player3Spaces.add(playerThree23);player3Spaces.add(playerThree24);player3Spaces.add(playerThree25);player3Spaces.add(playerThree26);player3Spaces.add(playerThree27);player3Spaces.add(playerThree28);player3Spaces.add(playerThree29);player3Spaces.add(playerThree30);player3Spaces.add(playerThree31);player3Spaces.add(playerThree32);
+    player4Spaces.add(playerFour1);player4Spaces.add(playerFour2);player4Spaces.add(playerFour3);player4Spaces.add(playerFour4);player4Spaces.add(playerFour5);player4Spaces.add(playerFour6);player4Spaces.add(playerFour7);player4Spaces.add(playerFour8);player4Spaces.add(playerFour9);player4Spaces.add(playerFour10);player4Spaces.add(playerFour11);player4Spaces.add(playerFour12);player4Spaces.add(playerFour13);player4Spaces.add(playerFour14);player4Spaces.add(playerFour15);player4Spaces.add(playerFour16);player4Spaces.add(playerFour17);player4Spaces.add(playerFour18);player4Spaces.add(playerFour19);player4Spaces.add(playerFour20);player4Spaces.add(playerFour21);player4Spaces.add(playerFour22);player4Spaces.add(playerFour23);player4Spaces.add(playerFour24);player4Spaces.add(playerFour25);player4Spaces.add(playerFour26);player4Spaces.add(playerFour27);player4Spaces.add(playerFour28);player4Spaces.add(playerFour29);player4Spaces.add(playerFour30);player4Spaces.add(playerFour31);player4Spaces.add(playerFour32);
 
     playersSpaces = new ArrayList<ArrayList<ImageView>>();
 
     playersSpaces.add(player1Spaces);playersSpaces.add(player2Spaces);
     if(players.length >= 3){
       playersSpaces.add(player3Spaces);
-      player3Spaces.add(playerThree1);player3Spaces.add(playerThree2);player3Spaces.add(playerThree3);player3Spaces.add(playerThree4);player3Spaces.add(playerThree5);player3Spaces.add(playerThree6);player3Spaces.add(playerThree7);player3Spaces.add(playerThree8);player3Spaces.add(playerThree9);player3Spaces.add(playerThree10);player3Spaces.add(playerThree11);player3Spaces.add(playerThree12);player3Spaces.add(playerThree13);player3Spaces.add(playerThree14);player3Spaces.add(playerThree15);player3Spaces.add(playerThree16);player3Spaces.add(playerThree17);player3Spaces.add(playerThree18);player3Spaces.add(playerThree19);player3Spaces.add(playerThree20);player3Spaces.add(playerThree21);player3Spaces.add(playerThree22);player3Spaces.add(playerThree23);player3Spaces.add(playerThree24);player3Spaces.add(playerThree25);player3Spaces.add(playerThree26);player3Spaces.add(playerThree27);player3Spaces.add(playerThree28);player3Spaces.add(playerThree29);player3Spaces.add(playerThree30);player3Spaces.add(playerThree31);player3Spaces.add(playerThree32);
 
       if(players.length == 4){
-        player4Spaces.add(playerFour1);player4Spaces.add(playerFour2);player4Spaces.add(playerFour3);player4Spaces.add(playerFour4);player4Spaces.add(playerFour5);player4Spaces.add(playerFour6);player4Spaces.add(playerFour7);player4Spaces.add(playerFour8);player4Spaces.add(playerFour9);player4Spaces.add(playerFour10);player4Spaces.add(playerFour11);player4Spaces.add(playerFour12);player4Spaces.add(playerFour13);player4Spaces.add(playerFour14);player4Spaces.add(playerFour15);player4Spaces.add(playerFour16);player4Spaces.add(playerFour17);player4Spaces.add(playerFour18);player4Spaces.add(playerFour19);player4Spaces.add(playerFour20);player4Spaces.add(playerFour21);player4Spaces.add(playerFour22);player4Spaces.add(playerFour23);player4Spaces.add(playerFour24);player4Spaces.add(playerFour25);player4Spaces.add(playerFour26);player4Spaces.add(playerFour27);player4Spaces.add(playerFour28);player4Spaces.add(playerFour29);player4Spaces.add(playerFour30);player4Spaces.add(playerFour31);player4Spaces.add(playerFour32);
         playersSpaces.add(player4Spaces);
       }
     }
+
+    owners = new ArrayList<ImageView>();
+    owners.add(owner1);owners.add(owner2);owners.add(owner3);owners.add(owner4);owners.add(owner5);
+    owners.add(owner6);owners.add(owner7);owners.add(owner8);owners.add(owner9);owners.add(owner10);
+    owners.add(owner11);owners.add(owner12);owners.add(owner13);owners.add(owner14);owners.add(owner15);
+    owners.add(owner16);owners.add(owner17);owners.add(owner18);owners.add(owner19);owners.add(owner20);
+    owners.add(owner21);owners.add(owner22);owners.add(owner23);owners.add(owner24);owners.add(owner25);
+    owners.add(owner26);owners.add(owner27);owners.add(owner28);
 
     spaces = new ArrayList<Label>();
     spaces.add(space1);spaces.add(space2);spaces.add(space3);spaces.add(space4);spaces.add(space5);
@@ -1170,20 +1180,33 @@ public class GamePlayController  {
         }
       }
     }
+
+    for(int i = 0; i < players.length;i++){
+      System.out.println(gameBoard.getPlayers()[i]);
+    }
+
     updatePlayerPositions();
-//TODO there's something on top of this comment that prevents the player names and money to display.
+
     player1.setText(players[0].getName());
+    Image ig = new Image(getClass().getResourceAsStream(playerAvatars.get(0)));
+    playerOneAvatar.setImage(ig);
     money1.setText(Double.toString(players[0].getMoney()));
+    ig = new Image(getClass().getResourceAsStream(playerAvatars.get(1)));
+    playerTwoAvatar.setImage(ig);
     player2.setText(players[1].getName());
     money2.setText(Double.toString(players[1].getMoney()));
 
     money5.setText(Double.toString(gameBoard.getBank().getMoney()));
     if(gameBoard.getPlayers().length > 2){
       playerPane3.setVisible(true);
+      ig = new Image(getClass().getResourceAsStream(playerAvatars.get(2)));
+      playerThreeAvatar.setImage(ig);
       player3.setText(players[2].getName());
       money3.setText(Double.toString(players[2].getMoney()));
       if(gameBoard.getPlayers().length == 4) {
         playerPane4.setVisible(true);
+        ig = new Image(getClass().getResourceAsStream(playerAvatars.get(3)));
+        playerFourAvatar.setImage(ig);
         player4.setText(players[3].getName());
         money4.setText(Double.toString(players[3].getMoney()));
       }

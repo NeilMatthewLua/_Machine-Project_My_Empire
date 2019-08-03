@@ -5,6 +5,8 @@ package Model;
  * Last Change Made: Class Created
  *
  * Previous Change Made:
+ *   @author  Lua and Tanting
+ *   @version 1.7
  */
 public class Start extends Land{
 

@@ -1,10 +1,12 @@
 /**
- * Card class which acts as a template for the cards that can be used during the game
+ * Card subclass which contains cards from group 2. This includes the
+ * proceed to property, proceed to utility, and proceed to railroad cards.
  *
  *  New Changes Made: Fixed Bugs
 
  *  Last Changes Made: Created this subclass
-
+ *   @author  Lua and Tanting
+ *   @version 1.7
  */
 
 package Model;
@@ -28,7 +30,7 @@ public class CardSet_2 extends Card{
         String event = "";
         int nIndex = player.getCards().get(player.getCards().size() - 1).getIndex(); //gets the index of the card to navigate through its set
 
-        if(nIndex == 0){
+        if(nIndex == 0){//Travel to a random property
 
             //CHECKS IF PROPERTY SUBCLASS
             Random rand = new Random();
@@ -48,7 +50,7 @@ public class CardSet_2 extends Card{
 
             event += player.getName() + " landed on " + gameBoard.getLand().get(player.getPosition()).getName() + "\n";
         }
-        else if (nIndex == 1) {
+        else if (nIndex == 1) {//Travel to closest utility
             while(!(gameBoard.getLand().get(player.getPosition()) instanceof Utility)) {//Loops until a utility is found
                 player.setPosition(1);
 
@@ -65,7 +67,7 @@ public class CardSet_2 extends Card{
             }
             event += player.getName() + " landed on " + gameBoard.getLand().get(player.getPosition()).getName() + "\n";
         }
-        else if (nIndex == 2) {
+        else if (nIndex == 2) {//Travel to closest railroad
             Random rand = new Random();
             int nRand = rand.nextInt(7);
 
@@ -88,7 +90,7 @@ public class CardSet_2 extends Card{
 
             if(((Railroad)gameBoard.getLand().get(player.getPosition())).getOwner() != null) { //checks if the Railroad tile is owned by anyone
                 if(!(player.isMine(gameBoard))) { //checks if you don't own it, you'll pay rent to the owner
-                    if(player.giveMoney(((Railroad)gameBoard.getLand().get(player.getPosition())).getOwner(), ((Railroad)gameBoard.getLand().get(player.getPosition())).getRent())){
+                    if(player.giveMoney(((Railroad)gameBoard.getLand().get(player.getPosition())).getOwner(), ((Railroad)gameBoard.getLand().get(player.getPosition())).getRent(((Railroad)gameBoard.getLand().get(player.getPosition())).getOwner()))){
                         event += player.getName() + " pays $" + (10 * nRand) + " to: " + ((Railroad)gameBoard.getLand().get(player.getPosition())).getOwner().getName();
                     }
                     else{//If player can't pay

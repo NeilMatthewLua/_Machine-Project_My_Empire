@@ -13,7 +13,7 @@ import java.util.Scanner;
  *   @author  Lua and Tanting
  *   @version 1.7
  */
-    public abstract class Card {
+    public abstract class  Card {
 
         private int nIndex; //Index of the card from the set
         private boolean canKeep;
@@ -53,7 +53,7 @@ import java.util.Scanner;
          * Abstracted method that triggers the effects of each card
          * @param player    player who got the card
          * @param gameBoard the gameboard
-         * @return
+         * @return string which contains the details of the event
          */
         public abstract String useCard(Player player, GameBoard gameBoard);
 }

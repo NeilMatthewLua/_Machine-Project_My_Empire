@@ -1,14 +1,16 @@
 package Model;
 /**
- * Utility Class
+ * Utility Class which is a subclass of Ownable and contains utility spaces
  *
  * Last Change Made: Created Class
  *
  * Previous Change:
+ *   @author  Lua and Tanting
+ *   @version 1.7
  */
 
 
-public class Utility extends Ownable{
+public class Utility extends Ownable implements IsRentable{
 
     public Utility(String strName, double dPrice){
         super(strName,dPrice);
@@ -17,8 +19,9 @@ public class Utility extends Ownable{
     /**
      * Calculates the rent for the given utility
      * @param player the player which will pay the rent
-     * @return
+     * @return the rent of the utility
      */
+    @Override
     public double getRent(Player player){
         int nCounter = 0;
         double dRent = 0;
