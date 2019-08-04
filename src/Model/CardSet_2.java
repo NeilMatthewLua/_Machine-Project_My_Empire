@@ -29,6 +29,7 @@ public class CardSet_2 extends Card{
     public String useCard(Player player, GameBoard gameBoard){
         String event = "";
         int nIndex = player.getCards().get(player.getCards().size() - 1).getIndex(); //gets the index of the card to navigate through its set
+
         if(nIndex == 0){//Travel to a random property
 
             //CHECKS IF PROPERTY SUBCLASS
@@ -67,6 +68,7 @@ public class CardSet_2 extends Card{
             event += player.getName() + " landed on " + gameBoard.getLand().get(player.getPosition()).getName() + "\n";
         }
         else if (nIndex == 2) {//Travel to closest railroad
+
             while(!(gameBoard.getLand().get(player.getPosition()) instanceof Railroad)) {//Loops until a utility is found
                 player.setPosition(1);
 
@@ -83,6 +85,7 @@ public class CardSet_2 extends Card{
             }
 
             event += player.getName() + " landed on " + gameBoard.getLand().get(player.getPosition()).getName() + "\n";
+
         }
 
         gameBoard.addCardDiscard(player.getCards().get(player.getCards().size() - 1)); //put used card into card discarded pile

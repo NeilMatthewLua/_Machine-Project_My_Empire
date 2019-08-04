@@ -14,6 +14,7 @@ package Model;
  *   @version 1.7
  */
 
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -265,9 +266,7 @@ public class Player extends People{
         int start = nPosition; //Initializes the starting position of the token
         Land temp;
         nRoll = (int)((Math.random() * (6 - 1)) + 1 ); //generates a random number form 1 - 6
-        while(!(gameBoard.getLand().get(nRoll) instanceof Chance)){
-            nRoll++;
-        }
+
 
         this.nDiceRoll = nRoll;
         String event = "";
@@ -310,6 +309,7 @@ public class Player extends People{
                     }
             }
             event += getName() + " landed on " + gameBoard.getLand().get(getPosition()).getName() + "\n";
+
         }
         return event;
     }
@@ -331,10 +331,12 @@ public class Player extends People{
      */
     public boolean canTrade(GameBoard gameBoard){
         //goes through player's assets
-        for(int i = 0; i < this.getProperties().size(); i++ ){
-            //Checks if there is at least one Property subclass in the player's assets
-            if(this.getProperties().get(i) instanceof Property)
-                return true;
+        if(gameBoard.getLand().get(nPosition) instanceof Property){
+            for(int i = 0; i < this.getProperties().size(); i++ ){
+                //Checks if there is at least one Property subclass in the player's assets
+                if(this.getProperties().get(i) instanceof Property)
+                    return true;
+            }
         }
         return false;
     }
@@ -405,8 +407,8 @@ public class Player extends People{
 
 
         String event = "";
-        event += getName() + " now owns " + landedOwnable.getName() + "\n";
-        event += temp2.getName() +" now owns " +
+        event += landedOwnable.getOwner().getName() + " now owns " + landedOwnable.getName() + "\n";
+        event += chosenOwnable.getOwner().getName() +" now owns " +
                 chosenOwnable.getName() + "\n";
 
         return event;

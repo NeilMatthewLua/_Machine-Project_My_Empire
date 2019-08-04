@@ -341,53 +341,108 @@ public class GamePlayController  {
     @FXML private AnchorPane anchor30;
     @FXML private AnchorPane anchor31;
     @FXML private AnchorPane anchor32;
-    
-    @FXML private ImageView Zoomed;
+
+    @FXML private ImageView currentDevelopment1;
+    @FXML private ImageView currentDevelopment2;
+    @FXML private ImageView currentDevelopment3;
+    @FXML private ImageView currentDevelopment4;
+    @FXML private ImageView currentDevelopment5;
+    @FXML private ImageView currentDevelopment6;
+
+    @FXML private ImageView increase10;
+    @FXML private ImageView increase50;
+    @FXML private ImageView decrease10;
+    @FXML private ImageView doubleRent;
+
+  @FXML private ImageView Zoomed;
     //TODO Use this for implementing Card Zoomed
     @FXML private ImageView CardZoomed;
     @FXML private Label closeZoomed;
     @FXML private Label ownerZoom;
     @FXML private Label footTrafficZoom;
     @FXML private Label playersZoom;
+
+    @FXML private AnchorPane tradePanel;
+    //Trade Panel components for tradee
+    @FXML private ImageView tradeeZoom;
+    @FXML private Label tradeeFootTraffic;
+    @FXML private Label tradeeOwner;
+    @FXML private ImageView tradeeDev1;
+    @FXML private ImageView tradeeDev2;
+    @FXML private ImageView tradeeDev3;
+    @FXML private ImageView tradeeDev4;
+    @FXML private ImageView tradeeDev5;
+    @FXML private ImageView tradeeDev6;
+    @FXML private ImageView tradeeDoubleRent;
+    @FXML private ImageView tradeeIncrease10;
+    @FXML private ImageView tradeeIncrease50;
+    @FXML private ImageView tradeeDecrease10;
+    @FXML private Label tradee;
+    @FXML private Label tradeeOffer;
+    private ArrayList<ImageView> tradeeDevelopment;
+
+    //Trade Panel components for trader
+    @FXML private AnchorPane traderPanel;
+    @FXML private ImageView traderZoom;
+    @FXML private Label traderFootTraffic;
+    @FXML private Label traderOwner;
+    @FXML private ImageView traderDev1;
+    @FXML private ImageView traderDev2;
+    @FXML private ImageView traderDev3;
+    @FXML private ImageView traderDev4;
+    @FXML private ImageView traderDev5;
+    @FXML private ImageView traderDev6;
+    @FXML private ImageView traderDoubleRent;
+    @FXML private ImageView traderIncrease10;
+    @FXML private ImageView traderIncrease50;
+    @FXML private ImageView traderDecrease10;
+    @FXML private Label trader;
+    @FXML private Label traderOffer;
+  private ArrayList<ImageView> traderDevelopment;
+
+    private boolean isTrade;
+
+
     @FXML private ImageView playerOneAvatar;
     @FXML private ImageView playerTwoAvatar;
     @FXML private ImageView playerThreeAvatar;
     @FXML private ImageView playerFourAvatar;
 
 
-  private ArrayList<ImageView> player1Spaces;
+    private ArrayList<ImageView> player1Spaces;
     private ArrayList<ImageView> player2Spaces;
     private ArrayList<ImageView> player3Spaces;
     private ArrayList<ImageView> player4Spaces;
+    private ArrayList<ImageView> developmentLevels;
     private ArrayList<ArrayList<ImageView>> playersSpaces;
     private ArrayList<ImageView> owners;
     private ArrayList<Label> spaces;
     private ArrayList<AnchorPane> anchors;
     private ArrayList<String> playerAvatars;
     private String[][] urls = {
-      {"Almond Drive","../Images/SmallSpaces/Silver.png","../Images/BigSpaces/Almond.png"},
-      {"Kasoy Street","../Images/SmallSpaces/Silver.png","../Images/BigSpaces/Kasoy.png"},
-      {"Rodeo Drive","../Images/SmallSpaces/Purple.png","../Images/BigSpaces/Rodeo.png"},
-      {"Orange Street","../Images/SmallSpaces/Purple.png","../Images/BigSpaces/Orange.png"},
-      {"Ventura Street","../Images/SmallSpaces/Purple.png","../Images/BigSpaces/Ventura.png"},
-      {"Juan Luna","../Images/SmallSpaces/Pink.png","../Images/BigSpaces/Juan.png"},
-      {"Ylaya","../Images/SmallSpaces/Pink.png","../Images/BigSpaces/Ylaya.png"},
-      {"J. Abad Santos","../Images/SmallSpaces/Pink.png","../Images/BigSpaces/Abad.png"},
-      {"Madison","../Images/SmallSpaces/Green.png","../Images/BigSpaces/Madison.png"},
-      {"Annapolis","../Images/SmallSpaces/Green.png","../Images/BigSpaces/Annapolis.png"},
-      {"Connecticut","../Images/SmallSpaces/Green.png","../Images/BigSpaces/Connecticut.png"},
-      {"Bougainvilla","../Images/SmallSpaces/Blue.png","../Images/BigSpaces/Bougainvilla.png"},
-      {"Dama de Noche","../Images/SmallSpaces/Blue.png","../Images/BigSpaces/Dama.png"},
-      {"Acacia","../Images/SmallSpaces/Blue.png","../Images/BigSpaces/Acacia.png"},
-      {"Solar Street","../Images/SmallSpaces/Red.png","../Images/BigSpaces/Solar.png"},
-      {"Galaxy Street","../Images/SmallSpaces/Red.png","../Images/BigSpaces/Galaxy.png"},
-      {"9th Street","../Images/SmallSpaces/Yellow.png","../Images/BigSpaces/9th.png"},
-      {"5th Avenue","../Images/SmallSpaces/Yellow.png","../Images/BigSpaces/5th.png"},
-      {"North","../Images/SmallSpaces/Railroad.png","../Images/BigSpaces/North.png"},
-      {"South","../Images/SmallSpaces/Railroad.png","../Images/BigSpaces/South.png"},
-      {"Metro","../Images/SmallSpaces/Railroad.png","../Images/BigSpaces/Metro.png"},
-      {"Water","../Images/SmallSpaces/Utility.png","../Images/BigSpaces/Water.png"},
-      {"Electric","../Images/SmallSpaces/Utility.png","../Images/BigSpaces/Electric.png"},
+      {"Almond Drive","../Images/SmallSpaces/Almond.png","../Images/BigSpaces/Almond.png"},
+      {"Kasoy Street","../Images/SmallSpaces/Kasoy.png","../Images/BigSpaces/Kasoy.png"},
+      {"Rodeo Drive","../Images/SmallSpaces/Rodeo.png","../Images/BigSpaces/Rodeo.png"},
+      {"Orange Street","../Images/SmallSpaces/Orange.png","../Images/BigSpaces/Orange.png"},
+      {"Ventura Street","../Images/SmallSpaces/Venture.png","../Images/BigSpaces/Ventura.png"},
+      {"Juan Luna","../Images/SmallSpaces/Juan.png","../Images/BigSpaces/Juan.png"},
+      {"Ylaya","../Images/SmallSpaces/Ylaya.png","../Images/BigSpaces/Ylaya.png"},
+      {"J. Abad Santos","../Images/SmallSpaces/J.png","../Images/BigSpaces/Abad.png"},
+      {"Madison","../Images/SmallSpaces/Madison.png","../Images/BigSpaces/Madison.png"},
+      {"Annapolis","../Images/SmallSpaces/Annapolis.png","../Images/BigSpaces/Annapolis.png"},
+      {"Connecticut","../Images/SmallSpaces/Connecticut.png","../Images/BigSpaces/Connecticut.png"},
+      {"Bougainvilla","../Images/SmallSpaces/Bougainvilla.png","../Images/BigSpaces/Bougainvilla.png"},
+      {"Dama de Noche","../Images/SmallSpaces/Dama.png","../Images/BigSpaces/Dama.png"},
+      {"Acacia","../Images/SmallSpaces/Acacia.png","../Images/BigSpaces/Acacia.png"},
+      {"Solar Street","../Images/SmallSpaces/Solar.png","../Images/BigSpaces/Solar.png"},
+      {"Galaxy Street","../Images/SmallSpaces/Galaxy.png","../Images/BigSpaces/Galaxy.png"},
+      {"9th Street","../Images/SmallSpaces/9th.png","../Images/BigSpaces/9th.png"},
+      {"5th Avenue","../Images/SmallSpaces/5th.png","../Images/BigSpaces/5th.png"},
+      {"North","../Images/SmallSpaces/North.png","../Images/BigSpaces/North.png"},
+      {"South","../Images/SmallSpaces/South.png","../Images/BigSpaces/South.png"},
+      {"Metro","../Images/SmallSpaces/Metro.png","../Images/BigSpaces/Metro.png"},
+      {"Water","../Images/SmallSpaces/Water.png","../Images/BigSpaces/Water.png"},
+      {"Electric","../Images/SmallSpaces/Electric.png","../Images/BigSpaces/Electric.png"},
       {"Luxury Tax","../Images/SmallSpaces/Tax.png","../Images/BigSpaces/Luxury.png"},
       {"Income Tax","../Images/SmallSpaces/Tax.png","../Images/BigSpaces/Income.png"},
       {"Chance","../Images/SmallSpaces/Chance.png","../Images/BigSpaces/Chance.png"},
@@ -430,8 +485,8 @@ public class GamePlayController  {
       }
       temp[i] = gameBoard.getBank().getMoney();
 
-
       rollPane.setVisible(false);
+
       String event = gameBoard.getPlayers()[nTurnCounter % nTotal].roll(gameBoard);
       eventLabel.setText(event);
       gameBoard.getEvents().add(event);
@@ -476,10 +531,20 @@ public class GamePlayController  {
             //Checks if player has anything to offer in trade
             if (gameBoard.getPlayers()[nTurnCounter % nTotal].canTrade(gameBoard)) {
               tradePane.setVisible(true);
-              rentPane.setVisible(true);
             }
-            //else, he has no choice but to pay rent
-            else {
+            //Check if the player can afford to pay the rent
+            Ownable tempOwnable = (Ownable) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition());
+            double dRent = 0;
+            if (tempOwnable instanceof Property){
+              dRent = ((Property) tempOwnable).getRent(tempOwnable.getOwner());
+            }
+            else if(tempOwnable instanceof Utility){
+              dRent = ((Utility) tempOwnable).getRent(gameBoard.getPlayers()[nTurnCounter % nTotal]);
+            }
+            else if(tempOwnable instanceof Railroad){
+              dRent = ((Railroad) tempOwnable).getRent(tempOwnable.getOwner());
+            }
+            if(gameBoard.getPlayers()[nTurnCounter % nTotal].getMoney() >= dRent){
               rentPane.setVisible(true);
             }
           }
@@ -493,50 +558,54 @@ public class GamePlayController  {
         }
       }
       else if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Chance){
-          event += gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()).triggerEvent(gameBoard, gameBoard.getPlayers()[nTurnCounter % nTotal]);
-          Card tempCard = gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1 );
+        event += gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()).triggerEvent(gameBoard, gameBoard.getPlayers()[nTurnCounter % nTotal]);
+        Card tempCard = gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1 );
 //TODO Add Card Desc FXML for Zoomed Card
         System.out.println(tempCard.getDescription());
-          eventLabel.setText(event);
-          gameBoard.getEvents().add(event);
+        eventLabel.setText(event);
+        gameBoard.getEvents().add(event);
 
-          if(tempCard instanceof CardSet_1){
-            keepPane.setVisible(true);
-          }
-          else
-            usePane.setVisible(true);
+        if(tempCard instanceof CardSet_1){
+          keepPane.setVisible(true);
+        }
+        else
+          usePane.setVisible(true);
       }
       //else, it's either Jail, Start, Tax, Community Service or Free Parking
       else {
         if(!(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Start)){
           event = gameBoard.getPlayers()[nTurnCounter % nTotal].action(gameBoard); //performs the action
         }
+
         gameBoard.getEvents().add(event);
         eventLabel.setText(event);
         endPane.setVisible(true);
-      }
 
-      j = 0;
-      //goes through everybody's money to check whose were changed
-      for( i = 0; i < nTotal; i ++){
-        if(temp[i] != gameBoard.getPlayers()[i].getMoney()){
-          nIndex[j] = i;    //holds their index in an array
-          j++;
+        j = 0;
+        //goes through everybody's money to check whose were changed
+        for( i = 0; i < nTotal; i ++){
+          if(temp[i] != gameBoard.getPlayers()[i].getMoney()){
+            nIndex[j] = i;    //holds their index in an array
+            j++;
+          }
         }
-      }
-      if(temp[i] != gameBoard.getBank().getMoney()) //checks the bank's value changed
-        nIndex[j] = 5;
+        if(temp[i] != gameBoard.getBank().getMoney()) //checks the bank's value changed
+          nIndex[j] = 5;
 
-      //updates the labels in the GUI if there are changes with their money
-      if(j == 1)
-        updateMoney(nIndex[0],nIndex[1]);
+        //updates the labels in the GUI if there are changes with their money
+        if(j == 1)
+          updateMoney(nIndex[0],nIndex[1]);
+      }
+
     }
     else if (e.getSource() == keepButton) {
+        keepButton.setVisible(false);
         keepPane.setVisible(false);
         endPane.setVisible(true);
     }
     else if (e.getSource() == discardButton) {
         gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().remove(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1);
+        discardButton.setVisible(false);
         discardPane.setVisible(false);
         endPane.setVisible(true);
     }
@@ -557,7 +626,6 @@ public class GamePlayController  {
       Card tempCard = gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1 );
 
       if(tempCard instanceof CardSet_2){
-        System.out.println("WEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
         event += tempCard.useCard(gameBoard.getPlayers()[nTurnCounter % nTotal], gameBoard);
         updatePlayerPositions();
         eventLabel.setText(event);
@@ -730,8 +798,6 @@ public class GamePlayController  {
                 }
               }
               else{
-                /This Gheiboi error proves that git updated mah stuff xdxd
-                        /Chat me "I LOVE UNICORNS" if read
                 //TODO SET ADDITIONAL LABEL "Not Applicable" in Card Desc
                 event +=  "No owned properties that can be renovated";
                 eventLabel.setText(event);
@@ -764,12 +830,12 @@ public class GamePlayController  {
             chooseVisibleRailroad(tempArr2);
 
             if(Zoomed.isVisible()){
+              choosePane.setVisible(true);
               System.out.println("ITS OPEN");
               choosePane.setVisible(true);
             }
             else if(closeZoomed.isVisible()){
               System.out.println("CLOSED");
-              choosePane.setVisible(true);
             }
             else
             {
@@ -830,19 +896,46 @@ public class GamePlayController  {
 //        eventLabel.setText(event);
 //        gameBoard.getEvents().add(event);
 //    }
+
     else if (e.getSource() == noTradeButton) {
+      isTrade = false;
+      tradePanel.setVisible(false);
       tradeAnchorPane.setVisible(false);
-      rentPane.setVisible(true);
+
+      //Check if the player can afford to pay the rent
+      Ownable tempOwnable = (Ownable) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition());
+      double dRent = 0;
+      if (tempOwnable instanceof Property){
+        dRent = ((Property) tempOwnable).getRent(tempOwnable.getOwner());
+      }
+      else if(tempOwnable instanceof Utility){
+        dRent = ((Utility) tempOwnable).getRent(gameBoard.getPlayers()[nTurnCounter % nTotal]);
+      }
+      else if(tempOwnable instanceof Railroad){
+        dRent = ((Railroad) tempOwnable).getRent(tempOwnable.getOwner());
+      }
+      if(gameBoard.getPlayers()[nTurnCounter % nTotal].getMoney() >= dRent){
+        rentPane.setVisible(true);
+      }
+
+      updateOwnerIcons();
+      updatePlayerPositions();
     }
     else if (e.getSource() == yesTradeButton) {
+      isTrade = false;
+      tradePanel.setVisible(false);
+      setAllVisible();
       String event = "";
       event += gameBoard.getPlayers()[nTurnCounter % nTotal].trade(gameBoard,((Ownable)gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())), gameBoard.getPlayers()[nTurnCounter % nTotal].getChosen());
       gameBoard.getEvents().add(event);
       eventLabel.setText(event);
       tradeAnchorPane.setVisible(false);
+      endPane.setVisible(true);
+      updateOwnerIcons();
+      updatePlayerPositions();
     }
-    else if (e.getSource() == purchaseButton) {
 
+    else if (e.getSource() == purchaseButton) {
       String event = gameBoard.getPlayers()[nTurnCounter % nTotal].purchase(gameBoard);
       gameBoard.getEvents().add(event);
       eventLabel.setText(event);
@@ -857,9 +950,91 @@ public class GamePlayController  {
       rentPane.setVisible(false);
       tradePane.setVisible(false);
       tradeAnchorPane.setVisible(true);
-      if (Zoomed.isVisible()) {
-        tradeAnchorPane.setVisible(true);
+
+      hideOwnerIcons();
+      hidePlayers();
+
+      isTrade = true;
+      tradePanel.setVisible(true);
+      //Various text setting for the tradee
+      tradee.setText(((Ownable)gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner().getName());
+      tradeeOwner.setText(((Ownable)gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner().getName());
+      tradeeOffer.setText(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()).getName());
+        int nDev = ((Property)gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getDevelopment();
+       //Set the development level of the property of the tradee
+        for(int i = 0; i < tradeeDevelopment.size();i++){
+          if(nDev == i)
+            tradeeDevelopment.get(i).setVisible(true);
+          else
+            tradeeDevelopment.get(i).setVisible(false);
+        }
+        tradeeFootTraffic.setText(""+((Property) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getFootTraffic());
+
+        //Set the image of the tradee
+        for(int i = 0; i < urls.length; i++){
+        if(urls[i][0].equalsIgnoreCase(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()).getName())){
+          Image ig = new Image(getClass().getResourceAsStream(urls[i][2]));
+          tradeeZoom.setImage(ig);
+        }
       }
+        //Set the icons of the tradee's property
+      tradeeDoubleRent.setVisible(false);tradeeIncrease10.setVisible(false);tradeeDecrease10.setVisible(false);tradeeIncrease50.setVisible(false);
+
+      for(int i = 0; i < ((Property)gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getCardMultipliers().size();i++){//Loops through the card multipliers
+        int nIndex = ((Property)gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getCardMultipliers().get(i).getIndex();
+        if(nIndex == 1){//Double Rent
+          tradeeDoubleRent.setVisible(true);
+        }
+        else if(nIndex == 2){//Renovation
+          tradeeIncrease50.setVisible(true);
+        }
+        else if(nIndex == 3 || nIndex == 5){//Decrease/Dilapidated
+          tradeeDecrease10.setVisible(true);
+        }
+        else if(nIndex == 4){//Increase10
+          tradeeIncrease10.setVisible(true);
+        }
+      }
+
+      //Trader property setting
+      gameBoard.getPlayers()[nTurnCounter % nTotal].setChosen(gameBoard.getPlayers()[nTurnCounter % nTotal].getOnlyProperty().get(0));
+      Property temp = tempArr.get(0);
+
+      for(int i = 0; i < urls.length; i++){
+        if(urls[i][0].equalsIgnoreCase(temp.getName())){
+          Image ig = new Image(getClass().getResourceAsStream(urls[i][2]));
+          traderZoom.setImage(ig);
+        }
+      }
+      traderFootTraffic.setText(""+ temp.getFootTraffic());
+      traderOwner.setText(temp.getOwner().getName());
+      traderOffer.setText(temp.getName());
+      traderDoubleRent.setVisible(false);traderIncrease10.setVisible(false);traderIncrease50.setVisible(false);traderDecrease10.setVisible(false);
+
+      for(int i = 0; i <traderDevelopment.size();i++){
+          if(temp.getDevelopment() == i)
+            traderDevelopment.get(i).setVisible(true);
+          else
+            traderDevelopment.get(i).setVisible(false);
+      }
+
+      for(int i = 0; i < temp.getCardMultipliers().size();i++){
+        int nIndex = temp.getCardMultipliers().get(i).getIndex();
+        if(nIndex == 1){//Double Rent
+          traderDoubleRent.setVisible(true);
+        }
+        else if(nIndex == 2){//Renovation
+          traderIncrease50.setVisible(true);
+        }
+        else if(nIndex == 3 || nIndex == 5){//Decrease/Dilapidated
+          traderDecrease10.setVisible(true);
+        }
+        else if(nIndex == 4){//Increase10
+          traderIncrease10.setVisible(true);
+        }
+      }
+      trader.setText(gameBoard.getPlayers()[nTurnCounter % nTotal].getName());
+
     }
     else if(e.getSource() == rentButton){
       String event = gameBoard.getPlayers()[nTurnCounter % nTotal].payRent(gameBoard);
@@ -985,18 +1160,21 @@ public class GamePlayController  {
 
   public void setFalseVisible() {
     for(int i = 0; i < spaces.size(); i++){
-        anchors.get(i).setVisible(false);
         spaces.get(i).setVisible(false);
+        anchors.get(i).setVisible(false);
     }
   }
 
   public void chooseVisibleProperty(ArrayList<Property> properties) {
     int counter = 0;
-    for(int i = 0; i < spaces.size() && counter <= properties.size(); i++){
+    for(int i = 0; i < spaces.size() && counter < properties.size(); i++){
       if (spaces.get(i).getText().equalsIgnoreCase(properties.get(counter).getName())){
-          anchors.get(i).setVisible(true);
-          spaces.get(i).setVisible(true);
-          counter++;
+        anchors.get(i).setVisible(true);
+        spaces.get(i).setVisible(true);
+        counter++;
+      }
+      else{
+        anchors.get(i).setVisible(false);
       }
     }
   }
@@ -1023,35 +1201,74 @@ public class GamePlayController  {
     }
   }
 
-
+  public void setAllVisible(){
+    for(int i = 0; i < spaces.size(); i++){
+      spaces.get(i).setVisible(true);
+      anchors.get(i).setVisible(true);
+      if(i < 28)
+      owners.get(i).setVisible(true);
+    }
+  }
 
   public void openZoomed(MouseEvent e){
-    if(Zoomed.isVisible() == false){
-      closeZoomed.setVisible(true);
-      Zoomed.setVisible(true);
-      boolean isFound = true;
-      int index;
-      if(e.getSource() instanceof Label){
-        index = spaces.indexOf(e.getSource());
+    if(isTrade == false){
+      if(Zoomed.isVisible() == false){
+        closeZoomed.setVisible(true);
+        Zoomed.setVisible(true);
+        boolean isFound = true;
+        int index;
+        if(e.getSource() instanceof Label){
+          index = spaces.indexOf(e.getSource());
+        }
+        else {
+          index = anchors.indexOf(e.getSource());
+        }
+        if(gameBoard.getLand().get(index) instanceof Ownable)
+          ownerZoom.setVisible(true);
+        if(gameBoard.getLand().get(index) instanceof Property){
+          for(int i = 0; i < developmentLevels.size();i++){
+            if(((Property) gameBoard.getLand().get(index)).getDevelopment() == i)
+              developmentLevels.get(i).setVisible(true);
+            else
+              developmentLevels.get(i).setVisible(false);
+          }
+          playersZoom.setVisible(true);
+          playersZoom.setText("" + gameBoard.getPlayers().length);
+          footTrafficZoom.setVisible(true);
+          doubleRent.setVisible(false);increase10.setVisible(false);decrease10.setVisible(false);increase50.setVisible(false);
+          for(int i = 0; i < ((Property)gameBoard.getLand().get(index)).getCardMultipliers().size();i++){//Loops through the card multipliers
+            int nIndex = ((Property)gameBoard.getLand().get(index)).getCardMultipliers().get(i).getIndex();
+            if(nIndex == 1){//Double Rent
+              doubleRent.setVisible(true);
+            }
+            else if(nIndex == 2){//Renovation
+              increase50.setVisible(true);
+            }
+            else if(nIndex == 3 || nIndex == 5){//Decrease/Dilapidated
+              decrease10.setVisible(true);
+            }
+            else if(nIndex == 4){//Increase10
+              increase10.setVisible(true);
+            }
+          }
+        }
       }
-      else {
-        index = anchors.indexOf(e.getSource());
-      }
-      if(gameBoard.getLand().get(index) instanceof Ownable)
-        ownerZoom.setVisible(true);
-      if(gameBoard.getLand().get(index) instanceof Property){
-        playersZoom.setVisible(true);
-        playersZoom.setText("" + gameBoard.getPlayers().length);
-        footTrafficZoom.setVisible(true);
+      else{
+        for(int i = 0; i < developmentLevels.size();i++){
+          developmentLevels.get(i).setVisible(false);
+        }
+        closeZoomed.setVisible(false);
+        Zoomed.setVisible(false);
+        ownerZoom.setVisible(false);
+        footTrafficZoom.setVisible(false);
+        playersZoom.setVisible(false);
+        increase10.setVisible(false);
+        decrease10.setVisible(false);
+        doubleRent.setVisible(false);
+        increase50.setVisible(false);
       }
     }
-    else{
-      closeZoomed.setVisible(false);
-      Zoomed.setVisible(false);
-      ownerZoom.setVisible(false);
-      footTrafficZoom.setVisible(false);
-      playersZoom.setVisible(false);
-    }}
+  }
 
 
   @FXML
@@ -1064,32 +1281,83 @@ public class GamePlayController  {
     else{
       index = anchors.indexOf(event.getSource());
     }
-    boolean isFound = false;
-    Image img;
-    for(int i = 0; i < urls.length && !isFound; i++){//Loop through to get the corresponding url for the space that was clicked
-      if(spaces.get(index).getText().equalsIgnoreCase(urls[i][0])){
-        isFound = true;
-        img = new Image(getClass().getResourceAsStream(urls[i][2]));
-        Zoomed.setImage(img);
-        openZoomed(event);
-            if (gameBoard.getLand().get(index) instanceof Ownable) {
-              gameBoard.getPlayers()[nTurnCounter % gameBoard.getPlayers().length].setChosen((Ownable) gameBoard.getLand().get(index)); //Set ownable clicked to chosen ownable
-              System.out.println(gameBoard.getPlayers()[nTurnCounter % gameBoard.getPlayers().length].getChosen().getName());
-              if (((Ownable) gameBoard.getLand().get(index)).getOwner() != null) {//If the Ownable is owned then display the following
-                if (gameBoard.getLand().get(index) instanceof Property) {//If the space is a property, also show the foot traffic
-                  ownerZoom.setText(((Property) gameBoard.getLand().get(index)).getOwner().getName());
-                  footTrafficZoom.setText("" + ((Property) gameBoard.getLand().get(index)).getFootTraffic());
-                } else {//Just display the owner
-                  ownerZoom.setText(((Ownable) gameBoard.getLand().get(index)).getOwner().getName());
-                }
-              } else {//If not owned, then show the following
-                footTrafficZoom.setText("0.0");
-                ownerZoom.setText("None");
+    if(isTrade == false){
+      boolean isFound = false;
+      Image img;
+      for(int i = 0; i < urls.length && !isFound; i++){//Loop through to get the corresponding url for the space that was clicked
+        if(spaces.get(index).getText().equalsIgnoreCase(urls[i][0])){
+          isFound = true;
+          img = new Image(getClass().getResourceAsStream(urls[i][2]));
+          Zoomed.setImage(img);
+          openZoomed(event);
+          if (gameBoard.getLand().get(index) instanceof Ownable) {
+            gameBoard.getPlayers()[nTurnCounter % gameBoard.getPlayers().length].setChosen((Ownable) gameBoard.getLand().get(index)); //Set ownable clicked to chosen ownable
+            if (((Ownable) gameBoard.getLand().get(index)).getOwner() != null) {//If the Ownable is owned then display the following
+              if (gameBoard.getLand().get(index) instanceof Property) {//If the space is a property, also show the foot traffic
+                ownerZoom.setText(((Property) gameBoard.getLand().get(index)).getOwner().getName());
+                footTrafficZoom.setText("" + ((Property) gameBoard.getLand().get(index)).getFootTraffic());
+              } else {//Just display the owner
+                ownerZoom.setText(((Ownable) gameBoard.getLand().get(index)).getOwner().getName());
               }
+            } else {//If not owned, then show the following
+              footTrafficZoom.setText("0.0");
+              ownerZoom.setText("None");
             }
+          }
         }
       }
     }
+    else{
+
+      Property temp = (Property) gameBoard.getLand().get(index);
+      for(int i = 0; i < urls.length; i++){
+        if(urls[i][0].equalsIgnoreCase(temp.getName())){
+          Image ig = new Image(getClass().getResourceAsStream(urls[i][2]));
+          traderZoom.setImage(ig);
+        }
+      }
+      gameBoard.getPlayers()[nTurnCounter % gameBoard.getPlayers().length].setChosen((Ownable) gameBoard.getLand().get(index)); //Set ownable clicked to chosen ownable
+      traderFootTraffic.setText(""+ temp.getFootTraffic());
+      traderOffer.setText(temp.getName());
+      traderDoubleRent.setVisible(false);traderIncrease10.setVisible(false);traderIncrease50.setVisible(false);traderDecrease10.setVisible(false);
+      for(int i = 0; i <traderDevelopment.size();i++){
+        if(temp.getDevelopment() == i)
+          traderDevelopment.get(i).setVisible(true);
+        else
+          traderDevelopment.get(i).setVisible(false);
+      }
+
+      for(int i = 0; i < temp.getCardMultipliers().size();i++){
+        int nIndex = temp.getCardMultipliers().get(i).getIndex();
+        if(nIndex == 1){//Double Rent
+          traderDoubleRent.setVisible(true);
+        }
+        else if(nIndex == 2){//Renovation
+          traderIncrease50.setVisible(true);
+        }
+        else if(nIndex == 3 || nIndex == 5){//Decrease/Dilapidated
+          traderDecrease10.setVisible(true);
+        }
+        else if(nIndex == 4){//Increase10
+          traderIncrease10.setVisible(true);
+        }
+      }
+    }
+    }
+
+  public void hideOwnerIcons(){//Hides owner icons
+    for(int i = 0; i < owners.size();i++){
+      owners.get(i).setVisible(false);
+    }
+  }
+
+  public void hidePlayers(){
+    for(int i = 0; i < playerAvatars.size();i++){
+      for(int j = 0; j < playersSpaces.get(i).size();j++){
+          playersSpaces.get(i).get(j).setImage(null);
+      }
+    }
+  }
 
   public void updateOwnerIcons(){ //Updates icons of owners of properties
       for(int i = 0; i < gameBoard.getLand().size();i++){
@@ -1102,18 +1370,6 @@ public class GamePlayController  {
               }
             }
           }
-//          if(((Ownable) gameBoard.getLand().get(i)).getOwner() != null){
-//            boolean isFound = false;
-//            for(int j = 0; i < gameBoard.getPlayers().length && !isFound;j++){
-//              System.out.println(((Ownable) gameBoard.getLand().get(i)).getOwner() + " " + gameBoard.getPlayers()[j]);
-//              if(((Ownable) gameBoard.getLand().get(i)).getOwner().getName().equalsIgnoreCase(gameBoard.getPlayers()[j].getName())){
-//                System.out.println(gameBoard.getPlayers()[j].getName());
-//                isFound = true;
-//                Image ig = new Image(getClass().getResourceAsStream(playerAvatars.get(j)));
-//                owners.get(i-(i / 8 + 1)).setImage(ig);
-//              }
-//            }
-//          }
           }
       }
   }
@@ -1125,6 +1381,7 @@ public class GamePlayController  {
         if(j == gameBoard.getPlayers()[i].getPosition()){
           Image img = new Image(getClass().getResourceAsStream(playerAvatars.get(i)));
           playersSpaces.get(i).get(j).setImage(img);
+          playersSpaces.get(i).get(j).toFront();
         }
         else //Set the images in empty spaces to null
           playersSpaces.get(i).get(j).setImage(null);
@@ -1162,6 +1419,7 @@ public class GamePlayController  {
       }
     }
 
+    //Add in the owner icon imageviews into an arraylist
     owners = new ArrayList<ImageView>();
     owners.add(owner1);owners.add(owner2);owners.add(owner3);owners.add(owner4);owners.add(owner5);
     owners.add(owner6);owners.add(owner7);owners.add(owner8);owners.add(owner9);owners.add(owner10);
@@ -1170,6 +1428,7 @@ public class GamePlayController  {
     owners.add(owner21);owners.add(owner22);owners.add(owner23);owners.add(owner24);owners.add(owner25);
     owners.add(owner26);owners.add(owner27);owners.add(owner28);
 
+    //Add in the board spaces into an arraylist of labels
     spaces = new ArrayList<Label>();
     spaces.add(space1);spaces.add(space2);spaces.add(space3);spaces.add(space4);spaces.add(space5);
     spaces.add(space6);spaces.add(space7);spaces.add(space8);spaces.add(space9);spaces.add(space10);
@@ -1179,6 +1438,7 @@ public class GamePlayController  {
     spaces.add(space26);spaces.add(space27);spaces.add(space28);spaces.add(space29);spaces.add(space30);
     spaces.add(space31);spaces.add(space32);
 
+    //Add in the anchors as an arraylist of anchorpanes
     anchors = new ArrayList<AnchorPane>();
     anchors.add(anchor1);anchors.add(anchor2);anchors.add(anchor3);anchors.add(anchor4);anchors.add(anchor5);
     anchors.add(anchor6);anchors.add(anchor7);anchors.add(anchor8);anchors.add(anchor9);anchors.add(anchor10);
@@ -1188,11 +1448,16 @@ public class GamePlayController  {
     anchors.add(anchor26);anchors.add(anchor27);anchors.add(anchor28);anchors.add(anchor29);anchors.add(anchor30);
     anchors.add(anchor31);anchors.add(anchor32);
 
+    developmentLevels = new ArrayList<ImageView>();
+    developmentLevels.add(currentDevelopment1);developmentLevels.add(currentDevelopment2);developmentLevels.add(currentDevelopment3);
+    developmentLevels.add(currentDevelopment4);developmentLevels.add(currentDevelopment5);developmentLevels.add(currentDevelopment6);
 
+    //Set the name of the spaces to that of the model's board
     for(int i = 0; i < gameBoard.getLand().size();i++){
       spaces.get(i).setText(gameBoard.getLand().get(i).getName());
     }
 
+    //Set the appropriate images to the label spaces
     for(int i = 0; i < spaces.size();i++){
       boolean isFound = true;
       for(int j = 0; j < urls.length && isFound; j++){
@@ -1204,12 +1469,21 @@ public class GamePlayController  {
       }
     }
 
-    for(int i = 0; i < players.length;i++){
-      System.out.println(gameBoard.getPlayers()[i]);
-    }
-
+    //Update the player positions on the board
     updatePlayerPositions();
 
+    tradeeDevelopment = new ArrayList<ImageView>();
+    tradeeDevelopment.add(tradeeDev1);tradeeDevelopment.add(tradeeDev2);tradeeDevelopment.add(tradeeDev3);
+    tradeeDevelopment.add(tradeeDev4);tradeeDevelopment.add(tradeeDev5);tradeeDevelopment.add(tradeeDev6);
+
+    traderDevelopment = new ArrayList<ImageView>();
+    traderDevelopment.add(traderDev1);traderDevelopment.add(traderDev2);traderDevelopment.add(traderDev3);
+    traderDevelopment.add(traderDev4);traderDevelopment.add(traderDev5);traderDevelopment.add(traderDev6);
+
+    //Set isTrade to false, only true during trading
+    isTrade = false;
+
+    //Initialize the GUI components of the players
     player1.setText(players[0].getName());
     Image ig = new Image(getClass().getResourceAsStream(playerAvatars.get(0)));
     playerOneAvatar.setImage(ig);

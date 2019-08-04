@@ -38,7 +38,7 @@ public class Tax extends Land {
             event += player.getName() + " paid " + dRent + " for" + space + ".";
         }
         else{
-            event += player.getName() + "paid " + dAmount + ". " + player.getName() + " is now bankrupt.";
+            event += player.getName() + " paid " + dAmount + ". " + player.getName() + " is now bankrupt.";
             gameBoard.setIsWin(true);
         }
         return event;

@@ -3,8 +3,18 @@
     -fx-background-size: cover, auto;
 }
 
-#Metro, #North,  #South{
-    -fx-graphic: url('../Images/SmallSpaces/Railroad.png');
+#Metro{
+    -fx-graphic: url('../Images/SmallSpaces/Metro.png');
+    -fx-content-display: graphic-only;
+}
+
+#North{
+    -fx-graphic: url('../Images/SmallSpaces/North.png');
+    -fx-content-display: graphic-only;
+}
+
+#South{
+    -fx-graphic: url('../Images/SmallSpaces/South.png');
     -fx-content-display: graphic-only;
 }
 
@@ -22,8 +32,14 @@
     -fx-content-display: graphic-only;
 }
 
-#Water, #Electric{
-    -fx-graphic: url('../Images/SmallSpaces/Utility.png');
+#Water{
+          -fx-graphic: url('../Images/SmallSpaces/Water.png');
+                  -fx-content-display: graphic-only;
+      }
+
+
+#Electric{
+    -fx-graphic: url('../Images/SmallSpaces/Electric.png');
             -fx-content-display: graphic-only;
 }
 
@@ -63,38 +79,84 @@
     -fx-underline: true;
 }
 
-#Almond, #Kasoy {
-    -fx-graphic: url('../Images/SmallSpaces/Silver.png');
+#Almond{
+           -fx-graphic: url('../Images/SmallSpaces/Almond.png');
+               -fx-content-display: graphic-only;
+       }
+#Kasoy {
+    -fx-graphic: url('../Images/SmallSpaces/Kasoy.png');
         -fx-content-display: graphic-only;
 }
 
-#Rodeo, #Orange , #Ventura{
-    -fx-graphic: url('../Images/SmallSpaces/Purple.png');
+#Rodeo{
+          -fx-graphic: url('../Images/SmallSpaces/Rodeo.png');
+              -fx-content-display: graphic-only;
+      }
+#Orange {
+            -fx-graphic: url('../Images/SmallSpaces/Orange.png');
+                -fx-content-display: graphic-only;
+        }
+#Ventura{
+    -fx-graphic: url('../Images/SmallSpaces/Venture.png');
         -fx-content-display: graphic-only;
 }
 
-#Juan, #Ylaya , #Abad{
-    -fx-graphic: url('../Images/SmallSpaces/Pink.png');
+#Juan{
+         -fx-graphic: url('../Images/SmallSpaces/Juan.png');
+             -fx-content-display: graphic-only;
+     }
+#Ylaya {
+           -fx-graphic: url('../Images/SmallSpaces/Ylaya.png');
+               -fx-content-display: graphic-only;
+       }
+#Abad{
+    -fx-graphic: url('../Images/SmallSpaces/J.png');
         -fx-content-display: graphic-only;
 }
 
-#Madison, #Annapolis, #Connecticut{
-    -fx-graphic: url('../Images/SmallSpaces/Green.png');
+#Madison{
+            -fx-graphic: url('../Images/SmallSpaces/Madison.png');
+                -fx-content-display: graphic-only;
+        }
+#Annapolis{
+              -fx-graphic: url('../Images/SmallSpaces/Annapolis.png');
+                  -fx-content-display: graphic-only;
+          }
+#Connecticut{
+    -fx-graphic: url('../Images/SmallSpaces/Connecticut.png');
         -fx-content-display: graphic-only;
 }
 
-#Bougainvilla, #Dama, #Acacia{
-    -fx-graphic: url('../Images/SmallSpaces/Blue.png');
+#Bougainvilla{
+                 -fx-graphic: url('../Images/SmallSpaces/Bougainvilla.png');
+                     -fx-content-display: graphic-only;
+             }
+#Dama
+{
+    -fx-graphic: url('../Images/SmallSpaces/Dama.png');
+        -fx-content-display: graphic-only;
+}
+#Acacia{
+    -fx-graphic: url('../Images/SmallSpaces/Acacia.png');
         -fx-content-display: graphic-only;
 }
 
-#Solar, #Galaxy{
-    -fx-graphic: url('../Images/SmallSpaces/Red.png');
+#Solar
+{
+    -fx-graphic: url('../Images/SmallSpaces/Solar.png');
+        -fx-content-display: graphic-only;
+}
+#Galaxy{
+    -fx-graphic: url('../Images/SmallSpaces/Galaxy.png');
         -fx-content-display: graphic-only;
 }
 
-#Ninth, #Fifth{
-    -fx-graphic: url('../Images/SmallSpaces/Yellow.png');
+#Ninth{
+          -fx-graphic: url('../Images/SmallSpaces/9th.png');
+              -fx-content-display: graphic-only;
+      }
+#Fifth{
+    -fx-graphic: url('../Images/SmallSpaces/5th.png');
         -fx-content-display: graphic-only;
 }
 

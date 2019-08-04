@@ -161,29 +161,29 @@ public class LandInitController implements Initializable {
 
     private ArrayList<String> playerAvatars;
     private String[][] urls = {
-            {"Almond Drive","../Images/SmallSpaces/Silver.png","../Images/BigSpaces/Almond.png"},
-            {"Kasoy Street","../Images/SmallSpaces/Silver.png","../Images/BigSpaces/Kasoy.png"},
-            {"Rodeo Drive","../Images/SmallSpaces/Purple.png","../Images/BigSpaces/Rodeo.png"},
-            {"Orange Street","../Images/SmallSpaces/Purple.png","../Images/BigSpaces/Orange.png"},
-            {"Ventura Street","../Images/SmallSpaces/Purple.png","../Images/BigSpaces/Ventura.png"},
-            {"Juan Luna","../Images/SmallSpaces/Pink.png","../Images/BigSpaces/Juan.png"},
-            {"Ylaya","../Images/SmallSpaces/Pink.png","../Images/BigSpaces/Ylaya.png"},
-            {"J. Abad Santos","../Images/SmallSpaces/Pink.png","../Images/BigSpaces/Abad.png"},
-            {"Madison","../Images/SmallSpaces/Green.png","../Images/BigSpaces/Madison.png"},
-            {"Annapolis","../Images/SmallSpaces/Green.png","../Images/BigSpaces/Annapolis.png"},
-            {"Connecticut","../Images/SmallSpaces/Green.png","../Images/BigSpaces/Connecticut.png"},
-            {"Bougainvilla","../Images/SmallSpaces/Blue.png","../Images/BigSpaces/Bougainvilla.png"},
-            {"Dama de Noche","../Images/SmallSpaces/Blue.png","../Images/BigSpaces/Dama.png"},
-            {"Acacia","../Images/SmallSpaces/Blue.png","../Images/BigSpaces/Acacia.png"},
-            {"Solar Street","../Images/SmallSpaces/Red.png","../Images/BigSpaces/Solar.png"},
-            {"Galaxy Street","../Images/SmallSpaces/Red.png","../Images/BigSpaces/Galaxy.png"},
-            {"9th Street","../Images/SmallSpaces/Yellow.png","../Images/BigSpaces/9th.png"},
-            {"5th Avenue","../Images/SmallSpaces/Yellow.png","../Images/BigSpaces/5th.png"},
-            {"North","../Images/SmallSpaces/Railroad.png","../Images/BigSpaces/North.png"},
-            {"South","../Images/SmallSpaces/Railroad.png","../Images/BigSpaces/South.png"},
-            {"Metro","../Images/SmallSpaces/Railroad.png","../Images/BigSpaces/Metro.png"},
-            {"Water","../Images/SmallSpaces/Utility.png","../Images/BigSpaces/Water.png"},
-            {"Electric","../Images/SmallSpaces/Utility.png","../Images/BigSpaces/Electric.png"},
+            {"Almond Drive","../Images/SmallSpaces/Almond.png","../Images/BigSpaces/Almond.png"},
+            {"Kasoy Street","../Images/SmallSpaces/Kasoy.png","../Images/BigSpaces/Kasoy.png"},
+            {"Rodeo Drive","../Images/SmallSpaces/Rodeo.png","../Images/BigSpaces/Rodeo.png"},
+            {"Orange Street","../Images/SmallSpaces/Orange.png","../Images/BigSpaces/Orange.png"},
+            {"Ventura Street","../Images/SmallSpaces/Venture.png","../Images/BigSpaces/Ventura.png"},
+            {"Juan Luna","../Images/SmallSpaces/Juan.png","../Images/BigSpaces/Juan.png"},
+            {"Ylaya","../Images/SmallSpaces/Ylaya.png","../Images/BigSpaces/Ylaya.png"},
+            {"J. Abad Santos","../Images/SmallSpaces/J.png","../Images/BigSpaces/Abad.png"},
+            {"Madison","../Images/SmallSpaces/Madison.png","../Images/BigSpaces/Madison.png"},
+            {"Annapolis","../Images/SmallSpaces/Annapolis.png","../Images/BigSpaces/Annapolis.png"},
+            {"Connecticut","../Images/SmallSpaces/Connecticut.png","../Images/BigSpaces/Connecticut.png"},
+            {"Bougainvilla","../Images/SmallSpaces/Bougainvilla.png","../Images/BigSpaces/Bougainvilla.png"},
+            {"Dama de Noche","../Images/SmallSpaces/Dama.png","../Images/BigSpaces/Dama.png"},
+            {"Acacia","../Images/SmallSpaces/Acacia.png","../Images/BigSpaces/Acacia.png"},
+            {"Solar Street","../Images/SmallSpaces/Solar.png","../Images/BigSpaces/Solar.png"},
+            {"Galaxy Street","../Images/SmallSpaces/Galaxy.png","../Images/BigSpaces/Galaxy.png"},
+            {"9th Street","../Images/SmallSpaces/9th.png","../Images/BigSpaces/9th.png"},
+            {"5th Avenue","../Images/SmallSpaces/5th.png","../Images/BigSpaces/5th.png"},
+            {"North","../Images/SmallSpaces/North.png","../Images/BigSpaces/North.png"},
+            {"South","../Images/SmallSpaces/South.png","../Images/BigSpaces/South.png"},
+            {"Metro","../Images/SmallSpaces/Metro.png","../Images/BigSpaces/Metro.png"},
+            {"Water","../Images/SmallSpaces/Water.png","../Images/BigSpaces/Water.png"},
+            {"Electric","../Images/SmallSpaces/Electric.png","../Images/BigSpaces/Electric.png"},
             {"Luxury Tax","../Images/SmallSpaces/Tax.png","../Images/BigSpaces/Luxury.png"},
             {"Income Tax","../Images/SmallSpaces/Tax.png","../Images/BigSpaces/Income.png"},
             {"Chance","../Images/SmallSpaces/Chance.png","../Images/BigSpaces/Chance.png"},
@@ -224,7 +224,6 @@ public class LandInitController implements Initializable {
     @FXML
     public void hoverPaneIn(MouseEvent e){//Shows clear button when hovered over a space in the board
         if(!(emptySpaces.get(panes.indexOf(e.getSource())).getText().equalsIgnoreCase("Empty"))){
-            System.out.println(emptySpaces.get(panes.indexOf(e.getSource())).getText());
             deleteLabels.get(panes.indexOf(e.getSource())).setVisible(true);
         }
     }
@@ -317,7 +316,6 @@ public class LandInitController implements Initializable {
                     emptySpaces.get(emptySpaces.indexOf((e.getSource()))).setText(urls[possibleSpaces.indexOf(current)][0]);
                     current = null;
                     currentSelected.setText("Nothing Selected");
-                    System.out.println(emptySpaces);
                 }
 
 
@@ -531,9 +529,6 @@ public class LandInitController implements Initializable {
         finalLand.add(24,new Parking("Free Parking"));
         gameBoard.setLand(finalLand);
 
-        for(int i = 0; i < gameBoard.getLand().size();i++){
-            System.out.println(i + 1 +" " + gameBoard.getLand().get(i).getName());
-        }
         try {
             Stage stage = (Stage) background.getScene().getWindow();
 

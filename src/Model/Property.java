@@ -118,6 +118,18 @@ public class Property extends Ownable implements IsRentable{
         else if(nCounter == 3)
             dRent += 20;
         dRent += arrAttributes[nDevelopment + 2]; //Add development level
+        double multiplier = 1;
+
+        for(int i = 0; i < getCardMultipliers().size();i++){//Apply card multipliers
+            if(getCardMultipliers().get(i) instanceof CardSet_5 && getCardMultipliers().get(i).getIndex() == 0){//Remove double rent card
+                multiplier *= 2;
+            }
+            else{
+                multiplier *= ((CardSet_5)getCardMultipliers().get(i)).getMultiplier();
+            }
+        }
+        dRent *= multiplier;
+
         return dRent;
     }
 
@@ -132,19 +144,12 @@ public class Property extends Ownable implements IsRentable{
 
         double dRent = getRent(this.getOwner());
 
-        double multiplier = 1;
-        for(int i = 0; i < getCardMultipliers().size();i++){//Apply card multipliers
+        for(int i = 0; i < getCardMultipliers().size();i++){//Check cards for double rent to remove
             if(getCardMultipliers().get(i) instanceof CardSet_5 && getCardMultipliers().get(i).getIndex() == 0){//Remove double rent card
-                multiplier *= 2;
                 gameBoard.addCardDiscard(getCardMultipliers().get(i)); // Add to discard pile
                 getCardMultipliers().remove(i); //Remove from property
             }
-            else{
-                multiplier *= ((CardSet_5)getCardMultipliers().get(i)).getMultiplier();
-            }
         }
-        dRent *= multiplier;
-
         this.setRentCollected(dRent); //Updates the rent collected tracker
 
         String event = "";
