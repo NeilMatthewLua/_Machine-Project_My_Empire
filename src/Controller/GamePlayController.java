@@ -492,20 +492,20 @@ public class GamePlayController  {
           endPane.setVisible(true);
         }
       }
-//      else if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Chance){
-//          Card temp = gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1 );
-//          event = gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()).triggerEvent(gameBoard, gameBoard.getPlayers()[nTurnCounter % nTotal]);
-////TODO Add Card Desc FXML for Zoomed Card
-//          usePane.setVisible(true);
-//          eventLabel.setText(event);
-//          gameBoard.getEvents().add(event);
-//
-//          if(temp instanceof CardSet_1){
-//            keepPane.setVisible(true);
-//          }
-//          else
-//            usePane.setVisible(true);
-//      }
+      else if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Chance){
+          event += gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()).triggerEvent(gameBoard, gameBoard.getPlayers()[nTurnCounter % nTotal]);
+          Card tempCard = gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1 );
+//TODO Add Card Desc FXML for Zoomed Card
+        System.out.println(tempCard.getDescription());
+          eventLabel.setText(event);
+          gameBoard.getEvents().add(event);
+
+          if(tempCard instanceof CardSet_1){
+            keepPane.setVisible(true);
+          }
+          else
+            usePane.setVisible(true);
+      }
       //else, it's either Jail, Start, Tax, Community Service or Free Parking
       else {
         if(!(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Start)){
@@ -532,13 +532,16 @@ public class GamePlayController  {
         updateMoney(nIndex[0],nIndex[1]);
     }
     else if (e.getSource() == keepButton) {
-        keepButton.setVisible(false);
+        keepPane.setVisible(false);
+        endPane.setVisible(true);
     }
     else if (e.getSource() == discardButton) {
         gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().remove(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1);
-        discardButton.setVisible(false);
+        discardPane.setVisible(false);
+        endPane.setVisible(true);
     }
     else if (e.getSource() == useButton){
+      usePane.setVisible(false);
       double[] temp = new double[nTotal + 1]; //temporary holder of everyone's(including bank's) money before the chance card takes action
       int[] nIndex = new int[2]; //holds the which players/bank's money has been changed
       int j = 0; //index of the players/bank whose money was changed
@@ -554,7 +557,9 @@ public class GamePlayController  {
       Card tempCard = gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1 );
 
       if(tempCard instanceof CardSet_2){
+        System.out.println("WEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
         event += tempCard.useCard(gameBoard.getPlayers()[nTurnCounter % nTotal], gameBoard);
+        updatePlayerPositions();
         eventLabel.setText(event);
         gameBoard.getEvents().add(event);
         //Checks if the spot is owned
@@ -624,10 +629,12 @@ public class GamePlayController  {
         event += tempCard.useCard(gameBoard.getPlayers()[nTurnCounter % nTotal], gameBoard);
         eventLabel.setText(event);
         gameBoard.getEvents().add(event);
+        endPane.setVisible(true);
 //TODO CHECKFORWIN METHOD HERE
       }
       else if(tempCard instanceof  CardSet_4){
         event += tempCard.useCard(gameBoard.getPlayers()[nTurnCounter % nTotal], gameBoard);
+        updatePlayerPositions();
         eventLabel.setText(event);
         gameBoard.getEvents().add(event);
 
@@ -682,9 +689,10 @@ public class GamePlayController  {
           }
         }
         else{
-          event += gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + " is now in Jail! \n";
+          event += gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()).triggerEvent(gameBoard, gameBoard.getPlayers()[nTurnCounter % nTotal]);
           eventLabel.setText(event);
           gameBoard.getEvents().add(event);
+          endPane.setVisible(true);
         }
       }
       else if(tempCard instanceof CardSet_5){
@@ -695,6 +703,9 @@ public class GamePlayController  {
             chooseVisibleProperty(tempArr);
             if(tempCard.getIndex() == 0 || tempCard.getIndex() == 2){
               if(Zoomed.isVisible()){
+                choosePane.setVisible(true);
+              }
+              else if(closeZoomed.isVisible()){
                 choosePane.setVisible(true);
               }
               else
@@ -710,12 +721,17 @@ public class GamePlayController  {
                 if(Zoomed.isVisible()){
                   choosePane.setVisible(true);
                 }
+                else if(closeZoomed.isVisible()){
+                  choosePane.setVisible(true);
+                }
                 else
                 {
                   choosePane.setVisible(false);
                 }
               }
               else{
+                /This Gheiboi error proves that git updated mah stuff xdxd
+                        /Chat me "I LOVE UNICORNS" if read
                 //TODO SET ADDITIONAL LABEL "Not Applicable" in Card Desc
                 event +=  "No owned properties that can be renovated";
                 eventLabel.setText(event);
@@ -748,6 +764,11 @@ public class GamePlayController  {
             chooseVisibleRailroad(tempArr2);
 
             if(Zoomed.isVisible()){
+              System.out.println("ITS OPEN");
+              choosePane.setVisible(true);
+            }
+            else if(closeZoomed.isVisible()){
+              System.out.println("CLOSED");
               choosePane.setVisible(true);
             }
             else
@@ -784,6 +805,7 @@ public class GamePlayController  {
         event += tempCard.useCard(gameBoard.getPlayers()[nTurnCounter % nTotal], gameBoard);
         eventLabel.setText(event);
         gameBoard.getEvents().add(event);
+        endPane.setVisible(true);
         //TODO Check isWin here
       }
 
@@ -808,22 +830,16 @@ public class GamePlayController  {
 //        eventLabel.setText(event);
 //        gameBoard.getEvents().add(event);
 //    }
-    else if (e.getSource() == yesTradeButton) {
-      String event ="";
-      //event += gameBoard.getPlayers()[nTurnCounter % nTotal].trade(gameBoard);
-//TODO GET NAME OF DISPLAYSPACE
-
-      eventLabel.setText(event);
-      gameBoard.getEvents().add(event);
-
+    else if (e.getSource() == noTradeButton) {
+      tradeAnchorPane.setVisible(false);
+      rentPane.setVisible(true);
     }
     else if (e.getSource() == yesTradeButton) {
       String event = "";
       event += gameBoard.getPlayers()[nTurnCounter % nTotal].trade(gameBoard,((Ownable)gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())), gameBoard.getPlayers()[nTurnCounter % nTotal].getChosen());
       gameBoard.getEvents().add(event);
       eventLabel.setText(event);
-      tradePane.setVisible(false);
-      rentPane.setVisible(true);
+      tradeAnchorPane.setVisible(false);
     }
     else if (e.getSource() == purchaseButton) {
 
@@ -969,14 +985,16 @@ public class GamePlayController  {
 
   public void setFalseVisible() {
     for(int i = 0; i < spaces.size(); i++){
+        anchors.get(i).setVisible(false);
         spaces.get(i).setVisible(false);
     }
   }
 
   public void chooseVisibleProperty(ArrayList<Property> properties) {
     int counter = 0;
-    for(int i = 0; i < spaces.size(); i++){
+    for(int i = 0; i < spaces.size() && counter <= properties.size(); i++){
       if (spaces.get(i).getText().equalsIgnoreCase(properties.get(counter).getName())){
+          anchors.get(i).setVisible(true);
           spaces.get(i).setVisible(true);
           counter++;
       }
@@ -985,8 +1003,9 @@ public class GamePlayController  {
 
   public void chooseVisibleUtility(ArrayList<Utility> properties) {
     int counter = 0;
-    for(int i = 0; i < spaces.size(); i++){
+    for(int i = 0; i < spaces.size() && counter < properties.size(); i++){
       if (spaces.get(i).getText().equalsIgnoreCase(properties.get(counter).getName())){
+        anchors.get(i).setVisible(true);
         spaces.get(i).setVisible(true);
         counter++;
       }
@@ -995,8 +1014,9 @@ public class GamePlayController  {
 
   public void chooseVisibleRailroad(ArrayList<Railroad> properties) {
     int counter = 0;
-    for(int i = 0; i < spaces.size(); i++){
+    for(int i = 0; i < spaces.size() && counter < properties.size(); i++){
       if (spaces.get(i).getText().equalsIgnoreCase(properties.get(counter).getName())){
+        anchors.get(i).setVisible(true);
         spaces.get(i).setVisible(true);
         counter++;
       }

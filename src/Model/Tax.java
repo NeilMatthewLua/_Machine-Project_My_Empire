@@ -35,7 +35,7 @@ public class Tax extends Land {
         double dAmount = player.getMoney();
         event += player.getName() + " landed on " + space + "\n";
         if(player.giveMoney(gameBoard.getBank(),dRent)){
-            event += player.getName() + "paid " + dRent + " for" + space + ".";
+            event += player.getName() + " paid " + dRent + " for" + space + ".";
         }
         else{
             event += player.getName() + "paid " + dAmount + ". " + player.getName() + " is now bankrupt.";

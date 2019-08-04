@@ -29,7 +29,6 @@ public class CardSet_2 extends Card{
     public String useCard(Player player, GameBoard gameBoard){
         String event = "";
         int nIndex = player.getCards().get(player.getCards().size() - 1).getIndex(); //gets the index of the card to navigate through its set
-
         if(nIndex == 0){//Travel to a random property
 
             //CHECKS IF PROPERTY SUBCLASS
@@ -68,11 +67,6 @@ public class CardSet_2 extends Card{
             event += player.getName() + " landed on " + gameBoard.getLand().get(player.getPosition()).getName() + "\n";
         }
         else if (nIndex == 2) {//Travel to closest railroad
-            Random rand = new Random();
-            int nRand = rand.nextInt(7);
-
-            double temp = player.getMoney();
-
             while(!(gameBoard.getLand().get(player.getPosition()) instanceof Railroad)) {//Loops until a utility is found
                 player.setPosition(1);
 
@@ -88,29 +82,12 @@ public class CardSet_2 extends Card{
                 }
             }
 
-            if(((Railroad)gameBoard.getLand().get(player.getPosition())).getOwner() != null) { //checks if the Railroad tile is owned by anyone
-                if(!(player.isMine(gameBoard))) { //checks if you don't own it, you'll pay rent to the owner
-                    if(player.giveMoney(((Railroad)gameBoard.getLand().get(player.getPosition())).getOwner(), ((Railroad)gameBoard.getLand().get(player.getPosition())).getRent(((Railroad)gameBoard.getLand().get(player.getPosition())).getOwner()))){
-                        event += player.getName() + " pays $" + (10 * nRand) + " to: " + ((Railroad)gameBoard.getLand().get(player.getPosition())).getOwner().getName();
-                    }
-                    else{//If player can't pay
-                        event += player.getName() + " pays $" + temp + " to: " + ((Railroad)gameBoard.getLand().get(player.getPosition())).getOwner().getName() + "\n";
-                        event += player.getName() +" is now bankrupt. Game is over.";
-                        gameBoard.setIsWin(true);
-                    }
-                }
-
-            }
-            else { //the railroad tile is free to buy
-                if(player.getMoney() >= ((Railroad)gameBoard.getLand().get(player.getPosition())).getPrice()) { //checks if the current player has sufficient funds before offering to buy that land
-                    player.purchase(gameBoard);
-                }
-            }
-
+            event += player.getName() + " landed on " + gameBoard.getLand().get(player.getPosition()).getName() + "\n";
         }
 
         gameBoard.addCardDiscard(player.getCards().get(player.getCards().size() - 1)); //put used card into card discarded pile
         player.getCards().remove(player.getCards().size() - 1); //remove from the player's hand
+        System.out.println(event);
         return event;
     }
 

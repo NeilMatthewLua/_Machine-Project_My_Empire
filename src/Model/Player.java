@@ -265,7 +265,9 @@ public class Player extends People{
         int start = nPosition; //Initializes the starting position of the token
         Land temp;
         nRoll = (int)((Math.random() * (6 - 1)) + 1 ); //generates a random number form 1 - 6
-
+        while(!(gameBoard.getLand().get(nRoll) instanceof Chance)){
+            nRoll++;
+        }
 
         this.nDiceRoll = nRoll;
         String event = "";
@@ -307,7 +309,7 @@ public class Player extends People{
                         ((Property) gameBoard.getLand().get(this.getPosition())).addFootTraffic();
                     }
             }
-            event += getName() + " landed on " + gameBoard.getLand().get(getPosition()).getName();
+            event += getName() + " landed on " + gameBoard.getLand().get(getPosition()).getName() + "\n";
         }
         return event;
     }

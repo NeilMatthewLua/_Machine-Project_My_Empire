@@ -37,7 +37,11 @@ public class CardSet_3 extends Card{
             dPayment = 100;
         }
         else if (nIndex == 2) {
-            dPayment = 200;
+            while(!(gameBoard.getLand().get(player.getPosition()) instanceof Start)){
+                System.out.println(gameBoard.getLand().get(player.getPosition()));
+                player.setPosition(1);
+            }
+            event += gameBoard.getLand().get((player.getPosition())).triggerEvent(gameBoard,player);
         }
         else if (nIndex == 3) {
             dPayment = 300;
@@ -45,13 +49,15 @@ public class CardSet_3 extends Card{
         else if (nIndex == 4) {
             dPayment = 150;
         }
-        if(gameBoard.getBank().giveMoney(player, dPayment)){
-            event += "Bank pays $"+ dPayment +" to: " + player.getName() + "\n";
-        }
-        else{//If bank can't pay
-            event += "Bank pays $"+ temp +" to: " + player.getName() + "\n";
-            event += "Bank is now bankrupt. Game is over.";
-            gameBoard.setIsWin(true);
+        if(nIndex != 2){
+            if(gameBoard.getBank().giveMoney(player, dPayment)){
+                event += "Bank pays $"+ dPayment +" to: " + player.getName() + "\n";
+            }
+            else{//If bank can't pay
+                event += "Bank pays $"+ temp +" to: " + player.getName() + "\n";
+                event += "Bank is now bankrupt. Game is over.";
+                gameBoard.setIsWin(true);
+            }
         }
 
         gameBoard.addCardDiscard(player.getCards().get(player.getCards().size() - 1)); //put used card into card discarded pile
