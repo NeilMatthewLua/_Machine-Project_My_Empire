@@ -9,12 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import static javafx.stage.Modality.APPLICATION_MODAL;
 
 public class StartController {
 
@@ -33,5 +29,4 @@ public class StartController {
            stage.setScene(scene);
        }
     }
-
 }

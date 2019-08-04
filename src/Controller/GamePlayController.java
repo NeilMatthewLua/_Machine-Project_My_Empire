@@ -419,8 +419,19 @@ public class GamePlayController  {
     int nTotal = gameBoard.getPlayers().length;// Total number of players
 
     if (e.getSource() == rollButton) {
+
+      double[] temp = new double[nTotal + 1]; //temporary holder of everyone's(including bank's) money before the chance card takes action
+      int[] nIndex = new int[2]; //holds the which players/bank's money has been changed
+      int j = 0; //index of the players/bank whose money was changed
+      int i;
+
+      for( i = 0; i < nTotal; i ++){
+        temp[i] = gameBoard.getPlayers()[i].getMoney(); //holds the money of everybody on a temp array
+      }
+      temp[i] = gameBoard.getBank().getMoney();
+
+
       rollPane.setVisible(false);
-      updateMoney(nTurnCounter % nTotal, 5);
       String event = gameBoard.getPlayers()[nTurnCounter % nTotal].roll(gameBoard);
       eventLabel.setText(event);
       gameBoard.getEvents().add(event);
@@ -497,38 +508,28 @@ public class GamePlayController  {
 //      }
       //else, it's either Jail, Start, Tax, Community Service or Free Parking
       else {
-        double[] temp = new double[nTotal + 1]; //temporary holder of everyone's(including bank's) money before the chance card takes action
-        int[] nIndex = new int[2]; //holds the which players/bank's money has been changed
-        int j = 0; //index of the players/bank whose money was changed
-        int i;
-
-        for( i = 0; i < nTotal; i ++){
-            temp[i] = gameBoard.getPlayers()[i].getMoney(); //holds the money of everybody on a temp array
+        if(!(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Start)){
+          event = gameBoard.getPlayers()[nTurnCounter % nTotal].action(gameBoard); //performs the action
         }
-        temp[i] = gameBoard.getBank().getMoney();
-
-        event = gameBoard.getPlayers()[nTurnCounter % nTotal].action(gameBoard); //performs the action
-
-        //goes through everybody's money to check whose were changed
-        for( i = 0; i < nTotal; i ++){
-            if(temp[i] != gameBoard.getPlayers()[i].getMoney()){
-                nIndex[j] = i;    //holds their index in an array
-                j++;
-            }
-        }
-        if(temp[i] != gameBoard.getBank().getMoney()) //checks the bank's value changed
-            nIndex[j] = 5;
-
-        //updates the labels in the GUI if there are changes with their money
-        if(j == 1)
-            updateMoney(nIndex[0],nIndex[1]);
-
-        updateMoney(nTurnCounter % nTotal, 5);
-        eventLabel.setText(event);
         gameBoard.getEvents().add(event);
+        eventLabel.setText(event);
         endPane.setVisible(true);
       }
 
+      j = 0;
+      //goes through everybody's money to check whose were changed
+      for( i = 0; i < nTotal; i ++){
+        if(temp[i] != gameBoard.getPlayers()[i].getMoney()){
+          nIndex[j] = i;    //holds their index in an array
+          j++;
+        }
+      }
+      if(temp[i] != gameBoard.getBank().getMoney()) //checks the bank's value changed
+        nIndex[j] = 5;
+
+      //updates the labels in the GUI if there are changes with their money
+      if(j == 1)
+        updateMoney(nIndex[0],nIndex[1]);
     }
     else if (e.getSource() == keepButton) {
         keepButton.setVisible(false);
@@ -817,6 +818,10 @@ public class GamePlayController  {
 
     }
     else if (e.getSource() == yesTradeButton) {
+      String event = "";
+      event += gameBoard.getPlayers()[nTurnCounter % nTotal].trade(gameBoard,((Ownable)gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())), gameBoard.getPlayers()[nTurnCounter % nTotal].getChosen());
+      gameBoard.getEvents().add(event);
+      eventLabel.setText(event);
       tradePane.setVisible(false);
       rentPane.setVisible(true);
     }
@@ -825,7 +830,6 @@ public class GamePlayController  {
       String event = gameBoard.getPlayers()[nTurnCounter % nTotal].purchase(gameBoard);
       gameBoard.getEvents().add(event);
       eventLabel.setText(event);
-      gameBoard.getEvents().add(event);
       updateOwnerIcons();
       purchasePane.setVisible(false);
       updateMoney(nTurnCounter % nTotal, 5);
@@ -862,13 +866,12 @@ public class GamePlayController  {
       rentPane.setVisible(false);
       tradePane.setVisible(false);
       endPane.setVisible(true);
-      gameBoard.getEvents().add(event);
       eventLabel.setText(event);
       gameBoard.getEvents().add(event);
     }
     else if(e.getSource() == endButton) {
+
       eventLabel.setText("");
-      gameBoard.getEvents().add("");
       purchasePane.setVisible(false);
       tradePane.setVisible(false);
       rollPane.setVisible(true);

@@ -33,6 +33,7 @@ public class Tax extends Land {
             space = " Income Tax Space";
         }
         double dAmount = player.getMoney();
+        event += player.getName() + " landed on " + space + "\n";
         if(player.giveMoney(gameBoard.getBank(),dRent)){
             event += player.getName() + "paid " + dRent + " for" + space + ".";
         }

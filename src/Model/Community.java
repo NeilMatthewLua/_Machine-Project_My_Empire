@@ -21,7 +21,7 @@ public class Community extends Land {
      */
     @Override
     public String triggerEvent(GameBoard gameBoard, Player player){
-        String event = "";
+        String event = player.getName() + " landed on community service \n";
         double dAmount = player.getMoney();
         if(player.giveMoney(gameBoard.getBank(),50)){//If the player can pay the bank
             event += player.getName() + " donated " + 50 + " to Bank.";

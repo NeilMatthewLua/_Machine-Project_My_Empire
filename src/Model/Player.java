@@ -265,6 +265,8 @@ public class Player extends People{
         int start = nPosition; //Initializes the starting position of the token
         Land temp;
         nRoll = (int)((Math.random() * (6 - 1)) + 1 ); //generates a random number form 1 - 6
+
+
         this.nDiceRoll = nRoll;
         String event = "";
         if(inJail){//If player is in jail then exact fine
@@ -380,29 +382,30 @@ public class Player extends People{
     /**
      * Conducts the trading of property
      * @param gameBoard main board of the game
-     * @param player player that owns the land
-     * @param nChosenPosition current player's chosen land to give to the other player
+     * @param landedOwnable landed Ownable
+     * @param chosenOwnable Ownable to be given
      * @return the summary of the trade event
      */
-    public String trade(GameBoard gameBoard, Player player, int nChosenPosition) {
+    public String trade(GameBoard gameBoard, Ownable landedOwnable, Ownable chosenOwnable) {
 
+        Player temp = chosenOwnable.getOwner();
+        Player temp2 = landedOwnable.getOwner();
 
-        Ownable temp = ((Property)gameBoard.getLand().get(nChosenPosition));
         //Sets owner to player and removes property traded from owned properties
-        this.properties.remove(temp);
-        (temp).setOwner(player);
-        player.getProperties().add((Property)gameBoard.getLand().get(nChosenPosition));
+        this.properties.remove(chosenOwnable);
+        chosenOwnable.setOwner(landedOwnable.getOwner());
+        landedOwnable.getOwner().getProperties().add(chosenOwnable);
 
         //Sets your chosen property to be owned by you
-        ((Property)gameBoard.getLand().get(this.getPosition())).getOwner().getProperties().remove((gameBoard.getLand().get(this.getPosition())));
-        ((Property)gameBoard.getLand().get(this.getPosition())).setOwner(this);
-        this.properties.add((Property)gameBoard.getLand().get(this.getPosition()));
+        landedOwnable.setOwner(temp);
+        temp.getProperties().add(landedOwnable);
+        temp2.getProperties().remove(landedOwnable);
 
 
         String event = "";
-        event += getName() + " now owns " + this.properties.get(properties.size()-1).getName() + "\n";
-        event += ((Property) gameBoard.getLand().get(nChosenPosition)).getOwner().getName() +" now owns " +
-                gameBoard.getLand().get(nChosenPosition).getName() + "\n";
+        event += getName() + " now owns " + landedOwnable.getName() + "\n";
+        event += temp2.getName() +" now owns " +
+                chosenOwnable.getName() + "\n";
 
         return event;
     }

@@ -19,6 +19,8 @@ public class Parking extends Land {
      */
     @Override
     public String triggerEvent(GameBoard gameboard, Player player){
-        return player.getName() + " enjoy your free parking!";
+        String event = player.getName() + " landed on free parking \n";
+        event += player.getName() + " enjoy your free parking!";
+        return event;
     }
 }
