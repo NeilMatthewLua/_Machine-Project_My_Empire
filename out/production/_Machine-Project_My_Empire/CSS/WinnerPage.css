@@ -1,0 +1,8 @@
+#endGame:hover{
+    -fx-underline: true;
+    -fx-font-size: 40px;
+}
+
+#endGame{
+    -fx-font-family: Broadway;
+}

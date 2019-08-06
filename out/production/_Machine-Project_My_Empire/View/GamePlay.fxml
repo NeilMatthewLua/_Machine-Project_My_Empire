@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
@@ -13,29 +14,253 @@
             <Font size="20.0" />
          </font>
       </Label>
-
-      <ImageView fx:id="Zoomed" fitHeight="300.0" fitWidth="300.0" layoutX="161.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true" visible="false">
-      </ImageView>
-      <Label fx:id="playersZoom" layoutX="410.0" layoutY="302.0" prefHeight="20.0" prefWidth="35.0" text="2" visible="false">
-         <font>
-            <Font name="Broadway" size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="closeZoomed" alignment="CENTER" contentDisplay="CENTER" layoutX="237.0" layoutY="117.0" onMouseClicked="#openZoomed" prefHeight="45.0" prefWidth="150.0" text="Close" textAlignment="CENTER" textFill="#fcd670" visible="false">
-         <font>
-            <Font name="Broadway" size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="ownerZoom" layoutX="369.0" layoutY="412.0" prefHeight="14.0" prefWidth="58.0" text="None" visible="false">
-         <font>
-            <Font name="Broadway" size="12.0" />
-         </font>
-      </Label>
-      <Label fx:id="footTrafficZoom" layoutX="369.0" layoutY="429.0" prefHeight="14.0" prefWidth="58.0" text="0.0" visible="false">
-         <font>
-            <Font name="Broadway" size="12.0" />
-         </font>
-      </Label>
+      <AnchorPane fx:id="zoomPanel" layoutX="161.0" layoutY="161.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+      
+                        <ImageView fx:id="Zoomed" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/BigSpaces/5th.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="playersZoom" layoutX="248.0" layoutY="113.0" prefHeight="20.0" prefWidth="35.0" text="2" visible="false">
+               <font>
+                  <Font name="Broadway" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="closeZoomed" alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="-50.0" onMouseClicked="#openZoomed" prefHeight="45.0" prefWidth="150.0" text="Close" textAlignment="CENTER" textFill="#fcd670" visible="false">
+               <font>
+                  <Font name="Broadway" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="ownerZoom" layoutX="196.0" layoutY="221.0" prefHeight="14.0" prefWidth="79.0" text="None" visible="false">
+               <font>
+                  <Font name="Broadway" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="footTrafficZoom" layoutX="196.0" layoutY="239.0" prefHeight="14.0" prefWidth="87.0" text="0.0" visible="false">
+               <font>
+                  <Font name="Broadway" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="currentDevelopment1" fitHeight="30.0" fitWidth="40.0" layoutX="23.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/CurrentLevel.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="currentDevelopment2" fitHeight="30.0" fitWidth="40.0" layoutX="66.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/CurrentLevel.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="currentDevelopment3" fitHeight="30.0" fitWidth="40.0" layoutX="109.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/CurrentLevel.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="currentDevelopment4" fitHeight="30.0" fitWidth="40.0" layoutX="151.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/CurrentLevel.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="currentDevelopment5" fitHeight="30.0" fitWidth="40.0" layoutX="194.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/CurrentLevel.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="currentDevelopment6" fitHeight="30.0" fitWidth="40.0" layoutX="236.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/CurrentLevel.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="doubleRent" fitHeight="20.0" fitWidth="30.0" layoutX="160.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/Mutlipliers/doublerent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="increase10" fitHeight="20.0" fitWidth="30.0" layoutX="191.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/Mutlipliers/increase10.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="increase50" fitHeight="20.0" fitWidth="30.0" layoutX="222.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/Mutlipliers/increase50.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="decrease10" fitHeight="20.0" fitWidth="30.0" layoutX="251.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/Mutlipliers/decrease10.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="tradePanel" layoutX="70.0" layoutY="70.0" prefHeight="482.0" prefWidth="482.0" visible="false">
+         <children>
+            <ImageView fitHeight="482.0" fitWidth="482.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/tradePanel.png" />
+               </image>
+            </ImageView>
+            <AnchorPane fx:id="tradeePanel" layoutX="257.0" layoutY="108.0" prefHeight="225.0" prefWidth="225.0">
+               <children>
+                  <ImageView fx:id="tradeeZoom" fitHeight="225.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/BigSpaces/5th.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="tradeeFootTraffic" layoutX="130.0" layoutY="177.0" prefHeight="14.0" prefWidth="87.0" text="0.0">
+                     <font>
+                        <Font name="Broadway" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="tradeeOwner" layoutX="130.0" layoutY="165.0" prefHeight="14.0" prefWidth="87.0" text="None">
+                     <font>
+                        <Font name="Broadway" size="12.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="tradeeDev1" fitHeight="24.0" fitWidth="35.0" layoutX="16.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeDev2" fitHeight="24.0" fitWidth="35.0" layoutX="48.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeDev3" fitHeight="24.0" fitWidth="35.0" layoutX="80.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeDev4" fitHeight="24.0" fitWidth="35.0" layoutX="112.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeDev5" fitHeight="24.0" fitWidth="35.0" layoutX="144.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeDev6" fitHeight="24.0" fitWidth="35.0" layoutX="176.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeDoubleRent" fitHeight="25.0" fitWidth="25.0" layoutX="118.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/doublerent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeIncrease10" fitHeight="20.0" fitWidth="25.0" layoutX="142.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/increase10.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeIncrease50" fitHeight="20.0" fitWidth="25.0" layoutX="168.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/increase50.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeDecrease10" fitHeight="20.0" fitWidth="25.0" layoutX="193.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/decrease10.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="traderPanel" layoutY="108.0" prefHeight="225.0" prefWidth="225.0">
+               <children>
+                  <ImageView fx:id="traderZoom" fitHeight="225.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/BigSpaces/5th.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="traderFootTraffic" layoutX="130.0" layoutY="177.0" prefHeight="14.0" prefWidth="87.0" text="0.0">
+                     <font>
+                        <Font name="Broadway" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="traderOwner" layoutX="130.0" layoutY="165.0" prefHeight="14.0" prefWidth="87.0" text="None">
+                     <font>
+                        <Font name="Broadway" size="12.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="traderDev1" fitHeight="24.0" fitWidth="35.0" layoutX="16.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderDev2" fitHeight="24.0" fitWidth="35.0" layoutX="48.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderDev3" fitHeight="24.0" fitWidth="35.0" layoutX="80.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderDev4" fitHeight="24.0" fitWidth="35.0" layoutX="112.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderDev5" fitHeight="24.0" fitWidth="35.0" layoutX="144.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderDev6" fitHeight="24.0" fitWidth="35.0" layoutX="176.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderDoubleRent" fitHeight="25.0" fitWidth="25.0" layoutX="118.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/doublerent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderIncrease10" fitHeight="20.0" fitWidth="25.0" layoutX="142.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/increase10.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderIncrease50" fitHeight="20.0" fitWidth="25.0" layoutX="168.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/increase50.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderDecrease10" fitHeight="20.0" fitWidth="25.0" layoutX="193.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/decrease10.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Label fx:id="trader" alignment="CENTER" layoutX="44.0" layoutY="352.0" text="MMMMMM" textAlignment="CENTER">
+               <font>
+                  <Font name="Broadway" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="tradee" alignment="CENTER" layoutX="301.0" layoutY="352.0" text="MMMMMM" textAlignment="CENTER">
+               <font>
+                  <Font name="Broadway" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="traderOffer" alignment="CENTER" layoutX="12.0" layoutY="411.0" text="Dama de Noche" textAlignment="CENTER">
+               <font>
+                  <Font name="Broadway" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="tradeeOffer" alignment="CENTER" layoutX="269.0" layoutY="411.0" text="Dama de Noche" textAlignment="CENTER">
+               <font>
+                  <Font name="Broadway" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
 
       <AnchorPane fx:id="anchor2" layoutX="482.0" layoutY="524.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0">
          <children>

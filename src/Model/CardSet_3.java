@@ -38,7 +38,6 @@ public class CardSet_3 extends Card{
         }
         else if (nIndex == 2) {
             while(!(gameBoard.getLand().get(player.getPosition()) instanceof Start)){
-                System.out.println(gameBoard.getLand().get(player.getPosition()));
                 player.setPosition(1);
             }
             event += gameBoard.getLand().get((player.getPosition())).triggerEvent(gameBoard,player);

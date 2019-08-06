@@ -2,18 +2,27 @@ package Controller;
 
 import Model.Player;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
-public class WinnerPageController implements Initializable {
+import static javafx.stage.Modality.APPLICATION_MODAL;
 
+public class WinnerPageController{
+
+    @FXML private Label endGame;
     @FXML private Label player1;
     @FXML private Label player2;
     @FXML private Label player3;
@@ -35,50 +44,53 @@ public class WinnerPageController implements Initializable {
     private ArrayList<Label> playerNames;
     private ArrayList<Label> playerMoney;
 
-    public void setPlayers(ArrayList<Player> players){
-        for(int i = 0; i < players.size();i++)
-            this.players.add(players.get(i));
-    }
-
-    public void setPlayerAvatars(ArrayList<String> playerAvatars){
-        for(int i = 0; i < playerAvatars.size(); i++)
-            this.playerAvatars.add(playerAvatars.get(i));
-    }
     public void arrangeRankings(){
         ranked = new ArrayList<Player>();
         arrangedPlayerAvatars = new ArrayList<String>();
+
         while(players.size() > 0){
             int biggest = 0;
-            for(int i = 1; i < players.size(); i++){
-                    if(players.get(0).getMoney() < players.get(i).getMoney()){
+            for(int i = 0; i < players.size(); i++){
+                    if(players.get(biggest).getMoney() < players.get(i).getMoney())
                         biggest = i;
             }
-                ranked.add(players.get(biggest));
-                players.remove(biggest);
-                arrangedPlayerAvatars.add(playerAvatars.get(biggest));
-                playerAvatars.remove(biggest);
-            }
+
+            ranked.add(players.get(biggest));
+            players.remove(biggest);
+
+            arrangedPlayerAvatars.add(playerAvatars.get(biggest));
+            playerAvatars.remove(biggest);
+
         }
     }
+/Chat me SEXY BOY once you get this update
 
 
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb){
-        players = new ArrayList<Player>();
-        playerAvatars = new ArrayList<String>();
+    public void initialize(Player[] players, ArrayList<String> playerAvatars){
+        this. players = new ArrayList<Player>();
+        this.playerAvatars = new ArrayList<String>();
         avatars = new ArrayList<ImageView>();
         playerNames = new ArrayList<Label>();
         playerMoney = new ArrayList<Label>();
+        for(int i = 0; i < players.length;i++)
+            this.players.add(players[i]);
+
+        for(int i = 0; i < playerAvatars.size(); i++){
+            this.playerAvatars.add(playerAvatars.get(i));
+
+        }
 
         playerMoney.add(money1);playerMoney.add(money2);playerMoney.add(money3);playerMoney.add(money4);
         playerNames.add(player1);playerNames.add(player2);playerNames.add(player3);playerNames.add(player4);
         avatars.add(playerAvatar1);avatars.add(playerAvatar2);avatars.add(playerAvatar3);avatars.add(playerAvatar4);
 
         arrangeRankings();
+
+
         for(int i = 0; i < ranked.size(); i++){
             playerNames.get(i).setText(ranked.get(i).getName());
-            if(ranked.get(i).getMoney() >= 0){
+            if(ranked.get(i).getMoney() > 0){
                 playerMoney.get(i).setText(""+ranked.get(i).getMoney());
             }
             else{
@@ -87,6 +99,13 @@ public class WinnerPageController implements Initializable {
             }
             Image ig = new Image(getClass().getResourceAsStream(arrangedPlayerAvatars.get(i)));
             avatars.get(i).setImage(ig);
+        }
+    }
+
+    public void endGame(MouseEvent e){
+        if(e.getSource() == endGame){
+            Stage currStage = (Stage) endGame.getScene().getWindow();
+            currStage.close();
         }
     }
 }

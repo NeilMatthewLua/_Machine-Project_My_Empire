@@ -33,7 +33,7 @@ public class CardSet_4 extends Card{
         int nIndex = player.getCards().get(player.getCards().size() - 1).getIndex(); //gets the index of the card to navigate through its set
 
         if(nIndex == 0){//Trip to jail, no money on start
-            while(player.getPosition() != 24){
+            while(player.getPosition() != 16){
                 player.setPosition(1);//Player moves one space
                 if (gameBoard.getLand().get(player.getPosition()) instanceof Property)
                     if (((Property)gameBoard.getLand().get(player.getPosition())).getOwner() != null){

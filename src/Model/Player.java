@@ -178,7 +178,10 @@ public class Player extends People{
      * @param nRoll number of spaces the token moves
      */
     public void setPosition(int nRoll) {
-        if(nPosition + nRoll > 31) { //checks if the token went through the whole board already
+        if(nPosition == 31 && nRoll == 1){
+            nPosition = -1;
+        }
+        else if(nPosition + nRoll > 31) { //checks if the token went through the whole board already
             nPosition = nRoll - (31 - nPosition) - 1;
         }
         nPosition += nRoll;

@@ -250,6 +250,7 @@ public class GameBoard {
                 }
                 else if(i == 1){
                     nRandInt = rand.nextInt(3);
+                    nRandInt = 0;
                 }
                 else {
                     nRandInt = rand.nextInt(5);

@@ -9,6 +9,7 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +24,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import java.awt.event.ActionListener;
@@ -69,6 +72,8 @@ public class GamePlayController  {
   @FXML
     private Label chooseButton;
   @FXML
+    private Label endGameButton;
+  @FXML
     private Label money1;
   @FXML
     private Label money2;
@@ -104,6 +109,8 @@ public class GamePlayController  {
     private StackPane discardPane;
   @FXML
     private StackPane choosePane;
+  @FXML
+    private StackPane endGamePane;
   @FXML
     private AnchorPane tradeAnchorPane;
   @FXML
@@ -474,12 +481,10 @@ public class GamePlayController  {
     int nTotal = gameBoard.getPlayers().length;// Total number of players
 
     if (e.getSource() == rollButton) {
-
       double[] temp = new double[nTotal + 1]; //temporary holder of everyone's(including bank's) money before the chance card takes action
       int[] nIndex = new int[2]; //holds the which players/bank's money has been changed
       int j = 0; //index of the players/bank whose money was changed
       int i;
-
       for( i = 0; i < nTotal; i ++){
         temp[i] = gameBoard.getPlayers()[i].getMoney(); //holds the money of everybody on a temp array
       }
@@ -491,6 +496,22 @@ public class GamePlayController  {
       eventLabel.setText(event);
       gameBoard.getEvents().add(event);
       updatePlayerPositions();
+
+      j = 0;
+      //goes through everybody's money to check whose were changed
+      for( i = 0; i < nTotal; i ++){
+        if(temp[i] != gameBoard.getPlayers()[i].getMoney()){
+          nIndex[j] = i;    //holds their index in an array
+          j++;
+        }
+      }
+      if(temp[i] != gameBoard.getBank().getMoney()) //checks the bank's value changed
+        nIndex[j] = 5;
+
+      //updates the labels in the GUI if there are changes with their money
+      if(j == 1)
+        updateMoney(nIndex[0],nIndex[1]);
+
 //      String[] strings = event.split("\n");
 //        System.out.println(event);
 //      if(strings.length > 1)
@@ -560,8 +581,6 @@ public class GamePlayController  {
       else if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Chance){
         event += gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()).triggerEvent(gameBoard, gameBoard.getPlayers()[nTurnCounter % nTotal]);
         Card tempCard = gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1 );
-//TODO Add Card Desc FXML for Zoomed Card
-        System.out.println(tempCard.getDescription());
         eventLabel.setText(event);
         gameBoard.getEvents().add(event);
 
@@ -595,6 +614,9 @@ public class GamePlayController  {
         //updates the labels in the GUI if there are changes with their money
         if(j == 1)
           updateMoney(nIndex[0],nIndex[1]);
+
+        checkWin();
+
       }
 
     }
@@ -605,7 +627,6 @@ public class GamePlayController  {
     }
     else if (e.getSource() == discardButton) {
         gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().remove(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1);
-        discardButton.setVisible(false);
         discardPane.setVisible(false);
         endPane.setVisible(true);
     }
@@ -677,7 +698,7 @@ public class GamePlayController  {
                 }
                 eventLabel.setText(event);
                 gameBoard.getEvents().add(event);
-                //TODO CHECKFORWIN METHOD HERE
+                checkWin();
               }
               else{
                 rentPane.setVisible(true);
@@ -698,7 +719,7 @@ public class GamePlayController  {
         eventLabel.setText(event);
         gameBoard.getEvents().add(event);
         endPane.setVisible(true);
-//TODO CHECKFORWIN METHOD HERE
+        checkWin();
       }
       else if(tempCard instanceof  CardSet_4){
         event += tempCard.useCard(gameBoard.getPlayers()[nTurnCounter % nTotal], gameBoard);
@@ -739,12 +760,10 @@ public class GamePlayController  {
               if (gameBoard.getPlayers()[nTurnCounter % nTotal].canTrade(gameBoard)) {
                 tradePane.setVisible(true);
                 rentPane.setVisible(true);
-                //TODO CHECKFORWIN METHOD HERE
               }
               //else, he has no choice but to pay rent
               else {
                 rentPane.setVisible(true);
-                //TODO CHECKFORWIN METHOD HERE
               }
             }
           }
@@ -828,7 +847,7 @@ public class GamePlayController  {
             setFalseVisible();
             chooseVisibleUtility(tempArr);
             chooseVisibleRailroad(tempArr2);
-
+//TODO REPLACE YOUR CARD ZOOMED HERE
             if(Zoomed.isVisible()){
               choosePane.setVisible(true);
               System.out.println("ITS OPEN");
@@ -872,7 +891,7 @@ public class GamePlayController  {
         eventLabel.setText(event);
         gameBoard.getEvents().add(event);
         endPane.setVisible(true);
-        //TODO Check isWin here
+        checkWin();
       }
 
       //goes through everybody's money to check whose were changed
@@ -889,14 +908,13 @@ public class GamePlayController  {
       if(j == 1)
         updateMoney(nIndex[0],nIndex[1]);
     }
-//    else if (e.getSource() == chooseButton) {
-//        String event = "";
-//        gameBoard.getPlayers()[nTurnCounter % nTotal].setChosen(); //TODO HOW TO GET Displayed Property/Utility/Railroad's Class?
-//        event += ((CardSet_5)gameBoard.getPlayers()[nTurnCounter & nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter & nTotal].getCards().size() - 1)).useCard(gameBoard.getPlayers()[nTurnCounter & nTotal],gameBoard);
-//        eventLabel.setText(event);
-//        gameBoard.getEvents().add(event);
-//    }
-
+   else if (e.getSource() == chooseButton) {
+       String event = "";    
+       event += ((CardSet_5)gameBoard.getPlayers()[nTurnCounter & nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter & nTotal].getCards().size() - 1)).useCard(gameBoard.getPlayers()[nTurnCounter & nTotal],gameBoard);
+       eventLabel.setText(event);
+       gameBoard.getEvents().add(event);
+       endPane.setVisible(true);
+   }
     else if (e.getSource() == noTradeButton) {
       isTrade = false;
       tradePanel.setVisible(false);
@@ -1053,7 +1071,7 @@ public class GamePlayController  {
            nIndex = i;
 
       updateMoney(nTurnCounter % nTotal, nIndex);
-
+      checkWin();
       rentPane.setVisible(false);
       tradePane.setVisible(false);
       endPane.setVisible(true);
@@ -1088,6 +1106,38 @@ public class GamePlayController  {
           x.setY(30);
           x.show();
       }
+    //TODO FXML
+//      else if(e.getSource() == endGameButton){
+//      try{
+//        Stage stage = new Stage(StageStyle.UNDECORATED);
+//        FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(getClass().getResource("/View/WinnerPage.fxml"));
+//        Scene scene = new Scene(loader.load());
+//        stage.setScene(scene);
+//        //stage.setResizable(false);
+//        stage.initModality(APPLICATION_MODAL);
+//        ((WinnerPageController) loader.getController()).setPlayers(gameBoard.getPlayers());
+//        ((WinnerPageController) loader.getController()).setPlayerAvatars(playerAvatars);
+//        stage.setX(600);
+//        stage.setY(30);
+//        stage.showAndWait();
+//
+//        try{
+//          Stage currStage = (Stage) anchor1.getScene().getWindow();
+//          FXMLLoader loaderNewGame = new FXMLLoader();
+//          loaderNewGame.setLocation(getClass().getResource("/View/StartPage.fxml"));
+//          Scene sceneNewGame = new Scene(loaderNewGame.load());
+//          currStage.setScene(sceneNewGame);
+//          currStage.show();
+//        }
+//        catch(IOException event){
+//          System.out.println("Something happened");
+//        }
+//      }
+//      catch(IOException event){
+//        System.out.println("Something happened");
+//      }
+//    }
   }
 
     private void delayStart(String[] string) {
@@ -1389,11 +1439,48 @@ public class GamePlayController  {
     }
   }
 
-//TODO CHECKISWIN
-//  public void checkWin(){
-//    if(gameBoard.getIsWin())
-//
-//  }
+    public void checkWin(){
+      if(gameBoard.getIsWin()){
+        gameBoard.getEvents().add("Game Over");
+        //TODO THIS
+        //endGamePane.setVisible(true);
+        try{
+          Stage stage = new Stage();
+          FXMLLoader loader = new FXMLLoader();
+          loader.setLocation(getClass().getResource("/View/WinnerPage.fxml"));
+          Scene scene = new Scene(loader.load(),575,575);
+          stage.setScene(scene);
+          stage.setResizable(false);
+          stage.initModality(APPLICATION_MODAL);
+          stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+              event.consume();
+            }
+          });
+
+          ((WinnerPageController) loader.getController()).initialize(gameBoard.getPlayers(),playerAvatars);
+          stage.setX(350);
+          stage.setY(30);
+          stage.showAndWait();
+
+            try{
+              Stage currStage = (Stage) anchor1.getScene().getWindow();
+              FXMLLoader loaderNewGame = new FXMLLoader();
+              loaderNewGame.setLocation(getClass().getResource("/View/StartPage.fxml"));
+              Scene sceneNewGame = new Scene(loaderNewGame.load());
+              currStage.setScene(sceneNewGame);
+              currStage.show();
+            }
+            catch(IOException event){
+              System.out.println("Something happened");
+            }
+          }
+          catch(IOException event){
+            System.out.println("Something happened");
+          }
+      }
+    }
  // Run everything in this function whenever this view has been initialized
   public void initialize(Player[] players) {
     player1Spaces = new ArrayList<ImageView>();
