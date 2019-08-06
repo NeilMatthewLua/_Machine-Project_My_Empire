@@ -16,21 +16,31 @@ import java.util.Scanner;
     public abstract class  Card {
 
         private int nIndex; //Index of the card from the set
+        private int nGroup;
         private boolean canKeep;
         private String strDescription;
 
         public Card(int nIndex,int nGroup, boolean canKeep, String[][] list){
             this.nIndex = nIndex;
             this.canKeep = canKeep;
+            this.nGroup = nGroup;
             strDescription = list[nGroup][nIndex];
         }
 
         /**
          * Returns the index of the card from the set
-         * @return index of the card
+         * @return index of the card in its card group
          */
         public int getIndex(){
             return this.nIndex;
+        }
+
+        /**
+         * Returns the card group of the card from the set
+         * @return index of the card group of the card
+         */
+        public int getGroup(){
+            return this.nGroup;
         }
 
         /**

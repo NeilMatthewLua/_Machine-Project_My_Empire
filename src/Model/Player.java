@@ -269,7 +269,14 @@ public class Player extends People{
         int start = nPosition; //Initializes the starting position of the token
         Land temp;
         nRoll = (int)((Math.random() * (6 - 1)) + 1 ); //generates a random number form 1 - 6
-
+        //nRoll = 1;
+//        if(nRoll + nPosition > 31)
+//            nPosition = 0;
+//        while(!(gameBoard.getLand().get(nRoll+nPosition) instanceof Chance || gameBoard.getLand().get(nRoll+nPosition) instanceof Property)){//PENIS LOOP REMOVE
+//            nRoll++;
+//            if(nRoll + nPosition > 31)
+//                nPosition = 0;
+//        }
 
         this.nDiceRoll = nRoll;
         String event = "";
@@ -279,8 +286,20 @@ public class Player extends People{
                     event += this.getCards().get(0).useCard(this,gameBoard)+"\n";
                     gameBoard.getEvents().add(event);
                 }
+                else{
+                    if(this.giveMoney(gameBoard.getBank(),50)){
+                        event += "Bank was given 50$ for Jail fine.\n";
+                        inJail = false;
+                        gameBoard.getEvents().add(event);
+                    }
+                    else{//If player can't pay
+                        event += getName() +" was not able to pay Jail Fine.\n";
+                        gameBoard.getEvents().add(event);
+                        gameBoard.setIsWin(true);
+                    }
+                }
             }
-            if(this.giveMoney(gameBoard.getBank(),50)){
+            else if(this.giveMoney(gameBoard.getBank(),50)){
                 event += "Bank was given 50$ for Jail fine.\n";
                 inJail = false;
                 gameBoard.getEvents().add(event);

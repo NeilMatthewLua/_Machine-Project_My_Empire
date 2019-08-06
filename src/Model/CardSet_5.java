@@ -51,15 +51,14 @@ public class CardSet_5 extends Card{
             }
             else if (nIndex == 1) {//Renovation
                 double dRenovation = 0; //Renovation price
-                if (((Property)player.getChosen()).getDevelopment() >= 1) {//Calculates price of renovation
-                    if (((Property)player.getChosen()).getDevelopment()== 5) {
+                if (((Property)  player.getChosen()).getDevelopment() >= 1) {//Calculates price of renovation
+                    if ((((Property)  player.getChosen()).getDevelopment() )== 5) {
                         dRenovation += 50;
-                        dRenovation += (((Property)player.getChosen()).getDevelopment() - 1) * 25;
+                        dRenovation += ((((Property)  player.getChosen()).getDevelopment()) - 1) * 25;
                     }
                     else
-                        dRenovation += (((Property)player.getChosen()).getDevelopment()) * 25;
+                        dRenovation += (((Property)  player.getChosen()).getDevelopment()) * 25;
                 }
-
                 player.giveMoney(gameBoard.getBank(), dRenovation);
                 multiplier = 1.5;
                 player.getChosen().getCardMultipliers().add(this);
@@ -73,17 +72,17 @@ public class CardSet_5 extends Card{
         }
         else if(nIndex == 3 || nIndex == 4){//For utilities / railroad
 
-            if(nIndex == 3){//Decrease by 10%
+            if(nIndex == 4){//Decrease by 10%
                 multiplier = 0.9;
+                player.getChosen().getCardMultipliers().add(this);
                 event += "Rent of " +  player.getChosen().getName()+ " decreased by 10%";
             }
-            else if(nIndex == 4){//Increase by 10%
+            else if(nIndex == 3){//Increase by 10%
                 multiplier = 1.1;
                 player.getChosen().getCardMultipliers().add(this);
                 event += "Rent of " +  player.getChosen().getName()+ " increased by 10%";
             }
         }
-
         player.getCards().remove(player.getCards().size() - 1); //remove from the player's hand
         return event;
     }

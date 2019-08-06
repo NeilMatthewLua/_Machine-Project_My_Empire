@@ -58,6 +58,11 @@ public class Property extends Ownable implements IsRentable{
         return nDevelopment;
     }
 
+    public void setDevelopment(){//PENIS FUNCTION REMOVE
+       int nRoll = (int)((Math.random() * 5) + 1);
+       nDevelopment = nRoll;
+    }
+
     /**
      * Gets the foot traffic of the property
      * @return foot traffic of the property
@@ -148,6 +153,7 @@ public class Property extends Ownable implements IsRentable{
             if(getCardMultipliers().get(i) instanceof CardSet_5 && getCardMultipliers().get(i).getIndex() == 0){//Remove double rent card
                 gameBoard.addCardDiscard(getCardMultipliers().get(i)); // Add to discard pile
                 getCardMultipliers().remove(i); //Remove from property
+                i--;
             }
         }
         this.setRentCollected(dRent); //Updates the rent collected tracker
@@ -155,11 +161,11 @@ public class Property extends Ownable implements IsRentable{
         String event = "";
         double dAmount = player.getMoney();
         if(player.giveMoney(this.getOwner(), dRent)){
-            event += player.getName() + "paid " + dRent + " to " + this.getOwner().getName() + ".";
+            event += player.getName() + " paid " + dRent + " to " + this.getOwner().getName() + ".";
         }
         else{
-            event += player.getName() + "paid " + dAmount + " to " + this.getOwner().getName() + ". ";
-            event += player.getName() + "is now bankrupt.";
+            event += player.getName() + " paid " + dAmount + " to " + this.getOwner().getName() + ". ";
+            event += player.getName() + " is now bankrupt.";
             gameBoard.setIsWin(true);
         }
         return event;

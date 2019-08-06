@@ -39,6 +39,11 @@ public class Utility extends Ownable implements IsRentable{
             default:
                 break;
         }
+        double multiplier = 1;
+        for(int i = 0; i < getCardMultipliers().size();i++){//Apply card multipliers
+            multiplier *= ((CardSet_5)getCardMultipliers().get(i)).getMultiplier();
+        }
+        dRent *= multiplier;
         return dRent;
     }
 

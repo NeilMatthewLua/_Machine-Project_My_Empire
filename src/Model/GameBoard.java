@@ -250,7 +250,6 @@ public class GameBoard {
                 }
                 else if(i == 1){
                     nRandInt = rand.nextInt(3);
-                    nRandInt = 0;
                 }
                 else {
                     nRandInt = rand.nextInt(5);
@@ -307,7 +306,7 @@ public class GameBoard {
      * @return true if the player has 2 full sets, false if less than 2 full sets
      */
     private boolean isCompleteSet(Player player){
-        int[] nPropertyCount = {0,0,0,0,0,0,0}; //Counts the no. of properties player has per color
+        int[] nPropertyCount = {0,0,0,0,0,0,0,0,0}; //Counts the no. of properties player has per color
         int nFullSet = 0;
         for(int j = 0; j < player.getProperties().size() && nFullSet < 2;j++){
             if(player.getProperties().get(j) instanceof Property){
@@ -346,8 +345,18 @@ public class GameBoard {
                     if(nPropertyCount[6] == 2)
                         nFullSet += 1;
                 }
+                else if(player.getProperties().get(j) instanceof Utility){
+                    nPropertyCount[7] += 1;
+                    if(nPropertyCount[7] == 2)
+                        nFullSet += 1;
+                }
+                else if(player.getProperties().get(j) instanceof Railroad){
+                    nPropertyCount[8] += 1;
+                    if(nPropertyCount[8] == 3)
+                        nFullSet += 1;
+                }
             }
-            if(nFullSet == 2)
+            if(nFullSet >= 2)
                 return true;
         }
         return false;
@@ -379,8 +388,8 @@ public class GameBoard {
                 cardDiscard.remove(0);
             }
         Collections.shuffle(cardPile);
-        Card temp = cardPile.get(cardPile.size()-1); //Remove topmost card in cardPile
-        cardPile.remove(cardPile.size()-1);
+        Card temp = cardPile.get(0); //Remove topmost card in cardPile
+        cardPile.remove(0);
         return temp;
     }
 
@@ -389,7 +398,7 @@ public class GameBoard {
      * @param c is the card to be added
      */
     public void addCardDiscard(Card c){
-        cardDiscard.add(c);
+       cardDiscard.add(c);
     }
 
 

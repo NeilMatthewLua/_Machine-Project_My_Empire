@@ -37,10 +37,10 @@ public class CardSet_6 extends Card{
         event += getDescription() + " " + arrChoices[value];
 
         if( player.giveMoney(gameBoard.getBank(),arrChoices[value])){//If player can't pay then he gives all he has and loses
-            event += player.getName() + " pays $" + arrChoices[value] + " to: Bank" + "\n";
+            event += player.getName() + " pays $" + arrChoices[value] + " to: Bank. " + "\n";
         }
         else{
-            event += player.getName() + " pays $" + temp + " to: Bank" + "\n";
+            event += player.getName() + " pays $" + temp + " to: Bank." + "\n";
             event += player.getName() + " is now bankrupt. Game is over.";
             gameBoard.setIsWin(true);
         }

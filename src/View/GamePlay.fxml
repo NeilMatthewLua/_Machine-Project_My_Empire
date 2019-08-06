@@ -14,6 +14,20 @@
             <Font size="20.0" />
          </font>
       </Label>
+      <AnchorPane fx:id="chancePanel" layoutX="161.0" layoutY="161.0" prefHeight="300.0" prefWidth="300.0">
+         <children>
+            <ImageView fx:id="zoomedChance" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/ChanceCards/Group5/DoubleRent.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="zoomedCardApplicable" alignment="CENTER" layoutX="23.0" layoutY="245.0" prefHeight="14.0" prefWidth="251.0" text="(Not applicable)" textAlignment="CENTER" visible="false">
+               <font>
+                  <Font name="Broadway" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="zoomPanel" layoutX="161.0" layoutY="161.0" prefHeight="200.0" prefWidth="200.0">
          <children>
       
@@ -92,6 +106,16 @@
                   <Image url="@../Images/Mutlipliers/decrease10.png" />
                </image>
             </ImageView>
+            <Label fx:id="renovationLabel" alignment="CENTER" layoutX="64.0" layoutY="300.0" prefHeight="30.0" prefWidth="180.0" text="RENOVATION COST" visible="false">
+               <font>
+                  <Font name="Broadway" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="renovationPrice" alignment="CENTER" layoutX="64.0" layoutY="315.0" prefHeight="30.0" prefWidth="180.0" text="191.00" visible="false">
+               <font>
+                  <Font name="Broadway" size="12.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="tradePanel" layoutX="70.0" layoutY="70.0" prefHeight="482.0" prefWidth="482.0" visible="false">

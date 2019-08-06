@@ -22,7 +22,7 @@ public class People{
      */
     public People(String strName) {
         this.strName = strName;
-        this.dMoney = 10;
+        this.dMoney = 1500;
     }
 
     /**

@@ -63,9 +63,6 @@ public class WinnerPageController{
 
         }
     }
-/Chat me SEXY BOY once you get this update
-
-
 
     public void initialize(Player[] players, ArrayList<String> playerAvatars){
         this. players = new ArrayList<Player>();

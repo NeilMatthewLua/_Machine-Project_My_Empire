@@ -9,7 +9,6 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,10 +23,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import javafx.util.Duration;
-
+import javafx.event.EventHandler;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
@@ -110,7 +109,7 @@ public class GamePlayController  {
   @FXML
     private StackPane choosePane;
   @FXML
-    private StackPane endGamePane;
+  private StackPane endGamePane;
   @FXML
     private AnchorPane tradeAnchorPane;
   @FXML
@@ -362,8 +361,8 @@ public class GamePlayController  {
     @FXML private ImageView doubleRent;
 
   @FXML private ImageView Zoomed;
-    //TODO Use this for implementing Card Zoomed
-    @FXML private ImageView CardZoomed;
+    @FXML private ImageView zoomedChance;
+    @FXML private Label zoomedCardApplicable;
     @FXML private Label closeZoomed;
     @FXML private Label ownerZoom;
     @FXML private Label footTrafficZoom;
@@ -405,9 +404,14 @@ public class GamePlayController  {
     @FXML private ImageView traderDecrease10;
     @FXML private Label trader;
     @FXML private Label traderOffer;
-  private ArrayList<ImageView> traderDevelopment;
+    private ArrayList<ImageView> traderDevelopment;
+
 
     private boolean isTrade;
+    private boolean isCardSet5;
+    private boolean isRenovate;
+    @FXML private Label renovationLabel;
+    @FXML private Label renovationPrice;
 
 
     @FXML private ImageView playerOneAvatar;
@@ -459,7 +463,22 @@ public class GamePlayController  {
             {"Community Service","../Images/SmallSpaces/placeholder.png","../Images/BigSpaces/Community.png"},
             {"Jail","../Images/SmallSpaces/placeholder.png","../Images/BigSpaces/Jail.png"},
             {"Free Parking","../Images/SmallSpaces/placeholder.png","../Images/BigSpaces/FreeParking.png"},
-};
+    };
+    private String[][] chanceUrls = {
+            {"../Images/ChanceCards/Group1/GetOutOfJail.png"},
+
+            {"../Images/ChanceCards/Group2/ProceedToProperty.png","../Images/ChanceCards/Group2/ProceedToUtility.png","../Images/ChanceCards/Group2/ProceedToRailroad.png"},
+
+            {"../Images/ChanceCards/Group3/BankDividend.png","../Images/ChanceCards/Group3/TaxRefund.png","../Images/ChanceCards/Group3/AdvanceToStart.png"
+                    ,"../Images/ChanceCards/Group3/Birthday.png", "../Images/ChanceCards/Group3/Competition.png",},
+
+            {"../Images/ChanceCards/Group4/GoToJail.png","../Images/ChanceCards/Group4/TakeTripProperty.png"},
+
+            {"../Images/ChanceCards/Group5/DoubleRent.png","../Images/ChanceCards/Group5/Renovation.png","../Images/ChanceCards/Group5/DilapidatedHouse.png",
+                    "../Images/ChanceCards/Group5/IncreaseUtilRail.png","../Images/ChanceCards/Group5/DecreaseUtilRail.png"},
+
+            {"../Images/ChanceCards/Group6/CommunityDevelopment.png","../Images/ChanceCards/Group6/Taxes.png"}
+    };
 
   private GameBoard gameBoard;
   private int nTurnCounter = 0;
@@ -481,10 +500,12 @@ public class GamePlayController  {
     int nTotal = gameBoard.getPlayers().length;// Total number of players
 
     if (e.getSource() == rollButton) {
+
       double[] temp = new double[nTotal + 1]; //temporary holder of everyone's(including bank's) money before the chance card takes action
       int[] nIndex = new int[2]; //holds the which players/bank's money has been changed
       int j = 0; //index of the players/bank whose money was changed
       int i;
+
       for( i = 0; i < nTotal; i ++){
         temp[i] = gameBoard.getPlayers()[i].getMoney(); //holds the money of everybody on a temp array
       }
@@ -511,11 +532,6 @@ public class GamePlayController  {
       //updates the labels in the GUI if there are changes with their money
       if(j == 1)
         updateMoney(nIndex[0],nIndex[1]);
-
-//      String[] strings = event.split("\n");
-//        System.out.println(event);
-//      if(strings.length > 1)
-//           delayStart(strings);
 
       turnLabel.setText(gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + "'s Turn!");
 
@@ -583,7 +599,8 @@ public class GamePlayController  {
         Card tempCard = gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1 );
         eventLabel.setText(event);
         gameBoard.getEvents().add(event);
-
+        displayChanceCard(tempCard);
+        System.out.println(tempCard.getDescription());
         if(tempCard instanceof CardSet_1){
           keepPane.setVisible(true);
         }
@@ -614,23 +631,24 @@ public class GamePlayController  {
         //updates the labels in the GUI if there are changes with their money
         if(j == 1)
           updateMoney(nIndex[0],nIndex[1]);
-
         checkWin();
-
       }
 
     }
     else if (e.getSource() == keepButton) {
-        keepButton.setVisible(false);
+        hideChanceCard();
         keepPane.setVisible(false);
         endPane.setVisible(true);
     }
     else if (e.getSource() == discardButton) {
+        hideChanceCard();
+        gameBoard.addCardDiscard(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1));
         gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().remove(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1);
         discardPane.setVisible(false);
         endPane.setVisible(true);
     }
     else if (e.getSource() == useButton){
+      hideChanceCard();
       usePane.setVisible(false);
       double[] temp = new double[nTotal + 1]; //temporary holder of everyone's(including bank's) money before the chance card takes action
       int[] nIndex = new int[2]; //holds the which players/bank's money has been changed
@@ -645,7 +663,6 @@ public class GamePlayController  {
 
       String event = "";
       Card tempCard = gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1 );
-
       if(tempCard instanceof CardSet_2){
         event += tempCard.useCard(gameBoard.getPlayers()[nTurnCounter % nTotal], gameBoard);
         updatePlayerPositions();
@@ -782,64 +799,37 @@ public class GamePlayController  {
           endPane.setVisible(true);
         }
       }
-      else if(tempCard instanceof CardSet_5){
-        if(tempCard.getIndex() >= 0 && tempCard.getIndex() <= 2){
+      else if(tempCard instanceof CardSet_5) {//CARDSET5
+        if (tempCard.getIndex() >= 0 && tempCard.getIndex() <= 2) {
           ArrayList<Property> tempArr = gameBoard.getPlayers()[nTurnCounter % nTotal].getOnlyProperty();
-          if(tempArr.size() > 0){
+          if (tempArr.size() > 0 && (tempCard.getIndex() == 0 || tempCard.getIndex() == 2)) {
+            isCardSet5 = true;
             setFalseVisible();
             chooseVisibleProperty(tempArr);
-            if(tempCard.getIndex() == 0 || tempCard.getIndex() == 2){
-              if(Zoomed.isVisible()){
-                choosePane.setVisible(true);
-              }
-              else if(closeZoomed.isVisible()){
-                choosePane.setVisible(true);
-              }
-              else
-              {
-                choosePane.setVisible(false);
-              }
-            }
-            else if(tempCard.getIndex() == 1){
-              ArrayList<Property> tempArr1 = gameBoard.getPlayers()[nTurnCounter % nTotal].getOnlyPropertyRenovate();
-              if(tempArr1.size() > 0){
-                setFalseVisible();
-                chooseVisibleProperty(tempArr1);
-                if(Zoomed.isVisible()){
-                  choosePane.setVisible(true);
-                }
-                else if(closeZoomed.isVisible()){
-                  choosePane.setVisible(true);
-                }
-                else
-                {
-                  choosePane.setVisible(false);
-                }
-              }
-              else{
-                //TODO SET ADDITIONAL LABEL "Not Applicable" in Card Desc
-                event +=  "No owned properties that can be renovated";
-                eventLabel.setText(event);
-                discardPane.setVisible(false);
-              }
-            }
-//            else{
-//              if(Zoomed.isVisible()){
-//                choosePane.setVisible(true);
-//              }
-//              else
-//              {
-//                choosePane.setVisible(false);
-//              }
-//            }
           }
-          else{
-            //TODO SET ADDITIONAL LABEL "Not Applicable" in Card Desc
-            event +=  "Not applicable. No owned properties.";
-            eventLabel.setText(event);
-            discardPane.setVisible(true);
+          else if (tempCard.getIndex() == 1) {
+            ArrayList<Property> tempArr1 = gameBoard.getPlayers()[nTurnCounter % nTotal].getOnlyPropertyRenovate();
+            if (tempArr1.size() > 0) {
+              isCardSet5 = true;
+              isRenovate = true;
+              setFalseVisible();
+              chooseVisibleProperty(tempArr1);
+            }
+            else {
+              zoomedCardApplicable.setVisible(true);
+              event += "No owned properties that can be renovated";
+              eventLabel.setText(event);
+              discardPane.setVisible(true);
+            }
           }
+         else {
+           zoomedCardApplicable.setVisible(true);
+          event += "Not applicable. No owned properties.";
+          eventLabel.setText(event);
+          discardPane.setVisible(true);
+         }
         }
+
         else if(tempCard.getIndex() == 3 || tempCard.getIndex() == 4){
           ArrayList<Utility> tempArr = gameBoard.getPlayers()[nTurnCounter % nTotal].getOnlyUtility();
           ArrayList<Railroad> tempArr2 = gameBoard.getPlayers()[nTurnCounter % nTotal].getOnlyRailroad();
@@ -847,39 +837,10 @@ public class GamePlayController  {
             setFalseVisible();
             chooseVisibleUtility(tempArr);
             chooseVisibleRailroad(tempArr2);
-//TODO REPLACE YOUR CARD ZOOMED HERE
-            if(Zoomed.isVisible()){
-              choosePane.setVisible(true);
-              System.out.println("ITS OPEN");
-              choosePane.setVisible(true);
-            }
-            else if(closeZoomed.isVisible()){
-              System.out.println("CLOSED");
-            }
-            else
-            {
-              choosePane.setVisible(false);
-            }
-//            if(tempCard.getIndex() == 3){
-//              if(Zoomed.isVisible()){
-//                choosePane.setVisible(true);
-//              }
-//              else
-//              {
-//                choosePane.setVisible(false);
-//              }
-//            }
-//            else{
-//              if(Zoomed.isVisible()){
-//                choosePane.setVisible(true);
-//              }
-//              else
-//              {
-//                choosePane.setVisible(false);
-//              }
-//            }
+            isCardSet5 = true;
           }
           else{
+            zoomedCardApplicable.setVisible(true);
             event +=  "Not applicable. No owned utilities / railroad.";
             eventLabel.setText(event);
             discardPane.setVisible(true);
@@ -908,13 +869,20 @@ public class GamePlayController  {
       if(j == 1)
         updateMoney(nIndex[0],nIndex[1]);
     }
-   else if (e.getSource() == chooseButton) {
-       String event = "";    
-       event += ((CardSet_5)gameBoard.getPlayers()[nTurnCounter & nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter & nTotal].getCards().size() - 1)).useCard(gameBoard.getPlayers()[nTurnCounter & nTotal],gameBoard);
-       eventLabel.setText(event);
-       gameBoard.getEvents().add(event);
-       endPane.setVisible(true);
-   }
+    else if (e.getSource() == chooseButton) {//CLICKCHOOSE
+      isRenovate = false;
+      isCardSet5 = false;
+      choosePane.setVisible(false);
+      openZoomed(e);
+      String event = "";
+      event += (gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1)).useCard(gameBoard.getPlayers()[nTurnCounter % nTotal],gameBoard);
+      setAllVisible();
+      updateMoney(nTurnCounter % nTotal,5);
+      eventLabel.setText(event);
+      gameBoard.getEvents().add(event);
+      endPane.setVisible(true);
+    }
+
     else if (e.getSource() == noTradeButton) {
       isTrade = false;
       tradePanel.setVisible(false);
@@ -942,15 +910,14 @@ public class GamePlayController  {
     else if (e.getSource() == yesTradeButton) {
       isTrade = false;
       tradePanel.setVisible(false);
-      setAllVisible();
       String event = "";
       event += gameBoard.getPlayers()[nTurnCounter % nTotal].trade(gameBoard,((Ownable)gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())), gameBoard.getPlayers()[nTurnCounter % nTotal].getChosen());
+      setAllVisible();
+      updateOwnerIcons();
       gameBoard.getEvents().add(event);
       eventLabel.setText(event);
       tradeAnchorPane.setVisible(false);
       endPane.setVisible(true);
-      updateOwnerIcons();
-      updatePlayerPositions();
     }
 
     else if (e.getSource() == purchaseButton) {
@@ -1106,8 +1073,7 @@ public class GamePlayController  {
           x.setY(30);
           x.show();
       }
-    //TODO FXML
-//      else if(e.getSource() == endGameButton){
+//          else if(e.getSource() == endGameButton){
 //      try{
 //        Stage stage = new Stage(StageStyle.UNDECORATED);
 //        FXMLLoader loader = new FXMLLoader();
@@ -1206,6 +1172,10 @@ public class GamePlayController  {
     else if(nPlayer2 == 5){
       money5.setText(String.valueOf(gameBoard.getBank().getMoney()));
     }
+    if(gameBoard.getBank().getMoney() <= 0){
+      gameBoard.setIsWin(true);
+    }
+    checkWin();
   }
 
   public void setFalseVisible() {
@@ -1258,6 +1228,18 @@ public class GamePlayController  {
       if(i < 28)
       owners.get(i).setVisible(true);
     }
+    updatePlayerPositions();
+  }
+
+  private void displayChanceCard(Card temp){
+      Image ig = new Image(getClass().getResourceAsStream(chanceUrls[temp.getGroup()][temp.getIndex()]));
+      zoomedChance.setImage(ig);
+      zoomedChance.setVisible(true);
+  }
+
+  private void hideChanceCard(){
+    zoomedCardApplicable.setVisible(false);
+    zoomedChance.setVisible(false);
   }
 
   public void openZoomed(MouseEvent e){
@@ -1273,8 +1255,25 @@ public class GamePlayController  {
         else {
           index = anchors.indexOf(e.getSource());
         }
-        if(gameBoard.getLand().get(index) instanceof Ownable)
+        if(gameBoard.getLand().get(index) instanceof Ownable){
+          doubleRent.setVisible(false);increase10.setVisible(false);decrease10.setVisible(false);increase50.setVisible(false);
+          for(int i = 0; i < ((Ownable)gameBoard.getLand().get(index)).getCardMultipliers().size();i++){//Loops through the card multipliers
+            int nIndex = ((Ownable)gameBoard.getLand().get(index)).getCardMultipliers().get(i).getIndex();
+            if(nIndex == 0){//Double Rent
+              doubleRent.setVisible(true);
+            }
+            else if(nIndex == 1){//Renovation
+              increase50.setVisible(true);
+            }
+            else if(nIndex == 2 || nIndex == 4){//Decrease/Dilapidated
+              decrease10.setVisible(true);
+            }
+            else if(nIndex == 3){//Increase10
+              increase10.setVisible(true);
+            }
+          }
           ownerZoom.setVisible(true);
+        }
         if(gameBoard.getLand().get(index) instanceof Property){
           for(int i = 0; i < developmentLevels.size();i++){
             if(((Property) gameBoard.getLand().get(index)).getDevelopment() == i)
@@ -1285,25 +1284,14 @@ public class GamePlayController  {
           playersZoom.setVisible(true);
           playersZoom.setText("" + gameBoard.getPlayers().length);
           footTrafficZoom.setVisible(true);
-          doubleRent.setVisible(false);increase10.setVisible(false);decrease10.setVisible(false);increase50.setVisible(false);
-          for(int i = 0; i < ((Property)gameBoard.getLand().get(index)).getCardMultipliers().size();i++){//Loops through the card multipliers
-            int nIndex = ((Property)gameBoard.getLand().get(index)).getCardMultipliers().get(i).getIndex();
-            if(nIndex == 1){//Double Rent
-              doubleRent.setVisible(true);
-            }
-            else if(nIndex == 2){//Renovation
-              increase50.setVisible(true);
-            }
-            else if(nIndex == 3 || nIndex == 5){//Decrease/Dilapidated
-              decrease10.setVisible(true);
-            }
-            else if(nIndex == 4){//Increase10
-              increase10.setVisible(true);
-            }
-          }
+        }
+        if(isRenovate == true){
+          renovationLabel.setVisible(true);
+          renovationPrice.setVisible(true);
         }
       }
-      else{
+      else {
+        choosePane.setVisible(false);
         for(int i = 0; i < developmentLevels.size();i++){
           developmentLevels.get(i).setVisible(false);
         }
@@ -1316,6 +1304,8 @@ public class GamePlayController  {
         decrease10.setVisible(false);
         doubleRent.setVisible(false);
         increase50.setVisible(false);
+        renovationLabel.setVisible(false);
+        renovationPrice.setVisible(false);
       }
     }
   }
@@ -1354,6 +1344,21 @@ public class GamePlayController  {
               ownerZoom.setText("None");
             }
           }
+        }
+      }
+      if(isCardSet5 == true){
+        choosePane.setVisible(true);
+        if(isRenovate == true){
+          double dRenovation = 0; //Renovation price
+          if (((Property)  gameBoard.getPlayers()[nTurnCounter % gameBoard.getPlayers().length].getChosen()).getDevelopment() >= 1) {//Calculates price of renovation
+            if ((((Property)  gameBoard.getPlayers()[nTurnCounter % gameBoard.getPlayers().length].getChosen()).getDevelopment() )== 5) {
+              dRenovation += 50;
+              dRenovation += ((((Property)  gameBoard.getPlayers()[nTurnCounter % gameBoard.getPlayers().length].getChosen()).getDevelopment()) - 1) * 25;
+            }
+            else
+              dRenovation += (((Property)  gameBoard.getPlayers()[nTurnCounter % gameBoard.getPlayers().length].getChosen()).getDevelopment()) * 25;
+          }
+          renovationPrice.setText(""+dRenovation);
         }
       }
     }
@@ -1439,48 +1444,49 @@ public class GamePlayController  {
     }
   }
 
-    public void checkWin(){
-      if(gameBoard.getIsWin()){
-        gameBoard.getEvents().add("Game Over");
-        //TODO THIS
-        //endGamePane.setVisible(true);
+  public void checkWin(){
+    if(gameBoard.getIsWin()){
+      gameBoard.getEvents().add("Game Over");
+      //TODO THIS
+      //endGamePane.setVisible(true);
+      try{
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/View/WinnerPage.fxml"));
+        Scene scene = new Scene(loader.load(),575,575);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.initModality(APPLICATION_MODAL);
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+          @Override
+          public void handle(WindowEvent event) {
+            event.consume();
+          }
+        });
+
+        ((WinnerPageController) loader.getController()).initialize(gameBoard.getPlayers(),playerAvatars);
+        stage.setX(350);
+        stage.setY(30);
+        stage.showAndWait();
+
         try{
-          Stage stage = new Stage();
-          FXMLLoader loader = new FXMLLoader();
-          loader.setLocation(getClass().getResource("/View/WinnerPage.fxml"));
-          Scene scene = new Scene(loader.load(),575,575);
-          stage.setScene(scene);
-          stage.setResizable(false);
-          stage.initModality(APPLICATION_MODAL);
-          stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-              event.consume();
-            }
-          });
-
-          ((WinnerPageController) loader.getController()).initialize(gameBoard.getPlayers(),playerAvatars);
-          stage.setX(350);
-          stage.setY(30);
-          stage.showAndWait();
-
-            try{
-              Stage currStage = (Stage) anchor1.getScene().getWindow();
-              FXMLLoader loaderNewGame = new FXMLLoader();
-              loaderNewGame.setLocation(getClass().getResource("/View/StartPage.fxml"));
-              Scene sceneNewGame = new Scene(loaderNewGame.load());
-              currStage.setScene(sceneNewGame);
-              currStage.show();
-            }
-            catch(IOException event){
-              System.out.println("Something happened");
-            }
-          }
-          catch(IOException event){
-            System.out.println("Something happened");
-          }
+          Stage currStage = (Stage) anchor1.getScene().getWindow();
+          FXMLLoader loaderNewGame = new FXMLLoader();
+          loaderNewGame.setLocation(getClass().getResource("/View/StartPage.fxml"));
+          Scene sceneNewGame = new Scene(loaderNewGame.load());
+          currStage.setScene(sceneNewGame);
+          currStage.show();
+        }
+        catch(IOException event){
+          System.out.println("Something happened");
+        }
+      }
+      catch(IOException event){
+        System.out.println("Something happened");
       }
     }
+  }
+
  // Run everything in this function whenever this view has been initialized
   public void initialize(Player[] players) {
     player1Spaces = new ArrayList<ImageView>();
@@ -1552,6 +1558,9 @@ public class GamePlayController  {
           Image image = new Image(getClass().getResourceAsStream(urls[j][1]));
           spaces.get(i).setGraphic(new ImageView(image));
           isFound = false;
+          if(gameBoard.getLand().get(i) instanceof Property){
+            //((Property) gameBoard.getLand().get(i)).setDevelopment(); //REMOVE THIS PENIS
+          }
         }
       }
     }
