@@ -15,7 +15,7 @@ public class Main extends Application {
         Font.loadFont(Main.class.getResource("/CSS/Fascinate-Regular.ttf").toExternalForm(),20);
         Parent root = FXMLLoader.load(getClass().getResource("/View/StartPage.fxml"));
         primaryStage.setTitle("My Empire");
-        primaryStage.setScene(new Scene(root, 1080, 620));
+        primaryStage.setScene(new Scene(root, 1080, 720));
         primaryStage.setResizable(false);
         primaryStage.show();
     }

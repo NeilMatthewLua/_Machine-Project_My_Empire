@@ -24,8 +24,8 @@ public class Jail extends Land {
     public String triggerEvent(GameBoard gameBoard, Player player){
         String event = "";
         player.setJail(true); //Player is put in jail
-        event += player.getName() + " was sent to Jail. " +
-                player.getName() + " will pay $50 next turn.";
+        event += player.getName() + " was sent to Jail. \n" +
+                player.getName() + " will pay $50 next turn.\n";
         return event;
     }
 }

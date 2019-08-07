@@ -808,6 +808,12 @@
             <Label id="actionButton" fx:id="chooseButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Choose" textFill="WHITE" />
          </children>
       </StackPane>
+      <StackPane fx:id="endGamePane" layoutX="778.0" layoutY="476.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="endGameButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="End Game" textFill="WHITE" />
+         </children>
+      </StackPane>
       <AnchorPane fx:id="tradeAnchorPane" layoutX="676.0" layoutY="416.0" prefHeight="200.0" prefWidth="359.0" visible="false">
          <children>
             <StackPane fx:id="yesTradePane" layoutX="23.0" layoutY="83.0" prefHeight="80.0" prefWidth="129.0">

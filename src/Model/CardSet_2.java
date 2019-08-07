@@ -36,7 +36,6 @@ public class CardSet_2 extends Card{
             Random rand = new Random();
             int nRandProperty = rand.nextInt(32);
             while(!(gameBoard.getLand().get(nRandProperty) instanceof Property)){//Loops until a property is found
-                System.out.println("BOBO " + gameBoard.getLand().get(nRandProperty));
                 nRandProperty = rand.nextInt(32);
             }
 

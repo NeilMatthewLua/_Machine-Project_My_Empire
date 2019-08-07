@@ -24,16 +24,15 @@ public class Tax extends Land {
         double dRent = 0;
         String space = "";
         String event = "";
-        if(this.getName().equalsIgnoreCase("Income Tax")){
+        if(this.getName().equalsIgnoreCase("Luxury Tax")){
             dRent = 75;
             space = " Luxury Tax Space";
         }
-        else if(this.getName().equalsIgnoreCase("Luxury Tax")){
+        else if(this.getName().equalsIgnoreCase("Income Tax")){
             dRent = ((player.getMoney() * .10) >= 200) ? player.getMoney() * .10 : 200;
             space = " Income Tax Space";
         }
         double dAmount = player.getMoney();
-        event += player.getName() + " landed on " + space + "\n";
         if(player.giveMoney(gameBoard.getBank(),dRent)){
             event += player.getName() + " paid " + dRent + " for" + space + ".";
         }

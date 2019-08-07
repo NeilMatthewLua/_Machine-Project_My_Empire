@@ -121,6 +121,13 @@ public class GamePlayController  {
   @FXML
     private AnchorPane playerPane4;
 
+  @FXML
+    private ArrayList<Label> playersMoney;
+  @FXML
+    private ArrayList<Label> playersName;
+  @FXML
+    private ArrayList<AnchorPane> playersPane;
+
     @FXML private Label space1;
     @FXML private Label space2;
     @FXML private Label space3;
@@ -419,7 +426,7 @@ public class GamePlayController  {
     @FXML private ImageView playerThreeAvatar;
     @FXML private ImageView playerFourAvatar;
 
-
+  private ArrayList<ImageView> playerAvatarIcons;
     private ArrayList<ImageView> player1Spaces;
     private ArrayList<ImageView> player2Spaces;
     private ArrayList<ImageView> player3Spaces;
@@ -517,6 +524,7 @@ public class GamePlayController  {
       eventLabel.setText(event);
       gameBoard.getEvents().add(event);
       updatePlayerPositions();
+      checkWin();
 
       j = 0;
       //goes through everybody's money to check whose were changed
@@ -552,7 +560,7 @@ public class GamePlayController  {
             //checks if that property is eligible for development
             if (gameBoard.getPlayers()[nTurnCounter % nTotal].eligibleDev(gameBoard)) {
               //Automatically develops the property if eligible
-              event = gameBoard.getPlayers()[nTurnCounter % nTotal].develop(gameBoard);
+              event += gameBoard.getPlayers()[nTurnCounter % nTotal].develop(gameBoard);
               eventLabel.setText(event);
               gameBoard.getEvents().add(event);
               endPane.setVisible(true);
@@ -610,7 +618,7 @@ public class GamePlayController  {
       //else, it's either Jail, Start, Tax, Community Service or Free Parking
       else {
         if(!(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Start)){
-          event = gameBoard.getPlayers()[nTurnCounter % nTotal].action(gameBoard); //performs the action
+          event += gameBoard.getPlayers()[nTurnCounter % nTotal].action(gameBoard) +"\n"; //performs the action
         }
 
         gameBoard.getEvents().add(event);
@@ -682,7 +690,7 @@ public class GamePlayController  {
             //checks if that property is eligible for development
             if (gameBoard.getPlayers()[nTurnCounter % nTotal].eligibleDev(gameBoard)) {
               //Automatically develops the property if eligible
-              event = gameBoard.getPlayers()[nTurnCounter % nTotal].develop(gameBoard);
+              event += gameBoard.getPlayers()[nTurnCounter % nTotal].develop(gameBoard);
               eventLabel.setText(event);
               gameBoard.getEvents().add(event);
               endPane.setVisible(true);
@@ -736,6 +744,7 @@ public class GamePlayController  {
         eventLabel.setText(event);
         gameBoard.getEvents().add(event);
         endPane.setVisible(true);
+        updatePlayerPositions();
         checkWin();
       }
       else if(tempCard instanceof  CardSet_4){
@@ -760,7 +769,7 @@ public class GamePlayController  {
               //checks if that property is eligible for development
               if (gameBoard.getPlayers()[nTurnCounter % nTotal].eligibleDev(gameBoard)) {
                 //Automatically develops the property if eligible
-                event = gameBoard.getPlayers()[nTurnCounter % nTotal].develop(gameBoard);
+                event += gameBoard.getPlayers()[nTurnCounter % nTotal].develop(gameBoard);
                 eventLabel.setText(event);
                 gameBoard.getEvents().add(event);
                 endPane.setVisible(true);
@@ -1073,71 +1082,45 @@ public class GamePlayController  {
           x.setY(30);
           x.show();
       }
-//          else if(e.getSource() == endGameButton){
-//      try{
-//        Stage stage = new Stage(StageStyle.UNDECORATED);
-//        FXMLLoader loader = new FXMLLoader();
-//        loader.setLocation(getClass().getResource("/View/WinnerPage.fxml"));
-//        Scene scene = new Scene(loader.load());
-//        stage.setScene(scene);
-//        //stage.setResizable(false);
-//        stage.initModality(APPLICATION_MODAL);
-//        ((WinnerPageController) loader.getController()).setPlayers(gameBoard.getPlayers());
-//        ((WinnerPageController) loader.getController()).setPlayerAvatars(playerAvatars);
-//        stage.setX(600);
-//        stage.setY(30);
-//        stage.showAndWait();
-//
-//        try{
-//          Stage currStage = (Stage) anchor1.getScene().getWindow();
-//          FXMLLoader loaderNewGame = new FXMLLoader();
-//          loaderNewGame.setLocation(getClass().getResource("/View/StartPage.fxml"));
-//          Scene sceneNewGame = new Scene(loaderNewGame.load());
-//          currStage.setScene(sceneNewGame);
-//          currStage.show();
-//        }
-//        catch(IOException event){
-//          System.out.println("Something happened");
-//        }
-//      }
-//      catch(IOException event){
-//        System.out.println("Something happened");
-//      }
-//    }
+          else if(e.getSource() == endGameButton){
+           try{
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/View/WinnerPage.fxml"));
+        Scene scene = new Scene(loader.load(),575,575);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.initModality(APPLICATION_MODAL);
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+          @Override
+          public void handle(WindowEvent event) {
+            event.consume();
+          }
+        });
+
+        ((WinnerPageController) loader.getController()).initialize(gameBoard.getPlayers(),playerAvatars);
+        stage.setX(350);
+        stage.setY(30);
+        stage.showAndWait();
+
+        try{
+          Stage currStage = (Stage) anchor1.getScene().getWindow();
+          FXMLLoader loaderNewGame = new FXMLLoader();
+          loaderNewGame.setLocation(getClass().getResource("/View/StartPage.fxml"));
+          Scene sceneNewGame = new Scene(loaderNewGame.load());
+          currStage.setScene(sceneNewGame);
+          currStage.show();
+        }
+        catch(IOException event){
+          System.out.println("Something happened");
+        }
+      }
+      catch(IOException event){
+        System.out.println("Something happened");
+      }
+    }
   }
 
-    private void delayStart(String[] string) {
-//      for(String a: string)
-//          System.out.println("D" + a);
-//        eventLabel.setText(string[0]);
-//        for(int i = 0; i < string.length; i++){
-//          int nIndex = i;
-//          PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
-//          pauseTransition.setOnFinished(e -> eventLabel.setText(string[nIndex]));
-//          pauseTransition.play();
-//      }
-
-//        i = 0;
-////        ScheduledExecutorService timer =
-////             Executors.newScheduledThreadPool(1);
-//        ScheduledExecutorService timer = Executors
-//                .newSingleThreadScheduledExecutor();
-//        timer.scheduleWithFixedDelay(new TimerTask() {
-//            @Override
-//            public void run() {
-//                Platform.runLater(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        if (i < string.length) {
-//                            eventLabel.setText(string[i]);
-//                            System.out.println("D");
-//                            i++;
-//                        }
-//                    }
-//                });
-//            }
-//        }, 0, 3L , TimeUnit.SECONDS);
-  }
 
   public void updateMoney(int nPlayer1, int nPlayer2){
      //Updates Player Money on the board
@@ -1445,54 +1428,27 @@ public class GamePlayController  {
   }
 
   public void checkWin(){
-    if(gameBoard.getIsWin()){
+    if(gameBoard.getIsWin()) {
+      rentPane.setVisible(false);
+      endPane.setVisible(false);
+      tradePane.setVisible(false);
+      purchasePane.setVisible(false);
       gameBoard.getEvents().add("Game Over");
-      //TODO THIS
-      //endGamePane.setVisible(true);
-      try{
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/View/WinnerPage.fxml"));
-        Scene scene = new Scene(loader.load(),575,575);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.initModality(APPLICATION_MODAL);
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-          @Override
-          public void handle(WindowEvent event) {
-            event.consume();
-          }
-        });
-
-        ((WinnerPageController) loader.getController()).initialize(gameBoard.getPlayers(),playerAvatars);
-        stage.setX(350);
-        stage.setY(30);
-        stage.showAndWait();
-
-        try{
-          Stage currStage = (Stage) anchor1.getScene().getWindow();
-          FXMLLoader loaderNewGame = new FXMLLoader();
-          loaderNewGame.setLocation(getClass().getResource("/View/StartPage.fxml"));
-          Scene sceneNewGame = new Scene(loaderNewGame.load());
-          currStage.setScene(sceneNewGame);
-          currStage.show();
-        }
-        catch(IOException event){
-          System.out.println("Something happened");
-        }
-      }
-      catch(IOException event){
-        System.out.println("Something happened");
-      }
+      endGamePane.setVisible(true);
     }
   }
 
  // Run everything in this function whenever this view has been initialized
   public void initialize(Player[] players) {
+      /NEW CHANGES EZCLAP
     player1Spaces = new ArrayList<ImageView>();
     player2Spaces = new ArrayList<ImageView>();
     player3Spaces = new ArrayList<ImageView>();
     player4Spaces = new ArrayList<ImageView>();
+    playersMoney = new ArrayList<Label>();
+    playersPane = new ArrayList<AnchorPane>();
+    playersName = new ArrayList<Label>();
+    playerAvatarIcons = new ArrayList<ImageView>();
 
 
     //Add in the imageviews of the player positions into their corresponding arraylists
@@ -1576,34 +1532,25 @@ public class GamePlayController  {
     traderDevelopment.add(traderDev1);traderDevelopment.add(traderDev2);traderDevelopment.add(traderDev3);
     traderDevelopment.add(traderDev4);traderDevelopment.add(traderDev5);traderDevelopment.add(traderDev6);
 
+    playersMoney.add(money1);playersMoney.add(money2);playersMoney.add(money3);playersMoney.add(money4);playersMoney.add(money5);
+    playersPane.add(playerPane1);playersPane.add(playerPane2);playersPane.add(playerPane3);playersPane.add(playerPane4);
+    playersName.add(player1);playersName.add(player2);playersName.add(player3);playersName.add(player4);
+    playerAvatarIcons.add(playerOneAvatar);playerAvatarIcons.add(playerTwoAvatar);playerAvatarIcons.add(playerThreeAvatar);playerAvatarIcons.add(playerFourAvatar);
     //Set isTrade to false, only true during trading
     isTrade = false;
 
-    //Initialize the GUI components of the players
-    player1.setText(players[0].getName());
-    Image ig = new Image(getClass().getResourceAsStream(playerAvatars.get(0)));
-    playerOneAvatar.setImage(ig);
-    money1.setText(Double.toString(players[0].getMoney()));
-    ig = new Image(getClass().getResourceAsStream(playerAvatars.get(1)));
-    playerTwoAvatar.setImage(ig);
-    player2.setText(players[1].getName());
-    money2.setText(Double.toString(players[1].getMoney()));
 
-    money5.setText(Double.toString(gameBoard.getBank().getMoney()));
-    if(gameBoard.getPlayers().length > 2){
-      playerPane3.setVisible(true);
-      ig = new Image(getClass().getResourceAsStream(playerAvatars.get(2)));
-      playerThreeAvatar.setImage(ig);
-      player3.setText(players[2].getName());
-      money3.setText(Double.toString(players[2].getMoney()));
-      if(gameBoard.getPlayers().length == 4) {
-        playerPane4.setVisible(true);
-        ig = new Image(getClass().getResourceAsStream(playerAvatars.get(3)));
-        playerFourAvatar.setImage(ig);
-        player4.setText(players[3].getName());
-        money4.setText(Double.toString(players[3].getMoney()));
-      }
+    for(int i = 0; i < players.length; i++){
+        System.out.println(players[i].getName());
+        playersName.get(i).setText(players[i].getName());
+        playersPane.get(i).setVisible(true);
+        playersMoney.get(i).setText(Double.toString(players[i].getMoney()));
+      Image ig = new Image(getClass().getResourceAsStream(playerAvatars.get(i)));
+      playerAvatarIcons.get(i).setImage(ig);
     }
+
+    playersMoney.get(4).setText(Double.toString(gameBoard.getBank().getMoney()));
+
 
     turnLabel.setText(gameBoard.getPlayers()[0].getName()+"'s Turn!");
   }

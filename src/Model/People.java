@@ -31,7 +31,7 @@ public class People{
      */
     public People(String strName, int nPlayers) {
         this.strName = strName;
-        this.dMoney = nPlayers * 2500;
+        this.dMoney = nPlayers * 10;
     }
 
     /**

@@ -29,7 +29,7 @@ public class Start extends Land{
         }
         else{
             event += player.getName() + " was given " + dAmount +
-                    ".Bank is bankrupt.";
+                    ".Bank is bankrupt.\n";
             gameBoard.setIsWin(true);
         }
         return event;

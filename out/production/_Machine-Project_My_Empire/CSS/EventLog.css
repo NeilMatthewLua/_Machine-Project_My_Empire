@@ -4,6 +4,7 @@
     -fx-font-family: Calibri;
     -fx-font-size: 15px;
     -fx-padding: 6 6 6 20;
+    -fx-wrap-text: true;
 }
 
 #anchorPane{
