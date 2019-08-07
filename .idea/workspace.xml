@@ -9,45 +9,13 @@
       <change afterPath="$PROJECT_DIR$/src/Model/Ownable.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/View/LandInit.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/CSS/EventLog.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/CSS/EventLog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/GamePlayController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/GamePlayController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/GamePlayController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/GamePlayController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/WinnerPageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/WinnerPageController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Card.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/CardSet_2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/CardSet_2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/CardSet_5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/CardSet_5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/CardSet_6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/CardSet_6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Community.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Community.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/GameBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/GameBoard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Jail.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Jail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Parking.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Parking.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/People.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/People.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Property.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Property.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Railroad.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Railroad.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Start.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Start.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Tax.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Tax.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Utility.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Utility.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/View/GamePlay.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/View/GamePlay.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/View/StartPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/View/StartPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CSS/EventLog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/CSS/EventLog.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Card.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Driver.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameBoard.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Land.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/CardSet_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/CardSet_2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Community.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Community.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Jail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Jail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Parking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Parking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/People.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/People.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Start.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Tax.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Tax.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/People.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Property.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/GamePlay.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/GamePlay.fxml" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -124,8 +92,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/GamePlayController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="1442" column="25" selection-start-line="1442" selection-start-column="25" selection-end-line="1442" selection-end-column="25" />
+            <state relative-caret-position="123">
+              <caret line="1294" column="25" selection-start-line="1294" selection-start-column="25" selection-end-line="1294" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -142,7 +110,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Model/Tax.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="408">
               <caret line="26" column="50" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
             </state>
           </provider>
@@ -151,7 +119,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Model/Community.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
+            <state relative-caret-position="357">
               <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
             </state>
           </provider>
@@ -169,7 +137,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Model/Jail.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
+            <state relative-caret-position="425">
               <caret line="27" column="62" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="62" />
             </state>
           </provider>
@@ -178,8 +146,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Model/Start.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="23" column="67" lean-forward="true" selection-start-line="23" selection-start-column="67" selection-end-line="23" selection-end-column="67" />
+            <state relative-caret-position="357">
+              <caret line="23" column="67" selection-start-line="23" selection-start-column="67" selection-end-line="23" selection-end-column="67" />
             </state>
           </provider>
         </entry>
@@ -224,8 +192,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Jail</find>
-      <find>roll</find>
       <find>isWin</find>
       <find>checkWin</find>
       <find>checkWin(){</find>
@@ -235,7 +201,6 @@
       <find>WInnerPageControl</find>
       <find>layerAvatars</find>
       <find>.roll</find>
-      <find>updateMoney(</find>
       <find>System</find>
       <find>WinnerPage</find>
       <find>initializeCards</find>
@@ -254,6 +219,9 @@
       <find>CardSet_2</find>
       <find>playerFourAvatar</find>
       <find>&lt;Label&gt;</find>
+      <find>updateMoney(</find>
+      <find>Double</find>
+      <find>temp =</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -330,6 +298,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -370,8 +340,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -519,12 +487,13 @@
       <workItem from="1565055371863" duration="4187000" />
       <workItem from="1565090089349" duration="8786000" />
       <workItem from="1565137585620" duration="2440000" />
-      <workItem from="1565156991478" duration="1037000" />
+      <workItem from="1565156991478" duration="1519000" />
+      <workItem from="1565158959896" duration="774000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="188066000" />
+    <option name="totallyTimeSpent" value="189322000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -539,7 +508,7 @@
     <frame x="12" y="0" width="1174" height="688" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.18312387" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.18671454" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -592,12 +561,12 @@
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/View/ViewInit.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Main.class" />
     <entry file="file://$PROJECT_DIR$/src/Images/GamePlay.png">
@@ -611,12 +580,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/View/GamePlay1.fxml" />
     <entry file="file://$PROJECT_DIR$/src/View/StartPage.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CSS/StartStyle.css">
       <provider selected="true" editor-type-id="text-editor">
@@ -626,12 +595,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/View/EventLog.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="239" selection-start-line="8" selection-start-column="239" selection-end-line="8" selection-end-column="239" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Model/Model/Player.class">
       <provider selected="true" editor-type-id="text-editor" />
@@ -644,12 +613,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/View/LandInit.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4352">
           <caret line="256" column="147" selection-start-line="256" selection-start-column="147" selection-end-line="256" selection-end-column="147" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/lang/Thread.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -731,12 +700,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/View/GamePlay.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="311" lean-forward="true" selection-start-line="9" selection-start-column="266" selection-end-line="9" selection-end-column="311" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Model/CardSet_1.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -804,12 +773,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/View/WinnerPage.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="247" selection-start-line="8" selection-start-column="247" selection-end-line="8" selection-end-column="247" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Model/Player.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -849,10 +818,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/GamePlayController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="1294" column="25" selection-start-line="1294" selection-start-column="25" selection-end-line="1294" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CSS/EventLog.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/Tax.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="26" column="50" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/Community.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Model/Parking.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/Jail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="27" column="62" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/Start.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="23" column="67" selection-start-line="23" selection-start-column="67" selection-end-line="23" selection-end-column="67" />
         </state>
       </provider>
     </entry>
@@ -874,48 +885,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="867">
           <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/Jail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="27" column="62" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/Start.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="23" column="67" lean-forward="true" selection-start-line="23" selection-start-column="67" selection-end-line="23" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/Community.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/Tax.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="26" column="50" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CSS/EventLog.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/GamePlayController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="1442" column="25" selection-start-line="1442" selection-start-column="25" selection-end-line="1442" selection-end-column="25" />
         </state>
       </provider>
     </entry>

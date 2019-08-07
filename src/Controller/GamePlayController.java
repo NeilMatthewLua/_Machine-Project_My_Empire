@@ -508,16 +508,6 @@ public class GamePlayController  {
 
     if (e.getSource() == rollButton) {
 
-      double[] temp = new double[nTotal + 1]; //temporary holder of everyone's(including bank's) money before the chance card takes action
-      int[] nIndex = new int[2]; //holds the which players/bank's money has been changed
-      int j = 0; //index of the players/bank whose money was changed
-      int i;
-
-      for( i = 0; i < nTotal; i ++){
-        temp[i] = gameBoard.getPlayers()[i].getMoney(); //holds the money of everybody on a temp array
-      }
-      temp[i] = gameBoard.getBank().getMoney();
-
       rollPane.setVisible(false);
 
       String event = gameBoard.getPlayers()[nTurnCounter % nTotal].roll(gameBoard);
@@ -525,21 +515,7 @@ public class GamePlayController  {
       gameBoard.getEvents().add(event);
       updatePlayerPositions();
       checkWin();
-
-      j = 0;
-      //goes through everybody's money to check whose were changed
-      for( i = 0; i < nTotal; i ++){
-        if(temp[i] != gameBoard.getPlayers()[i].getMoney()){
-          nIndex[j] = i;    //holds their index in an array
-          j++;
-        }
-      }
-      if(temp[i] != gameBoard.getBank().getMoney()) //checks the bank's value changed
-        nIndex[j] = 5;
-
-      //updates the labels in the GUI if there are changes with their money
-      if(j == 1)
-        updateMoney(nIndex[0],nIndex[1]);
+      updateMoney();
 
       turnLabel.setText(gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + "'s Turn!");
 
@@ -624,21 +600,7 @@ public class GamePlayController  {
         gameBoard.getEvents().add(event);
         eventLabel.setText(event);
         endPane.setVisible(true);
-
-        j = 0;
-        //goes through everybody's money to check whose were changed
-        for( i = 0; i < nTotal; i ++){
-          if(temp[i] != gameBoard.getPlayers()[i].getMoney()){
-            nIndex[j] = i;    //holds their index in an array
-            j++;
-          }
-        }
-        if(temp[i] != gameBoard.getBank().getMoney()) //checks the bank's value changed
-          nIndex[j] = 5;
-
-        //updates the labels in the GUI if there are changes with their money
-        if(j == 1)
-          updateMoney(nIndex[0],nIndex[1]);
+        updateMoney();
         checkWin();
       }
 
@@ -658,16 +620,6 @@ public class GamePlayController  {
     else if (e.getSource() == useButton){
       hideChanceCard();
       usePane.setVisible(false);
-      double[] temp = new double[nTotal + 1]; //temporary holder of everyone's(including bank's) money before the chance card takes action
-      int[] nIndex = new int[2]; //holds the which players/bank's money has been changed
-      int j = 0; //index of the players/bank whose money was changed
-      int i;
-
-      for( i = 0; i < nTotal; i ++){
-        temp[i] = gameBoard.getPlayers()[i].getMoney(); //holds the money of everybody on a temp array
-      }
-      temp[i] = gameBoard.getBank().getMoney();
-
 
       String event = "";
       Card tempCard = gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1 );
@@ -863,20 +815,7 @@ public class GamePlayController  {
         endPane.setVisible(true);
         checkWin();
       }
-
-      //goes through everybody's money to check whose were changed
-      for( i = 0; i < nTotal; i ++){
-        if(temp[i] != gameBoard.getPlayers()[i].getMoney()){
-          nIndex[j] = i;    //holds their index in an array
-          j++;
-        }
-      }
-      if(temp[i] != gameBoard.getBank().getMoney()) //checks the bank's value changed
-        nIndex[j] = 5;
-
-      //updates the labels in the GUI if there are changes with their money
-      if(j == 1)
-        updateMoney(nIndex[0],nIndex[1]);
+        updateMoney();
     }
     else if (e.getSource() == chooseButton) {//CLICKCHOOSE
       isRenovate = false;
@@ -886,7 +825,7 @@ public class GamePlayController  {
       String event = "";
       event += (gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1)).useCard(gameBoard.getPlayers()[nTurnCounter % nTotal],gameBoard);
       setAllVisible();
-      updateMoney(nTurnCounter % nTotal,5);
+      updateMoney();
       eventLabel.setText(event);
       gameBoard.getEvents().add(event);
       endPane.setVisible(true);
@@ -935,7 +874,7 @@ public class GamePlayController  {
       eventLabel.setText(event);
       updateOwnerIcons();
       purchasePane.setVisible(false);
-      updateMoney(nTurnCounter % nTotal, 5);
+      updateMoney();
     }
     else if(e.getSource() == tradeButton) {
       ArrayList<Property> tempArr = gameBoard.getPlayers()[nTurnCounter % nTotal].getOnlyProperty();
@@ -1046,7 +985,7 @@ public class GamePlayController  {
         if(gameBoard.getPlayers()[i] == tempPlayer)
            nIndex = i;
 
-      updateMoney(nTurnCounter % nTotal, nIndex);
+      updateMoney();
       checkWin();
       rentPane.setVisible(false);
       tradePane.setVisible(false);
@@ -1122,42 +1061,48 @@ public class GamePlayController  {
   }
 
 
-  public void updateMoney(int nPlayer1, int nPlayer2){
+  public void updateMoney(){
      //Updates Player Money on the board
-    if(nPlayer1 == 0){
-      money1.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
-    }
-    else if(nPlayer1 == 1){
-      money2.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
-    }
-    else if(nPlayer1 == 2){
-      money3.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
-    }
-    else if(nPlayer1 == 3){
-      money4.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
-    }
-    else if(nPlayer1 == 5){
-      money5.setText(String.valueOf(gameBoard.getBank().getMoney()));
-    }
+//    if(nPlayer1 == 0){
+//      money1.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
+//    }
+//    else if(nPlayer1 == 1){
+//      money2.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
+//    }
+//    else if(nPlayer1 == 2){
+//      money3.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
+//    }
+//    else if(nPlayer1 == 3){
+//      money4.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
+//    }
+//    else if(nPlayer1 == 5){
+//      money5.setText(String.valueOf(gameBoard.getBank().getMoney()));
+//    }
+//
+//    if(nPlayer2 == 0){
+//      money1.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
+//    }
+//    else if(nPlayer2 == 1){
+//      money2.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
+//    }
+//    else if(nPlayer2 == 2){
+//      money3.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
+//    }
+//    else if(nPlayer1 == 3){
+//        money4.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
+//    }
+//    else if(nPlayer2 == 5){
+//      money5.setText(String.valueOf(gameBoard.getBank().getMoney()));
+//    }
+//    if(gameBoard.getBank().getMoney() <= 0){
+//      gameBoard.setIsWin(true);
+//    }
+    int i = 0;
+    for(i = 0; i < gameBoard.getPlayers().length; i++)
+      playersMoney.get(i).setText(Double.toString(gameBoard.getPlayers()[i].getMoney()));
 
-    if(nPlayer2 == 0){
-      money1.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
-    }
-    else if(nPlayer2 == 1){
-      money2.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
-    }
-    else if(nPlayer2 == 2){
-      money3.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
-    }
-    else if(nPlayer1 == 3){
-        money4.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
-    }
-    else if(nPlayer2 == 5){
-      money5.setText(String.valueOf(gameBoard.getBank().getMoney()));
-    }
-    if(gameBoard.getBank().getMoney() <= 0){
-      gameBoard.setIsWin(true);
-    }
+    playersMoney.get(4).setText(Double.toString(gameBoard.getBank().getMoney()));
+
     checkWin();
   }
 
@@ -1440,7 +1385,7 @@ public class GamePlayController  {
 
  // Run everything in this function whenever this view has been initialized
   public void initialize(Player[] players) {
-      /NEW CHANGES EZCLAP
+
     player1Spaces = new ArrayList<ImageView>();
     player2Spaces = new ArrayList<ImageView>();
     player3Spaces = new ArrayList<ImageView>();
@@ -1539,14 +1484,14 @@ public class GamePlayController  {
     //Set isTrade to false, only true during trading
     isTrade = false;
 
-
-    for(int i = 0; i < players.length; i++){
+    i = 0;
+    for(i = 0; i < players.length; i++){
         System.out.println(players[i].getName());
         playersName.get(i).setText(players[i].getName());
         playersPane.get(i).setVisible(true);
         playersMoney.get(i).setText(Double.toString(players[i].getMoney()));
-      Image ig = new Image(getClass().getResourceAsStream(playerAvatars.get(i)));
-      playerAvatarIcons.get(i).setImage(ig);
+        Image ig = new Image(getClass().getResourceAsStream(playerAvatars.get(i)));
+        playerAvatarIcons.get(i).setImage(ig);
     }
 
     playersMoney.get(4).setText(Double.toString(gameBoard.getBank().getMoney()));
