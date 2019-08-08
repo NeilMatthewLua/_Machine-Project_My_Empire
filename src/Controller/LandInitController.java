@@ -10,11 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,8 +19,11 @@ import java.util.ResourceBundle;
 
 public class LandInitController implements Initializable {
 
+    //Background
     @FXML private AnchorPane background;
 
+    //Here are the different Labels for the land spaces the player
+    //sees on the right side of the screen
     @FXML private Label Almond;
     @FXML private Label Kasoy;
     @FXML private Label Rodeo;
@@ -42,21 +42,19 @@ public class LandInitController implements Initializable {
     @FXML private Label Galaxy;
     @FXML private Label Ninth;
     @FXML private Label Fifth;
-
     @FXML private Label North;
     @FXML private Label South;
     @FXML private Label Metro;
-
     @FXML private Label Water;
     @FXML private Label Electric;
-
     @FXML private Label Chance1;
     @FXML private Label Chance2;
     @FXML private Label Chance3;
-
     @FXML private Label Luxury;
     @FXML private Label Income;
 
+    //The empty label spaces on the board which take on the text from the labels
+    //Above
     @FXML private Label empty1;
     @FXML private Label empty2;
     @FXML private Label empty3;
@@ -86,6 +84,7 @@ public class LandInitController implements Initializable {
     @FXML private Label empty27;
     @FXML private Label empty28;
 
+    //The inidivudal clear button that appear when user hovers over a land space
     @FXML private Label delete1;
     @FXML private Label delete2;
     @FXML private Label delete3;
@@ -115,15 +114,20 @@ public class LandInitController implements Initializable {
     @FXML private Label delete27;
     @FXML private Label delete28;
 
+    //Label which shows the text of currently selected property
     @FXML private Label currentSelected;
+    //Play label when spaces have been filled
     @FXML private Label Play;
+    //Label which clears out all land spaces
     @FXML private Label ClearAll;
+    //Image of the zoomed land space
     @FXML private ImageView Zoomed;
     @FXML private Label closeZoomed;
     @FXML private Label ownerZoom;
     @FXML private Label footTrafficZoom;
     @FXML private Label playersZoom;
 
+    //The individual anchor panes which hold the labels of the empty spaces
     @FXML private AnchorPane anchor1;
     @FXML private AnchorPane anchor2;
     @FXML private AnchorPane anchor3;
@@ -154,11 +158,15 @@ public class LandInitController implements Initializable {
     @FXML private AnchorPane anchor28;
 
     private GameBoard gameBoard;
+    //Contains the empty spaces
     private ArrayList<Label> emptySpaces;
+    //Contains the spaces which can be placed on the baord
     private ArrayList<Label> possibleSpaces;
+    //Contains the different panes
     private ArrayList<AnchorPane> panes;
+    //Contains the clear buttons
     private ArrayList<Label> deleteLabels;
-
+    //Contains the urls of the player avatars
     private ArrayList<String> playerAvatars;
     private String[][] urls = {
             {"Almond Drive","../Images/SmallSpaces/Almond.png","../Images/BigSpaces/Almond.png"},
@@ -190,6 +198,7 @@ public class LandInitController implements Initializable {
             {"Chance","../Images/SmallSpaces/Chance.png","../Images/BigSpaces/Chance.png"},
             {"Chance","../Images/SmallSpaces/Chance.png","../Images/BigSpaces/Chance.png"},
     };
+    //Temporary container of the currently space's text
     private Label current;
 
     public void setGameBoard(GameBoard gameBoard){
@@ -203,7 +212,9 @@ public class LandInitController implements Initializable {
         }
     }
 
-    public boolean isPlacable(Label label){//Checks if label is placable
+    //Check if the label clicked can be placed
+    public boolean isPlacable(Label label){
+        //Checks if the label clicked is a possible space
         for(int i = 0; i < possibleSpaces.size(); i++){
             if(label == possibleSpaces.get(i))
                 return true;
@@ -211,38 +222,46 @@ public class LandInitController implements Initializable {
         return false;
     }
 
+    //When player hovers over a possible space then bring it to front
     @FXML
     public void hover(MouseEvent e){
         ((Label) e.getSource()).toFront();
     }
 
+    //When hovered off then send it to the back
     @FXML
     public void hoverOff(MouseEvent e){
         ((Label) e.getSource()).toBack();
     }
 
+    //Shows clear button when hovered over a space in the board
     @FXML
-    public void hoverPaneIn(MouseEvent e){//Shows clear button when hovered over a space in the board
+    public void hoverPaneIn(MouseEvent e){
         if(!(emptySpaces.get(panes.indexOf(e.getSource())).getText().equalsIgnoreCase("Empty"))){
             deleteLabels.get(panes.indexOf(e.getSource())).setVisible(true);
         }
     }
 
+    //Hides the clear button when hovered away
     @FXML
-    public void hoverPaneOut(MouseEvent e){//Hides the button when hovered away
+    public void hoverPaneOut(MouseEvent e){
         if(deleteLabels.get(panes.indexOf(e.getSource())).isVisible())
             deleteLabels.get(panes.indexOf(e.getSource())).setVisible(false);
     }
 
+    //When user clicks a possible space
     @FXML
-    public void chooseSpace(MouseEvent e) {//
-        if(e.getButton() == MouseButton.PRIMARY){//Selects current space when left clicked
+    public void chooseSpace(MouseEvent e) {
+        //Selects current space when left clicked
+        if(e.getButton() == MouseButton.PRIMARY){
             if (isPlacable((Label) e.getSource())) {
                 current = (Label) e.getSource();
                 currentSelected.setText(possibleSpaces.get(possibleSpaces.indexOf(current)).getText());
             }
         }
-        else if(e.getButton() == MouseButton.SECONDARY){//Zooms into the property when right clicked
+        //Zooms into the property when right clicked
+        else if(e.getButton() == MouseButton.SECONDARY){
+            //If no zoomed image is shown
             if(!Zoomed.isVisible()){
                 if(!((Label)e.getSource()).getText().equalsIgnoreCase("Empty")){
                     boolean isFound = true;
@@ -259,14 +278,16 @@ public class LandInitController implements Initializable {
                 }
                 openZoomed(e);
             }
+            //If a zoomed image is shown then close it
             else{
                 closeZoomed(e);
             }
         }
     }
 
+    //Closes zoomed space
     @FXML
-    public void closeZoomed(MouseEvent e){//Closes zoomed space
+    public void closeZoomed(MouseEvent e){
         if(Zoomed.isVisible()){
             closeZoomed.setVisible(false);
             Zoomed.setVisible(false);
@@ -276,16 +297,19 @@ public class LandInitController implements Initializable {
         }
     }
 
+    //Opens zoomed space
     @FXML
-    public void openZoomed(MouseEvent e){//Opens zoomed space
+    public void openZoomed(MouseEvent e){
         if(!Zoomed.isVisible()){
             closeZoomed.setVisible(true);
             Zoomed.setVisible(true);
             boolean isFound = true;
+            //Loop through the urls to find the appropriate url based on the name
             for(int i = 0; (i < urls.length - 5) && isFound ;i++){
                 if(((Label)e.getSource()).getText().equalsIgnoreCase(urls[i][0])){
                     ownerZoom.setVisible(true);
                     isFound = false;
+                    //If image to be zoomed is a property then show additional labels
                     if(i <= 17){
                         playersZoom.setVisible(true);
                         playersZoom.setText("" + gameBoard.getPlayers().length);
@@ -296,9 +320,12 @@ public class LandInitController implements Initializable {
         }
     }
 
+    //Adding spaces to the board or zooming into the spaces on the board
     @FXML
     public void addSpace(MouseEvent e){
-        if(e.getButton() == MouseButton.PRIMARY){//When left clicked
+        //When left clicked
+        if(e.getButton() == MouseButton.PRIMARY){
+            //You can only add non-corner spaces
             if(!(((Label)e.getSource()).getText().equalsIgnoreCase("Start") || ((Label)e.getSource()).getText().equalsIgnoreCase("Community") ||
                     ((Label)e.getSource()).getText().equalsIgnoreCase("Jail") || ((Label)e.getSource()).getText().equalsIgnoreCase("Free Parking"))){
                 if(current != null && (emptySpaces.get(emptySpaces.indexOf((e.getSource()))).getText().equalsIgnoreCase("Empty"))){
@@ -318,8 +345,6 @@ public class LandInitController implements Initializable {
                     currentSelected.setText("Nothing Selected");
                 }
 
-
-
                 boolean isValid = true;
                 for(int i = 0; i < emptySpaces.size() && isValid; i++){//Check if there are empty spaces left
                     if(emptySpaces.get(i).getText().equalsIgnoreCase("Empty")){
@@ -332,7 +357,9 @@ public class LandInitController implements Initializable {
                 }
             }
         }
-        else if(e.getButton() == MouseButton.SECONDARY) {//If right click then zoom
+        //If right click then zoom
+        else if(e.getButton() == MouseButton.SECONDARY) {
+            //Non-corner spaces
             if (!(((Label) e.getSource()).getText().equalsIgnoreCase("Start") || ((Label) e.getSource()).getText().equalsIgnoreCase("Community") ||
                     ((Label) e.getSource()).getText().equalsIgnoreCase("Jail") || ((Label) e.getSource()).getText().equalsIgnoreCase("Free Parking"))) {
                 if (!Zoomed.isVisible()) {
@@ -353,7 +380,9 @@ public class LandInitController implements Initializable {
                     closeZoomed(e);
                 }
             }
+            //For the corner spaces
             else{
+                //If no image is displayed then show a zoomed image
                 if (!Zoomed.isVisible()) {
                     if(((Label) e.getSource()).getText().equalsIgnoreCase("Start")){
                         Image ig = new Image(getClass().getResourceAsStream("../Images/BigSpaces/Start.png"));
@@ -372,15 +401,19 @@ public class LandInitController implements Initializable {
                         Zoomed.setImage(ig);
                     }
                     openZoomed(e);
-                } else {
+                }
+                //If an image is displayed then close the zoom
+                else {
                     closeZoomed(e);
                 }
             }
         }
     }
 
+    //Assigned to individual clear button to clear their respective tiles
     @FXML
     public void deleteSpace(MouseEvent e){
+        //If the chosen space is not empty then clear the land space on that tile
         if(!(emptySpaces.get(deleteLabels.indexOf(e.getSource())).getText().equalsIgnoreCase("Empty"))){
             Image image = new Image(getClass().getResourceAsStream("../Images/SmallSpaces/Empty.png"));
             emptySpaces.get(deleteLabels.indexOf(e.getSource())).setGraphic(new ImageView(image));
@@ -409,6 +442,7 @@ public class LandInitController implements Initializable {
                     }
                 }
             }
+            //Set it to an empty space again
             emptySpaces.get(deleteLabels.indexOf(e.getSource())).setText("Empty");
             boolean isEmptyBoard= true;
             for(int i = 0; i < emptySpaces.size() && isEmptyBoard; i++){//Check if there are empty spaces left
@@ -416,6 +450,7 @@ public class LandInitController implements Initializable {
                     isEmptyBoard = false;
                 }
             }
+            //Check if board is empty then clear all button is invisible
             if(isEmptyBoard){
                 ClearAll.setVisible(false);
             }
@@ -424,8 +459,10 @@ public class LandInitController implements Initializable {
         }
     }
 
+
+    //Empties all the properties on the board
     @FXML
-    public void clearAll(MouseEvent e){//Empties all the properties on the board
+    public void clearAll(MouseEvent e){
         for(int i = 0; i < emptySpaces.size(); i++){
             if(!(emptySpaces.get(i).getText().equalsIgnoreCase("Empty"))){
                 boolean isFound = true;
@@ -463,14 +500,17 @@ public class LandInitController implements Initializable {
         closeZoomed(e);
     }
 
+    //Randomizes the positions of the spaces on the board
     @FXML
-    public void randomize(MouseEvent e){//Randomizes the positions of the spaces on the board
+    public void randomize(MouseEvent e){
         gameBoard.randomizeLand();
         ArrayList<Land> randomizedLand = new ArrayList<Land>(gameBoard.getLand());
         randomizedLand.remove(0);
         randomizedLand.remove(7);
         randomizedLand.remove(14);
         randomizedLand.remove(21);
+
+        //Copy the land from the randomized land into the visual board
         for(int i = 0; i < randomizedLand.size();i++) {
             boolean isFound = true;
             for (int j = 0; j < possibleSpaces.size() && isFound; j++)
@@ -506,14 +546,17 @@ public class LandInitController implements Initializable {
 
     @FXML
     public void play(MouseEvent e){
+        //Make a temporary array for unsorted land
         ArrayList<Land> unsortedLand = new ArrayList<>(gameBoard.getLand());
+        //Remove the corners
         unsortedLand.remove(0);
         unsortedLand.remove(7);
         unsortedLand.remove(14);
         unsortedLand.remove(21);
         ArrayList<Land> finalLand = new ArrayList<>();
 
-        for(int i = 0; i < emptySpaces.size();i++){//Retrieve the land at the spaces on the visual board
+        //Retrieve the land at the spaces on the visual board and add it to the board
+        for(int i = 0; i < emptySpaces.size();i++){
             boolean isFound = true;
             for(int j = 0; j < 28 && isFound;j++)
                 if(unsortedLand.get(j).getName().equalsIgnoreCase(emptySpaces.get(i).getText())){
@@ -529,6 +572,7 @@ public class LandInitController implements Initializable {
         finalLand.add(24,new Parking("Free Parking"));
         gameBoard.setLand(finalLand);
 
+        //Load the next FXML
         try {
             Stage stage = (Stage) background.getScene().getWindow();
 
@@ -536,8 +580,10 @@ public class LandInitController implements Initializable {
             loader.setLocation(getClass().getResource("/View/GamePlay.fxml"));
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);
-            ((GamePlayController) loader.getController()).setPlayerAvatars(playerAvatars); //Pass the playerAvatar urls
-            ((GamePlayController) loader.getController()).setGameBoard(gameBoard); //Pass the new GameBoard
+            //Pass the playerAvatar urls
+            ((GamePlayController) loader.getController()).setPlayerAvatars(playerAvatars);
+            //Pass the new GameBoard
+            ((GamePlayController) loader.getController()).setGameBoard(gameBoard);
         }
         catch(IOException event){
             System.out.println("Something happened");
@@ -564,11 +610,10 @@ public class LandInitController implements Initializable {
         possibleSpaces.add(Annapolis);possibleSpaces.add(Connecticut);
         possibleSpaces.add(Bougainvilla);possibleSpaces.add(Dama);possibleSpaces.add(Acacia);
         possibleSpaces.add(Solar);possibleSpaces.add(Galaxy);possibleSpaces.add(Ninth);possibleSpaces.add(Fifth);
-
         possibleSpaces.add(North);possibleSpaces.add(South);possibleSpaces.add(Metro);possibleSpaces.add(Water);possibleSpaces.add(Electric);
         possibleSpaces.add(Luxury);possibleSpaces.add(Income);possibleSpaces.add(Chance1);possibleSpaces.add(Chance2);possibleSpaces.add(Chance3);
 
-
+        //Add the empty spaces into an array list
         emptySpaces = new ArrayList<Label>();
         emptySpaces.add(empty1);emptySpaces.add(empty2);emptySpaces.add(empty3);emptySpaces.add(empty4);emptySpaces.add(empty5);
         emptySpaces.add(empty6);emptySpaces.add(empty7);emptySpaces.add(empty8);emptySpaces.add(empty9);emptySpaces.add(empty10);
@@ -577,11 +622,13 @@ public class LandInitController implements Initializable {
         emptySpaces.add(empty21);emptySpaces.add(empty22);emptySpaces.add(empty23);emptySpaces.add(empty24);emptySpaces.add(empty25);
         emptySpaces.add(empty26);emptySpaces.add(empty27);emptySpaces.add(empty28);
 
+        //Set the images to that of an empty space
         for(int i = 0; i < emptySpaces.size(); i++){
             Image image = new Image(getClass().getResourceAsStream("../Images/SmallSpaces/Empty.png"));
             emptySpaces.get(i).setGraphic(new ImageView(image));
         }
 
+        //Add the clear buttons into an array list
         deleteLabels = new ArrayList<Label>();
         deleteLabels.add(delete1);deleteLabels.add(delete2);deleteLabels.add(delete3);deleteLabels.add(delete4);deleteLabels.add(delete5);
         deleteLabels.add(delete6);deleteLabels.add(delete7);deleteLabels.add(delete8);deleteLabels.add(delete9);deleteLabels.add(delete10);
@@ -590,6 +637,7 @@ public class LandInitController implements Initializable {
         deleteLabels.add(delete21);deleteLabels.add(delete22);deleteLabels.add(delete23);deleteLabels.add(delete24);deleteLabels.add(delete25);
         deleteLabels.add(delete26);deleteLabels.add(delete27);deleteLabels.add(delete28);
 
+        //Initialize the Land objects on the board
         gameBoard.initializeLand();
     }
 

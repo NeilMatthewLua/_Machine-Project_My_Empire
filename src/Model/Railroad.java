@@ -1,12 +1,7 @@
 package Model;
 /**
  * Railroad Class which is a subclass of land and is used as the railroad space on game board
- *
- * Last Change Made: Created Class
- *
- * Previous Change:
- *   @author  Lua and Tanting
- *   @version 1.7
+ * It also implements the IsRentable interface.
  */
 public class Railroad extends Ownable implements IsRentable{
 
@@ -21,49 +16,61 @@ public class Railroad extends Ownable implements IsRentable{
      */
     @Override
     public double getRent(Player player){
+        //Counts the number of Railroads owner has
         int nCounter = 0;
+        //Stores the value of the rent of the Railroad
         double dRent = 0;
+        //Counts the number of Railroads owner has
         for(int i = 0; i < player.getProperties().size(); i++)
             if(player.getProperties().get(i) instanceof Railroad)
                 nCounter++;
-        switch(nCounter) {//Calculations made based on no. of railroads owner has
-            case 1:
+        //Calculations made based on no. of Railroads owner has
+        switch(nCounter) {
+            case 1: //If owner has one Railroad
                 dRent = 25;
                 break;
-            case 2:
+            case 2: //If owner has two Railroads
                 dRent = 50;
                 break;
-            case 3:
+            case 3: //If owner has three Railroads
                 dRent = 150;
                 break;
             default: break;
         }
+        //The rent multiplier to be applied to rent
         double multiplier = 1;
-        for(int i = 0; i < getCardMultipliers().size();i++){//Apply card multipliers
+        //Loops through the different Card multipliers
+        for(int i = 0; i < getCardMultipliers().size();i++){
                 multiplier *= ((CardSet_5)getCardMultipliers().get(i)).getMultiplier();
         }
+        //Apply the multiplier to the rent
         dRent *= multiplier;
         return dRent;
     }
 
     /**
-     * Overridden method which asks player to pay rent when stepped on
-     * @param gameBoard instance of the game board
-     * @param player the player which triggered the event
-     * @return string which contains the details of the event
+     * Overridden method which will prompt Player to pay rent when stepped on
+     * @param gameBoard instance of GameBoard which contains the game elements
+     * @param player the Player which triggered the event
+     * @return String which contains the details of the event
      */
     @Override
     public String triggerEvent(GameBoard gameBoard, Player player){
+        //String which contains event details
         String event = "";
+        //Temporarily stores player money
         double playerMoney = player.getMoney();
-        if(player.giveMoney(getOwner(), this.getRent(this.getOwner()))){//If the player can pay
-            event += player.getName() + " gave " + getOwner().getName() + " " + this.getRent(this.getOwner()) + ".";
+        //If player is able to pay
+        if(player.giveMoney(getOwner(), (Math.round(this.getRent(this.getOwner())*10) / 10))){//If the player can pay
+            event += player.getName() + " gave " + getOwner().getName() + " " + (Math.round(this.getRent(this.getOwner())*10) / 10) + ".\n";
         }
-        else{//If the player cannot pay
+        //If the player cannot pay
+        else{
             event += player.getName() + " gave " + getOwner().getName() + " " + playerMoney;
-            event += ". " + player.getName() + " is now bankrupt.";
+            event += ".\n" + player.getName() + " is now bankrupt.\n";
             gameBoard.setIsWin(true);
         }
+        //Returns summary of event
         return event;
     }
 }

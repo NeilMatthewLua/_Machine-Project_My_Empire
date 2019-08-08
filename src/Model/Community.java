@@ -1,12 +1,6 @@
 package Model;
 /**
  * Community Class which is a subclass of land and is used as the community space on game board
- *
- * Last Change Made: Class Created
- *
- * Previous Change Made:
- *   @author  Lua and Tanting
- *   @version 1.7
  */
 public class Community extends Land {
     public Community(String strName){
@@ -14,22 +8,27 @@ public class Community extends Land {
     }
 
     /**
-     * Overridden method which taxes player $50 for community space when stepped on
-     * @param gameBoard instance of the game board
+     * Overridden method which taxes Player when landed on
+     * @param gameBoard instance of GameBoard which contains the game elements
      * @param player the player which triggered the event
      * @return string which contains the details of the event
      */
     @Override
     public String triggerEvent(GameBoard gameBoard, Player player){
+        //String which contains event details
         String event = "";
+        //Temporarily stores player money
         double dAmount = player.getMoney();
+        //If the player can pay the bank
         if(player.giveMoney(gameBoard.getBank(),50)){//If the player can pay the bank
-            event += player.getName() + " donated " + 50 + " to Bank.";
+            event += player.getName() + " donated " + 50 + " to Bank.\n";
         }
-        else{//If the player can't pay the bank
-            event += player.getName() + " donated " + dAmount + "to Bank. \n" + player.getName() + " is now bankrupt.";
+        //If the player can't pay the bank
+        else{
+            event += player.getName() + " donated " + dAmount + "to Bank. \n" + player.getName() + " is now bankrupt.\n";
             gameBoard.setIsWin(true);
         }
+        //Returns summary of event
         return event;
     }
 }

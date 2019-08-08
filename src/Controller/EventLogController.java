@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class EventLogController {
 
     @FXML
-    private ListView eventList;
+    private ListView<String> eventList;
 
     public void initialize(ArrayList<String> events){
 

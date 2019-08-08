@@ -1,12 +1,6 @@
 package Model;
 /**
  * Jail Class which is a subclass of land and is used as the Jail space on game board
- *
- * Last Change Made:
- *
- * Previous Change Made: Class Created
- *   @author  Lua and Tanting
- *   @version 1.7
  */
 public class Jail extends Land {
 
@@ -15,17 +9,21 @@ public class Jail extends Land {
     }
 
     /**
-     * Overridden method which puts player in jail when stepped on
-     * @param gameBoard instance of the game board
-     * @param player the player which triggered the event
-     * @return string which contains the details of the event
+     * Overridden method which puts Player in jail when stepped on
+     * @param gameBoard instance of GameBoard which contains the game elements
+     * @param player the Player which triggered the event
+     * @return String which contains the details of the event
      */
     @Override
     public String triggerEvent(GameBoard gameBoard, Player player){
+        //String which contains event details
         String event = "";
-        player.setJail(true); //Player is put in jail
+        //Player is put in jail
+        player.setJail(true);
+        //Summary of event is returned
         event += player.getName() + " was sent to Jail. \n" +
                 player.getName() + " will pay $50 next turn.\n";
+        //Returns summary of event
         return event;
     }
 }

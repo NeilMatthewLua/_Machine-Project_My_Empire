@@ -1,12 +1,6 @@
 package Model;
 /**
  * Chance Class which is a subclass of land and is used as the chance space on game board
- *
- * Last Change Made: Created Class
- *
- * Previous Change:
- *   @author  Lua and Tanting
- *   @version 1.7
  */
 public class Chance extends Land {
     public Chance(String strName){
@@ -14,17 +8,18 @@ public class Chance extends Land {
     }
 
     /**
-     * Overridden method which gives player a card when stepped on
-     * @param gameBoard instance of the game board
-     * @param player the player which triggered the event
-     * @return string which contains the details of the event
+     * Overridden method which gives Player a card when stepped on
+     * @param gameBoard instance of GameBoard which contains the game elements
+     * @param player the Player which triggered the event
+     * @return String which contains the details of the event
      */
-
     public String triggerEvent(GameBoard gameBoard, Player player){
+        //Temporarily stores the drawn card from the gameBoard
         Card temp = gameBoard.drawChance();
+        //Adds the card to the player's arrayList of cards
         player.addCard(temp);
-        String event = player.getName() + " drew  a card";
-
+        String event = player.getName() + " drew  a card.\n";
+        //Returns the summary of the event
         return event;
     }
 }

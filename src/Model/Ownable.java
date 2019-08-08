@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 /**
  * Ownable class is a subclass of land and are spaces which can be owned by the player.
- *
- *   @author  Lua and Tanting
- *   @version 1.7
  */
 
 public abstract class Ownable extends Land {
 
+    //Price of the Ownable
     private double dPrice;
+    //Player owner of the Ownable
     private Player owner;
+    //ArrayList<Card> of card multipliers applied to the Ownable
     private ArrayList<Card> cardMultipliers;
 
 
@@ -23,16 +23,16 @@ public abstract class Ownable extends Land {
     }
 
     /**
-     * Gets the price to buy the ownable space
-     * @return price of the ownable space
+     * Gets the price to buy the Ownable space
+     * @return Ownable price
      */
     public double getPrice(){
         return dPrice;
     }
 
     /**
-     * Returns the owner of the ownable space
-     * @return owner of the ownable space
+     * Returns the owner of Ownable
+     * @return Ownable price
      */
     public Player getOwner(){
         return owner;
@@ -40,16 +40,16 @@ public abstract class Ownable extends Land {
 
 
     /**
-     * Gets the array list of card multipliers currently on the property
-     * @return ArrayList of Cards
+     * Gets the array list of card multipliers on Ownable
+     * @return Ownable ArrayList Card multipliers
      */
     public ArrayList<Card> getCardMultipliers(){
         return cardMultipliers;
     }
 
     /**
-     * Sets the owner of the ownable space to parameter
-     * @param owner the new owner of the property
+     * Setter of the People owner
+     * @param owner the Player owner of the Property
      */
     public void setOwner(Player owner){
         this.owner = owner;

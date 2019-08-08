@@ -1,12 +1,6 @@
 package Model;
 /**
  * Start Class which is a subclass of land and is used as the start space on game board
- *
- * Last Change Made: Class Created
- *
- * Previous Change Made:
- *   @author  Lua and Tanting
- *   @version 1.7
  */
 public class Start extends Land{
 
@@ -15,23 +9,29 @@ public class Start extends Land{
     }
 
     /**
-     * Overridden method which gives player $200 when passed or stepped on
-     * @param gameBoard instance of the game board
-     * @param player the player which triggered the event
-     * @return string which contains the details of the event
+     * Overridden method where bank pays Player when stepped on or passed by
+     * @param gameBoard instance of GameBoard which contains the game elements
+     * @param player the Player which triggered the event
+     * @return String which contains the details of the event
      */
     @Override
     public String triggerEvent(GameBoard gameBoard, Player player){
+        //String which contains event details
         String event = "";
+        //Temporarily stores player money
         double dAmount = gameBoard.getBank().getMoney();
+        //If the Bank can pay the player $200
         if(gameBoard.getBank().giveMoney(player,200)){
             event += player.getName() + " passed by START and got $200.\n";
         }
+        //If the Bank cannot pay the player $200
         else{
             event += player.getName() + " was given " + dAmount +
-                    ".Bank is bankrupt.\n";
+                    ".\n Bank is bankrupt.\n";
+            //Game ends
             gameBoard.setIsWin(true);
         }
+        //Returns summary of event
         return event;
     }
 }

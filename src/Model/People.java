@@ -24,6 +24,7 @@ public class People{
     /**
      * This constructor creates a People object that is a bank
      @param strName name of the Player
+     @param nPlayers number of players on board
      */
     public People(String strName, int nPlayers) {
         this.strName = strName;

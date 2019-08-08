@@ -1,42 +1,21 @@
 package Controller;
 
 import Model.*;
-import javafx.animation.PauseTransition;
-import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.event.EventHandler;
-import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+
 
 import static javafx.stage.Modality.APPLICATION_MODAL;
 
@@ -120,7 +99,6 @@ public class GamePlayController  {
     private AnchorPane playerPane3;
   @FXML
     private AnchorPane playerPane4;
-
   @FXML
     private ArrayList<Label> playersMoney;
   @FXML
@@ -367,7 +345,7 @@ public class GamePlayController  {
     @FXML private ImageView decrease10;
     @FXML private ImageView doubleRent;
 
-  @FXML private ImageView Zoomed;
+    @FXML private ImageView Zoomed;
     @FXML private ImageView zoomedChance;
     @FXML private Label zoomedCardApplicable;
     @FXML private Label closeZoomed;
@@ -426,7 +404,7 @@ public class GamePlayController  {
     @FXML private ImageView playerThreeAvatar;
     @FXML private ImageView playerFourAvatar;
 
-  private ArrayList<ImageView> playerAvatarIcons;
+    private ArrayList<ImageView> playerAvatarIcons;
     private ArrayList<ImageView> player1Spaces;
     private ArrayList<ImageView> player2Spaces;
     private ArrayList<ImageView> player3Spaces;
@@ -618,11 +596,13 @@ public class GamePlayController  {
         endPane.setVisible(true);
     }
     else if (e.getSource() == useButton){
-      hideChanceCard();
       usePane.setVisible(false);
 
       String event = "";
       Card tempCard = gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1 );
+      if(!(tempCard instanceof CardSet_5)){
+        hideChanceCard();
+      }
       if(tempCard instanceof CardSet_2){
         event += tempCard.useCard(gameBoard.getPlayers()[nTurnCounter % nTotal], gameBoard);
         updatePlayerPositions();
@@ -827,6 +807,7 @@ public class GamePlayController  {
       openZoomed(e);
       String event = "";
       event += (gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1)).useCard(gameBoard.getPlayers()[nTurnCounter % nTotal],gameBoard);
+      hideChanceCard();
       setAllVisible();
       updateMoney();
       eventLabel.setText(event);
@@ -838,7 +819,7 @@ public class GamePlayController  {
       isTrade = false;
       tradePanel.setVisible(false);
       tradeAnchorPane.setVisible(false);
-
+      setAllVisible();
       //Check if the player can afford to pay the rent
       Ownable tempOwnable = (Ownable) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition());
       double dRent = 0;
@@ -854,6 +835,9 @@ public class GamePlayController  {
       if(gameBoard.getPlayers()[nTurnCounter % nTotal].getMoney() >= dRent){
         rentPane.setVisible(true);
       }
+      else{
+        tradePane.setVisible(true);
+      }
 
       updateOwnerIcons();
       updatePlayerPositions();
@@ -862,13 +846,14 @@ public class GamePlayController  {
       isTrade = false;
       tradePanel.setVisible(false);
       String event = "";
-      event += gameBoard.getPlayers()[nTurnCounter % nTotal].trade(gameBoard,((Ownable)gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())), gameBoard.getPlayers()[nTurnCounter % nTotal].getChosen());
+      event += gameBoard.getPlayers()[nTurnCounter % nTotal].trade(gameBoard,(Ownable) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()), gameBoard.getPlayers()[nTurnCounter % nTotal].getChosen());
       setAllVisible();
       updateOwnerIcons();
       gameBoard.getEvents().add(event);
       eventLabel.setText(event);
       tradeAnchorPane.setVisible(false);
       endPane.setVisible(true);
+      checkWin();
     }
 
     else if (e.getSource() == purchaseButton) {
@@ -878,6 +863,7 @@ public class GamePlayController  {
       updateOwnerIcons();
       purchasePane.setVisible(false);
       updateMoney();
+      checkWin();
     }
     else if(e.getSource() == tradeButton) {
       ArrayList<Property> tempArr = gameBoard.getPlayers()[nTurnCounter % nTotal].getOnlyProperty();
@@ -1065,43 +1051,7 @@ public class GamePlayController  {
 
 
   public void updateMoney(){
-     //Updates Player Money on the board
-//    if(nPlayer1 == 0){
-//      money1.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
-//    }
-//    else if(nPlayer1 == 1){
-//      money2.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
-//    }
-//    else if(nPlayer1 == 2){
-//      money3.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
-//    }
-//    else if(nPlayer1 == 3){
-//      money4.setText(String.valueOf(gameBoard.getPlayers()[nPlayer1].getMoney()));
-//    }
-//    else if(nPlayer1 == 5){
-//      money5.setText(String.valueOf(gameBoard.getBank().getMoney()));
-//    }
-//
-//    if(nPlayer2 == 0){
-//      money1.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
-//    }
-//    else if(nPlayer2 == 1){
-//      money2.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
-//    }
-//    else if(nPlayer2 == 2){
-//      money3.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
-//    }
-//    else if(nPlayer1 == 3){
-//        money4.setText(String.valueOf(gameBoard.getPlayers()[nPlayer2].getMoney()));
-//    }
-//    else if(nPlayer2 == 5){
-//      money5.setText(String.valueOf(gameBoard.getBank().getMoney()));
-//    }
-//    if(gameBoard.getBank().getMoney() <= 0){
-//      gameBoard.setIsWin(true);
-//    }
-    int i = 0;
-    for(i = 0; i < gameBoard.getPlayers().length; i++)
+    for(int i = 0; i < gameBoard.getPlayers().length; i++)
       playersMoney.get(i).setText(Double.toString(gameBoard.getPlayers()[i].getMoney()));
 
     playersMoney.get(4).setText(Double.toString(gameBoard.getBank().getMoney()));
@@ -1376,11 +1326,15 @@ public class GamePlayController  {
   }
 
   public void checkWin(){
-    if(gameBoard.getIsWin()) {
+    if(gameBoard.getIsWin() || gameBoard.isCompleteSet()) {
       rentPane.setVisible(false);
       endPane.setVisible(false);
       tradePane.setVisible(false);
       purchasePane.setVisible(false);
+      if(gameBoard.isCompleteSet()){
+        eventLabel.setText("Congratulations! " + gameBoard.getPlayers()[nTurnCounter % gameBoard.getPlayers().length].getName() + " has two full sets.\n");
+        gameBoard.getEvents().add(gameBoard.getPlayers()[nTurnCounter % gameBoard.getPlayers().length].getName() + " has gotten two full sets.\n");
+      }
       gameBoard.getEvents().add("Game Over");
       endGamePane.setVisible(true);
     }
@@ -1462,9 +1416,6 @@ public class GamePlayController  {
           Image image = new Image(getClass().getResourceAsStream(urls[j][1]));
           spaces.get(i).setGraphic(new ImageView(image));
           isFound = false;
-          if(gameBoard.getLand().get(i) instanceof Property){
-            //((Property) gameBoard.getLand().get(i)).setDevelopment(); //REMOVE THIS PENIS
-          }
         }
       }
     }
@@ -1487,9 +1438,7 @@ public class GamePlayController  {
     //Set isTrade to false, only true during trading
     isTrade = false;
 
-    i = 0;
-    for(i = 0; i < players.length; i++){
-        System.out.println(players[i].getName());
+    for(int i = 0; i < players.length; i++){
         playersName.get(i).setText(players[i].getName());
         playersPane.get(i).setVisible(true);
         playersMoney.get(i).setText(Double.toString(players[i].getMoney()));
@@ -1501,5 +1450,7 @@ public class GamePlayController  {
 
 
     turnLabel.setText(gameBoard.getPlayers()[0].getName()+"'s Turn!");
+    gameBoard.getBank().giveMoney(gameBoard.getPlayers()[0],200);
+    checkWin();
   }
 }
