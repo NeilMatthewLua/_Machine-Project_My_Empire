@@ -1,18 +1,13 @@
 
-/**
+package Model;
+ 
+ import java.util.Random;
+
+ /**
  * Card subclass which contains cards from group 4. This includes
  * the go to jail card or take a trip to property card.
- *
- *  New Changes Made: Fixed Bugs
-
- *  Last Changes Made: Created this subclass
- *   @author  Lua and Tanting
- *   @version 1.7
  */
 
-package Model;
-
-import java.util.Random;
 
 public class CardSet_4 extends Card{
 
@@ -30,41 +25,48 @@ public class CardSet_4 extends Card{
     public String useCard(Player player, GameBoard gameBoard){
 
         String event = "";
-        int nIndex = player.getCards().get(player.getCards().size() - 1).getIndex(); //gets the index of the card to navigate through its set
+        //gets the index of the card to navigate through its set
+        int nIndex = player.getCards().get(player.getCards().size() - 1).getIndex(); 
 
-        if(nIndex == 0){//Trip to jail, no money on start
+        //Trip to jail, no money on start
+        if(nIndex == 0){
             while(player.getPosition() != 16){
                 player.setPosition(1);//Player moves one space
                 if (gameBoard.getLand().get(player.getPosition()) instanceof Property)
+                //If land is owned and is property type
                     if (((Property)gameBoard.getLand().get(player.getPosition())).getOwner() != null){
-                        //If land is owned and is property type
                         ((Property)gameBoard.getLand().get(player.getPosition())).addFootTraffic();
                     }
             }
         }
-        else if(nIndex == 1){//Trip to random property
+        //Trip to random property
+        else if(nIndex == 1){
             Random rand = new Random();
             int nRandProperty = rand.nextInt(32);
             while(!(gameBoard.getLand().get(nRandProperty) instanceof Property)){//Loops until a property is found
                 nRandProperty = rand.nextInt(32);
             }
-            while(player.getPosition() != nRandProperty){//While player has not landed on property
-                player.setPosition(1);//Player moves one space
+            //While player has not landed on property
+            while(player.getPosition() != nRandProperty){
+                //Player moves one space
+                player.setPosition(1);
                 if(player.getPosition() == 0){
                     event += ((Start)gameBoard.getLand().get(player.getPosition())).triggerEvent(gameBoard, player);
 
                 }
                 if (gameBoard.getLand().get(player.getPosition()) instanceof Property)
+                     //If land is owned and is property type
                     if (((Property)gameBoard.getLand().get(player.getPosition())).getOwner() != null){
-                        //If land is owned and is property type
                         ((Property)gameBoard.getLand().get(player.getPosition())).addFootTraffic();
                     }
             }
 
         }
 
-        gameBoard.addCardDiscard(player.getCards().get(player.getCards().size() - 1)); //put used card into card discarded pile
-        player.getCards().remove(player.getCards().size() - 1); //remove from the player's hand
+        //put used card into card discarded pile
+        gameBoard.addCardDiscard(player.getCards().get(player.getCards().size() - 1)); 
+        //remove from the player's hand
+        player.getCards().remove(player.getCards().size() - 1); 
         return event;
     }
 }

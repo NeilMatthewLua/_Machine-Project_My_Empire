@@ -1,19 +1,15 @@
 package Model;
+
 /**
  * People Class parent class of players and contains name and money
- *    
- *      New Changes: Changed class constructor implementation
- * 
- *      Last Changes Made: Changed the implementation of giveMoney()
- *   @author  Lua and Tanting
- *   @version 1.7
- *
  */
 
 
 public class People{
 
+    //Name of the Player / "Bank"
     private String strName;
+    //Money of the Person
     protected double dMoney;
 
     /**
@@ -31,48 +27,64 @@ public class People{
      */
     public People(String strName, int nPlayers) {
         this.strName = strName;
-        this.dMoney = nPlayers * 10;
+        this.dMoney = nPlayers * 2500;
     }
 
     /**
-     * Gets Person's Name
-     * @return Person's name
+     * Getter for People name
+     * @return People name
      */
     public String getName() {
         return this.strName;
     }
 
     /**
-     * Gets Person's money
-     * @return current money of the Person
+     * Getter for Peeple money
+     * @return current money of People
      */
     public double getMoney(){
         return this.dMoney;
     }
 
     /**
-     * Receives Money to a Player
-     * @param amount amount of money to be paid to the Player
+     * Receives Money from People
+     * @param amount amount of money to be received
      */
-    public void receiveMoney( double amount) {
+    public void receiveMoney(double amount) {
         this.dMoney += amount;
     }
 
 
     /**
-     * Gives Money to a Player
-     * @param amount amount of money to be paid to the Player
-     * @return true if player is able to give money, false if not
+     * Gives Money to People
+     * @param receiver People that will receive the money
+     * @param amount amount of money to be paid to People
+     * @return boolean value that determines whether or not the player was able to pay full price
      */
     public boolean giveMoney(People receiver, double amount) {
-        if(this.dMoney - amount > 0){
+        //Checks if the current People has enough money
+        if(this instanceof Player && this.dMoney - amount >= 0){
+            //Receiver receives the money
             receiver.receiveMoney(amount);
+            //Money is deducted from the current People
             this.dMoney -= amount;
+            //Return true to show that the transaction was successful
+            return true;
+        }
+        else if(this.dMoney - amount > 0){
+            //Receiver receives the money
+            receiver.receiveMoney(amount);
+            //Money is deducted from the current People
+            this.dMoney -= amount;
+            //Return true to show that the transaction was successful
             return true;
         }
         else{
+            //Receiver receives whatever the current People has left
             receiver.receiveMoney(this.dMoney);
+            //Current People's money is now 0
             this.dMoney = 0;
+            //Returns false to show that someone is now bankrupt
             return false;
         }
     }

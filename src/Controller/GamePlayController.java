@@ -663,7 +663,10 @@ public class GamePlayController  {
             //else, he has no choice but to pay rent
             else {
               if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Utility){
-                double dPay = 10 * gameBoard.getPlayers()[nTurnCounter % nTotal].getLastRoll();
+                int nRoll;
+                nRoll = (int)((Math.random() * (6 - 1)) + 1 );
+                double dPay = 10 * nRoll;
+                event += gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + " rolled the die and got " + nRoll + "\n";
                 double dAmount = gameBoard.getPlayers()[nTurnCounter % nTotal].getMoney();
                 if(gameBoard.getPlayers()[nTurnCounter % nTotal].giveMoney(((Utility) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner(), dPay)){
                   event += gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + " paid $" + dPay + " to " +  ((Utility) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner().getName() + "\n";
