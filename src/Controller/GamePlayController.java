@@ -616,6 +616,10 @@ public class GamePlayController  {
             //There's nothing the player can do for that turn
             endPane.setVisible(true);
           }
+          //If it is a Utility, auto charge after paying
+          else if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Utility && (gameBoard.getIsWin() == false)){
+            endPane.setVisible(true);
+          }
           //Checks if player lands on an owned property
           else if (gameBoard.getPlayers()[nTurnCounter % nTotal].isOwnedProperty(gameBoard)) {
 
@@ -819,6 +823,7 @@ public class GamePlayController  {
       isTrade = false;
       tradePanel.setVisible(false);
       tradeAnchorPane.setVisible(false);
+      tradeButton.setVisible(true);
       setAllVisible();
       //Check if the player can afford to pay the rent
       Ownable tempOwnable = (Ownable) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition());
@@ -834,6 +839,7 @@ public class GamePlayController  {
       }
       if(gameBoard.getPlayers()[nTurnCounter % nTotal].getMoney() >= dRent){
         rentPane.setVisible(true);
+        tradePane.setVisible(true);
       }
       else{
         tradePane.setVisible(true);
