@@ -40,7 +40,7 @@ public class People{
     }
 
     /**
-     * Getter for Peeple money
+     * Getter for People money
      * @return current money of People
      */
     public double getMoney(){

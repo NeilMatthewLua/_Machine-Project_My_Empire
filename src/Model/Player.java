@@ -35,8 +35,8 @@ public class Player extends People{
 
 
     /**
-     * Getter for the Player's properties
-     * @return properties arrayList owned by the Player
+     * Getter for the Player's Ownables
+     * @return Ownables arrayList owned by the Player
      */
     public ArrayList<Ownable> getProperties() {
         return this.properties;
@@ -329,9 +329,9 @@ public class Player extends People{
                 gameBoard.setIsWin(true);
             }
         }
+        event += getName() + " rolled a " + nRoll + "\n";
         //Checks if there is already a winner
         if(!gameBoard.getIsWin()){
-            event += getName() + " rolled a " + nRoll + "\n";
             for( int i = start + 1 ; i <= start + nRoll; i++ ) {
                 //Checks if the token has reached the end of the board
                 if( i > 31 ) { 
