@@ -416,6 +416,7 @@ public class GameBoard {
                     if(nPropertyCount[8] == 3)
                         nFullSet += 1;
                 }
+
                 //If Player has two or more full sets
                 if(nFullSet >= 2){
                     isWin = true;

@@ -118,7 +118,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="tradePanel" layoutX="70.0" layoutY="70.0" prefHeight="482.0" prefWidth="482.0" visible="false">
+      <AnchorPane fx:id="tradePanel" layoutX="70.0" layoutY="70.0" prefHeight="482.0" prefWidth="482.0">
          <children>
             <ImageView fitHeight="482.0" fitWidth="482.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -263,22 +263,22 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <Label fx:id="trader" alignment="CENTER" layoutX="44.0" layoutY="352.0" text="MMMMMM" textAlignment="CENTER">
+            <Label id="traderName" fx:id="trader" alignment="CENTER" graphicTextGap="0.0" layoutX="38.0" layoutY="354.0" prefHeight="29.0" prefWidth="150.0" stylesheets="@../CSS/GamePlay.css">
                <font>
                   <Font name="Broadway" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="tradee" alignment="CENTER" layoutX="301.0" layoutY="352.0" text="MMMMMM" textAlignment="CENTER">
+            <Label id="traderName" fx:id="tradee" alignment="CENTER" layoutX="308.0" layoutY="354.0" prefHeight="29.0" prefWidth="150.0" stylesheets="@../CSS/GamePlay.css" textAlignment="CENTER">
                <font>
                   <Font name="Broadway" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="traderOffer" alignment="CENTER" layoutX="12.0" layoutY="411.0" text="Dama de Noche" textAlignment="CENTER">
+            <Label fx:id="traderOffer" alignment="CENTER" layoutX="12.0" layoutY="411.0" prefHeight="29.0" prefWidth="188.0" textAlignment="CENTER">
                <font>
                   <Font name="Broadway" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="tradeeOffer" alignment="CENTER" layoutX="269.0" layoutY="411.0" text="Dama de Noche" textAlignment="CENTER">
+            <Label fx:id="tradeeOffer" alignment="CENTER" layoutX="282.0" layoutY="412.0" prefHeight="29.0" prefWidth="188.0" textAlignment="CENTER">
                <font>
                   <Font name="Broadway" size="24.0" />
                </font>

@@ -30,8 +30,6 @@ public class CardSet_6 extends Card{
         int value = rand.nextInt(3);
         double temp = player.getMoney();
 
-        event += getDescription() + " " + arrChoices[value] + "\n";
-
         //If player can't pay then he gives all he has and loses
         if(player.giveMoney(gameBoard.getBank(),arrChoices[value])){
             event += player.getName() + " pays $" + arrChoices[value] + " to: Bank. " + "\n";

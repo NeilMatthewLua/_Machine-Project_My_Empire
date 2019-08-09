@@ -562,7 +562,6 @@ public class GamePlayController  {
         eventLabel.setText(event);
         gameBoard.getEvents().add(event);
         displayChanceCard(tempCard);
-        System.out.println(tempCard.getDescription());
         if(tempCard instanceof CardSet_1){
           keepPane.setVisible(true);
         }
@@ -1332,7 +1331,7 @@ public class GamePlayController  {
   }
 
   public void checkWin(){
-    if(gameBoard.getIsWin() || gameBoard.isCompleteSet()) {
+    if(gameBoard.getIsWin() || (gameBoard.isCompleteSet())) {
       rentPane.setVisible(false);
       endPane.setVisible(false);
       tradePane.setVisible(false);
