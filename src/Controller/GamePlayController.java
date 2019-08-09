@@ -615,10 +615,6 @@ public class GamePlayController  {
             //There's nothing the player can do for that turn
             endPane.setVisible(true);
           }
-          //If it is a Utility, auto charge after paying
-          else if(gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition()) instanceof Utility && (gameBoard.getIsWin() == false)){
-            endPane.setVisible(true);
-          }
           //Checks if player lands on an owned property
           else if (gameBoard.getPlayers()[nTurnCounter % nTotal].isOwnedProperty(gameBoard)) {
 
@@ -653,6 +649,7 @@ public class GamePlayController  {
                 double dAmount = gameBoard.getPlayers()[nTurnCounter % nTotal].getMoney();
                 if(gameBoard.getPlayers()[nTurnCounter % nTotal].giveMoney(((Utility) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner(), dPay)){
                   event += gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + " paid $" + dPay + " to " +  ((Utility) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner().getName() + "\n";
+                  endPane.setVisible(true);
                 }
                 else{
                   event += gameBoard.getPlayers()[nTurnCounter % nTotal].getName() + "paid " + dAmount + " to " + ((Utility) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition())).getOwner().getName() + ". \n";
