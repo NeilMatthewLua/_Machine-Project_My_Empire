@@ -433,15 +433,16 @@ public class GameBoard {
      * @return Card drawn
      */
     public Card drawChance(){
+
         //If cardPile is empty then shuffle discardPile into cardPile
         if(cardPile.size() == 0){
-
             events.add("Card pile empty. Shuffling discard pile into card pile.\n");
             //Add in the Cards from the discard pile into the draw pile
-            for(int i = 0; i < cardDiscard.size(); i++){
+            while(cardDiscard.size() > 0){
                 cardPile.add(cardDiscard.get(0));
                 cardDiscard.remove(0);
             }
+            System.out.println(cardPile.size());
             //Shuffle CardPile
             Collections.shuffle(cardPile);
         }
