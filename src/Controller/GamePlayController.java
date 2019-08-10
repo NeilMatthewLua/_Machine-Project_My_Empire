@@ -562,6 +562,10 @@ public class GamePlayController  {
         eventLabel.setText(event);
         gameBoard.getEvents().add(event);
         displayChanceCard(tempCard);
+
+        if(Zoomed.isVisible())
+          openZoomed(e);
+
         if(tempCard instanceof CardSet_1){
           keepPane.setVisible(true);
         }
@@ -1450,9 +1454,7 @@ public class GamePlayController  {
 
     playersMoney.get(4).setText(Double.toString(gameBoard.getBank().getMoney()));
 
-
     turnLabel.setText(gameBoard.getPlayers()[0].getName()+"'s Turn!");
-    gameBoard.getBank().giveMoney(gameBoard.getPlayers()[0],200);
-    checkWin();
+
   }
 }

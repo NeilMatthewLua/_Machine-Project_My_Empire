@@ -118,7 +118,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="tradePanel" layoutX="70.0" layoutY="70.0" prefHeight="482.0" prefWidth="482.0">
+      <AnchorPane fx:id="tradePanel" layoutX="70.0" layoutY="70.0" prefHeight="482.0" prefWidth="482.0" visible="false">
          <children>
             <ImageView fitHeight="482.0" fitWidth="482.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -263,7 +263,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <Label id="traderName" fx:id="trader" alignment="CENTER" graphicTextGap="0.0" layoutX="38.0" layoutY="354.0" prefHeight="29.0" prefWidth="150.0" stylesheets="@../CSS/GamePlay.css">
+            <Label id="traderName" fx:id="trader" alignment="CENTER" graphicTextGap="0.0" layoutX="31.0" layoutY="354.0" prefHeight="29.0" prefWidth="150.0" stylesheets="@../CSS/GamePlay.css">
                <font>
                   <Font name="Broadway" size="24.0" />
                </font>
@@ -278,7 +278,7 @@
                   <Font name="Broadway" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="tradeeOffer" alignment="CENTER" layoutX="282.0" layoutY="412.0" prefHeight="29.0" prefWidth="188.0" textAlignment="CENTER">
+            <Label fx:id="tradeeOffer" alignment="CENTER" layoutX="289.0" layoutY="411.0" prefHeight="29.0" prefWidth="188.0" textAlignment="CENTER">
                <font>
                   <Font name="Broadway" size="24.0" />
                </font>

@@ -334,7 +334,7 @@ public class Player extends People{
         if(!gameBoard.getIsWin()){
             for( int i = start + 1 ; i <= start + nRoll; i++ ) {
                 //Checks if the token has reached the end of the board
-                if( i > 31 ) { 
+                if( i > 31 ) {
                     nRoll = nRoll + start -i;
                     i = 0;
                     //this sets the token at start (index 0)

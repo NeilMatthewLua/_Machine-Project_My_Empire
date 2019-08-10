@@ -5,19 +5,69 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/CSS/WinnerPage.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/ViewInitController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/WinnerPageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/IsRentable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Ownable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/View/LandInit.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Card.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Driver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameBoard.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Land.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/People.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Property.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/CSS/ExitAlert.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/EventLog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/ExitAlert.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/GamePlayController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/GamePlayController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/GamePlayController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/GamePlayController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/ViewInitController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/ViewInitController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/WinnerPageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/WinnerPageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Controller/creator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Card.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Card.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/CardSet_1.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/CardSet_1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/CardSet_2.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/CardSet_2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/CardSet_3.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/CardSet_3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/CardSet_4.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/CardSet_4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/CardSet_5.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/CardSet_5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/CardSet_6.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/CardSet_6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Chance.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Chance.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Community.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Community.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/GameBoard.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/GameBoard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/IsRentable.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/IsRentable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Jail.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Jail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Land.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Land.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Ownable.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Ownable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Parking.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Parking.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Property.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Property.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Railroad.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Railroad.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Start.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Start.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Tax.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Tax.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Utility.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/Utility.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/Model/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/allclasses-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/allclasses-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/allclasses-noframe.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/allclasses-noframe.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/constant-values.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/constant-values.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/deprecated-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/deprecated-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/help-doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/index-all.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/index-all.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Javadoc/overview-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/CardSet_3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/CardSet_3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/CardSet_4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/CardSet_4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/CardSet_5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/CardSet_5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Chance.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Chance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Community.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Community.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Jail.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Jail.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Land.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Land.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Parking.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Parking.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/People.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/People.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Property.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Property.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Railroad.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Railroad.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Start.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Start.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Tax.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Tax.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Utility.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Model/Utility.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Test_Cases/[Test-Script]  GameBoard.docx" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Test_Cases/[Test-Script]  GameBoard.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Test_Cases/[Test-Script]  Property.docx" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Test_Cases/[Test-Script]  Property.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Test_Cases/[Test-Script] CardSet_5.docx" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Test_Cases/[Test-Script] CardSet_5.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Test_Cases/[Test-Script] Ownable.docx" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Test_Cases/[Test-Script] Ownable.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Test_Cases/[Test-Script] People.docx" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Test_Cases/[Test-Script] People.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Test_Cases/[Test-Script] Player.docx" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/Test_Cases/[Test-Script] Player.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/View/ExitAlert.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/View/GamePlay.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/View/GamePlay.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/View/LandInit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/_Machine-Project_My_Empire/View/LandInit.fxml" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -91,74 +141,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/GamePlayController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="604" column="40" lean-forward="true" selection-start-line="604" selection-start-column="40" selection-end-line="604" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/creator.java">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+              <caret line="555" column="11" lean-forward="true" selection-start-line="555" selection-start-column="11" selection-end-line="555" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Model/Chance.java">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/ArrayList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Model/CardSet_2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="33" column="81" lean-forward="true" selection-start-line="33" selection-start-column="81" selection-end-line="33" selection-end-column="81" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Model/CardSet_6.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CSS/EventLog.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/EventLogController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CSS/GamePlay.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
+            <state relative-caret-position="80">
+              <caret line="434" column="15" selection-start-line="434" selection-start-column="15" selection-end-line="434" selection-end-column="15" />
+              <folding>
+                <element signature="e#15586#15587#0" expanded="true" />
+                <element signature="e#15631#15632#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -166,17 +166,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Model/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="286" column="28" selection-start-line="286" selection-start-column="28" selection-end-line="286" selection-end-column="28" />
+            <state relative-caret-position="212">
+              <caret line="336" column="30" selection-start-line="336" selection-start-column="30" selection-end-line="336" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Model/GameBoard.java">
+        <entry file="file://$PROJECT_DIR$/src/CSS/GamePlay.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="436" column="20" selection-start-line="436" selection-start-column="20" selection-end-line="436" selection-end-column="20" />
+            <state relative-caret-position="168">
+              <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -194,12 +194,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>CardSet_3</find>
-      <find>endGame</find>
-      <find>endGamePan</find>
-      <find>endButton</find>
-      <find>EndGamePan</find>
-      <find>Tax</find>
       <find>event =</find>
       <find>event +</find>
       <find>playerFourAvatar</find>
@@ -218,12 +212,18 @@
       <find>setPost</find>
       <find>isCompleteSe</find>
       <find>rollButton</find>
-      <find>instanceof Chance</find>
       <find>isWin</find>
       <find>Chance</find>
       <find>...</find>
       <find>donate</find>
       <find>CardSet_2</find>
+      <find>.roll</find>
+      <find>initiali</find>
+      <find>Player a</find>
+      <find>hide</find>
+      <find>zoomed</find>
+      <find>instanceof Chance</find>
+      <find>Card temp</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -276,20 +276,20 @@
         <option value="$PROJECT_DIR$/src/Model/Tax.java" />
         <option value="$PROJECT_DIR$/src/Model/CardSet_2.java" />
         <option value="$PROJECT_DIR$/src/Model/GameBoard.java" />
-        <option value="$PROJECT_DIR$/src/Controller/GamePlayController.java" />
-        <option value="$PROJECT_DIR$/src/Model/Player.java" />
         <option value="$PROJECT_DIR$/src/Model/CardSet_6.java" />
         <option value="$PROJECT_DIR$/src/CSS/EventLog.css" />
         <option value="$PROJECT_DIR$/src/Controller/EventLogController.java" />
+        <option value="$PROJECT_DIR$/src/Model/Player.java" />
+        <option value="$PROJECT_DIR$/src/Controller/GamePlayController.java" />
         <option value="$PROJECT_DIR$/src/CSS/GamePlay.css" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-45" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="-17" />
     <option name="width" value="1761" />
-    <option name="height" value="1032" />
+    <option name="height" value="1091" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectReloadState">
@@ -300,8 +300,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -342,6 +340,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -496,11 +496,12 @@
       <workItem from="1565225659880" duration="306000" />
       <workItem from="1565228815438" duration="775000" />
       <workItem from="1565345076525" duration="6358000" />
+      <workItem from="1565428058108" duration="3519000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="198215000" />
+    <option name="totallyTimeSpent" value="201943000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -512,10 +513,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
+    <frame x="-11" y="0" width="1174" height="727" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.18461539" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.1956912" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -524,7 +525,7 @@
       <window_info id="UI Designer" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3285968" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.19405594" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26554623" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39964476" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -564,7 +565,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Controller/Main.class" />
     <entry file="file://$PROJECT_DIR$/src/Images/GamePlay.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -636,13 +636,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10506">
-          <caret line="656" column="18" selection-start-line="656" selection-start-column="18" selection-end-line="656" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -814,13 +807,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/ExitAlert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/ExitAlert.java" />
     <entry file="file://$PROJECT_DIR$/src/Model/Card.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -835,30 +822,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/GameBoard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="436" column="20" selection-start-line="436" selection-start-column="20" selection-end-line="436" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="286" column="28" selection-start-line="286" selection-start-column="28" selection-end-line="286" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/creator.java" />
     <entry file="file://$PROJECT_DIR$/src/Model/CardSet_2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="33" column="81" lean-forward="true" selection-start-line="33" selection-start-column="81" selection-end-line="33" selection-end-column="81" />
+        <state relative-caret-position="527">
+          <caret line="33" column="81" selection-start-line="33" selection-start-column="81" selection-end-line="33" selection-end-column="81" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Model/CardSet_6.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
+        <state relative-caret-position="476">
           <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
         </state>
       </provider>
@@ -872,29 +846,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/EventLogController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
+        <state relative-caret-position="187">
           <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/GameBoard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7208">
+          <caret line="436" column="20" selection-start-line="436" selection-start-column="20" selection-end-line="436" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://MODULES/mdl-_Machine-Project_My_Empire">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>MODULES</ID>
+          <OriginalElement>mdl-_Machine-Project_My_Empire</OriginalElement>
+          <nodes>
+            <node x="" y="">mdl-_Machine-Project_My_Empire</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="112.5" y="-69.5" />
+          <SelectedNodes />
+          <Categories />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="336" column="30" selection-start-line="336" selection-start-column="30" selection-end-line="336" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="434" column="15" selection-start-line="434" selection-start-column="15" selection-end-line="434" selection-end-column="15" />
+          <folding>
+            <element signature="e#15586#15587#0" expanded="true" />
+            <element signature="e#15631#15632#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CSS/GamePlay.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
+        <state relative-caret-position="168">
+          <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/GamePlayController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="604" column="40" lean-forward="true" selection-start-line="604" selection-start-column="40" selection-end-line="604" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/creator.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <caret line="555" column="11" lean-forward="true" selection-start-line="555" selection-start-column="11" selection-end-line="555" selection-end-column="11" />
         </state>
       </provider>
     </entry>

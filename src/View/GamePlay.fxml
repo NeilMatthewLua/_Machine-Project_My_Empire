@@ -118,7 +118,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="tradePanel" layoutX="70.0" layoutY="70.0" prefHeight="482.0" prefWidth="482.0">
+      <AnchorPane fx:id="tradePanel" layoutX="70.0" layoutY="70.0" prefHeight="482.0" prefWidth="482.0" visible="false">
          <children>
             <ImageView fitHeight="482.0" fitWidth="482.0" pickOnBounds="true" preserveRatio="true">
                <image>
