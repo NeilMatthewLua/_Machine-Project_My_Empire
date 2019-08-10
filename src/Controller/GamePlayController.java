@@ -530,20 +530,23 @@ public class GamePlayController  {
             //Checks if player has anything to offer in trade
             if (gameBoard.getPlayers()[nTurnCounter % nTotal].canTrade(gameBoard)) {
               tradePane.setVisible(true);
+
+              //Check if the player can afford to pay the rent
+              Ownable tempOwnable = (Ownable) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition());
+              double dRent = 0;
+              if (tempOwnable instanceof Property){
+                dRent = ((Property) tempOwnable).getRent(tempOwnable.getOwner());
+              }
+              else if(tempOwnable instanceof Utility){
+                dRent = ((Utility) tempOwnable).getRent(gameBoard.getPlayers()[nTurnCounter % nTotal]);
+              }
+              else if(tempOwnable instanceof Railroad){
+                dRent = ((Railroad) tempOwnable).getRent(tempOwnable.getOwner());
+              }
+              if(gameBoard.getPlayers()[nTurnCounter % nTotal].getMoney() >= dRent)
+                rentPane.setVisible(true);
             }
-            //Check if the player can afford to pay the rent
-            Ownable tempOwnable = (Ownable) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition());
-            double dRent = 0;
-            if (tempOwnable instanceof Property){
-              dRent = ((Property) tempOwnable).getRent(tempOwnable.getOwner());
-            }
-            else if(tempOwnable instanceof Utility){
-              dRent = ((Utility) tempOwnable).getRent(gameBoard.getPlayers()[nTurnCounter % nTotal]);
-            }
-            else if(tempOwnable instanceof Railroad){
-              dRent = ((Railroad) tempOwnable).getRent(tempOwnable.getOwner());
-            }
-            if(gameBoard.getPlayers()[nTurnCounter % nTotal].getMoney() >= dRent){
+            else{
               rentPane.setVisible(true);
             }
           }
@@ -808,7 +811,7 @@ public class GamePlayController  {
       isRenovate = false;
       isCardSet5 = false;
       choosePane.setVisible(false);
-      openZoomed(e);
+      hideZoomed();
       String event = "";
       event += (gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getCards().size() - 1)).useCard(gameBoard.getPlayers()[nTurnCounter % nTotal],gameBoard);
       hideChanceCard();
@@ -825,25 +828,9 @@ public class GamePlayController  {
       tradeAnchorPane.setVisible(false);
       tradeButton.setVisible(true);
       setAllVisible();
-      //Check if the player can afford to pay the rent
-      Ownable tempOwnable = (Ownable) gameBoard.getLand().get(gameBoard.getPlayers()[nTurnCounter % nTotal].getPosition());
-      double dRent = 0;
-      if (tempOwnable instanceof Property){
-        dRent = ((Property) tempOwnable).getRent(tempOwnable.getOwner());
-      }
-      else if(tempOwnable instanceof Utility){
-        dRent = ((Utility) tempOwnable).getRent(gameBoard.getPlayers()[nTurnCounter % nTotal]);
-      }
-      else if(tempOwnable instanceof Railroad){
-        dRent = ((Railroad) tempOwnable).getRent(tempOwnable.getOwner());
-      }
-      if(gameBoard.getPlayers()[nTurnCounter % nTotal].getMoney() >= dRent){
-        rentPane.setVisible(true);
-        tradePane.setVisible(true);
-      }
-      else{
-        tradePane.setVisible(true);
-      }
+
+      tradePane.setVisible(false);
+      rentPane.setVisible(true);
 
       updateOwnerIcons();
       updatePlayerPositions();
@@ -875,6 +862,8 @@ public class GamePlayController  {
       ArrayList<Property> tempArr = gameBoard.getPlayers()[nTurnCounter % nTotal].getOnlyProperty();
       setFalseVisible();
       chooseVisibleProperty(tempArr);
+      for(Property a : tempArr)
+        System.out.println("D" + a.getName());
       rentPane.setVisible(false);
       tradePane.setVisible(false);
       tradeAnchorPane.setVisible(true);
@@ -981,12 +970,18 @@ public class GamePlayController  {
            nIndex = i;
 
       updateMoney();
-      checkWin();
       rentPane.setVisible(false);
       tradePane.setVisible(false);
-      endPane.setVisible(true);
+      if(gameBoard.getIsWin()) {
+        endPane.setVisible(false);
+      }
+      else{
+        endPane.setVisible(true);
+      }
+
       eventLabel.setText(event);
       gameBoard.getEvents().add(event);
+      checkWin();
     }
     else if(e.getSource() == endButton) {
 
@@ -1073,40 +1068,41 @@ public class GamePlayController  {
   }
 
   public void chooseVisibleProperty(ArrayList<Property> properties) {
-    int counter = 0;
-    for(int i = 0; i < spaces.size() && counter < properties.size(); i++){
-      if (spaces.get(i).getText().equalsIgnoreCase(properties.get(counter).getName())){
-        anchors.get(i).setVisible(true);
-        spaces.get(i).setVisible(true);
-        counter++;
-      }
-      else{
-        anchors.get(i).setVisible(false);
+    for(int i = 0; i < properties.size(); i++){
+      boolean isFound = false;
+      for(int j = 0; j < spaces.size() && !isFound; j++){
+        if(properties.get(i).getName().equalsIgnoreCase(spaces.get(j).getText())){
+          anchors.get(j).setVisible(true);
+          spaces.get(j).setVisible(true);
+        }
       }
     }
   }
 
   public void chooseVisibleUtility(ArrayList<Utility> properties) {
-    int counter = 0;
-    for(int i = 0; i < spaces.size() && counter < properties.size(); i++){
-      if (spaces.get(i).getText().equalsIgnoreCase(properties.get(counter).getName())){
-        anchors.get(i).setVisible(true);
-        spaces.get(i).setVisible(true);
-        counter++;
+    for(int i = 0; i < properties.size(); i++){
+      boolean isFound = false;
+      for(int j = 0; j < spaces.size() && !isFound; j++){
+        if(properties.get(i).getName().equalsIgnoreCase(spaces.get(j).getText())){
+          anchors.get(j).setVisible(true);
+          spaces.get(j).setVisible(true);
+        }
       }
     }
   }
 
   public void chooseVisibleRailroad(ArrayList<Railroad> properties) {
-    int counter = 0;
-    for(int i = 0; i < spaces.size() && counter < properties.size(); i++){
-      if (spaces.get(i).getText().equalsIgnoreCase(properties.get(counter).getName())){
-        anchors.get(i).setVisible(true);
-        spaces.get(i).setVisible(true);
-        counter++;
+    for(int i = 0; i < properties.size(); i++){
+      boolean isFound = false;
+      for(int j = 0; j < spaces.size() && !isFound; j++){
+        if(properties.get(i).getName().equalsIgnoreCase(spaces.get(j).getText())){
+          anchors.get(j).setVisible(true);
+          spaces.get(j).setVisible(true);
+        }
       }
     }
   }
+
 
   public void setAllVisible(){
     for(int i = 0; i < spaces.size(); i++){
@@ -1197,6 +1193,24 @@ public class GamePlayController  {
     }
   }
 
+  @FXML
+  public void hideZoomed(){
+    choosePane.setVisible(false);
+    for(int i = 0; i < developmentLevels.size();i++){
+      developmentLevels.get(i).setVisible(false);
+    }
+    closeZoomed.setVisible(false);
+    Zoomed.setVisible(false);
+    ownerZoom.setVisible(false);
+    footTrafficZoom.setVisible(false);
+    playersZoom.setVisible(false);
+    increase10.setVisible(false);
+    decrease10.setVisible(false);
+    doubleRent.setVisible(false);
+    increase50.setVisible(false);
+    renovationLabel.setVisible(false);
+    renovationPrice.setVisible(false);
+  }
 
   @FXML
   public void displaySpaces(MouseEvent event) {
