@@ -1,0 +1,76 @@
+#background{
+    -fx-background-image: url('../Images/GamePlay.png');
+}
+
+#moneySummary{
+    -fx-font-family: Broadway;
+    -fx-font-size: 25px;
+}
+
+#nameSummary{
+    -fx-font-family: Broadway;
+    -fx-font-size: 25px;
+}
+
+#turnLabel{
+    -fx-font-color: rgb(252,214,112);
+    -fx-font-family: Broadway;
+    -fx-font-size: 25px;
+}
+
+#actionButton{
+    -fx-font-family: Broadway;
+    -fx-font-size: 25px;
+}
+
+#actionButtonBackground{
+    -fx-graphic: url('../Images/ActionButton.png');
+}
+
+#actionButton:hover{
+    -fx-underline: true;
+    -fx-font-size: 25px;
+}
+
+#eventButton:hover{
+    -fx-underline: true;
+    -fx-font-size: 20px;
+}
+
+#eventLabel{
+    -fx-font-family: Broadway;
+    -fx-font-size: 18px;
+    -fx-wrap-text: true;
+}
+
+#eventButton{
+    -fx-font-family: Broadway;
+}
+
+#Start, #Jail, #Community, #FreeParking{
+    -fx-content-display: graphic-only;
+}
+
+#closeZoomed{
+    -fx-graphic: url('../Images/close.png');
+         -fx-content-display: CENTER;
+}
+
+#closeZoomed:hover{
+    -fx-underline: true;
+}
+
+#traderName{
+    -fx-alignment: center;
+}
+
+#space1,#space2,#space3,#space4,
+#space5,#space6,#space7,#space8,
+#space9,#space10,#space11,#space12,
+#space13,#space14,#space15,#space16,
+#space17,#space18,#space19,#space20,
+#space21,#space22,#space23,#space24,
+#space25,#space26,#space27,#space28,
+#space29,#space30,#space31,#space32{
+    -fx-content-display: graphic-only;
+}

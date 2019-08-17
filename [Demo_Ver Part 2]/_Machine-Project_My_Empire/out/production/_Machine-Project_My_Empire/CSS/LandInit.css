@@ -1,0 +1,184 @@
+#background {
+    -fx-background-image: url('../Images/LandInit.png');
+    -fx-background-size: cover, auto;
+}
+
+#Metro{
+    -fx-graphic: url('../Images/SmallSpaces/Metro.png');
+    -fx-content-display: graphic-only;
+}
+
+#North{
+    -fx-graphic: url('../Images/SmallSpaces/North.png');
+    -fx-content-display: graphic-only;
+}
+
+#South{
+    -fx-graphic: url('../Images/SmallSpaces/South.png');
+    -fx-content-display: graphic-only;
+}
+
+#Income, #Luxury{
+    -fx-graphic: url('../Images/SmallSpaces/Tax.png');
+        -fx-content-display: graphic-only;
+}
+
+#Chance1, #Chance2, #Chance3{
+    -fx-graphic: url('../Images/SmallSpaces/Chance.png');
+            -fx-content-display: graphic-only;
+}
+
+#Start, #Jail, #Community, #FreeParking{
+    -fx-content-display: graphic-only;
+}
+
+#Water{
+          -fx-graphic: url('../Images/SmallSpaces/Water.png');
+                  -fx-content-display: graphic-only;
+      }
+
+
+#Electric{
+    -fx-graphic: url('../Images/SmallSpaces/Electric.png');
+            -fx-content-display: graphic-only;
+}
+
+#Randomize{
+     -fx-graphic: url('../Images/Randomize.png');
+     -fx-content-display: CENTER;
+}
+
+#Randomize:hover{
+    -fx-underline: true;
+}
+
+#ClearAll{
+     -fx-graphic: url('../Images/ClearAll.png');
+     -fx-content-display: CENTER;
+}
+
+#ClearAll:hover{
+    -fx-underline: true;
+}
+
+#closeZoomed{
+    -fx-graphic: url('../Images/close.png');
+         -fx-content-display: CENTER;
+}
+
+#closeZoomed:hover{
+    -fx-underline: true;
+}
+
+#Play {
+    -fx-graphic: url('../Images/Play.png');
+    -fx-content-display: CENTER;
+}
+
+#Play:hover{
+    -fx-underline: true;
+}
+
+#Almond{
+           -fx-graphic: url('../Images/SmallSpaces/Almond.png');
+               -fx-content-display: graphic-only;
+       }
+#Kasoy {
+    -fx-graphic: url('../Images/SmallSpaces/Kasoy.png');
+        -fx-content-display: graphic-only;
+}
+
+#Rodeo{
+          -fx-graphic: url('../Images/SmallSpaces/Rodeo.png');
+              -fx-content-display: graphic-only;
+      }
+#Orange {
+            -fx-graphic: url('../Images/SmallSpaces/Orange.png');
+                -fx-content-display: graphic-only;
+        }
+#Ventura{
+    -fx-graphic: url('../Images/SmallSpaces/Venture.png');
+        -fx-content-display: graphic-only;
+}
+
+#Juan{
+         -fx-graphic: url('../Images/SmallSpaces/Juan.png');
+             -fx-content-display: graphic-only;
+     }
+#Ylaya {
+           -fx-graphic: url('../Images/SmallSpaces/Ylaya.png');
+               -fx-content-display: graphic-only;
+       }
+#Abad{
+    -fx-graphic: url('../Images/SmallSpaces/J.png');
+        -fx-content-display: graphic-only;
+}
+
+#Madison{
+            -fx-graphic: url('../Images/SmallSpaces/Madison.png');
+                -fx-content-display: graphic-only;
+        }
+#Annapolis{
+              -fx-graphic: url('../Images/SmallSpaces/Annapolis.png');
+                  -fx-content-display: graphic-only;
+          }
+#Connecticut{
+    -fx-graphic: url('../Images/SmallSpaces/Connecticut.png');
+        -fx-content-display: graphic-only;
+}
+
+#Bougainvilla{
+                 -fx-graphic: url('../Images/SmallSpaces/Bougainvilla.png');
+                     -fx-content-display: graphic-only;
+             }
+#Dama
+{
+    -fx-graphic: url('../Images/SmallSpaces/Dama.png');
+        -fx-content-display: graphic-only;
+}
+#Acacia{
+    -fx-graphic: url('../Images/SmallSpaces/Acacia.png');
+        -fx-content-display: graphic-only;
+}
+
+#Solar
+{
+    -fx-graphic: url('../Images/SmallSpaces/Solar.png');
+        -fx-content-display: graphic-only;
+}
+#Galaxy{
+    -fx-graphic: url('../Images/SmallSpaces/Galaxy.png');
+        -fx-content-display: graphic-only;
+}
+
+#Ninth{
+          -fx-graphic: url('../Images/SmallSpaces/9th.png');
+              -fx-content-display: graphic-only;
+      }
+#Fifth{
+    -fx-graphic: url('../Images/SmallSpaces/5th.png');
+        -fx-content-display: graphic-only;
+}
+
+#empty1, #empty2, #empty3, #empty4, #empty5,
+#empty6, #empty7, #empty8, #empty9, #empty10,
+#empty11, #empty12, #empty13, #empty14, #empty15,
+#empty16, #empty17, #empty18, #empty19, #empty20,
+#empty21, #empty22, #empty23, #empty24, #empty25,
+#empty26, #empty27, #empty28{
+    -fx-content-display: graphic-only;
+}
+
+#delete1, #delete2, #delete3, #delete4, #delete5,
+#delete6, #delete7, #delete8, #delete9, #delete10,
+#delete11, #delete12, #delete13, #delete14, #delete15,
+#delete16, #delete17, #delete18, #delete19, #delete20,
+#delete21, #delete22, #delete23, #delete24, #delete25,
+#delete26, #delete27, #delete28 {
+    -fx-graphic: url('../Images/Clear.png');
+    -fx-content-display: graphic-only;
+}
+
+
+
+

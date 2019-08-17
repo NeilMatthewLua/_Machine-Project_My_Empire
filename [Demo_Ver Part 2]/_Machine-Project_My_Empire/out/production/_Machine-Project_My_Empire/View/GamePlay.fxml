@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../CSS/GamePlay.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GamePlayController">
+   <children>
+      <Label id="eventButton" fx:id="logButton" layoutX="924.0" layoutY="661.0" onMouseClicked="#mouseClick" stylesheets="@../CSS/GamePlay.css" text="Event Log" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="chancePanel" layoutX="161.0" layoutY="161.0" prefHeight="300.0" prefWidth="300.0">
+         <children>
+            <ImageView fx:id="zoomedChance" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/ChanceCards/Group5/DoubleRent.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="zoomedCardApplicable" alignment="CENTER" layoutX="23.0" layoutY="245.0" prefHeight="14.0" prefWidth="251.0" text="(Not applicable)" textAlignment="CENTER" visible="false">
+               <font>
+                  <Font name="Broadway" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="zoomPanel" layoutX="161.0" layoutY="161.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+      
+                        <ImageView fx:id="Zoomed" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/BigSpaces/5th.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="playersZoom" layoutX="248.0" layoutY="113.0" prefHeight="20.0" prefWidth="35.0" text="2" visible="false">
+               <font>
+                  <Font name="Broadway" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="closeZoomed" alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="-50.0" onMouseClicked="#openZoomed" prefHeight="45.0" prefWidth="150.0" text="Close" textAlignment="CENTER" textFill="#fcd670" visible="false">
+               <font>
+                  <Font name="Broadway" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="ownerZoom" layoutX="196.0" layoutY="221.0" prefHeight="14.0" prefWidth="79.0" text="None" visible="false">
+               <font>
+                  <Font name="Broadway" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="footTrafficZoom" layoutX="196.0" layoutY="239.0" prefHeight="14.0" prefWidth="87.0" text="0.0" visible="false">
+               <font>
+                  <Font name="Broadway" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="currentDevelopment1" fitHeight="30.0" fitWidth="40.0" layoutX="23.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/CurrentLevel.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="currentDevelopment2" fitHeight="30.0" fitWidth="40.0" layoutX="66.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/CurrentLevel.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="currentDevelopment3" fitHeight="30.0" fitWidth="40.0" layoutX="109.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/CurrentLevel.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="currentDevelopment4" fitHeight="30.0" fitWidth="40.0" layoutX="151.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/CurrentLevel.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="currentDevelopment5" fitHeight="30.0" fitWidth="40.0" layoutX="194.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/CurrentLevel.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="currentDevelopment6" fitHeight="30.0" fitWidth="40.0" layoutX="236.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/CurrentLevel.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="doubleRent" fitHeight="20.0" fitWidth="30.0" layoutX="160.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/Mutlipliers/doublerent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="increase10" fitHeight="20.0" fitWidth="30.0" layoutX="191.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/Mutlipliers/increase10.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="increase50" fitHeight="20.0" fitWidth="30.0" layoutX="222.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/Mutlipliers/increase50.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="decrease10" fitHeight="20.0" fitWidth="30.0" layoutX="251.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Images/Mutlipliers/decrease10.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="renovationLabel" alignment="CENTER" layoutX="64.0" layoutY="300.0" prefHeight="30.0" prefWidth="180.0" text="RENOVATION COST" visible="false">
+               <font>
+                  <Font name="Broadway" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="renovationPrice" alignment="CENTER" layoutX="64.0" layoutY="315.0" prefHeight="30.0" prefWidth="180.0" text="191.00" visible="false">
+               <font>
+                  <Font name="Broadway" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="tradePanel" layoutX="70.0" layoutY="70.0" prefHeight="482.0" prefWidth="482.0" visible="false">
+         <children>
+            <ImageView fitHeight="482.0" fitWidth="482.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/tradePanel.png" />
+               </image>
+            </ImageView>
+            <AnchorPane fx:id="tradeePanel" layoutX="257.0" layoutY="108.0" prefHeight="225.0" prefWidth="225.0">
+               <children>
+                  <ImageView fx:id="tradeeZoom" fitHeight="225.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/BigSpaces/5th.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="tradeeFootTraffic" layoutX="130.0" layoutY="177.0" prefHeight="14.0" prefWidth="87.0" text="0.0">
+                     <font>
+                        <Font name="Broadway" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="tradeeOwner" layoutX="130.0" layoutY="165.0" prefHeight="14.0" prefWidth="87.0" text="None">
+                     <font>
+                        <Font name="Broadway" size="12.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="tradeeDev1" fitHeight="24.0" fitWidth="35.0" layoutX="16.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeDev2" fitHeight="24.0" fitWidth="35.0" layoutX="48.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeDev3" fitHeight="24.0" fitWidth="35.0" layoutX="80.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeDev4" fitHeight="24.0" fitWidth="35.0" layoutX="112.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeDev5" fitHeight="24.0" fitWidth="35.0" layoutX="144.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeDev6" fitHeight="24.0" fitWidth="35.0" layoutX="176.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeDoubleRent" fitHeight="25.0" fitWidth="25.0" layoutX="118.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/doublerent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeIncrease10" fitHeight="20.0" fitWidth="25.0" layoutX="142.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/increase10.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeIncrease50" fitHeight="20.0" fitWidth="25.0" layoutX="168.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/increase50.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tradeeDecrease10" fitHeight="20.0" fitWidth="25.0" layoutX="193.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/decrease10.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="traderPanel" layoutY="108.0" prefHeight="225.0" prefWidth="225.0">
+               <children>
+                  <ImageView fx:id="traderZoom" fitHeight="225.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/BigSpaces/5th.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="traderFootTraffic" layoutX="130.0" layoutY="177.0" prefHeight="14.0" prefWidth="87.0" text="0.0">
+                     <font>
+                        <Font name="Broadway" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="traderOwner" layoutX="130.0" layoutY="165.0" prefHeight="14.0" prefWidth="87.0" text="None">
+                     <font>
+                        <Font name="Broadway" size="12.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="traderDev1" fitHeight="24.0" fitWidth="35.0" layoutX="16.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderDev2" fitHeight="24.0" fitWidth="35.0" layoutX="48.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderDev3" fitHeight="24.0" fitWidth="35.0" layoutX="80.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderDev4" fitHeight="24.0" fitWidth="35.0" layoutX="112.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderDev5" fitHeight="24.0" fitWidth="35.0" layoutX="144.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderDev6" fitHeight="24.0" fitWidth="35.0" layoutX="176.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/CurrentLevel.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderDoubleRent" fitHeight="25.0" fitWidth="25.0" layoutX="118.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/doublerent.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderIncrease10" fitHeight="20.0" fitWidth="25.0" layoutX="142.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/increase10.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderIncrease50" fitHeight="20.0" fitWidth="25.0" layoutX="168.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/increase50.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="traderDecrease10" fitHeight="20.0" fitWidth="25.0" layoutX="193.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Mutlipliers/decrease10.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Label id="traderName" fx:id="trader" alignment="CENTER" graphicTextGap="0.0" layoutX="31.0" layoutY="354.0" prefHeight="29.0" prefWidth="150.0" stylesheets="@../CSS/GamePlay.css">
+               <font>
+                  <Font name="Broadway" size="24.0" />
+               </font>
+            </Label>
+            <Label id="traderName" fx:id="tradee" alignment="CENTER" layoutX="308.0" layoutY="354.0" prefHeight="29.0" prefWidth="150.0" stylesheets="@../CSS/GamePlay.css" textAlignment="CENTER">
+               <font>
+                  <Font name="Broadway" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="traderOffer" alignment="CENTER" layoutX="12.0" layoutY="411.0" prefHeight="29.0" prefWidth="188.0" textAlignment="CENTER">
+               <font>
+                  <Font name="Broadway" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="tradeeOffer" alignment="CENTER" layoutX="289.0" layoutY="411.0" prefHeight="29.0" prefWidth="188.0" textAlignment="CENTER">
+               <font>
+                  <Font name="Broadway" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+
+      <AnchorPane fx:id="anchor2" layoutX="482.0" layoutY="524.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0">
+         <children>
+            <Label fx:id="space2" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner1" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne2" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerTwo2" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerFour2" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerThree2" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor3" layoutX="413.0" layoutY="524.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0">
+         <children>
+            <Label fx:id="space3" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner2" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne3" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerTwo3" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerThree3" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerFour3" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor4" layoutX="344.0" layoutY="524.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0">
+         <children>
+            <Label fx:id="space4" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner3" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne4" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo4" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree4" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour4" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor5" layoutX="276.0" layoutY="524.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0">
+         <children>
+            <Label fx:id="space5" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner4" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne5" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo5" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree5" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour5" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor6" layoutX="207.0" layoutY="524.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0">
+         <children>
+            <Label fx:id="space6" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner5" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne6" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo6" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree6" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour6" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor7" layoutX="138.0" layoutY="524.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0">
+         <children>
+            <Label fx:id="space7" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner6" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne7" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo7" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree7" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour7" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor8" layoutX="69.0" layoutY="524.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0">
+         <children>
+            <Label fx:id="space8" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner7" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne8" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo8" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree8" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour8" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+
+      <AnchorPane fx:id="anchor10" layoutX="15.0" layoutY="470.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
+         <children>
+            <Label fx:id="space10" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner8" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne10" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo10" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree10" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour10" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor11" layoutX="15.0" layoutY="401.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
+         <children>
+            <Label fx:id="space11" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner9" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne11" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo11" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree11" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour11" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor12" layoutX="15.0" layoutY="332.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
+         <children>
+            <Label fx:id="space12" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner10" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne12" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo12" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree12" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour12" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor13" layoutX="15.0" layoutY="264.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
+         <children>
+            <Label fx:id="space13" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner11" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne13" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo13" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree13" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour13" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor14" layoutX="15.0" layoutY="195.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
+         <children>
+            <Label fx:id="space14" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner12" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne14" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo14" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree14" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour14" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor15" layoutX="15.0" layoutY="126.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
+         <children>
+            <Label fx:id="space15" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner13" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne15" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo15" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree15" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour15" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor16" layoutX="15.0" layoutY="57.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="90.0">
+         <children>
+            <Label fx:id="space16" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner14" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne16" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerTwo16" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerThree16" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerFour16" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor18" layoutX="69.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+         <children>
+            <Label fx:id="space18" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="playerOne18" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo18" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree18" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour18" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="owner15" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor19" layoutX="138.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+         <children>
+            <Label fx:id="space19" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner16" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne19" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo19" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree19" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour19" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor20" layoutX="207.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+         <children>
+            <Label fx:id="space20" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner17" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne20" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo20" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree20" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour20" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor21" layoutX="276.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+         <children>
+            <Label fx:id="space21" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner18" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne21" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo21" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree21" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour21" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor22" layoutX="344.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+         <children>
+            <Label fx:id="space22" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner19" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne22" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo22" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree22" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour22" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor23" layoutX="413.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+         <children>
+            <Label fx:id="space23" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner20" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne23" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo23" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree23" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour23" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor24" layoutX="482.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="180.0">
+         <children>
+            <Label fx:id="space24" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner21" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne24" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo24" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree24" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour24" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+
+
+
+
+      <AnchorPane fx:id="anchor26" layoutX="537.0" layoutY="57.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+         <children>
+            <Label fx:id="space26" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner22" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne26" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo26" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree26" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour26" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor27" layoutX="537.0" layoutY="126.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+         <children>
+            <Label fx:id="space27" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner23" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne27" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo27" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree27" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour27" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor28" layoutX="537.0" layoutY="195.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+         <children>
+            <Label fx:id="space28" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner24" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne28" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo28" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree28" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour28" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor29" layoutX="537.0" layoutY="264.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+         <children>
+            <Label fx:id="space29" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner25" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne29" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo29" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree29" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour29" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor30" layoutX="537.0" layoutY="332.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+         <children>
+            <Label fx:id="space30" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner26" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne30" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo30" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree30" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour30" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor31" layoutX="537.0" layoutY="401.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+         <children>
+            <Label fx:id="space31" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner27" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne31" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo31" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree31" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour31" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor32" layoutX="537.0" layoutY="470.0" onMouseClicked="#displaySpaces" prefHeight="94.0" prefWidth="69.0" rotate="-90.0">
+         <children>
+            <Label fx:id="space32" layoutX="2.0" layoutY="29.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Empty" />
+            <ImageView fx:id="owner28" fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerOne32" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerTwo32" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree32" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour32" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+
+
+      <Label id="eventLabel" fx:id="eventLabel" alignment="TOP_CENTER" layoutX="685.0" layoutY="198.0" prefHeight="161.0" prefWidth="341.0" stylesheets="@../CSS/GamePlay.css" />
+      <Label id="turnLabel" fx:id="turnLabel" alignment="CENTER" layoutX="667.0" layoutY="58.0" prefHeight="71.0" prefWidth="376.0" stylesheets="@../CSS/GamePlay.css" textFill="#fcd670">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="playerPane11" layoutX="-19.0" layoutY="636.0" prefHeight="74.0" prefWidth="156.0">
+         <children>
+            <Label id="moneySummary" fx:id="money5" alignment="CENTER" layoutX="25.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label id="nameSummary" fx:id="player11" alignment="CENTER" layoutX="3.0" layoutY="-2.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" text="Bank" textFill="#fcd670">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="playerPane1" layoutX="140.0" layoutY="636.0" prefHeight="74.0" prefWidth="156.0">
+         <children>
+            <Label id="moneySummary" fx:id="money1" alignment="CENTER" layoutX="25.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label id="nameSummary" fx:id="player1" alignment="CENTER" layoutX="3.0" layoutY="-2.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" textFill="#fcd670">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="playerOneAvatar" fitHeight="30.0" fitWidth="30.0" layoutX="170.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="playerPane2" layoutX="325.0" layoutY="636.0" prefHeight="74.0" prefWidth="156.0">
+         <children>
+            <ImageView fx:id="playerTwoAvatar" fitHeight="30.0" fitWidth="30.0" layoutX="170.0" pickOnBounds="true" preserveRatio="true" />
+            <Label id="moneySummary" fx:id="money2" alignment="CENTER" layoutX="22.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label id="nameSummary" fx:id="player2" alignment="CENTER" layoutX="3.0" layoutY="-1.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" textFill="#fcd670">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="playerPane3" layoutX="515.0" layoutY="636.0" prefHeight="74.0" prefWidth="156.0" visible="false">
+         <children>
+            <ImageView fx:id="playerThreeAvatar" fitHeight="30.0" fitWidth="30.0" layoutX="170.0" pickOnBounds="true" preserveRatio="true" />
+            <Label id="moneySummary" fx:id="money3" alignment="CENTER" layoutX="22.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label id="nameSummary" fx:id="player3" alignment="CENTER" layoutX="3.0" layoutY="-2.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" textFill="#fcd670">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="playerPane4" layoutX="705.0" layoutY="636.0" prefHeight="74.0" prefWidth="156.0" visible="false">
+         <children>
+            <Label id="moneySummary" fx:id="money4" alignment="CENTER" layoutX="22.0" layoutY="32.0" maxHeight="95.0" maxWidth="183.0" minHeight="20.0" minWidth="20.0" prefHeight="40.0" prefWidth="139.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label id="nameSummary" fx:id="player4" alignment="CENTER" layoutX="3.0" layoutY="-2.0" prefHeight="31.0" prefWidth="179.0" stylesheets="@../CSS/GamePlay.css" textFill="#fcd670">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="playerFourAvatar" fitHeight="30.0" fitWidth="30.0" layoutX="170.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <StackPane fx:id="tradePane" layoutX="871.0" layoutY="428.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="tradeButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Trade" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="purchasePane" layoutX="685.0" layoutY="428.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="purchaseButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Purchase" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="rentPane" layoutX="685.0" layoutY="523.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="rentButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Pay Rent" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="endPane" layoutX="874.0" layoutY="523.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="endButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="End Turn" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="rollPane" layoutX="778.0" layoutY="476.0" prefHeight="80.0" prefWidth="129.0">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" />
+            <Label id="actionButton" fx:id="rollButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="80.0" prefWidth="204.0" stylesheets="@../CSS/GamePlay.css" text="Roll" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="keepPane" layoutX="778.0" layoutY="476.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="keepButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Keep" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="discardPane" layoutX="778.0" layoutY="476.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="discardButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Discard" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="usePane" layoutX="778.0" layoutY="476.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="useButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Use" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="choosePane" layoutX="778.0" layoutY="476.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="chooseButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Choose" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="endGamePane" layoutX="778.0" layoutY="476.0" prefHeight="80.0" prefWidth="129.0" visible="false">
+         <children>
+            <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+            <Label id="actionButton" fx:id="endGameButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="End Game" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <AnchorPane fx:id="tradeAnchorPane" layoutX="676.0" layoutY="416.0" prefHeight="200.0" prefWidth="359.0" visible="false">
+         <children>
+            <StackPane fx:id="yesTradePane" layoutX="23.0" layoutY="83.0" prefHeight="80.0" prefWidth="129.0">
+               <children>
+                  <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+                  <Label id="actionButton" fx:id="yesTradeButton" alignment="CENTER" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="Yes!" textFill="WHITE" />
+               </children>
+            </StackPane>
+            <StackPane fx:id="noTradePane" layoutX="153.0" layoutY="64.0" prefHeight="117.0" prefWidth="204.0">
+               <children>
+                  <Label id="actionButtonBackground" prefHeight="80.0" prefWidth="129.0" stylesheets="@../CSS/GamePlay.css" textFill="WHITE" />
+                  <Label id="actionButton" fx:id="noTradeButton" alignment="CENTER" layoutX="30.0" onMouseClicked="#mouseClick" prefHeight="79.0" prefWidth="145.0" stylesheets="@../CSS/GamePlay.css" text="No!" textFill="WHITE" />
+               </children>
+            </StackPane>
+            <Label id="nameSummary" layoutX="83.0" layoutY="24.0" stylesheets="@../CSS/GamePlay.css" text="Accept Trade?" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor17" layoutX="-2.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="69.0" rotate="-180.0">
+         <children>
+            <Label fx:id="space17" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Jail" />
+            <ImageView fx:id="playerTwo17" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerOne17" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour17" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree17" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor9" layoutX="-2.0" layoutY="554.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="69.0" rotate="90.0">
+         <children>
+            <Label fx:id="space9" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Community" />
+            <ImageView fx:id="playerTwo9" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" pickOnBounds="true" preserveRatio="true">
+              </ImageView>
+            <ImageView fx:id="playerOne9" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" pickOnBounds="true" preserveRatio="true">
+             </ImageView>
+            <ImageView fx:id="playerFour9" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               </ImageView>
+            <ImageView fx:id="playerThree9" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+              </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor25" layoutX="551.0" layoutY="2.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="69.0" rotate="-90.0">
+         <children>
+            <Label fx:id="space25" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Free Parking" />
+            <ImageView fx:id="playerTwo25" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" pickOnBounds="true" preserveRatio="true">
+               </ImageView>
+            <ImageView fx:id="playerOne25" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" pickOnBounds="true" preserveRatio="true">
+               </ImageView>
+            <ImageView fx:id="playerFour25" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               </ImageView>
+            <ImageView fx:id="playerThree25" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor1" layoutX="551.0" layoutY="552.0" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="69.0">
+         <children>
+            <Label fx:id="space1" onMouseClicked="#displaySpaces" prefHeight="65.0" prefWidth="65.0" text="Start" />
+            <ImageView fx:id="playerTwo1" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerOne1" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerFour1" fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="playerThree1" fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

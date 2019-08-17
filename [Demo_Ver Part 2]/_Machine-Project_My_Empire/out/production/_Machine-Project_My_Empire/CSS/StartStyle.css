@@ -1,0 +1,13 @@
+#anchorPane{
+      -fx-background-color: rgb(224,121,122);
+      -fx-background-size: cover, auto;
+}
+
+#playLabel{
+    -fx-font-family: "Impact";
+    -fx-font-size: 80px;
+}
+
+#playLabel:hover{
+    -fx-underline: true;
+}

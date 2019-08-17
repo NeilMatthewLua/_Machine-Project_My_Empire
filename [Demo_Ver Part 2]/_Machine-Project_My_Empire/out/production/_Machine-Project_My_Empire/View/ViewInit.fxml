@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../CSS/ViewInit.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ViewInitController">
+   <children>
+      <VBox prefHeight="720.0" prefWidth="540.0">
+         <children>
+            <AnchorPane prefHeight="360.0" prefWidth="540.0">
+               <children>
+                  <TextField fx:id="textField1" alignment="CENTER" layoutX="196.0" layoutY="242.0" promptText="Enter name.." />
+                  <Label fx:id="ready1" alignment="CENTER" layoutX="219.0" layoutY="275.0" onMouseClicked="#ready" prefHeight="25.0" prefWidth="101.0" text="READY" textAlignment="CENTER" textFill="#f4e8a6">
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="error1" alignment="CENTER" layoutX="135.0" layoutY="25.0" onMouseClicked="#play" prefHeight="43.0" prefWidth="270.0" text="Error" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="240.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/Players/player1.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="360.0" prefWidth="540.0">
+               <children>
+                  <Label fx:id="error3" alignment="CENTER" layoutX="135.0" layoutY="-25.0" onMouseClicked="#play" prefHeight="43.0" prefWidth="270.0" text="Error" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="textField3" alignment="CENTER" layoutX="196.0" layoutY="194.0" promptText="Enter name.." visible="false" />
+                  <Label fx:id="add1" alignment="CENTER" layoutX="213.0" layoutY="97.0" onMouseClicked="#add" prefHeight="70.0" prefWidth="115.0" text="ADD" textAlignment="CENTER" textFill="#f4e8a6" wrapText="true">
+                     <font>
+                        <Font name="Broadway" size="44.0" />
+                     </font></Label>
+                  <Label fx:id="delete1" alignment="CENTER" layoutX="414.0" layoutY="6.0" onMouseClicked="#delete" prefHeight="43.0" prefWidth="91.0" text="DELETE" textFill="#f4e8a6" visible="false">
+                     <font>
+                        <Font name="Broadway" size="13.0" />
+                     </font></Label>
+                  <Label fx:id="ready3" alignment="CENTER" layoutX="218.0" layoutY="228.0" onMouseClicked="#ready" prefHeight="25.0" prefWidth="101.0" text="READY" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="player3Avatar" fitHeight="60.0" fitWidth="60.0" layoutX="240.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Players/player3.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <VBox prefHeight="720.0" prefWidth="540.0">
+         <children>
+            <AnchorPane prefHeight="360.0" prefWidth="540.0">
+               <children>
+                  <TextField fx:id="textField2" alignment="CENTER" layoutX="196.0" layoutY="242.0" promptText="Enter name.." />
+                  <Label fx:id="ready2" alignment="CENTER" layoutX="221.0" layoutY="276.0" onMouseClicked="#ready" prefHeight="25.0" prefWidth="101.0" text="READY" textAlignment="CENTER" textFill="#f4e8a6">
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="play" alignment="CENTER" layoutX="-64.0" layoutY="313.0" onMouseClicked="#play" prefHeight="43.0" prefWidth="115.0" text="PLAY" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="error2" alignment="CENTER" layoutX="135.0" layoutY="25.0" onMouseClicked="#play" prefHeight="43.0" prefWidth="270.0" text="Error" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="240.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/Players/player2.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="360.0" prefWidth="540.0">
+               <children>
+                  <Label fx:id="error4" alignment="CENTER" layoutX="135.0" layoutY="-25.0" onMouseClicked="#play" prefHeight="43.0" prefWidth="270.0" text="Error" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="textField4" alignment="CENTER" layoutX="196.0" layoutY="194.0" promptText="Enter name.." visible="false" />
+                  <Label fx:id="add2" alignment="CENTER" layoutX="213.0" layoutY="92.0" onMouseClicked="#add" prefHeight="70.0" prefWidth="115.0" text="ADD" textAlignment="CENTER" textFill="#f4e8a6" visible="false" wrapText="true">
+                     <font>
+                        <Font name="Broadway" size="44.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="delete2" alignment="CENTER" layoutX="414.0" layoutY="6.0" onMouseClicked="#delete" prefHeight="43.0" prefWidth="91.0" text="DELETE" textFill="#f4e8a6" visible="false">
+                     <font>
+                        <Font name="Broadway" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="ready4" alignment="CENTER" layoutX="218.0" layoutY="228.0" onMouseClicked="#ready" prefHeight="25.0" prefWidth="101.0" text="READY" textAlignment="CENTER" textFill="#f4e8a6" visible="false">
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="player4Avatar" fitHeight="60.0" fitWidth="60.0" layoutX="241.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../Images/Players/player4.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</HBox>
